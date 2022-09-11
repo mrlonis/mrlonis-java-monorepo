@@ -1,0 +1,36 @@
+# Folders
+/.gradle/
+/.idea/**
+!/.idea/codeStyles/
+!/.idea/codeStyles/codeStyleConfig.xml
+!/.idea/codeStyles/Project.xml
+/.nb-gradle/
+/.settings/
+/.vscode/
+/bin/
+/build/
+/dist/
+!gradle/wrapper/gradle-wrapper.jar
+/nbbuild/
+/nbdist/
+/nbproject/private/
+/node_modules/
+/out/
+
+# Files
+.apt_generated
+.DS_Store
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+*.dmp
+*.hprof
+*.ids
+*.iml
+*.ipr
+*.iws
+*.orig
+*.trc

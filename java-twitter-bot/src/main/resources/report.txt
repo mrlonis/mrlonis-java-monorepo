@@ -1,0 +1,274 @@
+Report.txt
+
+Design and run a variety of experiments in MatchBot.main() and summarize your results in a text file 
+named report.txt that you include with your project. Which of the three algorithms works best on the 
+Twitter dataset? What about other kinds of data? Hypothesize about the reasons why one algorithm is 
+better suited to a particular type of data. Support your conclusions with evidence.
+
+@author Matthew Lonis (mrlonis)
+
+<----------- Report Analysis -------------->
+
+When analyzing real-time Twitter data, it appears that the Boyer-Moore string matching algorithm appears to consume the least amount of character comparisons
+when compared to the other two algorithms. I have copied and pasted my console output from my MatchBot.main() testing to highlight the results.
+
+Since the Boyer-Moore string matching has the least amount of character comparisons, it is clear that this is the best algorithm for the Twitter dataset.
+What struck me as interesting is that the KMP algorithm actually resulted in more character comparisons than the naive string matching. The only times KMP was
+faster than the naive algorithm is when there were repeats in the pattern or text as shown at the bottom with my testPartialRepeat() results.
+
+I think the Boyer-Moore is best suited to any data type due to its ability to make long jumps in the texts. This allows traversing the 140 characters
+in a Tweet efficient and quick, eliminating excess character comparisons. The KMP is best suited for repeating patterns partly due to the way its flinks
+are best utilized on repeating patterns. The naive algorithm is a brute force failsafe and is at times better than KMP because it doesn't require excess
+character comparisons in the form of building the flinks and works more efficiently on patterns without repeats.
+
+The reason i believe the Boyer-Moore to be the best algorithm for any data set is because when running randomly in Testing.java, it was always the fastest algorithm
+with the least amount of character comparisons. KMP and naive never have less comparisons than the Boyer-Moore, so even when they tie, the Boyer-Moore is still preferred
+since it can be applied efficiently to other algorithms.
+
+I will make one note here: When a pattern has a character that mismatches at the front of the pattern no matter where it is when aligned relative to the text, the naive 
+algorithm will be faster since the Boyer-Moore will start analyzing the pattern with the text from the rightmost end of the pattern. This is the only advantage the naive 
+has over the Boyer-Moore. This is demonstrated when running all three algorithms on the lec14a, where the naive algorithm has 16 comparisons for the pattern "10000" and the 
+Boyer-Moore has 80 comparisons. I believe the Boyer-Moore could be improved dramatically if the algorithm can start its comparisons by first comparing the first and the last 
+index of the pattern against the text, and if they both match, proceed with the Boyer-Moore algorithm as normal.
+
+<--------- Evidence from MatchBot.java --------->
+
+Creeping on @realDonaldTrump and looking for the pattern China!
+naive comps = 57223, KMP comps = 61156, Moyer-Moore comps = 13624
+0. Why would I call China a currency manipulator when they are working with us on the North Korean problem? We will see what happens!
+China appears at index 17
+2. Had a very good call last night with the President of China concerning the menace of North Korea.
+China appears at index 54
+4. I explained to the President of China that a trade deal with the U.S. will be far better for them if they solve the North Korean problem!
+China appears at index 32
+6. The meeting next week with China will be a very difficult one in that we can no longer have massive trade deficits...
+China appears at index 27
+8. The failing @nytimes does major FAKE NEWS China story saying "Mr.Xi has not spoken to Mr. Trump since Nov.14." We spoke at length yesterday!
+China appears at index 42
+
+<-------------------- New User -------------------->
+
+Creeping on @THEUALIFESTYLE and looking for the pattern Renaissance!
+naive comps = 20787, KMP comps = 25530, Moyer-Moore comps = 2669
+0. RT @THEUALIFESTYLE: We dropping some exclusive new merch. Check it out and preorder the new album on https://t.co/uRCtle1JHW
+
+Renaissance 5…
+Renaissance appears at index 126
+2. RT @HipHopParallel_: The Underachievers are set to drop their album “Renaissance” on May 19th https://t.co/MTi9lXB95G
+Renaissance appears at index 69
+4. RT @RPMMSC: You ready? 😈
+RENAISSANCE. 5.19.17
+#Renaissance - @THEUALIFESTYLE https://t.co/J8hfSfDBRo
+Renaissance appears at index 26
+6. RT @iDailyRapFacts: The Underachievers are set to drop their album “Renaissance” on May 19th https://t.co/cVMZDFO3xH
+Renaissance appears at index 68
+8. RT @Issa_GOLD: Renaissance releases 5.19.17. https://t.co/GWLFuw1XEa
+Renaissance appears at index 15
+10. RT @iunderachieve: Renaissance is completed.
+Renaissance appears at index 19
+12. #Renaissance
+Renaissance appears at index 1
+14. Renaissance is everything you love from The Underachievers.
+Renaissance appears at index 0
+16. RT @OnSMASH: Listen to @THEUALIFESTYLE's new #Renaissance single, "Gotham Nights” https://t.co/xIgNKxsyKA https://t.co/4Gom7ImUde
+Renaissance appears at index 46
+18. RT @2DopeBoyz: The Underachievers (@THEUALIFESTYLE) drop the first single off #Renaissance, "Gotham Nights" » https://t.co/HGOwDppFyZ https…
+Renaissance appears at index 79
+20. RT @thissongissick_: The Underachievers (@THEUALIFESTYLE) return w/ new single "Gotham Nights" & announce upcoming 'Renaissance' project ht…
+Renaissance appears at index 116
+22. RT @ChiefersDaily: With their new project #Renaissance on the way, @THEUALIFESTYLE drop off their new single, "Gotham Nights:" https://t.co…
+Renaissance appears at index 43
+
+<-------------------- New User -------------------->
+
+Creeping on @kenzi_day and looking for the pattern Matthew!
+naive comps = 22615, KMP comps = 25583, Moyer-Moore comps = 3913
+0. Matthew made my hangry alter ego. Love is real folks. https://t.co/rIFyQyQpvo
+Matthew appears at index 0
+2. Matthew bought me plants for Valentine's Day my heart ugh https://t.co/UA403a84Of
+Matthew appears at index 0
+
+<-------------------- New Pattern: emotional -------------------->
+naive comps = 23956, KMP comps = 28000, Moyer-Moore comps = 3414
+0. Too emotional? Same, but it's a good thing. https://t.co/OKz6FV3L9u
+emotional appears at index 4
+
+<-------------------- New Pattern: sexual assault -------------------->
+naive comps = 22172, KMP comps = 29115, Moyer-Moore comps = 2256
+0. Someone decided to start a blog and open up because I opened up about my sexual assault and I'm so overwhelmed wow
+sexual assault appears at index 73
+
+<-------------------- New Pattern: Trump -------------------->
+naive comps = 22455, KMP comps = 24410, Moyer-Moore comps = 4942
+0. RT @VicBergerIV: ¯\_(ツ)_/¯ 
+
+@realDonaldTrump https://t.co/QUEGY41AUA
+Trump appears at index 40
+2. RT @AP: BREAKING: Comey confirms FBI is investigating possible links, coordination between Trump associates and Russia.
+Trump appears at index 91
+4. RT @Vallmeister: For people doubtful that Trump heard the request to shake Angela Merkel's hand, this shows he did: https://t.co/bg1dnhLsp3
+Trump appears at index 42
+6. RT @prasejeebus: Donald Trump has said more about Ivanka's line being discontinued at Nordstrom than he has about the Mosque shooting in Qu…
+Trump appears at index 24
+8. Trump is the sorest winner ever. Stop trying to distract us from your bad choices by continuing to talk about Obama's presidency 😂
+Trump appears at index 0
+10. RT @Lathrop_18: So Trump approves an oil pipeline that he owns stock in, and then puts a gag order on the EPA and USDA so they can't report…
+Trump appears at index 19
+
+<-------------------- New User -------------------->
+
+Creeping on @PlayOverwatch and looking for the pattern Overwatch!
+naive comps = 15520, KMP comps = 19425, Moyer-Moore comps = 2493
+0. Update your social profiles (and bring the past to life) with these recently declassified Overwatch sprays! | ⏰… https://t.co/NzIKPvik5f
+Overwatch appears at index 90
+2. RT @wow_bacon: Movin with the payload! Gimme the coffee!! #overwatch @PlayOverwatch https://t.co/VB0TmRiV73
+Overwatch appears at index 59
+4. King's Row needs heroes, and Overwatch needs you. Tag three friends to assemble the perfect strike team!
+
+⏰📂… https://t.co/A1W39wQOqt
+Overwatch appears at index 29
+6. RT @KibaDva: How to celebrate the new @PlayOverwatch event with the gf. 🎮 https://t.co/gdyQXzQEAJ
+Overwatch appears at index 43
+8. @ReallWizdom Overwatch loves you.
+Overwatch appears at index 13
+
+<-------------------- New User -------------------->
+
+Creeping on @taylorswift13 and looking for the pattern love!
+naive comps = 26063, KMP comps = 27415, Moyer-Moore comps = 7299
+0. So much love, pride, and respect for those who marched. I'm proud to be a woman today, and every day. 
+#WomensMarch
+love appears at index 8
+2. RT @twitter: Thank you, @taylorswift13 for celebrating love and sharing your stage with us every day. #LoveTwitter
+https://t.co/mfkSawqfLK
+love appears at index 55
+4. Me: Please love me.
+Kangaroo: No. https://t.co/9CLnECzgF1
+love appears at index 11
+6. I loved playing Shanghai last night-- so stoked to play 2 more shows here!! https://t.co/nzFCEdOdQN
+love appears at index 2
+8. RT @TheRyanAdams: It's the SONGS that matter. The stories. The love. 
+Build things. Go deep. Dare. 
+XO
+1989 
+https://t.co/Xwpwk1SAfv http:/…
+love appears at index 63
+10. RT @GrahamColton: I wish my music could be described as the love child btw @TheRyanAdams & @taylorswift13.  #1989 album is amazing. http://…
+love appears at index 60
+12. RT @totallymorgan: I love this @TheRyanAdams cover of @taylorswift13's #1989. Thought you should know. #demofriendly
+love appears at index 21
+
+<-------------------- New User -------------------->
+
+Creeping on @billnye and looking for the pattern science!
+naive comps = 25266, KMP comps = 28190, Moyer-Moore comps = 4442
+0. RT @TheView: Ahead on @TheView: @BillNye hits the table to talk his latest “science” project and more! https://t.co/ekW3KZVduR
+science appears at index 76
+2. Wear your love for science on your sleeve and we can match in our “Science is Universal” shirts... get yours here:… https://t.co/RBvSO5wroj
+science appears at index 19
+4. Making a Super Bowl commercial isn't an exact science... https://t.co/5Se55BCMst
+science appears at index 46
+6. I'm LIVE on @mashable's FB. Tune in now to support @GoParks & watch some science experiments.… https://t.co/TjHFTQeON1
+science appears at index 73
+8. RT @TalkStoop: ICYMI @BillNye, was on the stoop talking w/ Primo about science. Primo held his own.  https://t.co/ysLRC03c0Y https://t.co/M…
+science appears at index 71
+10. Awaiting Jupiter Orbital Insertion (JOI). It's rocket science!  Happy 4th. @NASAJuno  @exploreplanets https://t.co/q444Fhksfk
+science appears at index 54
+12. Rocket science rules.  https://t.co/Bdd7dHDBk6
+science appears at index 7
+
+<-------------------- New User -------------------->
+
+Creeping on @nasa and looking for the pattern space!
+naive comps = 30661, KMP comps = 32440, Moyer-Moore comps = 7458
+0. Comet crumbs? They’re a thing & we’re hoping to use our LISA Pathfinder spacecraft to map these tiny dust particles… https://t.co/7LFB60dpiw
+space appears at index 72
+2. RT @OrbitalATK: L-2! Our #OA7 #Cygnus spacecraft is named in honor of former #astronaut & U.S. Senator John Glenn https://t.co/uhsbKEZhjT h…
+space appears at index 38
+4. Need more space in your life? Download the NASA App on your device for the latest images, videos, news and more:… https://t.co/HaETFeEyRM
+space appears at index 10
+6. Teamwork makes the…spacecraft work! We’re providing some instruments for @ESA’s JUICE mission that'll study Jupiter… https://t.co/WhDEXSf2WK
+space appears at index 19
+8. .@Astro_Kimbrough returned to Earth this week from 173 days in space! Hear from him & ask Qs on FB Live at 4pm ET:… https://t.co/ePZ159CqJl
+space appears at index 63
+10. Want to help astronauts live & work in space?  RadWorks teamed with students to analyze radiation on @Space_Station… https://t.co/grOLOVhrfV
+space appears at index 39
+12. #ICYMI: Three @Space_Station crew members are back on Earth after a 173-day mission in space. Learn more:… https://t.co/UMmeVR4w1I
+space appears at index 15
+14. LIVE NOW: 3 @Space_Station crew say farewell & close the hatch at ~12:40am ET on their #Soyuz spacecraft:… https://t.co/g6TcYBDt6h
+space appears at index 13
+16. Collision of multiple atmospheric conditions on Jupiter provides a mosaic masterpiece seen by @NASAJuno spacecraft:… https://t.co/mhFZFaDrVJ
+space appears at index 104
+18. Acting NASA Admin Lightfoot sees space missions come together with @LockheedMartin, @SierraNevCorp & @BallAerospace… https://t.co/v8Ts7vTXei
+space appears at index 33
+20. Science in space! We’re sending stem cells to @Space_Station to help develop new treatments for diseases on Earth:… https://t.co/NmL0tykszi
+space appears at index 11
+22. We're investigating the body’s immune response & if spaceflight alters a crew member’s susceptibility to disease:… https://t.co/rTTTBSwgvZ
+space appears at index 52
+24. #ICYMI, @CassiniSaturn spacecraft starts its #GrandFinale April 26 with a daring dive between Saturn and its rings:… https://t.co/92OltFU2Bm
+space appears at index 23
+26. LIVE NOW: Mission experts explain how & why @CassiniSaturn spacecraft will dive btwn Saturn & its rings:… https://t.co/btYWW2nzUG
+space appears at index 59
+28. A gateway to deep space near the moon opens opportunities for missions farther into the solar system, including Mar… https://t.co/cjN8dIkjN7
+space appears at index 18
+30. No one keeps time quite like we do! Why? Timekeeping plays a critical role in spacecraft navigation:… https://t.co/fFnuiTRBnP
+space appears at index 78
+32. @Boobyt98 Here's a look at the far side of the moon and all the way around from our @LRO_NASA spacecraft: https://t.co/JCAB1rW6W7
+space appears at index 94
+34. For a decade, our partnerships with commercial companies have set a foundation of new space-related industries:… https://t.co/0PqgR19vJQ
+space appears at index 86
+36. RT @Thom_astro: 🎵 These boots are made for spacewalking 🎵 ;) https://t.co/A3lqA9HH4j
+space appears at index 44
+38. RT @Thom_astro: On the earth's dark side a spacewalk feels like scuba diving at night
+
+Sortir dans l’obscurité c’est 1 peu comme faire de l…
+space appears at index 43
+40. During today's #spacewalk, a thermal shield to be installed was lost. Problem solved: A cover was used instead!… https://t.co/GhFOjndVsh
+space appears at index 16
+42. RT @Space_Station: .@AstroPeggy and @Astro_Kimbrough begin wrapping up their spacewalk and cleaning up the work site. https://t.co/qpyi2LM1…
+space appears at index 4
+44. RT @Thom_astro: Shane and Peggy on their way to their first #spacewalk tasks
+
+@astro_kimbrough et @AstroPeggy en route vers leur zone de tr…
+space appears at index 61
+46. A #spacewalk is more of a climb…on the outside of @Space_Station…in the vacuum of space! Watch a live spacewalk now… https://t.co/DAnJh7bV2H
+space appears at index 3
+48. LIVE NOW: Astronauts on @Space_Station prepare to venture into the vacuum of space for their 8am ET #spacewalk:… https://t.co/r2jgUemrDA
+space appears at index 25
+50. Set your alarms to wake up @AstroPeggy & @Astro_Kimbrough! They're set to perform a spacewalk at 6:30am ET. Details… https://t.co/6H0Tyq04lV
+space appears at index 84
+
+<-------------------- New User -------------------->
+
+Creeping on @mike_pence and looking for the pattern great!
+naive comps = 30869, KMP comps = 32815, Boyer-Moore comps = 7942
+0. Tomorrow history will be made. Tonight was for family, Hoosier friends, & a dance with the greatest blessing in my… https://t.co/INO1J3aM33
+great appears at index 91
+2. This is great news. Small business is the backbone of America's economy. https://t.co/tndMg50OZ3
+great appears at index 8
+4. RT @GovPenceIN: Happy 200th birthday Indiana! Great to join Hoosiers from communities large & small across our great state this morning to…
+great appears at index 46
+6. Proud to welcome @realDonaldTrump back to the great state of Indiana! #carrier https://t.co/MK8v7LqQPE
+great appears at index 46
+8. Wrapping a great day on the trail with @tedcruz! Join me tomorrow in Michigan, North Carolina and Florida. Tickets:… https://t.co/WfJqf1Ev9Q
+great appears at index 11
+
+<------------- Testing.java Tests/Evidence -------------->
+
+testOneChar
+    1     1     1 : Boyer-Moore
+    1     1     1 : Boyer-Moore
+
+testEmpty
+    0     0     0 : Boyer-Moore
+    0     0     0 : Boyer-Moore
+
+testPartialRepeat
+   50    42    33 : Boyer-Moore
+   25    53    25 : Boyer-Moore
+
+testRepeat
+    3     5     3 : Boyer-Moore
+    8    11     3 : Boyer-Moore
+   12    13     5 : Boyer-Moore
+    9    13     2 : Boyer-Moore

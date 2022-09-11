@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/java-color-drench-board-game" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/java-color-drench-board-game" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/java-dna-sequence-aligner" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/java-dna-sequence-aligner" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/java-image-comparison" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/java-image-comparison" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/java-line-sweeper" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/java-line-sweeper" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/java-shortest-path-finder" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/java-shortest-path-finder" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/java-text-statistics" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/java-text-statistics" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/java-twitter-bot" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/java-twitter-bot" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

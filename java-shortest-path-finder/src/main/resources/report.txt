@@ -1,0 +1,137 @@
+Report
+
+Create a report.txt file that includes the following five items. Include the report with your project.
+
+1. Give an English description of your solution strategy. Explain exactly how Wires are connected and what you do when you are unable to make a connection.
+
+ - In order to connect the Wires on any given chip, I first construct a visited matrix where any coordinate inside an obstacle is marked as true and every 
+   Wire's from and to coordinates are marked as true. This matrix allows for me to process each coordinate along the way and easily detect if any of its 
+   neighbors are possible candidates to move forward with during the construction of the Path, where false coordinates are available to be used in the 
+   construction of the Path and true coordinates are not able to be used in the construction of the Path.  After this, I sort each of the Wires in the chip 
+   into a separate PriorityQueue that is organized based on separation length on each of the Wires. This PriorityQueue allows processing the Wires with the 
+   shortest separation distance first before moving on and trying to solve Wires with longer separation lengths. The PriorityQueue also updates as Wires are 
+   removed from it ensuring each new Wire pulled from the Queue is the next Wire with the shortest separation. From there, I set up a HashMap of Integers and 
+   Pairs called Pairs in order to reference back to later in the event a Wire cannot be connected due to some other Wire blocking its Path. A Pair is an object 
+   I created which holds a Path a String wildcard that represents the direction that was first taken when constructing the Path it is Paired with. This HashMap 
+   uses the Wire ID has the key in order to signify which Wire the Pair belongs to.
+
+ - From there, I process each Wire in the queue and run my helper function on it to find its optimal Path. This method essentially starts at the from coordinate 
+   in the Wire and analyzes all of its neighbors based on my neighbor's helper function in PathFinder.java that only returns neighbors that are possible to add 
+   to the Path. Neighbor's such as dead ends are not viable options and are therefore not returned as a possible option with my helper function. For each neighbor, 
+   it runs 2 heuristics. All three heuristics prefer the direction to move in this order:
+        - Right
+        - Up
+        - Left
+        - Down
+
+ - The first heuristic detects if a coordinate's neighbor has a shorter or equal separation to the Wire's to coordinate, and if it does, it adds that neighbor to a 
+   HashMap of potential advances where the keys are the neighbor's direction with regard to the current coordinate and the values are the neighbor coordinate itself. 
+   Once all the neighbors are processed, the algorithm detects if this is the first time the method has been running by checking to see if the numberOfIterations 
+   variable equals 0. If it does, the wildcard parameter comes into play however, all Wires initially are given a wildcard called "" on its first run through. If the 
+   wildcard equals, "Right", "Left", "Down", or "Up", the program can make sure to never move to that coordinate since each coordinate in my HashMap has its direction 
+   string associated with its coordinate. Whether this is the first time the while loop has been running or not, the heuristic picks the first coordinate it finds in 
+   potential advances based on the preferred direction priority hard coded into the if statements.
+
+ - The second heuristic is exactly like the first one except it adds potential matches to potential advances based on less strict quidelines. The second heuristic also 
+   only runs if the first one doesn't add anything to potential advances. This Heuristic tracks a separation min value in a variable that is initially set to 
+   Integer.Max_VALUE. Every time it considers a coordinate in neighbors if its separation is less than or equal to the current tracked separation, it adds it to potential 
+   advances and then adjusts the separation tracker to the value of the coordinate. Every new coordinate must then have a separation less than or equal to that of the last 
+   coordinate or it doesn't get added. This works as a failsafe as well because since the tracked variable initially starts out as Integer.MAX_VALUE, a coordinate is 
+   garunteed to be added to potential advances. From there, after every neighbor has been processed, it follows the same picking priority as the first heuristic.
+
+ - Once a coordinate has been picked it is added to the Path and from there we find the newly added coordinate's neighbors and begin processing all over again until we find 
+   the Wire's to coordinate. If at any time, a coordinate does not have any allowable neighbors to move to, the algorithm will detect this and begin backing up in the Path 
+   until it finds a coordinate that does have potential neighbors to move to and begins the Path in a different direction, deleting the coordinates that took us into the 
+   dead end and setting them as false within the visited matrix. This has a failsafe in its loop using an int called backtracks. If this int exceeds 4 at any time (since 
+   each coordinate can have a max of 4 neighbors) the algorithm terminates and returns null. This prevents infinite loops and is part of why small_08.in is able to complete 
+   its computation at all. The algorithm at this stage will also catch if the Wire's from coordinate has no moveable neighbors (either due to being blocked by obstacles or 
+   another Wire) and will return a Pair with its Path being NULL but its wild card being the Wire ID (in string form), which it gets by finding the coordinate blocking it in 
+   on the chip's grid and converting that integer to a string, of the Wire blocking it. If no Wire ID can be found, a NULL object is returned signifying the Wire cannot be 
+   connected.
+
+ - If at any time the Wire processing returns null (an absolute null) the algorithm will state using System.out.println() that the Wire could not be connected. If at anytime 
+   Wire processing returns a Pair with a null Path but a string that isn't null, the algorithm will parse the string back into an int, find the Wire in the temporary HashMap 
+   called Pairs, and force the Wire to reprocess its Path, only this time the wild card given to the method is the direction the algorithm moved on its first move when 
+   computing the Path for the Wire. This way an attempt can be made to find an alternate Path for the Wire that is blocking the other Wire from being created. Once an alternative 
+   Path has been found, the original Wire is reprocessed. If the reprocessed Wire has finally found a Path, it is added to the layout HashMap, otherwise, it is stated that the 
+   Wire could not be connected. Unfortunately, this reprocessing of Wires is only given one shot and one direction . I was too concerned about the possibility of an infinite 
+   loop where a Wire that is being reprocessed is continually switching back and forth between two different Paths and never finding one that doesn't free the Wire being blocked 
+   in. If I could, I'd like to have implemented some sort of way to pass a list of coordinates to the Wire processing method and the list of coordinates would be a list of 
+   coordinates the method cannot add to the Path for any reason. However, I feel this idea is flawed and didn't have the time to properly investigate this potential.
+
+ - After each Wire has been processed, a HashMap is returned which is the actual layout to be used to mark the Paths of the Wires on the chip's grid.
+
+2. Write a high-level pseudo-code description of your algorithm to route one Wire.
+
+Step 1: Start with the Wire's from coordinate and find its neighbors
+
+Step 2: While the current coordinate under consideration in the Path doesn't equal the Wire's to coordinate, run:
+
+- For each coordinate in the current coordinates neighbors list:
+    - If its separation to the Wire's to coordinate is less than or equal to the current coordinate's separation, consider it as a potential advancement
+- For each potential advancement:
+    - If this is the first time running the loop, select the first coordinate that is a potential advance by priority of direction right, up, left, down.
+    - If the potential advancement list is empty:
+        - For each neighbor that is a neighbor of the current coordinate:
+            - Set a variable equal to the maximum integer value.
+            - If a coordinate's separation to the Wire's to coordinate is shorter than or equal to the variable set, add it to of potential advances and set the variable equal to the separation of that neighbor
+        - For each potential advancement:
+            - If this is the first time running the loop, select the first coordinate that is a potential advance by priority of direction right, up, left, down.
+- Add the coordinate selected for advancement to the Path
+
+Step 3: If the coordinate given is the Wire's to coordinate, add it to the Path and return the Path with a string describing the Path's first direction taken.
+
+Step 4: Associate the Path with a Wire ID in a HashMap for future layout of the Chip.
+
+3. Enumerate any data structures you use along the way and explain their purpose in your algorithm.
+
+ - Visited matrix: A boolean matrix that allows for a coordinate to find the neighbors it can travel to without interfering with an obstacle or another Wire.
+ 
+ - Potential Advances: A HashMap of coordinates with string directions of where the algorithm can travel to. Has string directions to be able to implement a priority direction in 
+   which to try to travel to first
+   
+ - Pairs: Contains a Path and a string detailing the first direction taken in the processing of that Path.
+ 
+ - Pairs (HashMap): A list of Pairs much like how the layout will be but associates a Wire ID with a given Pair.
+ 
+ - Neighbors (HashMap): A HashMap of neighbors for a given coordinate with strings to identify their direction relative to the current coordinate.
+
+4. Tell us about any heuristics you've implemented and why you think they're useful.
+
+ - See item 1's description of my two heuristics. Other than that the only heuristic I feel is necessary is my heuristic that backtracks a Path if it reaches a dead end and moves 
+   to another direction to avoid a dead end (hopefully) and the fact I prioritize directions to travel (I prefer RULD instead of the standard NSEW).
+
+- The backtracking works by backing up in a Path until it finds a coordinate with viable neighbors to travel to.
+
+- The prioritization of directions to travel to was a guess and check on my part. I ended up finding right, up, left, and down, in that order, where the best directional 
+  prioritization for my algorithm.
+
+5. In a table, summarize your successes and failures each of the sample input files that are included with the project.
+
+    - Small Inputs
+        - small_00.in  || cost: 2     || All Wires Connected
+        - small_01.in  || cost: 3     || All Wires Connected
+        - small_02.in  || cost: 14    || All Wires Connected
+        - small_03.in  || cost: 11    || All Wires Connected
+        - small_04.in  || cost: 12    || All Wires Connected
+        - small_05.in  || cost: 22    || All Wires Connected
+        - small_06.in  || cost: 27    || All Wires Connected
+        - small_07.in  || cost: 19    || All Wires Connected
+        - small_08.in  || cost: 14    || Unable to connect Wire(s) 2
+        - small_09.in  || cost: 18    || All Wires Connected
+        - small_10.in  || cost: 21    || All Wires Connected
+        - small_11.in  || cost: 11    || All Wires Connected
+    - Medium Inputs
+        - medium_01.in || cost: 105   || All Wires Connected
+        - medium_02.in || cost: 235   || All Wires Connected
+    - Big Inputs
+        - big_01.in    || cost: 445   || All Wires Connected
+        - big_02.in    || cost: 704   || All Wires Connected
+        - big_03.in    || cost: 1114  || Unable to connect Wire(s) 184
+        - big_04.in    || cost: 4709  || Unable to connect Wire(s) 721, 723, 726
+    - Huge Inputs
+        - huge_01.in   || cost: 18961 || Unable to connect Wire(s) 2010
+        
+Total Time (On my computer) to run all benchmarks: 0.639 seconds
+
+I was planning on adding more Testing cases but ran out of time. I'm sorry.
