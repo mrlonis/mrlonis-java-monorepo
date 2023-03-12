@@ -13,6 +13,7 @@ This repo contains all my personal Java related projects under one repo
     - [JDK](#jdk)
       - [Mac-OS](#mac-os)
       - [WSL - Ubuntu](#wsl---ubuntu)
+  - [Running the Project](#running-the-project)
 
 ## Prerequisites
 
@@ -44,4 +45,18 @@ brew install oracle-jdk@17
 apt-get install gnupg2 software-properties-common
 add-apt-repository ppa:linuxuprising/java
 apt-get install oracle-java17-installer oracle-java17-set-default
+```
+
+## Running the Project
+
+To run the project, run the following command:
+
+```shell
+./gradlew build
+```
+
+If on Windows, run the following command:
+
+```cmd
+gradlew.bat build
 ```
