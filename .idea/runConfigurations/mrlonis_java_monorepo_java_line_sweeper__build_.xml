@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="java-color-drench-board-game [build]" type="GradleRunConfiguration" factoryName="Gradle">
+  <configuration default="false" name="mrlonis-java-monorepo:java-line-sweeper [build]" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
-      <option name="externalProjectPath" value="$PROJECT_DIR$/java-color-drench-board-game" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$/java-line-sweeper" />
       <option name="externalSystemIdString" value="GRADLE" />
       <option name="scriptParameters" value="" />
       <option name="taskDescriptions">
