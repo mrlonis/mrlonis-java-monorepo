@@ -16,7 +16,7 @@ public class AVLTreeTests {
         }
         System.out.println(avl.keys().toString());
         avl.printAll();
-        System.out.println(avl.toString());
+        System.out.println(avl);
         assertEquals(5, avl.height());
     }
 

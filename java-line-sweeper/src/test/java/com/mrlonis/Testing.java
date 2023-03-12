@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-/**
+/*
  * To test with JUnit, add JUnit to your project. To do this, go to Project->Properties. Select "Java Build Path".
  * Select the "Libraries" tab and "Add Library". Select JUnit, then JUnit 4.
  */
@@ -17,14 +17,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Testing {
 
-    @Test
     /**
      * Start with this test. Make appropriate changes to BinarySearchTree.Node.
-     */ public void nodeProperties() {
+     */
+    @Test
+     public void nodeProperties() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         assertTrue(bst.isEmpty());
         BinarySearchTree<Integer>.Node p;
@@ -33,25 +35,25 @@ public class Testing {
         assertNull(p.right);
         assertNull(p.parent);
         assertNotNull(p.get());
-        assertTrue(5 == p.data);
+        assertEquals(5, (int) p.data);
         assertNotNull(p.get());
-        assertTrue(5 == p.get());
+        assertEquals(5, (int) p.get());
         assertEquals(1, p.height);
         assertFalse(p.dirty);
         assertTrue(p.isLeaf());
         p = bst.new Node(6, p, null);
-        assertTrue(6 == p.data);
-        assertTrue(6 == p.get());
+        assertEquals(6, (int) p.data);
+        assertEquals(6, (int) p.get());
         p.fixHeight();
         assertEquals(2, p.height);
         p = bst.new Node(7, null, p);
-        assertTrue(7 == p.data);
-        assertTrue(7 == p.get());
+        assertEquals(7, (int) p.data);
+        assertEquals(7, (int) p.get());
         p.fixHeight();
         assertEquals(3, p.height);
         p.left = bst.new Node(8);
-        assertTrue(8 == p.left.data);
-        assertTrue(8 == p.left.get());
+        assertEquals(8, (int) p.left.data);
+        assertEquals(8, (int) p.left.get());
         p.fixHeight();
         assertEquals(3, p.height);
         p.left.left = p.right;
@@ -61,10 +63,11 @@ public class Testing {
         assertEquals(4, p.height);
     }
 
-    @Test
     /**
      * When you're ready to run this test, remove the // from the above line.
-     */ public void insertSmallBST() {
+     */
+    @Test
+    public void insertSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         assertTrue(bst.isEmpty());
         int[] a = new int[]{4, 8, 0, 2, 6, 10};
@@ -74,15 +77,13 @@ public class Testing {
             n++;
             assertEquals(n, bst.size());
         }
-        /**
-         * 4 / \ 0 8 \ / \ 2 6 10
-         */
-        assertTrue(4 == bst.root.data);
-        assertTrue(0 == bst.root.left.data);
-        assertTrue(2 == bst.root.left.right.data);
-        assertTrue(8 == bst.root.right.data);
-        assertTrue(6 == bst.root.right.left.data);
-        assertTrue(10 == bst.root.right.right.data);
+        /* 4 / \ 0 8 \ / \ 2 6 10 */
+        assertEquals(4, (int) bst.root.data);
+        assertEquals(0, (int) bst.root.left.data);
+        assertEquals(2, (int) bst.root.left.right.data);
+        assertEquals(8, (int) bst.root.right.data);
+        assertEquals(6, (int) bst.root.right.left.data);
+        assertEquals(10, (int) bst.root.right.right.data);
 
         assertNull(bst.root.parent);
         assertEquals(bst.root, bst.root.left.parent);
@@ -144,12 +145,12 @@ public class Testing {
         for (Integer key : a) {
             bst.insert(key);
         }
-        assertTrue(null == bst.root.parent);
-        assertTrue(bst.root == bst.root.left.parent);
-        assertTrue(bst.root.left == bst.root.left.right.parent);
-        assertTrue(bst.root == bst.root.right.parent);
-        assertTrue(bst.root.right == bst.root.right.left.parent);
-        assertTrue(bst.root.right == bst.root.right.right.parent);
+        assertNull(bst.root.parent);
+        assertSame(bst.root, bst.root.left.parent);
+        assertSame(bst.root.left, bst.root.left.right.parent);
+        assertSame(bst.root, bst.root.right.parent);
+        assertSame(bst.root.right, bst.root.right.left.parent);
+        assertSame(bst.root.right, bst.root.right.right.parent);
     }
 
     @Test
@@ -162,20 +163,20 @@ public class Testing {
         /*
          * Before and After on left side of tree. (before on root)
          */
-        assertTrue(bst.root.getBefore() == bst.root.left.right);
+        assertSame(bst.root.getBefore(), bst.root.left.right);
         assertNull(bst.root.left.getBefore());
-        assertTrue(bst.root.left.getAfter() == bst.root.left.right);
-        assertTrue(bst.root.left.right.getBefore() == bst.root.left);
-        assertTrue(bst.root.left.right.getAfter() == bst.root);
+        assertSame(bst.root.left.getAfter(), bst.root.left.right);
+        assertSame(bst.root.left.right.getBefore(), bst.root.left);
+        assertSame(bst.root.left.right.getAfter(), bst.root);
         /*
          * Before and After on right side of tree. (after on root)
          */
-        assertTrue(bst.root.getAfter() == bst.root.right.left);
-        assertTrue(bst.root.right.getBefore() == bst.root.right.left);
-        assertTrue(bst.root.right.left.getBefore() == bst.root);
-        assertTrue(bst.root.right.left.getAfter() == bst.root.right);
-        assertTrue(bst.root.right.getAfter() == bst.root.right.right);
-        assertTrue(bst.root.right.right.getBefore() == bst.root.right);
+        assertSame(bst.root.getAfter(), bst.root.right.left);
+        assertSame(bst.root.right.getBefore(), bst.root.right.left);
+        assertSame(bst.root.right.left.getBefore(), bst.root);
+        assertSame(bst.root.right.left.getAfter(), bst.root.right);
+        assertSame(bst.root.right.getAfter(), bst.root.right.right);
+        assertSame(bst.root.right.right.getBefore(), bst.root.right);
         assertNull(bst.root.right.right.getAfter());
     }
 
@@ -194,7 +195,7 @@ public class Testing {
             assertNotNull(loc);
             assertEquals(key, loc.get());
             loc = bst.search(key + 1);
-            assertNull(bst.search(key + 1));
+            assertNull(loc);
         }
     }
 
@@ -288,7 +289,7 @@ public class Testing {
             dirtyCount--;
             size++;
             assertEquals(size, bst.size());
-            assertTrue(!bst.search(key).dirty);
+            assertFalse(bst.search(key).dirty);
             assertEquals(dirtyCount, countDirtyNodes(bst.root));
         }
     }
@@ -325,7 +326,7 @@ public class Testing {
         ks = bst.keys();
         assertEquals(a.length - 4, ks.size());
         for (Integer key : ks) {
-            assertTrue(key % 2 == 0);
+            assertEquals(0, key % 2);
         }
         for (int i = 1; i < ks.size(); i++) {
             assertTrue(ks.get(i - 1) <= ks.get(i));
@@ -393,7 +394,7 @@ public class Testing {
         }
         assertNull(bst.search(1).getBefore());
         for (int i = 2; i <= n; i++) {
-            assertTrue(i - 1 == bst.search(i).getBefore().get());
+            assertEquals(i - 1, (int) bst.search(i).getBefore().get());
         }
     }
 
@@ -407,7 +408,7 @@ public class Testing {
             bst.insert(key);
         }
         for (int i = 1; i < n; i++) {
-            assertTrue(i + 1 == bst.search(i).getAfter().get());
+            assertEquals(i + 1, (int) bst.search(i).getAfter().get());
         }
         assertNull(bst.search(n).getAfter());
     }
@@ -423,7 +424,7 @@ public class Testing {
             bst.remove(key);
         }
         for (int key = 3; key <= 100; key += 2) {
-            assertTrue(key - 2 == bst.search(key).getBefore().get());
+            assertEquals(key - 2, (int) bst.search(key).getBefore().get());
         }
     }
 
@@ -469,7 +470,7 @@ public class Testing {
         }
         assertNull(avl.search(1).getBefore());
         for (int i = 2; i <= n; i++) {
-            assertTrue(i - 1 == avl.search(i).getBefore().get());
+            assertEquals(i - 1, (int) avl.search(i).getBefore().get());
         }
     }
 
@@ -483,7 +484,7 @@ public class Testing {
             avl.insert(key);
         }
         for (int i = 1; i < n; i++) {
-            assertTrue(i + 1 == avl.search(i).getAfter().get());
+            assertEquals(i + 1, (int) avl.search(i).getAfter().get());
         }
         assertNull(avl.search(n).getAfter());
     }
@@ -498,9 +499,9 @@ public class Testing {
         // Check size
         assertEquals(3, avl.size());
         // Check keys
-        assertTrue(2 == avl.root.data);
-        assertTrue(1 == avl.root.left.data);
-        assertTrue(3 == avl.root.right.data);
+        assertEquals(2, (int) avl.root.data);
+        assertEquals(1, (int) avl.root.left.data);
+        assertEquals(3, (int) avl.root.right.data);
         // Check parents
         assertNull(avl.root.parent);
         assertEquals(avl.root, avl.root.left.parent);
@@ -522,9 +523,9 @@ public class Testing {
         // Check size
         assertEquals(3, avl.size());
         // Check keys
-        assertTrue(2 == avl.root.data);
-        assertTrue(1 == avl.root.left.data);
-        assertTrue(3 == avl.root.right.data);
+        assertEquals(2, (int) avl.root.data);
+        assertEquals(1, (int) avl.root.left.data);
+        assertEquals(3, (int) avl.root.right.data);
         // Check parents
         assertNull(avl.root.parent);
         assertEquals(avl.root, avl.root.left.parent);
@@ -546,9 +547,9 @@ public class Testing {
         // Check size
         assertEquals(3, avl.size());
         // Check keys
-        assertTrue(2 == avl.root.data);
-        assertTrue(1 == avl.root.left.data);
-        assertTrue(3 == avl.root.right.data);
+        assertEquals(2, (int) avl.root.data);
+        assertEquals(1, (int) avl.root.left.data);
+        assertEquals(3, (int) avl.root.right.data);
         // Check parents
         assertNull(avl.root.parent);
         assertEquals(avl.root, avl.root.left.parent);
@@ -570,9 +571,9 @@ public class Testing {
         // Check size
         assertEquals(3, avl.size());
         // Check keys
-        assertTrue(2 == avl.root.data);
-        assertTrue(1 == avl.root.left.data);
-        assertTrue(3 == avl.root.right.data);
+        assertEquals(2, (int) avl.root.data);
+        assertEquals(1, (int) avl.root.left.data);
+        assertEquals(3, (int) avl.root.right.data);
         // Check parents
         assertNull(avl.root.parent);
         assertEquals(avl.root, avl.root.left.parent);
@@ -594,12 +595,12 @@ public class Testing {
         // Check size
         assertEquals(6, avl.size());
         // Check keys
-        assertTrue(3 == avl.root.data);
-        assertTrue(2 == avl.root.left.data);
-        assertTrue(5 == avl.root.right.data);
-        assertTrue(1 == avl.root.left.left.data);
-        assertTrue(4 == avl.root.right.left.data);
-        assertTrue(6 == avl.root.right.right.data);
+        assertEquals(3, (int) avl.root.data);
+        assertEquals(2, (int) avl.root.left.data);
+        assertEquals(5, (int) avl.root.right.data);
+        assertEquals(1, (int) avl.root.left.left.data);
+        assertEquals(4, (int) avl.root.right.left.data);
+        assertEquals(6, (int) avl.root.right.right.data);
         // Check parents
         assertNull(avl.root.parent);
         assertEquals(avl.root, avl.root.left.parent);
@@ -627,12 +628,12 @@ public class Testing {
         // Check size
         assertEquals(6, avl.size());
         // Check keys
-        assertTrue(4 == avl.root.data);
-        assertTrue(2 == avl.root.left.data);
-        assertTrue(1 == avl.root.left.left.data);
-        assertTrue(3 == avl.root.left.right.data);
-        assertTrue(5 == avl.root.right.data);
-        assertTrue(6 == avl.root.right.right.data);
+        assertEquals(4, (int) avl.root.data);
+        assertEquals(2, (int) avl.root.left.data);
+        assertEquals(1, (int) avl.root.left.left.data);
+        assertEquals(3, (int) avl.root.left.right.data);
+        assertEquals(5, (int) avl.root.right.data);
+        assertEquals(6, (int) avl.root.right.right.data);
         // Check parents
         assertNull(avl.root.parent);
         assertEquals(avl.root, avl.root.left.parent);
@@ -658,21 +659,21 @@ public class Testing {
             avl.insert(key);
         }
         // Check keys before the rotation
-        assertTrue(5 == avl.root.data);
-        assertTrue(2 == avl.root.left.data);
-        assertTrue(6 == avl.root.right.data);
-        assertTrue(1 == avl.root.left.left.data);
-        assertTrue(3 == avl.root.left.right.data);
+        assertEquals(5, (int) avl.root.data);
+        assertEquals(2, (int) avl.root.left.data);
+        assertEquals(6, (int) avl.root.right.data);
+        assertEquals(1, (int) avl.root.left.left.data);
+        assertEquals(3, (int) avl.root.left.right.data);
         // Do the rotation
         avl.insert(4);
         // Check keys after the rotation
         assertEquals(6, avl.size());
-        assertTrue(3 == avl.root.data);
-        assertTrue(2 == avl.root.left.data);
-        assertTrue(5 == avl.root.right.data);
-        assertTrue(1 == avl.root.left.left.data);
-        assertTrue(4 == avl.root.right.left.data);
-        assertTrue(6 == avl.root.right.right.data);
+        assertEquals(3, (int) avl.root.data);
+        assertEquals(2, (int) avl.root.left.data);
+        assertEquals(5, (int) avl.root.right.data);
+        assertEquals(1, (int) avl.root.left.left.data);
+        assertEquals(4, (int) avl.root.right.left.data);
+        assertEquals(6, (int) avl.root.right.right.data);
         // Check parents
         assertNull(avl.root.parent);
         assertEquals(avl.root, avl.root.left.parent);
@@ -698,21 +699,21 @@ public class Testing {
             avl.insert(key);
         }
         // Check keys before the rotation
-        assertTrue(2 == avl.root.data);
-        assertTrue(1 == avl.root.left.data);
-        assertTrue(5 == avl.root.right.data);
-        assertTrue(3 == avl.root.right.left.data);
-        assertTrue(6 == avl.root.right.right.data);
+        assertEquals(2, (int) avl.root.data);
+        assertEquals(1, (int) avl.root.left.data);
+        assertEquals(5, (int) avl.root.right.data);
+        assertEquals(3, (int) avl.root.right.left.data);
+        assertEquals(6, (int) avl.root.right.right.data);
         // Do the rotation
         avl.insert(4);
         // Check keys after the rotation
         assertEquals(6, avl.size());
-        assertTrue(3 == avl.root.data);
-        assertTrue(2 == avl.root.left.data);
-        assertTrue(5 == avl.root.right.data);
-        assertTrue(1 == avl.root.left.left.data);
-        assertTrue(4 == avl.root.right.left.data);
-        assertTrue(6 == avl.root.right.right.data);
+        assertEquals(3, (int) avl.root.data);
+        assertEquals(2, (int) avl.root.left.data);
+        assertEquals(5, (int) avl.root.right.data);
+        assertEquals(1, (int) avl.root.left.left.data);
+        assertEquals(4, (int) avl.root.right.left.data);
+        assertEquals(6, (int) avl.root.right.right.data);
         // Check parents
         assertNull(avl.root.parent);
         assertEquals(avl.root, avl.root.left.parent);
@@ -754,7 +755,7 @@ public class Testing {
         }
         System.out.println(avl.keys().toString());
         avl.printAll();
-        System.out.println(avl.toString());
+        System.out.println(avl);
         assertEquals(5, avl.height());
         assert verifyParentPointers(avl.root);
         for (int i = a.length - 1; i >= 0; i--) {
@@ -863,7 +864,7 @@ public class Testing {
         ks = avl.keys();
         assertEquals(a.length - 4, ks.size());
         for (Integer key : ks) {
-            assertTrue(key % 2 == 0);
+            assertEquals(0, key % 2);
         }
         for (int i = 1; i < ks.size(); i++) {
             assertTrue(ks.get(i - 1) <= ks.get(i));

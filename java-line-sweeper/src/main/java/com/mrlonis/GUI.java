@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,6 +23,7 @@ class GUI extends JFrame {
     /**
      * Added default serial ID to remove Eclipse warning.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     static {
@@ -33,7 +35,7 @@ class GUI extends JFrame {
     }
 
     private LineSegment sweepLine = null;
-    private List<LineSegment> world = new ArrayList<>();
+    private final List<LineSegment> world = new ArrayList<>();
     private boolean showDetails;
 
     public GUI(int treeType) {
@@ -62,6 +64,7 @@ class GUI extends JFrame {
             /**
              * Added default serial ID to remove Eclipse warning.
              */
+            @Serial
             private static final long serialVersionUID = 1L;
 
             {
@@ -74,6 +77,7 @@ class GUI extends JFrame {
             /**
              * Added default serial ID to remove Eclipse warning.
              */
+            @Serial
             private static final long serialVersionUID = 1L;
 
             private LineSegment currentSeg;
@@ -218,7 +222,7 @@ class GUI extends JFrame {
             return;
         }
         try {
-            PrintWriter out = new PrintWriter(new File(Constants.FILENAME));
+            PrintWriter out = new PrintWriter(Constants.FILENAME);
             for (LineSegment line : world) {
                 Endpoint left = line.getLeftEndpoint(), right = line.getRightEndpoint();
                 int x1 = (int) left.getX(), y1 = (int) left.getY();

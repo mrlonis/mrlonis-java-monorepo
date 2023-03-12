@@ -18,6 +18,7 @@ package com.mrlonis;
  * intersect with each other.
  */
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,8 +28,8 @@ import java.util.function.BiPredicate;
 
 public class Sweeper {
     private int sweepX; // x-coordinate of the sweep line
-    private List<LineSegment> world; // all the line segments
-    private BinarySearchTree<LineSegment> tr; // those segments that intersect
+    private final List<LineSegment> world; // all the line segments
+    private final BinarySearchTree<LineSegment> tr; // those segments that intersect
     // the sweep line
 
     public Sweeper(List<LineSegment> world, int treeType) {
@@ -55,11 +56,10 @@ public class Sweeper {
     }
 
     /**
-     * Runs the sweep from left to right until either an intersection is
-     * detected, in which case true is returns, or the rightmost endpoint is
-     * processed, in which case false is returned.
+     * Runs the sweep from left to right until either an intersection is detected, in which case true is returns, or the
+     * rightmost endpoint is processed, in which case false is returned.
      */
-    public boolean run() {
+    public void run() {
         // Create a list of all the endpoints in the world.
         List<Endpoint> endpoints = new ArrayList<>();
 
@@ -91,7 +91,7 @@ public class Sweeper {
                     if (currSeg.intersects(above.get())) {
                         currSeg.highlight();
                         above.get().highlight();
-                        return true;
+                        return;
                     }
                 }
                 Location<LineSegment> below = loc.getAfter();
@@ -99,7 +99,7 @@ public class Sweeper {
                     if (currSeg.intersects(below.get())) {
                         currSeg.highlight();
                         below.get().highlight();
-                        return true;
+                        return;
                     }
                 }
             } else {
@@ -121,11 +121,10 @@ public class Sweeper {
                 if (above != null && below != null && above.get().intersects(below.get())) {
                     above.get().highlight();
                     below.get().highlight();
-                    return true;
+                    return;
                 }
             }
         }
-        return false;
     }
 }
 
@@ -139,10 +138,11 @@ class SweeperException extends RuntimeException {
     /**
      * Added default serial ID to remove Eclipse warning.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    private LineSegment seg;
-    private Tree<LineSegment> tr;
+    private final LineSegment seg;
+    private final Tree<LineSegment> tr;
 
     public SweeperException(LineSegment seg, Tree<LineSegment> tr) {
         super("Sweeper: the search failed to locate " + seg + " in the tree while processing its right endpoint.");

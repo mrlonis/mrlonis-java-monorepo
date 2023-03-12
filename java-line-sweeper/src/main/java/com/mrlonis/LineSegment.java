@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.io.Serial;
 
 /**
  * [read-only]
@@ -158,8 +159,7 @@ public class LineSegment {
      * Return true iff this line segment is the same as the other one.
      */
     public boolean equals(Object other) {
-        if (other instanceof LineSegment) {
-            LineSegment that = (LineSegment) other;
+        if (other instanceof LineSegment that) {
             return this.p1.equals(that.p1) && this.p2.equals(that.p2);
         }
         return false;
@@ -239,6 +239,7 @@ abstract class Endpoint extends Point2D.Double implements Comparable<Endpoint> {
     /**
      * Added default serial ID to remove Eclipse warning.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public Endpoint(Point2D point) {
@@ -255,13 +256,7 @@ abstract class Endpoint extends Point2D.Double implements Comparable<Endpoint> {
             } else if (p1.onRight() && p2.onLeft()) {
                 return 1;
             } else // on the same side
-                if (p1.getY() < p2.getY()) {
-                    return -1;
-                } else if (p1.getY() == p2.getY()) {
-                    return 0;
-                } else {
-                    return 1;
-                }
+                return java.lang.Double.compare(p1.getY(), p2.getY());
         } else {
             return 1;
         }
@@ -274,8 +269,7 @@ abstract class Endpoint extends Point2D.Double implements Comparable<Endpoint> {
     }
 
     public boolean equal(Object other) {
-        if (other instanceof Endpoint) {
-            Endpoint that = (Endpoint) other;
+        if (other instanceof Endpoint that) {
             return (int) getX() == (int) that.getX() && (int) getY() == (int) that.getY();
         }
         return false;
@@ -293,6 +287,7 @@ class LeftEndpoint extends Endpoint {
     /**
      * Added default serial ID to remove Eclipse warning.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public LeftEndpoint(Point2D point) {
@@ -311,6 +306,7 @@ class RightEndpoint extends Endpoint {
     /**
      * Added default serial ID to remove Eclipse warning.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public RightEndpoint(Point2D point) {

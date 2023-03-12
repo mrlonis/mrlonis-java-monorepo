@@ -1,6 +1,5 @@
 package com.mrlonis;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiPredicate;
@@ -44,7 +43,7 @@ public class BinarySearchTree<K> implements Tree<K> {
             }
         }
 
-        return curr;
+        return null;
     }
 
     /**
@@ -189,15 +188,12 @@ public class BinarySearchTree<K> implements Tree<K> {
      *         The key to be removed from this tree if it exists in this tree.
      */
     public void remove(K key) {
-        if (root == null) {
-            return;
-        } else {
+        if (root != null) {
             Node search = search(key);
             if (search != null) {
                 if (!search.dirty) {
                     search.dirty = true;
                     n--;
-                    return;
                 }
             }
         }
@@ -209,9 +205,8 @@ public class BinarySearchTree<K> implements Tree<K> {
     public void rebuild() {
         List<K> keys = this.keys();
         this.clear();
-        Iterator<K> keysIT = keys.iterator();
-        while (keysIT.hasNext()) {
-            this.insert(keysIT.next());
+        for (K key : keys) {
+            this.insert(key);
         }
     }
 
@@ -251,7 +246,7 @@ public class BinarySearchTree<K> implements Tree<K> {
         StringBuilder str = new StringBuilder();
         str.append("Start of Tree...\n");
         if (root != null) {
-            str.append("ROOT: {" + root.data.toString() + "}");
+            str.append("ROOT: {").append(root.data.toString()).append("}");
             str.append("\nROOT LEFT: ");
             toStringHelper(root.left, str, 1);
             str.append("\nROOT RIGHT: ");
@@ -274,7 +269,7 @@ public class BinarySearchTree<K> implements Tree<K> {
      */
     public void toStringHelper(Node p, StringBuilder str, int level) {
         if (p != null) {
-            str.append("Node (h=" + level + ") Data: {" + p.data.toString());
+            str.append("Node (h=").append(level).append(") Data: {").append(p.data.toString());
             if (p.left != null) {
                 str.append(" LEFT: ");
                 toStringHelper(p.left, str, level + 1);
@@ -337,12 +332,11 @@ public class BinarySearchTree<K> implements Tree<K> {
      * Testing method
      */
     public void printAllHelper(Node p) {
-        Node curr = p;
-        if (curr == null) {
+        if (p == null) {
             return;
         }
         printAllHelper(p.left);
-        System.out.print(curr.data + ", ");
+        System.out.print(p.data + ", ");
         printAllHelper(p.right);
     }
 
@@ -442,7 +436,7 @@ public class BinarySearchTree<K> implements Tree<K> {
                     p = p.before;
                 }
             }
-            return p.before;
+            return null;
         }
 
         /**
@@ -459,7 +453,7 @@ public class BinarySearchTree<K> implements Tree<K> {
                     p = p.after;
                 }
             }
-            return p.after;
+            return null;
         }
 
         /**

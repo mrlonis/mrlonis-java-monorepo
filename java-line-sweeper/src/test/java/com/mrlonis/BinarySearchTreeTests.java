@@ -16,7 +16,7 @@ public class BinarySearchTreeTests {
         }
         System.out.println(bst.keys().toString());
         bst.printAll();
-        System.out.println(bst.toString());
+        System.out.println(bst);
         assertEquals(8, bst.height());
     }
 
