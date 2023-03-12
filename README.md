@@ -13,6 +13,20 @@ This repo contains all my personal Java related projects under one repo
 
 ## Prerequisites
 
+### Gradle
+
+#### Windows
+
+```cmd
+choco install gradle
+```
+
+#### Mac-OS / WSL
+
+```shell
+brew install gradle
+```
+
 ### JDK
 
 #### Mac-OS

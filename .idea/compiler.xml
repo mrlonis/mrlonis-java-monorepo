@@ -7,9 +7,22 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.24/13a394eed5c4f9efb2a6d956e2086f1d81e857d9/lombok-1.18.24.jar" />
         </processorPath>
-        <module name="java-dna-sequence-aligner.main" />
-        <module name="java-dna-sequence-aligner.test" />
+        <module name="mrlonis-java-monorepo.java-line-sweeper.test" />
+        <module name="mrlonis-java-monorepo.java-twitter-bot.test" />
+        <module name="mrlonis-java-monorepo.java-text-statistics.main" />
+        <module name="mrlonis-java-monorepo.java-image-comparison.test" />
+        <module name="mrlonis-java-monorepo.java-shortest-path-finder.main" />
+        <module name="mrlonis-java-monorepo.java-image-comparison.main" />
+        <module name="mrlonis-java-monorepo.java-shortest-path-finder.test" />
+        <module name="mrlonis-java-monorepo.java-twitter-bot.main" />
+        <module name="mrlonis-java-monorepo.java-line-sweeper.main" />
+        <module name="mrlonis-java-monorepo.java-dna-sequence-aligner.main" />
+        <module name="mrlonis-java-monorepo.java-color-drench-board-game.test" />
+        <module name="mrlonis-java-monorepo.java-color-drench-board-game.main" />
+        <module name="mrlonis-java-monorepo.java-dna-sequence-aligner.test" />
+        <module name="mrlonis-java-monorepo.java-text-statistics.test" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="17" />
   </component>
 </project>
