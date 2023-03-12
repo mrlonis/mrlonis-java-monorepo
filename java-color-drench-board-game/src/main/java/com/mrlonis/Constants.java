@@ -4,6 +4,8 @@ package com.mrlonis;
  * Global constants.
  */
 public class Constants {
+    private Constants() {
+    }
 
     public static final String TITLE = "Project 2: Flood It";
     public static final String HINT = "Initially, the tile in the upper left corner is flooded. Clicking a tile recolors\nthe flooded region with the selected color, then floods all tiles adjacent\nto the flooded region that are in the selected color.\n\nThe player wins when all tiles are flooded, and loses when the step\nlimit is reached.\n";
