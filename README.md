@@ -35,11 +35,13 @@ brew install gradle
 #### Mac-OS
 
 ```shell
-brew install openjdk@17
+brew install oracle-jdk@17
 ```
 
 #### WSL - Ubuntu
 
 ```shell
-sudo apt install openjdk-17-jdk
+apt-get install gnupg2 software-properties-common
+add-apt-repository ppa:linuxuprising/java
+apt-get install oracle-java17-installer oracle-java17-set-default
 ```
