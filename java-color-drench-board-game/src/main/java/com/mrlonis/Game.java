@@ -1,23 +1,25 @@
 package com.mrlonis;
 
-import static java.lang.Math.toIntExact;
-
+import javax.swing.*;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
-import javax.swing.SwingUtilities;
+
+import static java.lang.Math.toIntExact;
 
 /**
- * Game is a controller that run a game in either interactive or batch mode. Unless resized, the game is played on a board of size Constants.DEFAULT_SIZE.
+ * Game is a controller that run a game in either interactive or batch mode. Unless resized, the game is played on a
+ * board of size Constants.DEFAULT_SIZE.
  * <p>
- * Operations are provided to compare run times of different flood functions (using reflection to automatically detect the defined methods in the Board class).
+ * Operations are provided to compare run times of different flood functions (using reflection to automatically detect
+ * the defined methods in the Board class).
  */
 public class Game {
 
+    private final boolean interactive;
     private int size = Constants.DEFAULT_SIZE;
     private Board board;
     private GUI theView;
-    private boolean interactive = true;
     private int currentStep;
     private List<Integer> thisRun = new LinkedList<>(); // for timings when
     // running in batch mode
@@ -38,23 +40,12 @@ public class Game {
     }
 
     /**
-     * Initializes this game to a fresh state and starts up the gui.
-     */
-    private void init() {
-        this.board = new Board(this.size);
-        this.currentStep = 0;
-		if (this.interactive) {
-			this.theView = new GUI(this);
-		}
-    }
-
-    /**
      * Runs a game in interactive mode. See comment for how to run in batch (i.e., testing) mode.
      */
     public static void main(final String... args) {
         System.out.println(Constants.TITLE);
         // Run a game in interactive mode:
-        SwingUtilities.invokeLater(() -> new Game());
+        SwingUtilities.invokeLater(Game::new);
 
         // Uncomment the following line to run a batch of games and display a
         // graph of the timings:
@@ -68,6 +59,17 @@ public class Game {
 		newGame.autoPlay(1);
 		System.out.println("Finished!");
 		*/
+    }
+
+    /**
+     * Initializes this game to a fresh state and starts up the gui.
+     */
+    private void init() {
+        this.board = new Board(this.size);
+        this.currentStep = 0;
+        if (this.interactive) {
+            this.theView = new GUI(this);
+        }
     }
 
     /**
@@ -99,7 +101,8 @@ public class Game {
     }
 
     /**
-     * Processes one step of the game (where the player has selected the given color for their move) using the standard flood function.
+     * Processes one step of the game (where the player has selected the given color for their move) using the standard
+     * flood function.
      */
     public void select(WaterColor color) {
         select(0, color); // k == 0 means to use Board.flood() as the flood
@@ -107,10 +110,10 @@ public class Game {
     }
 
     /**
-     * Processes one stop of the game (where the player has selected the give color for their move) using the kth flood function (where k = 0, 1, 2, ...)
+     * Processes one stop of the game (where the player has selected the give color for their move) using the kth flood
+     * function (where k = 0, 1, 2, ...)
      */
-    public void select(int k,
-                       WaterColor color) {
+    public void select(int k, WaterColor color) {
         try {
             Class<?> c = Board.class;
             Class<?>[] argTypes = new Class[]{WaterColor.class};
@@ -125,7 +128,8 @@ public class Game {
     }
 
     /**
-     * Runs a batch of tests, on boards of varying sizes, through autoPlay(), iterating over all defined flood functions, and then displays a graph of run times.
+     * Runs a batch of tests, on boards of varying sizes, through autoPlay(), iterating over all defined flood
+     * functions, and then displays a graph of run times.
      */
     private void batchTest() {
         List<List<Integer>> allTimings = new LinkedList<>();
@@ -160,15 +164,15 @@ public class Game {
      */
     void resize(int size) {
         this.size = size;
-		if (this.interactive) {
-			this.theView.dispose();
-		}
+        if (this.interactive) {
+            this.theView.dispose();
+        }
         this.init();
     }
 
     /**
-     * Plays a series of games in batch mode, where player moves are selected according to the board's suggestions, and the kth flood function is used, and adds the averaged
-     * elapsed time to the thisRun list.
+     * Plays a series of games in batch mode, where player moves are selected according to the board's suggestions, and
+     * the kth flood function is used, and adds the averaged elapsed time to the thisRun list.
      */
     private void autoPlay(int k) {
         long gameTime = 0;
