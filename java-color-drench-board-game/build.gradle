@@ -44,13 +44,16 @@ def filesToExcludeFromCoverage = ["**/com/mrlonis/configuration/**",
 test {
 	finalizedBy jacocoTestReport
 	useJUnitPlatform()
+	testLogging {
+		showStandardStreams = true
+	}
 }
 
 jacocoTestReport {
 	dependsOn test
 	reports {
-		xml.required true
-		csv.required false
+		xml.required = true
+		csv.required = false
 	}
 
 	afterEvaluate {
