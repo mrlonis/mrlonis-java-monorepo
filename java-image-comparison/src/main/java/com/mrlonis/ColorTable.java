@@ -64,7 +64,6 @@ public class ColorTable {
      * @throws RuntimeException
      *         if rehashThreshold is not in the range (0.0..1.0] for a linear strategy or (0.0..0.5) for a quadratic
      *         strategy
-     * @return ColorTable            The ColorTable with the specified properties of the four parameters.
      */
     public ColorTable(int initialCapacity, int bitsPerChannel, int collisionStrategy, double rehashThreshold) {
         if ((initialCapacity > Constants.MAX_CAPACITY) || (initialCapacity < 1)) {
@@ -87,7 +86,7 @@ public class ColorTable {
                 throw new RuntimeException(
                         "rehashThreshold Error - Cannot be less than or equal to zero for LINEAR collision strategy");
             }
-        } else if (collisionStrategy == Constants.QUADRATIC) {
+        } else {
             if (rehashThreshold >= 0.5) {
                 throw new RuntimeException(
                         "rehashThreshold Error - Cannot be greater than or equal to 0.5 for QUADRATIC collision strategy");
@@ -127,8 +126,8 @@ public class ColorTable {
 
         ColorTable table = new ColorTable(3, 6, Constants.QUADRATIC, .49);
         int[] data = new int[]{32960, 4293315, 99011, 296390};
-        for (int i = 0; i < data.length; i++) {
-            table.increment(new Color(data[i]));
+        for (int datum : data) {
+            table.increment(new Color(datum));
         }
         System.out.println("capacity: " + table.getCapacity()); // Expected: 7
         System.out.println("size: " + table.getSize());         // Expected: 3
@@ -224,9 +223,7 @@ public class ColorTable {
      * @param    color    The Color that will be put into the ColorTable.
      */
     public void put(Color color, long count) {
-        if (count <= 0) {
-
-        } else {
+        if (count > 0) {
             numCollisions = 0;
             int hashVal = Util.pack(color, this.bitsPerChannel);
             int hashLocation = hashVal % this.capacity;
@@ -331,7 +328,7 @@ public class ColorTable {
             newCapacity = Constants.MAX_CAPACITY;
         } else {
             boolean primeAnd4j3 = false;
-            while (primeAnd4j3 == false) {
+            while (!primeAnd4j3) {
                 if (Util.isPrime(newCapacity)) {
                     int temp = newCapacity - 3;
                     if ((temp % 4) == 0) {
@@ -369,7 +366,7 @@ public class ColorTable {
      * counts for each color in the color key space that exists in this ColorTable.
      *
      * @return An Iterator that marches through the color key space
-     * @see    ColorIterator.java
+     * @see    ColorIterator
      */
     public Iterator iterator() {
         return new ColorIterator(this);
@@ -381,24 +378,24 @@ public class ColorTable {
      * @return A string representation of the Association[] colorTable array in this ColorTable.
      */
     public String toString() {
-        String str = "[";
+        StringBuilder str = new StringBuilder("[");
 
         for (int i = 0; i < this.capacity; i++) {
             if (this.colorTable[i] != null) {
-                str += Integer.toString(i);
-                str += ":";
-                str += Integer.toString(this.colorTable[i].key);
-                str += ",";
-                str += Long.toString(this.colorTable[i].value);
-                str += ", ";
+                str.append(i);
+                str.append(":");
+                str.append(this.colorTable[i].key);
+                str.append(",");
+                str.append(this.colorTable[i].value);
+                str.append(", ");
             }
         }
 
         int n = str.length();
-        str = str.substring(0, n - 2);
-        str += "]";
+        str = new StringBuilder(str.substring(0, n - 2));
+        str.append("]");
 
-        return str;
+        return str.toString();
     }
 
     /**

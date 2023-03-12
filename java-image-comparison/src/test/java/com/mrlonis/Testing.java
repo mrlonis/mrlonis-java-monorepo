@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Assorted JUnit tests for ColorTable.
@@ -14,7 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class Testing {
 
-    private static Color c0, c1, c2, c3, c4, c5, c6, c7;
+    private static Color c1;
+    private static Color c2;
+    private static Color c3;
+    private static Color c5;
+    private static Color c6;
+    private static Color c7;
     private static ColorTable table;
 
     @Test
@@ -38,11 +45,11 @@ public class Testing {
         table = new ColorTable(3, 2, Constants.LINEAR, 0.9);
         assertEquals(0, table.getSize());
         assertEquals(3, table.getCapacity());
-        assertEquals(true, table.isEmpty());
+        assertTrue(table.isEmpty());
         table.put(Color.BLACK, 5);
         assertEquals(1, table.getSize());
         assertEquals(3, table.getCapacity());
-        assertEquals(false, table.isEmpty());
+        assertFalse(table.isEmpty());
         assertEquals(0, ColorTable.getNumCollisions());
         table.put(Color.WHITE, 5);
         table.put(Color.RED, 5);
@@ -151,11 +158,11 @@ public class Testing {
     public void testQuadraticProbing() {
         table = new ColorTable(13, 8, Constants.QUADRATIC, 0.49);
         // For a tableSize of 13, these keys all collide.
-        c0 = new Color(0);
+        Color c0 = new Color(0);
         c1 = new Color(13);
         c2 = new Color(2 * 13);
         c3 = new Color(3 * 13);
-        c4 = new Color(4 * 13);
+        Color c4 = new Color(4 * 13);
         c5 = new Color(5 * 13);
         c6 = new Color(6 * 13);
         c7 = new Color(7 * 13);
@@ -180,16 +187,16 @@ public class Testing {
         table = new ColorTable(3, 4, Constants.LINEAR, 0.1);
         assertEquals(0, table.getSize());
         assertEquals(3, table.getCapacity());
-        assertEquals(true, table.getLoadFactor() < 0.1);
+        assertTrue(table.getLoadFactor() < 0.1);
         table.put(Color.BLACK, 5);
         assertEquals(1, table.getSize());
         assertEquals(19, table.getCapacity());
-        assertEquals(true, table.getLoadFactor() < 0.1);
+        assertTrue(table.getLoadFactor() < 0.1);
         assertEquals(5, table.get(Color.BLACK));
         table.put(Color.WHITE, 5);
         assertEquals(2, table.getSize());
         assertEquals(43, table.getCapacity());
-        assertEquals(true, table.getLoadFactor() < 0.1);
+        assertTrue(table.getLoadFactor() < 0.1);
         for (int c = 0xFF; c >= 0xF0; c--) {
             table.put(new Color(c, c, c), c);
         }
@@ -199,7 +206,7 @@ public class Testing {
             table.put(new Color(c, c, c), c);
         }
         assertEquals(211, table.getCapacity());
-        assertEquals(true, table.getLoadFactor() < 0.1);
+        assertTrue(table.getLoadFactor() < 0.1);
     }
 
     @Test

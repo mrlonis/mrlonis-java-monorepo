@@ -18,8 +18,7 @@ public class Util {
         double dotProduct = dotProduct(A, B);
         double vectorMagA = vectorMagnitude(A);
         double vectorMagB = vectorMagnitude(B);
-        double cosineSim = (dotProduct / (vectorMagA * vectorMagB));
-        return cosineSim;
+        return (dotProduct / (vectorMagA * vectorMagB));
     }
 
     /**
@@ -153,7 +152,7 @@ public class Util {
         int white = pack(Color.WHITE, 8);
         System.out.println("white encoded in " + (3 * 8) + " bits: " + white);
         white = pack(Color.WHITE, 1);
-        System.out.println("white encoded in " + (3 * 1) + " bits: " + white);
+        System.out.println("white encoded in " + (3) + " bits: " + white);
         int green = pack(Color.GREEN, 3);
         System.out.println("green encoded in " + (3 * 3) + " bits: " + green);
         green = pack(Color.GREEN, 4);

@@ -6,9 +6,9 @@ package com.mrlonis;
 public enum Painting {
     MONA_LISA("davinci.jpg"), CHRISTINAS_WORLD("wyeth.jpg"), STARRY_NIGHT("vangogh.jpg"), BLUE_DANCERS("degas.jpg");
 
-    private Image image;
+    private final Image image;
 
-    private Painting(String filename) {
+    Painting(String filename) {
         this.image = new Image(Constants.IMAGE_DIR + "/" + filename);
     }
 

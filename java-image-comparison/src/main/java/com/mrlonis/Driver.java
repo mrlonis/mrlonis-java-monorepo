@@ -47,8 +47,7 @@ public class Driver {
     public static double similarity(Image image1, Image image2, int bitsPerChannel) {
         ColorTable image1CT = vectorize(image1, bitsPerChannel);
         ColorTable image2CT = vectorize(image2, bitsPerChannel);
-        double cosineSim = Util.cosineSimilarity(image1CT, image2CT);
-        return cosineSim;
+        return Util.cosineSimilarity(image1CT, image2CT);
     }
 
     /**
@@ -62,8 +61,8 @@ public class Driver {
                 System.out.println(paintings[y].get().getName() + " and " + paintings[x].get().getName() + ":");
                 for (int bitsPerChannel = 1; bitsPerChannel <= 8; bitsPerChannel++) {
                     numCollisions = 0;
-                    System.out.println(String.format("   %d: %.2f %d", bitsPerChannel,
-                            similarity(paintings[x].get(), paintings[y].get(), bitsPerChannel), numCollisions));
+                    System.out.printf("   %d: %.2f %d%n", bitsPerChannel,
+                            similarity(paintings[x].get(), paintings[y].get(), bitsPerChannel), numCollisions);
                 }
                 System.out.println();
             }
@@ -92,7 +91,7 @@ public class Driver {
         System.out.println("mona's dimensions are " + mona.getWidth() + " x " + mona.getHeight());
         System.out.println("starry's dimenstions are " + starry.getWidth() + " x " + starry.getHeight());
         System.out.println("christina's dimensions are " + christina.getWidth() + " x " + christina.getHeight());
-        System.out.println("");
+        System.out.println();
         System.out.println("All Pairs Testing...");
         allPairsTest();
         System.out.println("...Done!");

@@ -1,10 +1,6 @@
 package com.mrlonis;
 
 /**
- *
- */
-
-/**
  * @author mrlonis
  *
  */
@@ -18,9 +14,6 @@ public class Association {
         this.value = value;
     }
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
         Association a1 = new Association(1, 2);
 

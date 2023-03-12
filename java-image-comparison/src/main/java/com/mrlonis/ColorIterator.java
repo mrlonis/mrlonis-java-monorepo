@@ -13,12 +13,12 @@ public class ColorIterator implements Iterator {
     /**
      * Represents the increment amount for the RGB values in the color space.
      */
-    private int inc;
+    private final int inc;
 
     /**
      * Represents the ColorTable that this ColorIterator will use ColorTable.get() on.
      */
-    private ColorTable colorTable;
+    private final ColorTable colorTable;
 
     /**
      * Represents the Red value in the RGB spectrum.
@@ -36,7 +36,7 @@ public class ColorIterator implements Iterator {
     private int b;
 
     /**
-     * Represents whether or not this is this first time hasNext() has process. Is <code>true</code> if it is the first
+     * Represents whether this is this first time hasNext() has process. Is <code>true</code> if it is the first
      * time hasNext() is called or if the r, g, and b values are all 0. Is <code>false</code> otherwise.
      */
     private boolean initial;
@@ -63,8 +63,8 @@ public class ColorIterator implements Iterator {
         System.out.println("ColorIterator Testing...");
         ColorTable table = new ColorTable(3, 6, Constants.QUADRATIC, .49);
         int[] data = new int[]{32960, 4293315, 99011, 296390};
-        for (int i = 0; i < data.length; i++) {
-            table.increment(new Color(data[i]));
+        for (int datum : data) {
+            table.increment(new Color(datum));
         }
 
         Iterator it = table.iterator();
@@ -111,14 +111,10 @@ public class ColorIterator implements Iterator {
      * <code>flase</code>.
      */
     public boolean hasNext() {
-        if (initial == true) {
+        if (initial) {
             return true;
         } else {
-            if ((r == 0) && (g == 0) && (b == 0)) {
-                return false;
-            } else {
-                return true;
-            }
+            return (r != 0) || (g != 0) || (b != 0);
         }
     }
 }

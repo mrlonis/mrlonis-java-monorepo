@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ public class GUI extends JFrame {
     /**
      *
      */
+    @Serial
     private static final long serialVersionUID = 6320759299671037262L;
 
     static {
@@ -40,6 +42,7 @@ public class GUI extends JFrame {
         /**
          *
          */
+        @Serial
         private static final long serialVersionUID = 2745885405011315969L;
 
         {
@@ -60,6 +63,7 @@ public class GUI extends JFrame {
         /**
          *
          */
+        @Serial
         private static final long serialVersionUID = -3598882915133834212L;
 
         {
@@ -93,6 +97,7 @@ public class GUI extends JFrame {
             /**
              *
              */
+            @Serial
             private static final long serialVersionUID = -3538371272208108362L;
 
             {
@@ -107,6 +112,7 @@ public class GUI extends JFrame {
             /**
              *
              */
+            @Serial
             private static final long serialVersionUID = -8638776654159584375L;
 
             {
@@ -124,6 +130,7 @@ public class GUI extends JFrame {
             /**
              *
              */
+            @Serial
             private static final long serialVersionUID = 4287137813176043278L;
 
             {
@@ -145,6 +152,7 @@ public class GUI extends JFrame {
             /**
              *
              */
+            @Serial
             private static final long serialVersionUID = -1835311537011626348L;
 
             {
@@ -161,6 +169,7 @@ public class GUI extends JFrame {
             /**
              *
              */
+            @Serial
             private static final long serialVersionUID = -7189354716916668768L;
 
             {
@@ -187,9 +196,7 @@ public class GUI extends JFrame {
             simLabel.setText(String.format("Similarity: %1.2f", similarity()));
         });
 
-        newWindow.addActionListener(e -> {
-            GUI.main(null);
-        });
+        newWindow.addActionListener(e -> GUI.main(null));
 
         close.addActionListener(e -> dispose());
 
@@ -267,6 +274,7 @@ public class GUI extends JFrame {
         /**
          *
          */
+        @Serial
         private static final long serialVersionUID = -121987832051247515L;
         // The actual image.
         private final Image image;
