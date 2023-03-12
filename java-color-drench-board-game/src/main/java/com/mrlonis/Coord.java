@@ -1,15 +1,12 @@
 package com.mrlonis;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
- * Coord represents an (x,y)-coordinate on a 2D board. The origin, (0,0) is
- * assumed to be in the upper left corner. X-coordinates increase from left to
- * right. Y-coordinates
- * increase from top to bottom. Operations are provided to easily locate
- * neighboring coordinates (in the NSEW compass directions) on a board.
+ * Coord represents an (x,y)-coordinate on a 2D board. The origin, (0,0) is assumed to be in the upper left corner.
+ * X-coordinates increase from left to right. Y-coordinates increase from top to bottom. Operations are provided to
+ * easily locate neighboring coordinates (in the NSEW compass directions) on a board.
  *
  * @author Matthew Lonis
  */
@@ -35,8 +32,7 @@ public class Coord implements Comparable<Coord> {
     /**
      * Constructs a new Coord representing (x,y).
      */
-    public Coord(int x,
-            int y) {
+    public Coord(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -70,8 +66,8 @@ public class Coord implements Comparable<Coord> {
     }
 
     /**
-     * Pre-hashing: pack this coordinate into an int, so that the key space is as
-     * uniformly distributed among the range of integers as possible.
+     * Pre-hashing: pack this coordinate into an int, so that the key space is as uniformly distributed among the range
+     * of integers as possible.
      *
      * @return The int representation of a Coord.
      */
@@ -82,7 +78,9 @@ public class Coord implements Comparable<Coord> {
     /**
      * Returns true iff this Coord is visible on a board of the given size.
      *
-     * @param size The size of the Board.
+     * @param size
+     *         The size of the Board.
+     *
      * @return true iff this Coord is visible on a board of the given size.
      */
     public boolean onBoard(int size) {
@@ -90,12 +88,12 @@ public class Coord implements Comparable<Coord> {
     }
 
     /**
-     * Returns a list of the immediate board coordinates of this Coord's north,
-     * south, east, and west neighbors.
+     * Returns a list of the immediate board coordinates of this Coord's north, south, east, and west neighbors.
      *
-     * @param size The size of the Board.
-     * @return An ArrayList of the immediate board coordinates of this Coord's
-     *         north, south, east, and west neighbors.
+     * @param size
+     *         The size of the Board.
+     *
+     * @return An ArrayList of the immediate board coordinates of this Coord's north, south, east, and west neighbors.
      */
     public List<Coord> neighbors(int size) {
         List<Coord> neighborsList = new ArrayList<>();
@@ -105,14 +103,7 @@ public class Coord implements Comparable<Coord> {
         neighborsList.add(this.left());
         neighborsList.add(this.right());
 
-        Iterator<Coord> it = neighborsList.iterator();
-
-        while (it.hasNext()) {
-            if (!it.next()
-                    .onBoard(size)) {
-                it.remove();
-            }
-        }
+        neighborsList.removeIf(coord -> !coord.onBoard(size));
 
         return neighborsList;
     }
@@ -146,12 +137,10 @@ public class Coord implements Comparable<Coord> {
     }
 
     /**
-     * Returns true iff the (x,y)-coordinates of the given object match this Coord's
-     * (x,y)-coordinates.
+     * Returns true iff the (x,y)-coordinates of the given object match this Coord's (x,y)-coordinates.
      */
     public boolean equals(Object obj) {
-        if (obj instanceof Coord) {
-            Coord that = (Coord) obj;
+        if (obj instanceof Coord that) {
             return that.x == this.x && that.y == this.y;
         }
         return false;
