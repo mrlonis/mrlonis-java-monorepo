@@ -1,25 +1,26 @@
 package com.mrlonis;
 
-/**
+/*
  * To test with JUnit, add JUnit to your project. To do this, go to Project->Properties. Select "Java Build Path". Select the "Libraries" tab and "Add Library". Select JUnit, then
  * JUnit 4.
  *
  * @author Matthew Lonis (mrlonis)
  */
 
+import com.mrlonis.Judge.StringLengthException;
+import org.junit.jupiter.api.Test;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.mrlonis.Judge.StringLengthException;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import org.junit.jupiter.api.Test;
-
-public class Testing {
+public class JudgeTests {
 
     @Test
     public void defaultJudgeTest() {
@@ -39,7 +40,7 @@ public class Testing {
         assertEquals(-4, judge.score("AAAA", "____"));
         assertEquals(-4, judge.score("____", "AAAA"));
         assertEquals(-4, judge.score("____", "____"));
-        assertEquals(2 + -1 + -1 + -2, judge.score("AC_G", "A_TA"));
+        assertEquals(-2, judge.score("AC_G", "A_TA"));
     }
 
     /**
@@ -57,7 +58,7 @@ public class Testing {
         assertEquals(-35, judge.score("ABRA___", "CADABRA"));
         try {
             judge.score("MATTHEW", "LONIS");
-        } catch (StringLengthException e) {
+        } catch (StringLengthException ignored) {
 
         }
         assertEquals(-30, judge.score("ATANDT", "______"));
@@ -68,7 +69,7 @@ public class Testing {
         assertEquals(-30, judge.score("DONALD", "______"));
         assertEquals(-55, judge.score("___________", "MASDGSGREAG"));
         assertEquals(-40, judge.score("________", "________"));
-        assertEquals(-10 + -10 + -5 + -5 + -5 + -10 + -10 + -10, judge.score("MATT_HEW", "LO___NIS"));
+        assertEquals(-10 - 10 - 5 - 5 - 5 - 10 - 10 - 10, judge.score("MATT_HEW", "LO___NIS"));
     }
 
     /**********************************************
@@ -173,14 +174,10 @@ public class Testing {
         SequenceAligner sa;
         Result result;
         sa = new SequenceAligner("AG", "AG");
-        assertEquals(-2, sa.getResult(0, 2)
-                           .getScore());
-        assertEquals(-2, sa.getResult(2, 0)
-                           .getScore());
-        assertEquals(Direction.LEFT, sa.getResult(0, 2)
-                                       .getParent());
-        assertEquals(Direction.UP, sa.getResult(2, 0)
-                                     .getParent());
+        assertEquals(-2, sa.getResult(0, 2).getScore());
+        assertEquals(-2, sa.getResult(2, 0).getScore());
+        assertEquals(Direction.LEFT, sa.getResult(0, 2).getParent());
+        assertEquals(Direction.UP, sa.getResult(2, 0).getParent());
         result = sa.getResult(1, 1);
         assertEquals(2, result.getScore());
         assertEquals(Direction.DIAGONAL, result.getParent());
@@ -194,14 +191,10 @@ public class Testing {
         assertEquals(4, result.getScore());
         assertEquals(Direction.DIAGONAL, result.getParent());
         sa = new SequenceAligner("AG", "GA");
-        assertEquals(-2, sa.getResult(0, 2)
-                           .getScore());
-        assertEquals(-2, sa.getResult(2, 0)
-                           .getScore());
-        assertEquals(Direction.LEFT, sa.getResult(0, 2)
-                                       .getParent());
-        assertEquals(Direction.UP, sa.getResult(2, 0)
-                                     .getParent());
+        assertEquals(-2, sa.getResult(0, 2).getScore());
+        assertEquals(-2, sa.getResult(2, 0).getScore());
+        assertEquals(Direction.LEFT, sa.getResult(0, 2).getParent());
+        assertEquals(Direction.UP, sa.getResult(2, 0).getParent());
         result = sa.getResult(1, 1);
         assertEquals(-2, result.getScore());
         assertEquals(Direction.DIAGONAL, result.getParent());
@@ -221,10 +214,8 @@ public class Testing {
         SequenceAligner sa;
         Result result;
         sa = new SequenceAligner("A", "AG");
-        assertEquals(-2, sa.getResult(0, 2)
-                           .getScore());
-        assertEquals(Direction.LEFT, sa.getResult(0, 2)
-                                       .getParent());
+        assertEquals(-2, sa.getResult(0, 2).getScore());
+        assertEquals(Direction.LEFT, sa.getResult(0, 2).getParent());
         result = sa.getResult(1, 1);
         assertEquals(2, result.getScore());
         assertEquals(Direction.DIAGONAL, result.getParent());
@@ -232,10 +223,8 @@ public class Testing {
         assertEquals(1, result.getScore());
         assertEquals(Direction.LEFT, result.getParent());
         sa = new SequenceAligner("AG", "G");
-        assertEquals(-2, sa.getResult(2, 0)
-                           .getScore());
-        assertEquals(Direction.UP, sa.getResult(2, 0)
-                                     .getParent());
+        assertEquals(-2, sa.getResult(2, 0).getScore());
+        assertEquals(Direction.UP, sa.getResult(2, 0).getParent());
         result = sa.getResult(1, 1);
         assertEquals(-2, result.getScore());
         assertEquals(Direction.DIAGONAL, result.getParent());
@@ -251,27 +240,19 @@ public class Testing {
     public void bigBases() {
         SequenceAligner sa;
         sa = new SequenceAligner(1000);
-		for (int i = 0; i < sa.getX()
-							  .length() + 1; i++) {
-			assertEquals(-i, sa.getResult(i, 0)
-							   .getScore());
-		}
-		for (int j = 0; j < sa.getY()
-							  .length() + 1; j++) {
-			assertEquals(-j, sa.getResult(0, j)
-							   .getScore());
-		}
+        for (int i = 0; i < sa.getX().length() + 1; i++) {
+            assertEquals(-i, sa.getResult(i, 0).getScore());
+        }
+        for (int j = 0; j < sa.getY().length() + 1; j++) {
+            assertEquals(-j, sa.getResult(0, j).getScore());
+        }
         sa = new SequenceAligner("AAAAAAAAAA", "CCCCCCCCCCCC", new Judge(4, 5, 6));
-		for (int i = 0; i < sa.getX()
-							  .length() + 1; i++) {
-			assertEquals(6 * i, sa.getResult(i, 0)
-								  .getScore());
-		}
-		for (int j = 0; j < sa.getY()
-							  .length() + 1; j++) {
-			assertEquals(6 * j, sa.getResult(0, j)
-								  .getScore());
-		}
+        for (int i = 0; i < sa.getX().length() + 1; i++) {
+            assertEquals(6 * i, sa.getResult(i, 0).getScore());
+        }
+        for (int j = 0; j < sa.getY().length() + 1; j++) {
+            assertEquals(6 * j, sa.getResult(0, j).getScore());
+        }
     }
 
     /**********************************************
@@ -338,34 +319,30 @@ public class Testing {
         assertEquals("_AGACG", sa.getAlignedX());
         assertEquals("CCG_CT", sa.getAlignedY());
         // check that start and end are on the path
-        assertTrue(sa.getResult(0, 0)
-                     .onPath());
-        assertTrue(sa.getResult(5, 5)
-                     .onPath());
-        int[][] expectedScores = {{0, -1, -2, -3, -4, -5}, {-1, -2, -3, -4, -5, -6}, {-2, -3, -4, -1, -2, -3}, {-3, -4, -5, -2, -3, -4}, {-4, -1, -2, -3, 0, -1},
-                                  {-5, -2, -3, 0, -1, -2},};
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 6; j++) {
-				assertEquals(expectedScores[i][j], sa.getResult(i, j)
-													 .getScore());
-			}
-		}
+        assertTrue(sa.getResult(0, 0).onPath());
+        assertTrue(sa.getResult(5, 5).onPath());
+        int[][] expectedScores =
+                {{0, -1, -2, -3, -4, -5}, {-1, -2, -3, -4, -5, -6}, {-2, -3, -4, -1, -2, -3}, {-3, -4, -5, -2, -3, -4},
+                        {-4, -1, -2, -3, 0, -1}, {-5, -2, -3, 0, -1, -2},};
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                assertEquals(expectedScores[i][j], sa.getResult(i, j).getScore());
+            }
+        }
         // expected coords on optimal path
         int[] is = {0, 0, 1, 2, 3, 4, 5};
         int[] js = {0, 1, 2, 3, 3, 4, 5};
         int k = 0;
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 6; j++) {
-				if (i == is[k] && j == js[k]) {
-					assertTrue(sa.getResult(i, j)
-								 .onPath());
-					k++;
-				} else {
-					assertFalse(sa.getResult(i, j)
-								  .onPath());
-				}
-			}
-		}
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (i == is[k] && j == js[k]) {
+                    assertTrue(sa.getResult(i, j).onPath());
+                    k++;
+                } else {
+                    assertFalse(sa.getResult(i, j).onPath());
+                }
+            }
+        }
     }
 
     /**********************************************
@@ -390,18 +367,15 @@ public class Testing {
                 int expectedScore = Integer.parseInt(field[2]);
                 System.out.println(strands + " (expecting " + expectedScore + ")\n");
                 assert strands.getScore() == expectedScore;
-                assert strands.getAlignedX()
-                              .replaceAll("_", "")
-                              .equals(strands.getX());
-                assert strands.getAlignedY()
-                              .replaceAll("_", "")
-                              .equals(strands.getY());
+                assert strands.getAlignedX().replaceAll("_", "").equals(strands.getX());
+                assert strands.getAlignedY().replaceAll("_", "").equals(strands.getY());
                 System.out.println("------------------\n");
             }
             in.close();
             System.out.println("All tests passed...\n");
         } catch (FileNotFoundException e) {
-            System.out.println("The test suite file, " + filename + ", is not found.\nYou probably deleted it by mistake.");
+            System.out.println(
+                    "The test suite file, " + filename + ", is not found.\nYou probably deleted it by mistake.");
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }

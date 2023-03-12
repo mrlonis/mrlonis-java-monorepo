@@ -1,20 +1,17 @@
 package com.mrlonis;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.*;
-import java.awt.font.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.font.LineMetrics;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serial;
 import java.util.List;
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * Support class to display a graph of the runtime data.
@@ -24,9 +21,10 @@ public class TimingGraph extends JPanel {
     /**
      * This is an auto-generated serial ID to remove the Eclipse warning.
      */
+    @Serial
     private static final long serialVersionUID = -1940206477212230676L;
-    private int numRuns;
-    private List<List<Integer>> timings;
+    private final int numRuns;
+    private final List<List<Integer>> timings;
 
     /**
      * Constructs a panel on which we can paint a graph of the given timing data.
@@ -36,8 +34,7 @@ public class TimingGraph extends JPanel {
         this.timings = timings;
         setBackground(Color.WHITE);
         setOpaque(true);
-        numRuns = timings.get(0)
-                         .size();
+        numRuns = timings.get(0).size();
         showAndTell();
     }
 
@@ -64,8 +61,7 @@ public class TimingGraph extends JPanel {
         float sy = numRuns + ((h - 2 * numRuns) - s.length() * sh) / 2 + lm.getAscent();
         for (int i = 0; i < s.length(); i++) {
             String letter = String.valueOf(s.charAt(i));
-            float sw = (float) font.getStringBounds(letter, frc)
-                                   .getWidth();
+            float sw = (float) font.getStringBounds(letter, frc).getWidth();
             float sx = (numRuns - sw) / 2;
             g2.drawString(letter, sx, sy);
             sy += sh;
@@ -73,13 +69,11 @@ public class TimingGraph extends JPanel {
         // Draw label on the x-axis
         s = "board size";
         sy = h - numRuns + (numRuns - sh) / 2 + lm.getAscent();
-        float sw = (float) font.getStringBounds(s, frc)
-                               .getWidth();
+        float sw = (float) font.getStringBounds(s, frc).getWidth();
         float sx = (w - sw) / 2;
         g2.drawString(s, sx, sy);
         // Draw lines
-        double xInc = (double) (w - 2 * numRuns) / (timings.get(0)
-                                                           .size() - 1);
+        double xInc = (double) (w - 2 * numRuns) / (timings.get(0).size() - 1);
         double scale = (double) (h - 2 * numRuns) / getMax();
         Color[] colors = {Color.LIGHT_GRAY, Color.GREEN, Color.BLUE, Color.BLACK, Color.ORANGE};
         // g2.setPaint(Color.GREEN.darker());
@@ -109,11 +103,11 @@ public class TimingGraph extends JPanel {
      */
     private int getMax() {
         int max = Integer.MIN_VALUE;
-		for (List<Integer> run : timings) {
-			for (int x : run) {
-				max = Math.max(x, max);
-			}
-		}
+        for (List<Integer> run : timings) {
+            for (int x : run) {
+                max = Math.max(x, max);
+            }
+        }
         return max;
     }
 

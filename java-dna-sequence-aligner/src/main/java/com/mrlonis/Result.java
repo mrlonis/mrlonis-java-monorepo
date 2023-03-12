@@ -1,8 +1,9 @@
 package com.mrlonis;
 
 /**
- * We use this enumeration to represent the direction of the parent result along the optimal path. If the largest score comes from an M operation (i.e., a match or a mismatch),
- * then the direction is DIAGONAL. If the largest score comes from an I operation (i.e., a gap is inserted into strand x), then the direction to the parent is UP. If the largest
+ * We use this enumeration to represent the direction of the parent result along the optimal path. If the largest score
+ * comes from an M operation (i.e., a match or a mismatch), then the direction is DIAGONAL. If the largest score comes
+ * from an I operation (i.e., a gap is inserted into strand x), then the direction to the parent is UP. If the largest
  * score comes from a D operation (i.e., a gap is inserted into strand y), then the direction to the parent is LEFT.
  */
 enum Direction {
@@ -10,18 +11,15 @@ enum Direction {
         public String toString() {
             return "diag";
         }
-    },
-    LEFT {
+    }, LEFT {
         public String toString() {
             return "left";
         }
-    },
-    UP {
+    }, UP {
         public String toString() {
             return "up";
         }
-    },
-    NONE {
+    }, NONE {
         public String toString() {
             return "";
         }
@@ -38,7 +36,8 @@ public class Result {
      */
     private final int score;
     /**
-     * The direction of the neighboring entry in the cache from which this entry is extended. (See definition of Direction below.)
+     * The direction of the neighboring entry in the cache from which this entry is extended. (See definition of
+     * Direction below.)
      */
     private final Direction parent;
     /**
@@ -56,8 +55,7 @@ public class Result {
     /**
      * Creates an umarked result with the given score and parent.
      */
-    public Result(int score,
-                  Direction parent) {
+    public Result(int score, Direction parent) {
         this.score = score;
         this.parent = parent;
     }
@@ -88,9 +86,9 @@ public class Result {
      */
     public String toString() {
         String ans = "Result[score=" + score + ",parent=" + parent;
-		if (onPath()) {
-			ans += ",*";
-		}
+        if (onPath()) {
+            ans += ",*";
+        }
         return ans + "]";
     }
 

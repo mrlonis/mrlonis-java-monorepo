@@ -1,10 +1,7 @@
 package com.mrlonis;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -15,16 +12,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 public class GUI extends JFrame {
 
@@ -41,6 +28,13 @@ public class GUI extends JFrame {
         }
     }
 
+    // Lookup table for previously computed similarities.
+    private final Map<Integer, Double> simCache = new HashMap<>();
+    // Images to compare.
+    private final Image leftImage;
+    private final Image rightImage;
+    // Display panels for images.
+    private final ArrayList<ImagePanel> panels = new ArrayList<>();
     // bitSelector is the interface element for selecting desired number of bits per channel.
     JSlider bitSelector = new JSlider(SwingConstants.HORIZONTAL, 1, 8, 8) {
         /**
@@ -83,21 +77,13 @@ public class GUI extends JFrame {
             setText(text);
         }
     };
-    // Lookup table for previously computed similarities.
-    private final Map<Integer, Double> simCache = new HashMap<>();
-    // Images to compare.
-    private final Image leftImage;
-	private final Image rightImage;
-    // Display panels for images.
-    private final ArrayList<ImagePanel> panels = new ArrayList<>();
     // Indicative of whether or not the xray is turned on (initially false).
     private boolean xrayEffect;
 
     /**
      * Constructs a window to display two images and compare them for similarity after quantization.
      */
-    public GUI(Image leftImage,
-               Image rightImage) {
+    public GUI(Image leftImage, Image rightImage) {
         this.leftImage = leftImage;
         this.rightImage = rightImage;
         setTitle(Constants.TITLE + " (" + leftImage.getName() + " and " + rightImage.getName() + ")");
@@ -209,25 +195,12 @@ public class GUI extends JFrame {
 
         main.add(sideBySide);
         main.add(Box.createRigidArea(new Dimension(0, 30)));
-		main.add(controls);
+        main.add(controls);
         main.add(Box.createRigidArea(new Dimension(0, 30)));
-		setContentPane(main);
+        setContentPane(main);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-    }
-
-    /**
-     * Returns the similarity of the two images using however many bits per channel appear on bitSelector. Results are memoized to speed the process.
-     */
-    private double similarity() {
-        int bitsPerChannel = bitSelector.getValue();
-		if (simCache.containsKey(bitsPerChannel)) {
-			return simCache.get(bitsPerChannel);
-		}
-        double sim = Driver.similarity(leftImage, rightImage, bitsPerChannel);
-        simCache.put(bitsPerChannel, sim); // Jot down for later.
-        return sim;
     }
 
     /**
@@ -236,16 +209,16 @@ public class GUI extends JFrame {
     public static void main(String[] args) {
         // Load all the paintings in the image directory.
         List<Image> paintings = new ArrayList<>();
-		for (File file : new File(Constants.IMAGE_DIR).listFiles()) {
-			paintings.add(new Image(file.getPath()));
-		}
+        for (File file : new File(Constants.IMAGE_DIR).listFiles()) {
+            paintings.add(new Image(file.getPath()));
+        }
         int n = paintings.size();
         // Choose two different images, at random and with equal probability.
         Random rand = new Random();
         int i = rand.nextInt(n), j = rand.nextInt(n - 1);
-		if (j >= i) {
-			j++;
-		}
+        if (j >= i) {
+            j++;
+        }
         Image pic1 = paintings.get(i), pic2 = paintings.get(j);
         SwingUtilities.invokeLater(() -> new GUI(pic1, pic2));
     }
@@ -261,21 +234,33 @@ public class GUI extends JFrame {
     /**
      * Returns a black and white version of the given image, where pixels matching color are white.
      */
-    private static Image xray(Color color,
-                              Image image) {
+    private static Image xray(Color color, Image image) {
         Image copy = new Image(image);
-		for (int x = 0; x < copy.getWidth(); x++) {
-			for (int y = 0; y < copy.getHeight(); y++) {
-				copy.setColor(x, y, copy.getColor(x, y)
-										.equals(color) ? Color.WHITE : Color.BLACK);
-			}
-		}
+        for (int x = 0; x < copy.getWidth(); x++) {
+            for (int y = 0; y < copy.getHeight(); y++) {
+                copy.setColor(x, y, copy.getColor(x, y).equals(color) ? Color.WHITE : Color.BLACK);
+            }
+        }
         return copy;
     }
 
     /**
-     * An ImagePanel represents one panel displaying one image. The image is quantized depending on the bitSelector value. This component listens for mouse events, and updates the
-     * colorBox control accordingly.
+     * Returns the similarity of the two images using however many bits per channel appear on bitSelector. Results are
+     * memoized to speed the process.
+     */
+    private double similarity() {
+        int bitsPerChannel = bitSelector.getValue();
+        if (simCache.containsKey(bitsPerChannel)) {
+            return simCache.get(bitsPerChannel);
+        }
+        double sim = Driver.similarity(leftImage, rightImage, bitsPerChannel);
+        simCache.put(bitsPerChannel, sim); // Jot down for later.
+        return sim;
+    }
+
+    /**
+     * An ImagePanel represents one panel displaying one image. The image is quantized depending on the bitSelector
+     * value. This component listens for mouse events, and updates the colorBox control accordingly.
      */
     class ImagePanel extends JPanel {
 
@@ -310,9 +295,9 @@ public class GUI extends JFrame {
                         public void run() {
                             xrayEffect = true;
                             // Xray both panels, not just the this one.
-							for (ImagePanel panel : panels) {
-								panel.repaint();
-							}
+                            for (ImagePanel panel : panels) {
+                                panel.repaint();
+                            }
                         }
                     }, 100);
 
@@ -322,9 +307,9 @@ public class GUI extends JFrame {
                     timer.cancel();
                     if (xrayEffect) {
                         xrayEffect = false;
-						for (ImagePanel panel : panels) {
-							panel.repaint();
-						}
+                        for (ImagePanel panel : panels) {
+                            panel.repaint();
+                        }
                     }
                 }
             });
@@ -333,11 +318,11 @@ public class GUI extends JFrame {
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             quantImage = image.quantize(bitSelector.getValue());
-			if (xrayEffect) {
-				xray(colorBox.getBackground(), quantImage).draw(g);
-			} else {
-				quantImage.draw(g);
-			}
+            if (xrayEffect) {
+                xray(colorBox.getBackground(), quantImage).draw(g);
+            } else {
+                quantImage.draw(g);
+            }
         }
     }
 }

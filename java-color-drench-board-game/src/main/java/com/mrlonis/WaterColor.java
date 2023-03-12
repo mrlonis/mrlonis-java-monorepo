@@ -1,11 +1,11 @@
 package com.mrlonis;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Random;
 
 /**
- * An enumeration of the five possible colors used to create tiles in the game. Operations are provided to access the underlying java.awt.Color object and to select a water color
- * at random.
+ * An enumeration of the five possible colors used to create tiles in the game. Operations are provided to access the
+ * underlying java.awt.Color object and to select a water color at random.
  */
 public enum WaterColor {
     BLUE(Color.BLUE), // blue
@@ -25,9 +25,9 @@ public enum WaterColor {
      * Simple testing.
      */
     public static void main(String... args) {
-		for (WaterColor color : values()) {
-			System.out.println(color + "\t" + pickOneExcept(color));
-		}
+        for (WaterColor color : values()) {
+            System.out.println(color + "\t" + pickOneExcept(color));
+        }
     }
 
     /**
@@ -35,9 +35,9 @@ public enum WaterColor {
      */
     public static WaterColor pickOneExcept(WaterColor thisOne) {
         WaterColor color;
-		do {
-			color = pickOne();
-		} while (color == thisOne);
+        do {
+            color = pickOne();
+        } while (color == thisOne);
         return color;
     }
 
@@ -59,7 +59,6 @@ public enum WaterColor {
      * Returns a string representation of this water color.
      */
     public String toString() {
-        return super.toString()
-                    .toLowerCase();
+        return super.toString().toLowerCase();
     }
 }

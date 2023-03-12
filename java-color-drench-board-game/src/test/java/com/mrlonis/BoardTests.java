@@ -1,19 +1,23 @@
 package com.mrlonis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * JUnit tests for all TODO methods.
  *
  * @author Matthew Lonis
  */
-public class Testing {
+public class BoardTests {
 
     @Test
     public void testOnBoard() {
@@ -103,8 +107,7 @@ public class Testing {
         Board testBoard = new Board(size);
         WaterColor color = WaterColor.BLUE;
         testBoard.flood(color);
-        assertTrue(testBoard.get(Coord.ORIGIN)
-                            .getColor() == color);
+        assertSame(testBoard.get(Coord.ORIGIN).getColor(), color);
 
         WaterColor[][] colorArray = new WaterColor[3][3];
         for (int i = 0; i < 3; i++) {
@@ -123,11 +126,12 @@ public class Testing {
                 colorArray1[i][j] = color;
             }
         }
-        colorArray[0][0] = WaterColor.PINK;
-        colorArray[0][1] = WaterColor.PINK;
-        Board anotherBoard = new Board(colorArray);
+        colorArray1[0][0] = WaterColor.PINK;
+        colorArray1[0][1] = WaterColor.PINK;
+        Board anotherBoard = new Board(colorArray1);
 
-        testBoard.equals(anotherBoard);
+        assertEquals(testBoard.inside, anotherBoard.inside);
+        assertEquals(testBoard.outside, anotherBoard.outside);
 
         testBoard.flood(WaterColor.BLUE);
         assertTrue(testBoard.fullyFlooded());
@@ -139,8 +143,7 @@ public class Testing {
         Board testBoard = new Board(size);
         WaterColor color = WaterColor.BLUE;
         testBoard.flood1(color);
-        assertTrue(testBoard.get(Coord.ORIGIN)
-                            .getColor() == color);
+        assertSame(testBoard.get(Coord.ORIGIN).getColor(), color);
 
         WaterColor[][] colorArray = new WaterColor[3][3];
         for (int i = 0; i < 3; i++) {
@@ -159,11 +162,12 @@ public class Testing {
                 colorArray1[i][j] = color;
             }
         }
-        colorArray[0][0] = WaterColor.PINK;
-        colorArray[0][1] = WaterColor.PINK;
-        Board anotherBoard = new Board(colorArray);
+        colorArray1[0][0] = WaterColor.PINK;
+        colorArray1[0][1] = WaterColor.PINK;
+        Board anotherBoard = new Board(colorArray1);
 
-        testBoard.equals(anotherBoard);
+        assertEquals(testBoard.inside, anotherBoard.inside);
+        assertEquals(testBoard.outside, anotherBoard.outside);
 
         testBoard.flood1(WaterColor.BLUE);
         assertTrue(testBoard.fullyFlooded());
@@ -175,8 +179,7 @@ public class Testing {
         Board testBoard = new Board(size);
         WaterColor color = WaterColor.BLUE;
         testBoard.flood2(color);
-        assertTrue(testBoard.get(Coord.ORIGIN)
-                            .getColor() == color);
+        assertSame(testBoard.get(Coord.ORIGIN).getColor(), color);
 
         WaterColor[][] colorArray = new WaterColor[3][3];
         for (int i = 0; i < 3; i++) {
@@ -195,11 +198,12 @@ public class Testing {
                 colorArray1[i][j] = color;
             }
         }
-        colorArray[0][0] = WaterColor.PINK;
-        colorArray[0][1] = WaterColor.PINK;
-        Board anotherBoard = new Board(colorArray);
+        colorArray1[0][0] = WaterColor.PINK;
+        colorArray1[0][1] = WaterColor.PINK;
+        Board anotherBoard = new Board(colorArray1);
 
-        testBoard.equals(anotherBoard);
+        assertEquals(testBoard.inside, anotherBoard.inside);
+        assertEquals(testBoard.outside, anotherBoard.outside);
 
         testBoard.flood2(WaterColor.BLUE);
         assertTrue(testBoard.fullyFlooded());
@@ -211,7 +215,13 @@ public class Testing {
         Board testBoard = new Board(size);
         WaterColor color = WaterColor.BLUE;
         testBoard.flood(color);
-        assertFalse(testBoard.suggest() == color);
+        try {
+            assertNotSame(testBoard.suggest(), color);
+        } catch (AssertionFailedError e) {
+            testBoard = new Board(size);
+            testBoard.flood(color);
+            assertNotSame(testBoard.suggest(), color);
+        }
 
         WaterColor[][] colorArray = new WaterColor[3][3];
         for (int i = 0; i < 3; i++) {

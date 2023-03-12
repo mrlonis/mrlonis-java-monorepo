@@ -1,24 +1,9 @@
 package com.mrlonis;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Point;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.ToolTipManager;
-import javax.swing.UIManager;
+import java.io.Serial;
 
 /**
  * There's nothing for you to do here.
@@ -28,15 +13,14 @@ public class GUI extends JFrame {
     /**
      * Randomly generated Serial ID to avoid Eclipse warning.
      */
+    @Serial
     private static final long serialVersionUID = 1945952304585171003L;
 
     static {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-            ToolTipManager.sharedInstance()
-                          .setInitialDelay(0);
-            ToolTipManager.sharedInstance()
-                          .setDismissDelay(1000);
+            ToolTipManager.sharedInstance().setInitialDelay(0);
+            ToolTipManager.sharedInstance().setDismissDelay(1000);
             UIManager.put("ToolTip.background", Constants.PATH_COLOR);
             UIManager.put("ToolTip.border", BorderFactory.createEmptyBorder());
             UIManager.put("MenuItem.foreground", Constants.MENU_COLOR);
@@ -48,7 +32,7 @@ public class GUI extends JFrame {
 
     private final JCheckBox showPath;
     private final JLabel xLabel;
-	private final JLabel yLabel;
+    private final JLabel yLabel;
     private final JLabel[][] cells;
     private SequenceAligner strands;
 
@@ -74,6 +58,7 @@ public class GUI extends JFrame {
                     /**
                      *
                      */
+                    @Serial
                     private static final long serialVersionUID = 1125324985782401249L;
 
                     @Override
@@ -93,21 +78,21 @@ public class GUI extends JFrame {
                         cell.setForeground(Constants.NUCLEOTIDE_COLOR);
                         cell.setText((row == 0 ? y.charAt(col) : x.charAt(row)) + "");
                         cell.setComponentPopupMenu(new ACTG(cell, row, col));
-						if (row > 1) {
-							cell.setToolTipText("<html>x<sub>" + (row - 2) + "</sub></html>");
-						} else {
-							cell.setToolTipText("<html>y<sub>" + (col - 2) + "</sub></html>");
-						}
+                        if (row > 1) {
+                            cell.setToolTipText("<html>x<sub>" + (row - 2) + "</sub></html>");
+                        } else {
+                            cell.setToolTipText("<html>y<sub>" + (col - 2) + "</sub></html>");
+                        }
                     }
                 } else {
                     cell.setFont(scoreFont);
                     // Change text color in start and end cells of path
-					if (row == 1 && col == 1) {
-						cell.setForeground(new Color(0, 180, 0)); // dark green
-					}
-					if (row == numRows - 1 && col == numCols - 1) {
-						cell.setForeground(Color.RED);
-					}
+                    if (row == 1 && col == 1) {
+                        cell.setForeground(new Color(0, 180, 0)); // dark green
+                    }
+                    if (row == numRows - 1 && col == numCols - 1) {
+                        cell.setForeground(Color.RED);
+                    }
                 }
                 grid.add(cell);
             }
@@ -150,20 +135,18 @@ public class GUI extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Replaces the character at position i in s with the string t.
+     */
+    private static String replaceChar(String s, int i, String t) {
+        return s.substring(0, i) + t + s.substring(i + 1);
+    }
+
     private void showAlignment() {
         String x = strands.getAlignedX();
         xLabel.setText("x: " + (x == null ? strands.getX() : x));
         String y = strands.getAlignedY();
         yLabel.setText("y: " + (y == null ? strands.getY() : y));
-    }
-
-    /**
-     * Replaces the character at position i in s with the string t.
-     */
-    private static String replaceChar(String s,
-                                      int i,
-                                      String t) {
-        return s.substring(0, i) + t + s.substring(i + 1);
     }
 
     /**
@@ -183,19 +166,18 @@ public class GUI extends JFrame {
             for (int col = 1; col <= numCols; col++) {
                 JLabel cell = cells[row][col];
                 Result result = strands.getResult(row - 1, col - 1);
-				if (result == null) {
-					cell.setToolTipText(String.format("[%d][%d]", row - 1, col - 1));
-				} else {
-					cell.setToolTipText(result.getParent()
-											  .toString());
-					cell.setBackground(Constants.CELL_COLOR);
-					if (showPath.isSelected() && result.onPath()) {
-						cell.setBackground(Constants.PATH_COLOR);
-					}
-					if (numRows <= Constants.MAX_CELLS && numCols <= Constants.MAX_CELLS) {
-						cell.setText(result.getScore() + "");
-					}
-				}
+                if (result == null) {
+                    cell.setToolTipText(String.format("[%d][%d]", row - 1, col - 1));
+                } else {
+                    cell.setToolTipText(result.getParent().toString());
+                    cell.setBackground(Constants.CELL_COLOR);
+                    if (showPath.isSelected() && result.onPath()) {
+                        cell.setBackground(Constants.PATH_COLOR);
+                    }
+                    if (numRows <= Constants.MAX_CELLS && numCols <= Constants.MAX_CELLS) {
+                        cell.setText(result.getScore() + "");
+                    }
+                }
             }
         }
     }
@@ -208,24 +190,22 @@ public class GUI extends JFrame {
         /**
          * Randomly generated Serial ID to avoid Eclipse warning.
          */
+        @Serial
         private static final long serialVersionUID = -6360532678602805033L;
 
-        ACTG(JLabel cell,
-             int row,
-             int col) {
+        ACTG(JLabel cell, int row, int col) {
             for (int i = 0; i < 4; i++) {
                 String nucleotide = "ACTG".substring(i, i + 1);
                 JMenuItem item = new JMenuItem(nucleotide);
                 item.addActionListener(e -> {
-                    if (cell.getText()
-                            .charAt(0) != nucleotide.charAt(0)) {
+                    if (cell.getText().charAt(0) != nucleotide.charAt(0)) {
                         cell.setText(nucleotide);
                         String x = strands.getX(), y = strands.getY();
-						if (col == 0) {
-							x = replaceChar(x, row - 2, nucleotide);
-						} else {
-							y = replaceChar(y, col - 2, nucleotide);
-						}
+                        if (col == 0) {
+                            x = replaceChar(x, row - 2, nucleotide);
+                        } else {
+                            y = replaceChar(y, col - 2, nucleotide);
+                        }
                         // GUI.this.replaceStrand(x, y);
                         strands = new SequenceAligner(x, y, strands.getJudge());
                         System.out.println("\n" + strands);

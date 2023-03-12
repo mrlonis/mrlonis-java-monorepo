@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -105,10 +105,14 @@ import java.util.PriorityQueue;
     }
 
     /**
-     * Constructs the initial visited array placing true into every coordinate that is either inside an obstacle or an end point of a wire.
+     * Constructs the initial visited array placing true into every coordinate that is either inside an obstacle or an
+     * end point of a wire.
      *
-     * @param chip The chip this visited array will reference from.
-     * @return A boolean matrix of true and false where true is wherever an obstacle is or wherever an end point of a wire is.
+     * @param chip
+     *         The chip this visited array will reference from.
+     *
+     * @return A boolean matrix of true and false where true is wherever an obstacle is or wherever an end point of a
+     * wire is.
      */
     public static boolean[][] visitedConstruction(Chip chip) {
         int height = chip.dim.height;
@@ -130,10 +134,13 @@ import java.util.PriorityQueue;
     }
 
     /**
-     * This method sorts the wires into a PriorityQueue based on the separation distance of the wires. The wires with the smallest separation distance will be placed at the top of
-     * the queue while the longer separations will be placed at the bottom of the queue.
+     * This method sorts the wires into a PriorityQueue based on the separation distance of the wires. The wires with
+     * the smallest separation distance will be placed at the top of the queue while the longer separations will be
+     * placed at the bottom of the queue.
      *
-     * @param wires The wires to be sorted into a PriorityQueue.
+     * @param wires
+     *         The wires to be sorted into a PriorityQueue.
+     *
      * @return The PrioiortyQueue of sorted wires.
      */
     public static PriorityQueue<Wire> wiresSort(List<Wire> wires) {
@@ -147,20 +154,26 @@ import java.util.PriorityQueue;
     }
 
     /**
-     * This method processes a given wire, finding the optimal path to connect the wire. If the path cannot be found, a null value is returned if the path wasn't able to be
-     * completed, or a pair is returned that contains a null path but a string containing the wireID of the wire preventing this wire from connecting.
+     * This method processes a given wire, finding the optimal path to connect the wire. If the path cannot be found, a
+     * null value is returned if the path wasn't able to be completed, or a pair is returned that contains a null path
+     * but a string containing the wireID of the wire preventing this wire from connecting.
      *
-     * @param wire     The wire to connect.
-     * @param visited  The visited matrix corresponding to coordinates that can be added to the path without interfering with any obstacles or other wires.
-     * @param chip     The chip this wire exists inside of.
-     * @param wildCard A wild card string. If this is anything other than "Ignore" then the algorithm will use this as a reference of a direction to avoid using on its first move.
-     * @return A pair containing the found path, if there is one, and a String referencing either the first direction the algorithm made or the wireID of the wire preventing this
-     * wire from being able to connect. In special circumstances, such as the wire being unable to connect due to obstacles, null is returned.
+     * @param wire
+     *         The wire to connect.
+     * @param visited
+     *         The visited matrix corresponding to coordinates that can be added to the path without interfering with
+     *         any obstacles or other wires.
+     * @param chip
+     *         The chip this wire exists inside of.
+     * @param wildCard
+     *         A wild card string. If this is anything other than "Ignore" then the algorithm will use this as a
+     *         reference of a direction to avoid using on its first move.
+     *
+     * @return A pair containing the found path, if there is one, and a String referencing either the first direction
+     * the algorithm made or the wireID of the wire preventing this wire from being able to connect. In special
+     * circumstances, such as the wire being unable to connect due to obstacles, null is returned.
      */
-    public static Pair wireProcessing(Wire wire,
-                                      boolean[][] visited,
-                                      Chip chip,
-                                      String wildCard) {
+    public static Pair wireProcessing(Wire wire, boolean[][] visited, Chip chip, String wildCard) {
         /**
          * Start of local variable declarations.
          */
@@ -270,8 +283,7 @@ import java.util.PriorityQueue;
                  */
                 for (Coord cor : from.neighbors(dim)) {
                     if (grid.get(cor) != -1 && grid.get(cor) != 0 && grid.get(cor) != wire.wireId) {
-                        firstDir = grid.get(cor)
-                                       .toString();
+                        firstDir = grid.get(cor).toString();
 
                         for (Coord coord : path) {
                             if (!cor.equals(to) && !cor.equals(from)) {
@@ -459,8 +471,7 @@ import java.util.PriorityQueue;
             numberOfIterations++;
         }
 
-        if (path.get(path.size() - 1)
-                .equals(to)) {
+        if (path.get(path.size() - 1).equals(to)) {
             return new Pair(path, firstDir);
         } else {
             for (Coord cor : path) {
@@ -478,12 +489,10 @@ import java.util.PriorityQueue;
      * @param to
      * @param visited
      * @param dim
+     *
      * @return
      */
-    public static Map<String, Coord> neighbors(Coord from,
-                                               Coord to,
-                                               boolean[][] visited,
-                                               Dimension dim) {
+    public static Map<String, Coord> neighbors(Coord from, Coord to, boolean[][] visited, Dimension dim) {
         Map<String, Coord> neigh = from.neighborsMap(dim);
         Map<String, Coord> temporaryNeighbors = new HashMap<>();
 

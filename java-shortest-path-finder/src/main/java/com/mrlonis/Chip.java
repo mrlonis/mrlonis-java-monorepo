@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,47 +36,11 @@ import java.util.Map;
     /**
      * Creates a new chip of the given dimensions with the specified obstacles and wire endpoints.
      */
-    public Chip(Dimension dim,
-                List<Obstacle> obstacles,
-                List<Wire> wires) {
+    public Chip(Dimension dim, List<Obstacle> obstacles, List<Wire> wires) {
         this.dim = dim;
         this.obstacles = new ArrayList<>(obstacles);
         this.wires = new ArrayList<>(wires);
         layout();
-    }
-
-    /**
-     * Lays out the initial grid.
-     */
-    public void layout() {
-        /*
-         * Build an empty grid.
-         */
-        grid = new HashMap<>();
-        for (int y = 0; y < dim.height; y++) {
-            for (int x = 0; x < dim.width; x++) {
-                grid.put(new Coord(x, y), Constants.FREE);
-            }
-        }
-
-        /*
-         * Lay out the obstacles on the grid.
-         */
-        for (Obstacle obs : obstacles) {
-            for (int y = obs.upperLeft.getY(); y <= obs.lowerRight.getY(); y++) {
-                for (int x = obs.upperLeft.getX(); x <= obs.lowerRight.getX(); x++) {
-                    grid.put(new Coord(x, y), Constants.OBSTACLE);
-                }
-            }
-        }
-
-        /*
-         * Lay out the wire endpoints on the grid.
-         */
-        for (Wire wire : wires) {
-            grid.put(wire.from, wire.wireId);
-            grid.put(wire.to, wire.wireId);
-        }
     }
 
     /**
@@ -126,10 +90,43 @@ import java.util.Map;
     }
 
     /**
+     * Lays out the initial grid.
+     */
+    public void layout() {
+        /*
+         * Build an empty grid.
+         */
+        grid = new HashMap<>();
+        for (int y = 0; y < dim.height; y++) {
+            for (int x = 0; x < dim.width; x++) {
+                grid.put(new Coord(x, y), Constants.FREE);
+            }
+        }
+
+        /*
+         * Lay out the obstacles on the grid.
+         */
+        for (Obstacle obs : obstacles) {
+            for (int y = obs.upperLeft.getY(); y <= obs.lowerRight.getY(); y++) {
+                for (int x = obs.upperLeft.getX(); x <= obs.lowerRight.getX(); x++) {
+                    grid.put(new Coord(x, y), Constants.OBSTACLE);
+                }
+            }
+        }
+
+        /*
+         * Lay out the wire endpoints on the grid.
+         */
+        for (Wire wire : wires) {
+            grid.put(wire.from, wire.wireId);
+            grid.put(wire.to, wire.wireId);
+        }
+    }
+
+    /**
      * Returns true iff the cell at the specified coord is available for the wire.
      */
-    public boolean isAvailable(Coord coord,
-                               int wireId) {
+    public boolean isAvailable(Coord coord, int wireId) {
         return grid.get(coord) == Constants.FREE || grid.get(coord) == wireId;
     }
 
@@ -154,8 +151,7 @@ import java.util.Map;
     /**
      * Marks the cell on the grid at coordinate coord with the given value.
      */
-    public void mark(Coord coord,
-                     int value) {
+    public void mark(Coord coord, int value) {
         grid.put(coord, value);
     }
 

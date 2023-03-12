@@ -1,14 +1,15 @@
 package com.mrlonis;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Coord represents an (x,y)-coordinate on a 2D board. The origin, (0,0) is assumed to be in the upper left corner. X-coordinates increase from left to right. Y-coordinates
- * increase from top to bottom. Operations are provided to easily locate neighboring coordinates (in the NSEW compass directions) on a board.
+ * Coord represents an (x,y)-coordinate on a 2D board. The origin, (0,0) is assumed to be in the upper left corner.
+ * X-coordinates increase from left to right. Y-coordinates increase from top to bottom. Operations are provided to
+ * easily locate neighboring coordinates (in the NSEW compass directions) on a board.
  *
  * @author Matthew Lonis (mrlonis)
  */
@@ -26,8 +27,7 @@ public class Coord implements Comparable<Coord> {
     /**
      * Constructs a new Coord representing (x,y).
      */
-    public Coord(int x,
-                 int y) {
+    public Coord(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -35,8 +35,7 @@ public class Coord implements Comparable<Coord> {
     /**
      * Constructs a new Coord representing (x,y).
      */
-    public Coord(String x,
-                 String y) {
+    public Coord(String x, String y) {
         this.x = Integer.parseInt(x);
         this.y = Integer.parseInt(y);
     }
@@ -92,8 +91,11 @@ public class Coord implements Comparable<Coord> {
     /**
      * Returns a list of the immediate board coordinates of this Coord's north, south, east, and west neighbors.
      *
-     * @param dim The dimension of the board for the given coordinate.
-     * @return A HashMap consisting of the neighbors for the given coordinate with strings as keys representing the direction the neighbor lies from the given coordinate.
+     * @param dim
+     *         The dimension of the board for the given coordinate.
+     *
+     * @return A HashMap consisting of the neighbors for the given coordinate with strings as keys representing the
+     * direction the neighbor lies from the given coordinate.
      */
     public Map<String, Coord> neighborsMap(Dimension dim) {
         Map<String, Coord> ans = new HashMap<>();
@@ -122,8 +124,8 @@ public class Coord implements Comparable<Coord> {
     }
 
     /**
-     * Returns the minimal distance separating this coord and the given coord. The result corresponds to the length of the shortest connecting wire. This is also known of as the
-     * Manhattan Distance between two points on a grid.
+     * Returns the minimal distance separating this coord and the given coord. The result corresponds to the length of
+     * the shortest connecting wire. This is also known of as the Manhattan Distance between two points on a grid.
      */
     public int separation(Coord to) {
         return Math.abs(Math.abs(this.x - to.x) + Math.abs(this.y - to.y));
@@ -133,9 +135,9 @@ public class Coord implements Comparable<Coord> {
      * Coords are ordered first on the x-coordinate and then on the y-coordinate.
      */
     public int compareTo(Coord that) {
-		if (this.x == that.x) {
-			return this.y - that.y;
-		}
+        if (this.x == that.x) {
+            return this.y - that.y;
+        }
         return this.x - that.x;
     }
 
@@ -154,7 +156,8 @@ public class Coord implements Comparable<Coord> {
     }
 
     /**
-     * Pre-hashing: pack this coordinate into an int, so that the key space is as uniformly distributed among the range of integers as possible.
+     * Pre-hashing: pack this coordinate into an int, so that the key space is as uniformly distributed among the range
+     * of integers as possible.
      * <p>
      * Uses a weighted sum to pack the x- and y-coordinates into an int.
      */

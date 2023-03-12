@@ -1,14 +1,16 @@
 package com.mrlonis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.awt.Color;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Assorted JUnit tests for ColorTable.
  * <p>
- * To "turn off" any test, put double slashes ( "//" ) in front of the "@Test" that precedes that method. For example, "//@Test".
+ * To "turn off" any test, put double slashes ( "//" ) in front of the "@Test" that precedes that method. For example,
+ * "//@Test".
  */
 public class Testing {
 
@@ -67,9 +69,9 @@ public class Testing {
         table.increment(Color.RED);
         table.increment(Color.RED);
         assertEquals(2, table.get(Color.RED));
-		for (int i = 0; i < 100; i++) {
-			table.increment(Color.BLUE);
-		}
+        for (int i = 0; i < 100; i++) {
+            table.increment(Color.BLUE);
+        }
         assertEquals(100, table.get(Color.BLUE));
         assertEquals(2, table.get(Color.RED));
     }
@@ -188,14 +190,14 @@ public class Testing {
         assertEquals(2, table.getSize());
         assertEquals(43, table.getCapacity());
         assertEquals(true, table.getLoadFactor() < 0.1);
-		for (int c = 0xFF; c >= 0xF0; c--) {
-			table.put(new Color(c, c, c), c);
-		}
+        for (int c = 0xFF; c >= 0xF0; c--) {
+            table.put(new Color(c, c, c), c);
+        }
         assertEquals(0xF0, table.get(Color.WHITE));
         assertEquals(2, table.getSize());
-		for (int c = 0x0F; c <= 0xFF; c += 0x10) {
-			table.put(new Color(c, c, c), c);
-		}
+        for (int c = 0x0F; c <= 0xFF; c += 0x10) {
+            table.put(new Color(c, c, c), c);
+        }
         assertEquals(211, table.getCapacity());
         assertEquals(true, table.getLoadFactor() < 0.1);
     }
@@ -203,9 +205,9 @@ public class Testing {
     @Test
     public void testIterator() {
         table = new ColorTable(13, 2, Constants.LINEAR, 0.49);
-		for (int i = 0; i < 20 * 17; i += 17) {
-			table.put(new Color(i * i), i);
-		}
+        for (int i = 0; i < 20 * 17; i += 17) {
+            table.put(new Color(i * i), i);
+        }
         assertEquals(9, table.getSize());
         int[] expected = {272, 119, 102, 0, 0, 289, 0, 306, 0, 0, 323, 221, 255, 238};
         Iterator it = table.iterator();
@@ -216,9 +218,9 @@ public class Testing {
         }
 
         table = new ColorTable(13, 2, Constants.QUADRATIC, 0.49);
-		for (int i = 0; i < 20 * 17; i += 17) {
-			table.put(new Color(i * i), i);
-		}
+        for (int i = 0; i < 20 * 17; i += 17) {
+            table.put(new Color(i * i), i);
+        }
         assertEquals(9, table.getSize());
         it = table.iterator();
         k = 0;

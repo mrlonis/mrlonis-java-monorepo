@@ -1,19 +1,11 @@
 package com.mrlonis;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
+import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.event.MouseInputAdapter;
+import java.io.Serial;
 
 /**
  * Builds the gui interface for an interactive run of the game.
@@ -23,6 +15,7 @@ public class GUI extends JFrame {
     /**
      * This is an auto-generated serial ID to remove the Eclipse warning.
      */
+    @Serial
     private static final long serialVersionUID = -3353395325455077732L;
 
     // Boilerplate setup.
@@ -50,11 +43,11 @@ public class GUI extends JFrame {
         int size = board.getSize();
 
         grid = new JPanel(new GridLayout(size, size));
-		for (int y = 0; y < size; y++) {
-			for (int x = 0; x < size; x++) {
-				grid.add(new TileButton(board.get(new Coord(x, y))));
-			}
-		}
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                grid.add(new TileButton(board.get(new Coord(x, y))));
+            }
+        }
 
         setSteps();
         initMenu();
@@ -112,14 +105,15 @@ public class GUI extends JFrame {
     }
 
     /**
-     * An inner class to represent the physical manifestation of a Tile on a game board. These are clickable objects, so we'll take advantage of the functionality already
-     * implemented by JButton.
+     * An inner class to represent the physical manifestation of a Tile on a game board. These are clickable objects, so
+     * we'll take advantage of the functionality already implemented by JButton.
      */
     class TileButton extends JButton {
 
         /**
          * This is an auto-generated serial ID to remove the Eclipse warning.
          */
+        @Serial
         private static final long serialVersionUID = 1212931495709531989L;
         private final Tile tile;
 
@@ -134,11 +128,11 @@ public class GUI extends JFrame {
                     // Update the view
                     setSteps();
                     GUI.this.repaint();
-					if (board.fullyFlooded()) {
-						youWin();
-					} else if (game.noMoreSteps()) {
-						youLose();
-					}
+                    if (board.fullyFlooded()) {
+                        youWin();
+                    } else if (game.noMoreSteps()) {
+                        youLose();
+                    }
                 }
             });
         }
@@ -163,8 +157,7 @@ public class GUI extends JFrame {
          * Draws the tile on this button.
          */
         public void paintComponent(Graphics gr) {
-            setBackground(tile.getColor()
-                              .get());
+            setBackground(tile.getColor().get());
             super.paintComponent(gr);
         }
     }

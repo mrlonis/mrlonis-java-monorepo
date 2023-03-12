@@ -13,20 +13,14 @@ public class Wire {
     /**
      * Creates a new wire between grid cells at the given coordinates.
      */
-    public Wire(int wireNumber,
-                int x1,
-                int y1,
-                int x2,
-                int y2) {
+    public Wire(int wireNumber, int x1, int y1, int x2, int y2) {
         this(wireNumber, new Coord(x1, y1), new Coord(x2, y2));
     }
 
     /**
      * Creates a new wire between grid cells at the given coordinates.
      */
-    public Wire(int wireId,
-                Coord from,
-                Coord to) {
+    public Wire(int wireId, Coord from, Coord to) {
         this.wireId = wireId;
         this.from = from;
         this.to = to;

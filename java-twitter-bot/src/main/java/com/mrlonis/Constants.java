@@ -10,7 +10,7 @@ public interface Constants {
     String PUNCTUATION = ".,'?!:;\"(){}^{}<>-";
     String BORING_WORDS = "boringWords.txt";
     // Assume alphabet consists of the basic ASCII code.
-	int SIGMA_SIZE = 128;
+    int SIGMA_SIZE = 128;
     // The factory instance is re-useable and thread safe.
-	Twitter TWITTER = TwitterFactory.getSingleton();
+    Twitter TWITTER = TwitterFactory.getSingleton();
 }

@@ -25,8 +25,7 @@ public class Tile {
     /**
      * Constructs a tile at the given coordinate and with the given color.
      */
-    public Tile(Coord coord,
-                WaterColor color) {
+    public Tile(Coord coord, WaterColor color) {
         this.coord = coord;
         this.color = color;
     }
@@ -43,8 +42,7 @@ public class Tile {
      * Returns true iff the given object is a tile at the same coordinate and with the same color.
      */
     public boolean equals(Object obj) {
-        if (obj instanceof Tile) {
-            Tile that = (Tile) obj;
+        if (obj instanceof Tile that) {
             return this.coord.equals(that.coord) && this.color == that.color;
         }
         return false;

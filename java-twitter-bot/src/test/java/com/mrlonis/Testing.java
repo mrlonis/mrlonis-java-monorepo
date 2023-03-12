@@ -1,30 +1,22 @@
 package com.mrlonis;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Testing {
 
     private static final Random random = new Random();
     private static final String alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-    @Test
-    public void testEmpty() {
-        System.out.println("testEmpty");
-        match("", "");
-        match("", "ab");
-        System.out.println();
-    }
-
-    private static void match(String pattern,
-                              String text) {
+    private static void match(String pattern, String text) {
         // run all three algorithms and test for correctness
         Result ansNaive = StringMatch.matchNaive(pattern, text);
         int expected = text.indexOf(pattern);
@@ -34,8 +26,56 @@ public class Testing {
         Result ansBoyerMoore = StringMatch.matchBoyerMoore(pattern, text);
         assertEquals(expected, ansBoyerMoore.pos);
         System.out.println(String.format("%5d %5d %5d : %s", ansNaive.comps, ansKMP.comps, ansBoyerMoore.comps,
-                                         (ansNaive.comps < ansKMP.comps && ansNaive.comps < ansBoyerMoore.comps) ? "Naive" :
-                                         (ansKMP.comps < ansNaive.comps && ansKMP.comps < ansBoyerMoore.comps) ? "KMP" : "Boyer-Moore"));
+                (ansNaive.comps < ansKMP.comps && ansNaive.comps < ansBoyerMoore.comps) ? "Naive" :
+                        (ansKMP.comps < ansNaive.comps && ansKMP.comps < ansBoyerMoore.comps) ? "KMP" : "Boyer-Moore"));
+    }
+
+    private static String makeRandomPattern() {
+        StringBuilder sb = new StringBuilder();
+        int steps = random.nextInt(10) + 1;
+        for (int i = 0; i < steps; i++) {
+            if (sb.length() == 0 || random.nextBoolean()) { // Add literal
+                int len = random.nextInt(5) + 1;
+                for (int j = 0; j < len; j++) {
+                    sb.append(alphabet.charAt(random.nextInt(alphabet.length())));
+                }
+            } else { // Repeat prefix
+                int len = random.nextInt(sb.length()) + 1;
+                int reps = random.nextInt(3) + 1;
+                if (sb.length() + len * reps > 1000) {
+                    break;
+                }
+                for (int j = 0; j < reps; j++) {
+                    sb.append(sb.substring(0, len));
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    private static String makeRandomText(String pattern) {
+        StringBuilder sb = new StringBuilder();
+        int steps = random.nextInt(100);
+        for (int i = 0; i < steps && sb.length() < 10000; i++) {
+            if (random.nextDouble() < 0.7) { // Add prefix of pattern
+                int len = random.nextInt(pattern.length()) + 1;
+                sb.append(pattern, 0, len);
+            } else { // Add literal
+                int len = random.nextInt(30) + 1;
+                for (int j = 0; j < len; j++) {
+                    sb.append(alphabet.charAt(random.nextInt(alphabet.length())));
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    @Test
+    public void testEmpty() {
+        System.out.println("testEmpty");
+        match("", "");
+        match("", "ab");
+        System.out.println();
     }
 
     @Test
@@ -77,46 +117,6 @@ public class Testing {
         System.out.println();
     }
 
-    private static String makeRandomPattern() {
-        StringBuilder sb = new StringBuilder();
-        int steps = random.nextInt(10) + 1;
-        for (int i = 0; i < steps; i++) {
-            if (sb.length() == 0 || random.nextBoolean()) { // Add literal
-                int len = random.nextInt(5) + 1;
-				for (int j = 0; j < len; j++) {
-					sb.append(alphabet.charAt(random.nextInt(alphabet.length())));
-				}
-            } else { // Repeat prefix
-                int len = random.nextInt(sb.length()) + 1;
-                int reps = random.nextInt(3) + 1;
-				if (sb.length() + len * reps > 1000) {
-					break;
-				}
-				for (int j = 0; j < reps; j++) {
-					sb.append(sb.substring(0, len));
-				}
-            }
-        }
-        return sb.toString();
-    }
-
-    private static String makeRandomText(String pattern) {
-        StringBuilder sb = new StringBuilder();
-        int steps = random.nextInt(100);
-        for (int i = 0; i < steps && sb.length() < 10000; i++) {
-            if (random.nextDouble() < 0.7) { // Add prefix of pattern
-                int len = random.nextInt(pattern.length()) + 1;
-                sb.append(pattern, 0, len);
-            } else { // Add literal
-                int len = random.nextInt(30) + 1;
-				for (int j = 0; j < len; j++) {
-					sb.append(alphabet.charAt(random.nextInt(alphabet.length())));
-				}
-            }
-        }
-        return sb.toString();
-    }
-
     /**
      * Tests Added after Lab 13
      */
@@ -125,7 +125,8 @@ public class Testing {
         String[] pats = new String[]{"AAAA", "BAAA", "AAAB", "AAAC", "ABAB"};
         String text = "AAAAAAAAABAAAAAAAAAB";
         assertEquals(20, text.length());
-        Result[] results = new Result[]{new Result(0, 4), new Result(9, 13), new Result(6, 28), new Result(-1, 62), new Result(-1, 35),};
+        Result[] results = new Result[]{new Result(0, 4), new Result(9, 13), new Result(6, 28), new Result(-1, 62),
+                new Result(-1, 35),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchNaive(pat, text);
@@ -140,7 +141,8 @@ public class Testing {
         String[] pats = new String[]{"AABC", "ABCDE", "AABAACAABABA", "ABRACADABRA",};
         String text = "AAAAAABRACADABAAAAAAAAAAAAAAAAAAAAAAABCAAAAAAAAAAABAABAAAAAAAAAAAAAAA";
         assertEquals(69, text.length());
-        Result[] results = new Result[]{new Result(35, 96), new Result(-1, 127), new Result(-1, 157), new Result(-1, 121),};
+        Result[] results =
+                new Result[]{new Result(35, 96), new Result(-1, 127), new Result(-1, 157), new Result(-1, 121),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchNaive(pat, text);
@@ -155,7 +157,8 @@ public class Testing {
         String[] pats = new String[]{"00000", "11111", "00011", "10100", "10000",};
         String text = "00000000000000000000";
         assertEquals(20, text.length());
-        Result[] results = new Result[]{new Result(0, 5), new Result(-1, 16), new Result(-1, 64), new Result(-1, 16), new Result(-1, 16),};
+        Result[] results = new Result[]{new Result(0, 5), new Result(-1, 16), new Result(-1, 64), new Result(-1, 16),
+                new Result(-1, 16),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchNaive(pat, text);
@@ -173,7 +176,8 @@ public class Testing {
 
         int[] comps = new int[]{3, 3, 5, 5, 3};
 
-        int[][] results = new int[][]{{-1, 0, 1, 2, 3}, {-1, 0, 0, 0, 0}, {-1, 0, 1, 2, 0}, {-1, 0, 1, 2, 0}, {-1, 0, 0, 1, 2}};
+        int[][] results =
+                new int[][]{{-1, 0, 1, 2, 3}, {-1, 0, 0, 0, 0}, {-1, 0, 1, 2, 0}, {-1, 0, 1, 2, 0}, {-1, 0, 0, 1, 2}};
 
         int i = 0;
         for (String pat : pats) {
@@ -187,7 +191,8 @@ public class Testing {
     @Test
     public void lec13bBuildKMP() {
         String[] pats = new String[]{"AABC", "ABCDE", "AABAACAABABA", "ABRACADABRA",};
-        int[][] flinks = new int[][]{{-1, 0, 1, 0, 0}, {-1, 0, 0, 0, 0, 0}, {-1, 0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 0, 1}, {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
+        int[][] flinks = new int[][]{{-1, 0, 1, 0, 0}, {-1, 0, 0, 0, 0, 0}, {-1, 0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 0, 1},
+                {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
         int[][] results = new int[][]{new int[5], new int[6], new int[13], new int[12]};
         int[] comps = new int[]{4, 4, 16, 12};
         int i = 0;
@@ -207,7 +212,9 @@ public class Testing {
 
         int[] comps = new int[]{4, 4, 6, 5, 4};
 
-        int[][] flinkResults = new int[][]{{-1, 0, 1, 2, 3, 4}, {-1, 0, 1, 2, 3, 4}, {-1, 0, 1, 2, 0, 0}, {-1, 0, 0, 1, 2, 0}, {-1, 0, 0, 0, 0, 0}};
+        int[][] flinkResults =
+                new int[][]{{-1, 0, 1, 2, 3, 4}, {-1, 0, 1, 2, 3, 4}, {-1, 0, 1, 2, 0, 0}, {-1, 0, 0, 1, 2, 0},
+                        {-1, 0, 0, 0, 0, 0}};
 
         int i = 0;
         for (String pat : pats) {
@@ -223,7 +230,8 @@ public class Testing {
         String[] pats = new String[]{"AAAA", "BAAA", "AAAB", "AAAC", "ABAB",};
         String text = "AAAAAAAAABAAAAAAAAAB";
         assertEquals(20, text.length());
-        Result[] results = new Result[]{new Result(0, 7), new Result(9, 16), new Result(6, 21), new Result(-1, 43), new Result(-1, 40),};
+        Result[] results = new Result[]{new Result(0, 7), new Result(9, 16), new Result(6, 21), new Result(-1, 43),
+                new Result(-1, 40),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchKMP(pat, text);
@@ -236,10 +244,12 @@ public class Testing {
     @Test
     public void lec13bKMP() {
         String[] pats = new String[]{"AABC", "ABCDE", "AABAACAABABA", "ABRACADABRA",};
-        int[][] flinks = new int[][]{{-1, 0, 1, 0, 0}, {-1, 0, 0, 0, 0, 0}, {-1, 0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 0, 1}, {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
+        int[][] flinks = new int[][]{{-1, 0, 1, 0, 0}, {-1, 0, 0, 0, 0, 0}, {-1, 0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 0, 1},
+                {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
         String text = "AAAAAABRACADABAAAAAAAAAAAAAAAAAAAAAAABCAAAAAAAAAAABAABAAAAAAAAAAAAAAA";
         assertEquals(69, text.length());
-        Result[] results = new Result[]{new Result(35, 68), new Result(-1, 128), new Result(-1, 123), new Result(-1, 126),};
+        Result[] results =
+                new Result[]{new Result(35, 68), new Result(-1, 128), new Result(-1, 123), new Result(-1, 126),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.runKMP(pat, text, flinks[i]);
@@ -254,7 +264,8 @@ public class Testing {
         String[] pats = new String[]{"00000", "11111", "00011", "10100", "10000",};
         String text = "00000000000000000000";
         assertEquals(20, text.length());
-        Result[] results = new Result[]{new Result(0, 9), new Result(-1, 24), new Result(-1, 43), new Result(-1, 25), new Result(-1, 24),};
+        Result[] results = new Result[]{new Result(0, 9), new Result(-1, 24), new Result(-1, 43), new Result(-1, 25),
+                new Result(-1, 24),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchKMP(pat, text);
@@ -266,10 +277,14 @@ public class Testing {
 
     @Test
     public void smallMachines() {
-        String[] pats = new String[]{"", "A", "AB", "AA", "AAAA", "BAAA", "AAAB", "AAAC", "ABAB", "ABCD", "ABBA", "AABC", "ABAAB", "AABAACAABABA", "ABRACADABRA",};
-        int[][] flinks = new int[][]{{-1}, {-1, 0}, {-1, 0, 0}, {-1, 0, 1}, {-1, 0, 1, 2, 3}, {-1, 0, 0, 0, 0}, {-1, 0, 1, 2, 0}, {-1, 0, 1, 2, 0}, {-1, 0, 0, 1, 2},
-                                     {-1, 0, 0, 0, 0}, {-1, 0, 0, 0, 1}, {-1, 0, 1, 0, 0}, {-1, 0, 0, 1, 1, 2}, {-1, 0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 0, 1},
-                                     {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
+        String[] pats =
+                new String[]{"", "A", "AB", "AA", "AAAA", "BAAA", "AAAB", "AAAC", "ABAB", "ABCD", "ABBA", "AABC",
+                        "ABAAB", "AABAACAABABA", "ABRACADABRA",};
+        int[][] flinks =
+                new int[][]{{-1}, {-1, 0}, {-1, 0, 0}, {-1, 0, 1}, {-1, 0, 1, 2, 3}, {-1, 0, 0, 0, 0}, {-1, 0, 1, 2, 0},
+                        {-1, 0, 1, 2, 0}, {-1, 0, 0, 1, 2}, {-1, 0, 0, 0, 0}, {-1, 0, 0, 0, 1}, {-1, 0, 1, 0, 0},
+                        {-1, 0, 0, 1, 1, 2}, {-1, 0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 0, 1},
+                        {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
         int[] comps = new int[]{0, 0, 1, 1, 3, 3, 5, 5, 3, 3, 3, 4, 5, 16, 12};
         int i = 0;
         for (String pat : pats) {
@@ -284,25 +299,31 @@ public class Testing {
     public void lec13aBulidBoyerMoore() {
         String[] pats = new String[]{"AAAA", "BAAA", "AAAB", "AAAC", "ABAB",};
 
-        int[][] delta1s = new int[][]{new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE],
-                                      new int[Constants.SIGMA_SIZE]};
+        int[][] delta1s =
+                new int[][]{new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE],
+                        new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE]};
 
         int[][] results = new int[][]{
-                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
-                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
-                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
-                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
-                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}};
+                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0,
+                        3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
+                        0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
+                        4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
+                        0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}};
 
         int i = 0;
         for (String pat : pats) {
@@ -316,23 +337,31 @@ public class Testing {
     public void lec13bBulidBoyerMoore() {
         String[] pats = new String[]{"AABC", "ABCDE", "AABAACAABABA", "ABRACADABRA",};
 
-        int[][] delta1s = new int[][]{new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE]};
+        int[][] delta1s =
+                new int[][]{new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE],
+                        new int[Constants.SIGMA_SIZE]};
 
         int[][] results = new int[][]{
-                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
-                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 3, 2, 1, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
-                {12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-                 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 0, 1, 6, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-                 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-                 12, 12, 12, 12, 12},
-                {11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
-                 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 0, 2, 6, 4, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 1,
-                 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
-                 11, 11, 11, 11}};
+                {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
+                        1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4,
+                        3, 2, 1, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+                {12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+                        12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+                        12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 0, 1, 6, 12, 12, 12, 12, 12, 12, 12,
+                        12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+                        12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+                        12, 12, 12, 12, 12},
+                {11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+                        11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+                        11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 0, 2, 6, 4, 11, 11, 11, 11, 11, 11,
+                        11, 11, 11, 11, 11, 11, 11, 1, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+                        11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+                        11, 11, 11, 11, 11}};
 
         int i = 0;
         for (String pat : pats) {
@@ -346,25 +375,31 @@ public class Testing {
     public void lec14aBuildBoyerMoore() {
         String[] pats = new String[]{"00000", "11111", "00011", "10100", "10000",};
 
-        int[][] delta1s = new int[][]{new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE],
-                                      new int[Constants.SIGMA_SIZE]};
+        int[][] delta1s =
+                new int[][]{new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE],
+                        new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE]};
 
         int[][] results = new int[][]{
-                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
-                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
-                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 0, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
-                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 2, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
-                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 4, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}};
+                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+                {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}};
 
         int i = 0;
         for (String pat : pats) {
@@ -379,7 +414,8 @@ public class Testing {
         String[] pats = new String[]{"AAAA", "BAAA", "AAAB", "AAAC", "ABAB",};
         String text = "AAAAAAAAABAAAAAAAAAB";
         assertEquals(20, text.length());
-        Result[] results = new Result[]{new Result(0, 4), new Result(9, 29), new Result(6, 10), new Result(-1, 14), new Result(-1, 21),};
+        Result[] results = new Result[]{new Result(0, 4), new Result(9, 29), new Result(6, 10), new Result(-1, 14),
+                new Result(-1, 21),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchBoyerMoore(pat, text);
@@ -409,7 +445,8 @@ public class Testing {
         String[] pats = new String[]{"00000", "11111", "00011", "10100", "10000",};
         String text = "00000000000000000000";
         assertEquals(20, text.length());
-        Result[] results = new Result[]{new Result(0, 5), new Result(-1, 4), new Result(-1, 8), new Result(-1, 48), new Result(-1, 80)};
+        Result[] results = new Result[]{new Result(0, 5), new Result(-1, 4), new Result(-1, 8), new Result(-1, 48),
+                new Result(-1, 80)};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchBoyerMoore(pat, text);
@@ -461,10 +498,13 @@ public class Testing {
     public void mediumBuildDelta1() {
         String pattern = "ABCABCDEBACBDACBTBAC";
         int[] flink = new int[Constants.SIGMA_SIZE];
-        int[] result = new int[]{20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-                                 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 1, 2, 0, 7, 12, 20, 20, 20, 20, 20,
-                                 20, 20, 20, 20, 20, 20, 20, 20, 20, 3, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-                                 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20};
+        int[] result =
+                new int[]{20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+                        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+                        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 1, 2, 0, 7, 12, 20, 20,
+                        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 3, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+                        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+                        20, 20, 20, 20, 20, 20, 20, 20};
         assertEquals(pattern.length(), 20);
         assertEquals(flink.length, 128);
         assertEquals(result.length, 128);
@@ -551,7 +591,8 @@ public class Testing {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " + compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
+                compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -564,8 +605,7 @@ public class Testing {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase()
-                                                                     .indexOf(pattern.toLowerCase()));
+            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
