@@ -44,21 +44,38 @@ public class Game {
      */
     public static void main(final String... args) {
         System.out.println(Constants.TITLE);
-        // Run a game in interactive mode:
-        SwingUtilities.invokeLater(Game::new);
+        String mode = "Interactive";
 
-        // Uncomment the following line to run a batch of games and display a
-        // graph of the timings:
-        // new Game(false).batchTest();
+        if (args.length > 0) {
+            System.out.println("Printing Args");
+            for (String arg: args) {
+                System.out.println(arg);
+            }
 
-		/*
-		Game newGame = new Game(false);
-		newGame.resize(5);
-		newGame.autoPlay(0);
-		newGame.resize(5);
-		newGame.autoPlay(1);
-		System.out.println("Finished!");
-		*/
+            mode = args[0];
+        }
+
+        switch (mode) {
+            case "Interactive" -> {
+                System.out.println("Running in Interactive Mode");
+                SwingUtilities.invokeLater(Game::new);
+            }
+            case "Batch" -> {
+                System.out.println("Running in Batch Mode");
+                new Game(false).batchTest();
+            }
+            case "Autoplay" -> {
+                System.out.println("Running in Autoplay Mode");
+                Game newGame = new Game(false);
+                newGame.resize(5);
+                newGame.autoPlay(0);
+                newGame.resize(5);
+                newGame.autoPlay(1);
+            }
+            default -> System.out.println("Invalid mode: " + mode);
+        }
+
+        System.out.println("Finished!");
     }
 
     /**
