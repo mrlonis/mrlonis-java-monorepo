@@ -1,7 +1,6 @@
 package com.mrlonis;
 
 import twitter4j.Twitter;
-import twitter4j.TwitterFactory;
 
 public interface Constants {
 
@@ -12,5 +11,5 @@ public interface Constants {
     // Assume alphabet consists of the basic ASCII code.
     int SIGMA_SIZE = 128;
     // The factory instance is re-useable and thread safe.
-    Twitter TWITTER = TwitterFactory.getSingleton();
+    Twitter TWITTER = Twitter.getInstance();
 }

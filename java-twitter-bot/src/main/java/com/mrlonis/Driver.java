@@ -1,8 +1,8 @@
 package com.mrlonis;
 
-import twitter4j.Query;
-import twitter4j.QueryResult;
-import twitter4j.Status;
+import twitter4j.v1.Query;
+import twitter4j.v1.QueryResult;
+import twitter4j.v1.Status;
 import twitter4j.TwitterException;
 
 @SuppressWarnings("unused")
@@ -60,7 +60,7 @@ import twitter4j.TwitterException;
             System.out.println(String.format("Tweet = %s", message));
         } else {
             try {
-                Constants.TWITTER.updateStatus(message);
+                Constants.TWITTER.v1().tweets().updateStatus(message);
             } catch (TwitterException e) {
                 System.out.println("Unable to tweet out at this time.");
                 System.out.println(e.getMessage());
@@ -75,19 +75,19 @@ import twitter4j.TwitterException;
         if (!forReal) {
             System.out.println(String.format("tweetsAbout(\"%s\", %b);", subject, forReal));
         } else {
-            Query query = new Query(subject);
+            Query query = Query.of(subject);
             /*
              * This will limit the number of responses to 100.
              */
-            query.setCount(100);
+            query = query.count(100);
             /*
              * Could limit the responses to a geographical location, if we
              * wanted. query.setGeoCode(new GeoLocation(39.22031, -86.45824),
              * 50, Query.MILES);
              */
-            query.setSince("2017-4-1");
+            query = query.since("2017-4-1");
             try {
-                QueryResult result = Constants.TWITTER.search(query);
+                QueryResult result = Constants.TWITTER.v1().search().search(query);
                 System.out.println("Number tweets about " + subject + ": " + result.getTweets().size());
                 for (Status tweet : result.getTweets()) {
                     System.out.println("@" + tweet.getUser().getScreenName() + ": " + tweet.getText());

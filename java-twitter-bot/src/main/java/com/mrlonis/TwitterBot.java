@@ -1,7 +1,7 @@
 package com.mrlonis;
 
-import twitter4j.Paging;
-import twitter4j.Status;
+import twitter4j.v1.Paging;
+import twitter4j.v1.Status;
 import twitter4j.TwitterException;
 
 import java.io.FileOutputStream;
@@ -37,10 +37,10 @@ public class TwitterBot {
     private void fetch() {
         try {
             PrintStream out = new PrintStream(new FileOutputStream(user + "_tweets.txt"));
-            Paging page = new Paging(1, Constants.PAGE_SIZE);
+            Paging page = Paging.ofPage(1).count(Constants.PAGE_SIZE);
             for (int p = 1; p <= Math.ceil((double) numTweets / Constants.PAGE_SIZE); p++) {
-                page.setPage(p);
-                for (Status status : Constants.TWITTER.getUserTimeline(user, page)) {
+                page = page.withPage(p);
+                for (Status status : Constants.TWITTER.v1().timelines().getUserTimeline(user, page)) {
                     tweets.add(status.getText());
                 }
             }
