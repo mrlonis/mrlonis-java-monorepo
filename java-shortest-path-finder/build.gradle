@@ -1,39 +1,17 @@
 plugins {
-	id "java"
-	id "idea"
 	id "jacoco"
-	id "io.freefair.lombok" version "6.6.3"
+	id "io.freefair.lombok" version "${lombokPluginVersion}"
 }
 
-group = "com.mrlonis"
-version = "0.0.1-SNAPSHOT"
 archivesBaseName = "java-shortest-path-finder"
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-repositories {
-	mavenCentral()
-}
 
 dependencies {
-	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
-	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
-}
-
-compileJava {
-	options.deprecation = true
-	options.warnings = true
-	options.compilerArgs << "-Xlint:unchecked"
-}
-
-compileTestJava {
-	options.deprecation = true
-	options.warnings = true
-	options.compilerArgs << "-Xlint:unchecked"
+	testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
 
 jacoco {
-	toolVersion = "0.8.8"
+	toolVersion = "${jacocoVersion}"
 }
 def filesToExcludeFromCoverage = ["**/com/mrlonis/configuration/**",
 								  "**/com/mrlonis/controller/filters/**",
