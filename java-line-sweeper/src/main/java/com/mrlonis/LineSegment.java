@@ -256,7 +256,9 @@ abstract class Endpoint extends Point2D.Double implements Comparable<Endpoint> {
             } else if (p1.onRight() && p2.onLeft()) {
                 return 1;
             } else // on the same side
+            {
                 return java.lang.Double.compare(p1.getY(), p2.getY());
+            }
         } else {
             return 1;
         }

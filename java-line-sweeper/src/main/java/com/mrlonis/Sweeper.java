@@ -27,9 +27,9 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 
 public class Sweeper {
-    private int sweepX; // x-coordinate of the sweep line
     private final List<LineSegment> world; // all the line segments
     private final BinarySearchTree<LineSegment> tr; // those segments that intersect
+    private int sweepX; // x-coordinate of the sweep line
     // the sweep line
 
     public Sweeper(List<LineSegment> world, int treeType) {
@@ -129,9 +129,8 @@ public class Sweeper {
 }
 
 /**
- * This exception is useful for debugging purposes. It is caught by the GUI,
- * which highlights the segment and the sweep line and also prints the state of
- * the tree.
+ * This exception is useful for debugging purposes. It is caught by the GUI, which highlights the segment and the sweep
+ * line and also prints the state of the tree.
  */
 
 class SweeperException extends RuntimeException {

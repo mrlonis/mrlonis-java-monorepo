@@ -14,8 +14,11 @@ public class Driver {
      * Return the ColorTable associated with this image, assuming the color key space is restricted to bitsPerChannel.
      * Increment numCollisions after each increment.
      *
-     * @param    image            The image that will be converted into a ColorTable.
-     * @param    bitsPerChannel    The bits per channel that will be used in the ColorTable.
+     * @param image
+     *         The image that will be converted into a ColorTable.
+     * @param bitsPerChannel
+     *         The bits per channel that will be used in the ColorTable.
+     *
      * @return A ColorTable representation of image.
      */
     public static ColorTable vectorize(Image image, int bitsPerChannel) {
@@ -39,9 +42,13 @@ public class Driver {
     /**
      * Return the result of running Util.cosineSimilarity() on the vectorized images.
      *
-     * @param    image1            The first image.
-     * @param    image2            The second image.
-     * @param    bitsPerChannel    The bits per channel used when converting image1 and image2 into a ColorTable.
+     * @param image1
+     *         The first image.
+     * @param image2
+     *         The second image.
+     * @param bitsPerChannel
+     *         The bits per channel used when converting image1 and image2 into a ColorTable.
+     *
      * @return The cosine similarity of image1 and image2.
      */
     public static double similarity(Image image1, Image image2, int bitsPerChannel) {

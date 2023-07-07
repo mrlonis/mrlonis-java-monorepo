@@ -3,7 +3,9 @@ plugins {
     id "io.freefair.lombok" version "${lombokPluginVersion}"
 }
 
-archivesBaseName = "java-text-statistics"
+base {
+    archivesName = "java-text-statistics"
+}
 
 dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"

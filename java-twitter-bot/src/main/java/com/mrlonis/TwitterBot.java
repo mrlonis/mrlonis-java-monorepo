@@ -1,8 +1,8 @@
 package com.mrlonis;
 
+import twitter4j.TwitterException;
 import twitter4j.v1.Paging;
 import twitter4j.v1.Status;
-import twitter4j.TwitterException;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

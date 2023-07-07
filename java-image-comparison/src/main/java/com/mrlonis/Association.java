@@ -2,7 +2,6 @@ package com.mrlonis;
 
 /**
  * @author mrlonis
- *
  */
 public class Association {
 

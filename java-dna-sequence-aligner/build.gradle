@@ -1,72 +1,74 @@
 plugins {
-	id "jacoco"
-	id "io.freefair.lombok" version "${lombokPluginVersion}"
+    id "jacoco"
+    id "io.freefair.lombok" version "${lombokPluginVersion}"
 }
 
-archivesBaseName = "java-dna-sequence-aligner"
+base {
+    archivesName = "java-dna-sequence-aligner"
+}
 
 dependencies {
-	testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
 
 jacoco {
-	toolVersion = "${jacocoVersion}"
+    toolVersion = "${jacocoVersion}"
 }
 def filesToExcludeFromCoverage = ["**/com/mrlonis/configuration/**",
-								  "**/com/mrlonis/controller/filters/**",
-								  "**/com/mrlonis/dto/**",
-								  "**/com/mrlonis/interfaces/**",
-								  "**/com/mrlonis/SpringBootProjectTemplateApplication.*"]
+                                  "**/com/mrlonis/controller/filters/**",
+                                  "**/com/mrlonis/dto/**",
+                                  "**/com/mrlonis/interfaces/**",
+                                  "**/com/mrlonis/SpringBootProjectTemplateApplication.*"]
 
 test {
-	finalizedBy jacocoTestReport
-	useJUnitPlatform()
+    finalizedBy jacocoTestReport
+    useJUnitPlatform()
 }
 
 jacocoTestReport {
-	dependsOn test
-	reports {
-		xml.required = true
-		csv.required = false
-	}
+    dependsOn test
+    reports {
+        xml.required = true
+        csv.required = false
+    }
 
-	afterEvaluate {
-		classDirectories.from = files(classDirectories.files.collect {
-			fileTree(dir: it, exclude: filesToExcludeFromCoverage)
-		})
-	}
+    afterEvaluate {
+        classDirectories.from = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: filesToExcludeFromCoverage)
+        })
+    }
 }
 
 jacocoTestCoverageVerification {
-	afterEvaluate {
-		classDirectories.from = files(classDirectories.files.collect {
-			fileTree(dir: it, exclude: filesToExcludeFromCoverage)
-		})
-	}
+    afterEvaluate {
+        classDirectories.from = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: filesToExcludeFromCoverage)
+        })
+    }
 
-	violationRules {
-		rule {
-			limit {
-				minimum = 0.00
-			}
-		}
-		rule {
-			limit {
-				counter = "BRANCH"
-				value = "COVEREDRATIO"
-				minimum = 0.00
-			}
-		}
-	}
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.00
+            }
+        }
+        rule {
+            limit {
+                counter = "BRANCH"
+                value = "COVEREDRATIO"
+                minimum = 0.00
+            }
+        }
+    }
 
-	mustRunAfter jacocoTestReport
+    mustRunAfter jacocoTestReport
 }
 
 check {
-	dependsOn jacocoTestCoverageVerification
+    dependsOn jacocoTestCoverageVerification
 }
 
 build {
-	dependsOn jacocoTestReport
+    dependsOn jacocoTestReport
 }

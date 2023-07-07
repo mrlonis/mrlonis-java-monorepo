@@ -50,12 +50,10 @@ public class Testing {
     }
 
     /**
-     * Note: These tests are not necessarily exhaustive, although they do
-     * provide you with a good roadmap to follow in developing your code for
-     * this project.
-     *
-     * Add some of your own tests, but do not remove the provided tests or
-     * change any of the expected results.
+     * Note: These tests are not necessarily exhaustive, although they do provide you with a good roadmap to follow in
+     * developing your code for this project.
+     * <p>
+     * Add some of your own tests, but do not remove the provided tests or change any of the expected results.
      */
 
     @Test
@@ -63,9 +61,9 @@ public class Testing {
         FrequencyTable ft = new FrequencyTable();
         assertEquals(0, ft.size());
         assertTrue(ft.isEmpty());
-        assertTrue(0 == ft.get('a'));
-        assertTrue(0 == ft.get('b'));
-        assertTrue(0 == ft.get('c'));
+        assertEquals(0, (int) ft.get('a'));
+        assertEquals(0, (int) ft.get('b'));
+        assertEquals(0, (int) ft.get('c'));
     }
 
     @Test
@@ -73,22 +71,22 @@ public class Testing {
         FrequencyTable ft = new FrequencyTable("abacca");
         assertEquals(3, ft.size());
         assertFalse(ft.isEmpty());
-        assertTrue(3 == ft.get('a'));
-        assertTrue(1 == ft.get('b'));
-        assertTrue(2 == ft.get('c'));
+        assertEquals(3, (int) ft.get('a'));
+        assertEquals(1, (int) ft.get('b'));
+        assertEquals(2, (int) ft.get('c'));
     }
 
     @Test
     public void mediumFreqTable() {
         FrequencyTable ft = new FrequencyTable("a");
-        assertTrue(1 == ft.get('a'));
+        assertEquals(1, (int) ft.get('a'));
         ft = new FrequencyTable("aaaaaaaa");
-        assertTrue(8 == ft.get('a'));
+        assertEquals(8, (int) ft.get('a'));
         ft = new FrequencyTable("ab");
-        assertTrue(1 == ft.get('a'));
-        assertTrue(1 == ft.get('b'));
-        assertTrue(0 == ft.get('c'));
-        assertTrue(0 == ft.get('d'));
+        assertEquals(1, (int) ft.get('a'));
+        assertEquals(1, (int) ft.get('b'));
+        assertEquals(0, (int) ft.get('c'));
+        assertEquals(0, (int) ft.get('d'));
     }
 
     /**********************************************************************************
@@ -118,11 +116,11 @@ public class Testing {
         }
         FrequencyTable ft = new FrequencyTable(text);
         for (int i = 0; i < alpha.length(); i++) {
-            assertTrue(freqs[i] == ft.get(alpha.charAt(i)));
+            assertEquals(freqs[i], (int) ft.get(alpha.charAt(i)));
         }
         String other = "0123456789!@#$%^&*()";
         for (int i = 0; i < other.length(); i++) {
-            assertTrue(0 == ft.get(other.charAt(i)));
+            assertEquals(0, (int) ft.get(other.charAt(i)));
         }
     }
 
@@ -320,54 +318,54 @@ public class Testing {
         Heap<Integer> heap = new Heap<>((x, y) -> x.compareTo(y));
         Comparator<Integer> comp = heap.comparator();
         assertTrue(comp.compare(2, 3) < 0);
-        assertTrue(comp.compare(4, 4) == 0);
+        assertEquals(0, comp.compare(4, 4));
         assertTrue(comp.compare(5, 4) > 0);
         assertTrue(heap.isEmpty());
         assertEquals(0, heap.size());
         heap.insert(5);
         assertFalse(heap.isEmpty());
         assertEquals(1, heap.size());
-        assertTrue(5 == heap.peek());
+        assertEquals(5, (int) heap.peek());
         assertEquals(1, heap.size());
-        assertTrue(5 == heap.delete());
+        assertEquals(5, (int) heap.delete());
         assertTrue(heap.isEmpty());
         heap.insert(1);
         heap.insert(2);
         heap.insert(3);
         assertEquals(3, heap.size());
-        assertTrue(1 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(3 == heap.delete());
+        assertEquals(1, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(3, (int) heap.delete());
         heap.insert(1);
         heap.insert(3);
         heap.insert(2);
-        assertTrue(1 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(3 == heap.delete());
+        assertEquals(1, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(3, (int) heap.delete());
         heap.insert(2);
         heap.insert(1);
         heap.insert(3);
-        assertTrue(1 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(3 == heap.delete());
+        assertEquals(1, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(3, (int) heap.delete());
         heap.insert(2);
         heap.insert(3);
         heap.insert(1);
-        assertTrue(1 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(3 == heap.delete());
+        assertEquals(1, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(3, (int) heap.delete());
         heap.insert(3);
         heap.insert(1);
         heap.insert(2);
-        assertTrue(1 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(3 == heap.delete());
+        assertEquals(1, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(3, (int) heap.delete());
         heap.insert(3);
         heap.insert(2);
         heap.insert(1);
-        assertTrue(1 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(3 == heap.delete());
+        assertEquals(1, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(3, (int) heap.delete());
     }
 
     @Test
@@ -376,39 +374,39 @@ public class Testing {
         heap.insert(1);
         heap.insert(2);
         heap.insert(3);
-        assertTrue(3 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(1 == heap.delete());
+        assertEquals(3, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(1, (int) heap.delete());
         heap.insert(1);
         heap.insert(3);
         heap.insert(2);
-        assertTrue(3 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(1 == heap.delete());
+        assertEquals(3, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(1, (int) heap.delete());
         heap.insert(2);
         heap.insert(1);
         heap.insert(3);
-        assertTrue(3 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(1 == heap.delete());
+        assertEquals(3, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(1, (int) heap.delete());
         heap.insert(2);
         heap.insert(3);
         heap.insert(1);
-        assertTrue(3 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(1 == heap.delete());
+        assertEquals(3, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(1, (int) heap.delete());
         heap.insert(3);
         heap.insert(1);
         heap.insert(2);
-        assertTrue(3 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(1 == heap.delete());
+        assertEquals(3, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(1, (int) heap.delete());
         heap.insert(3);
         heap.insert(2);
         heap.insert(1);
-        assertTrue(3 == heap.delete());
-        assertTrue(2 == heap.delete());
-        assertTrue(1 == heap.delete());
+        assertEquals(3, (int) heap.delete());
+        assertEquals(2, (int) heap.delete());
+        assertEquals(1, (int) heap.delete());
     }
 
     @Test
@@ -417,7 +415,7 @@ public class Testing {
         Heap<String> heap = new Heap<>((s, t) -> s.length() - t.length());
         Comparator<String> comp = heap.comparator();
         assertTrue(comp.compare("zz", "aaaa") < 0);
-        assertTrue(comp.compare("cat", "dog") == 0);
+        assertEquals(0, comp.compare("cat", "dog"));
         assertTrue(comp.compare("bbbbbb", "aa") > 0);
         heap.insert("aaa");
         heap.insert("bb");
@@ -434,8 +432,8 @@ public class Testing {
             heap.insert(x);
         }
         for (int i = 1; i <= 10; i++) {
-            assertTrue(i == heap.peek());
-            assertTrue(i == heap.delete());
+            assertEquals(i, (int) heap.peek());
+            assertEquals(i, (int) heap.delete());
         }
     }
 
@@ -447,8 +445,8 @@ public class Testing {
         }
         assertEquals("[20, 17, 19, 15, 16, 13, 18, 5, 11, 14, 12, 4, 8, 2, 9, 1, 3, 7, 10, 6]", heap.toString());
         for (int i = heap.size(); i >= 1; i--) {
-            assertTrue(i == heap.peek());
-            assertTrue(i == heap.delete());
+            assertEquals(i, (int) heap.peek());
+            assertEquals(i, (int) heap.delete());
         }
         assertTrue(heap.isEmpty());
     }
@@ -456,18 +454,18 @@ public class Testing {
     @Test
     public void smallHuff() {
         FrequencyTable ft = new FrequencyTable("aaaabbc");
-        assertTrue(4 == ft.get('a'));
-        assertTrue(2 == ft.get('b'));
-        assertTrue(1 == ft.get('c'));
+        assertEquals(4, (int) ft.get('a'));
+        assertEquals(2, (int) ft.get('b'));
+        assertEquals(1, (int) ft.get('c'));
         HuffmanTree ht = new HuffmanTree(ft);
-        assertTrue(7 == ht.root.priority);
-        assertTrue(3 == ht.root.left.priority);
-        assertTrue(4 == ht.root.right.priority);
-        assertTrue(1 == ht.root.left.left.priority);
-        assertTrue(2 == ht.root.left.right.priority);
-        assertTrue('a' == ht.root.right.key);
-        assertTrue('c' == ht.root.left.left.key);
-        assertTrue('b' == ht.root.left.right.key);
+        assertEquals(7, ht.root.priority);
+        assertEquals(3, ht.root.left.priority);
+        assertEquals(4, ht.root.right.priority);
+        assertEquals(1, ht.root.left.left.priority);
+        assertEquals(2, ht.root.left.right.priority);
+        assertEquals('a', ht.root.right.key);
+        assertEquals('c', ht.root.left.left.key);
+        assertEquals('b', ht.root.left.right.key);
     }
 
     @Test
@@ -499,21 +497,21 @@ public class Testing {
     @Test
     public void catInHat() {
         HuffmanTree ht = new HuffmanTree(new FrequencyTable("THE CAT IN THE HAT"));
-        assertTrue(18 == ht.root.priority);
-        assertTrue(8 == ht.root.left.priority);
-        assertTrue(10 == ht.root.right.priority);
-        assertTrue(4 == ht.root.left.left.priority);
-        assertTrue(4 == ht.root.left.right.priority);
-        assertTrue(2 == ht.root.left.right.left.priority);
-        assertTrue(2 == ht.root.left.right.right.priority);
-        assertTrue(1 == ht.root.left.right.right.left.priority);
-        assertTrue(1 == ht.root.left.right.right.right.priority);
-        assertTrue(4 == ht.root.right.left.priority);
-        assertTrue(6 == ht.root.right.right.priority);
-        assertTrue(3 == ht.root.right.right.left.priority);
-        assertTrue(3 == ht.root.right.right.right.priority);
-        assertTrue(1 == ht.root.right.right.right.left.priority);
-        assertTrue(2 == ht.root.right.right.right.right.priority);
+        assertEquals(18, ht.root.priority);
+        assertEquals(8, ht.root.left.priority);
+        assertEquals(10, ht.root.right.priority);
+        assertEquals(4, ht.root.left.left.priority);
+        assertEquals(4, ht.root.left.right.priority);
+        assertEquals(2, ht.root.left.right.left.priority);
+        assertEquals(2, ht.root.left.right.right.priority);
+        assertEquals(1, ht.root.left.right.right.left.priority);
+        assertEquals(1, ht.root.left.right.right.right.priority);
+        assertEquals(4, ht.root.right.left.priority);
+        assertEquals(6, ht.root.right.right.priority);
+        assertEquals(3, ht.root.right.right.left.priority);
+        assertEquals(3, ht.root.right.right.right.priority);
+        assertEquals(1, ht.root.right.right.right.left.priority);
+        assertEquals(2, ht.root.right.right.right.right.priority);
         assertEquals("10", ht.lookup('T'));
         assertEquals("110", ht.lookup('H'));
         assertEquals("010", ht.lookup('E'));
@@ -554,18 +552,18 @@ public class Testing {
         assertEquals("1101", book.encodeChar('e'));
         assertEquals("1100", book.encodeChar('f'));
         HuffmanTree ht = book.getHuffmanTree();
-        assertTrue('a' == ht.decodeChar("0"));
-        assertTrue('b' == ht.decodeChar("101"));
-        assertTrue('c' == ht.decodeChar("100"));
-        assertTrue('d' == ht.decodeChar("111"));
-        assertTrue('e' == ht.decodeChar("1101"));
-        assertTrue('f' == ht.decodeChar("1100"));
-        assertTrue('a' == ht.decodeChar("0101"));
-        assertTrue('b' == ht.decodeChar("101101001010"));
-        assertTrue('c' == ht.decodeChar("1001010101"));
-        assertTrue('d' == ht.decodeChar("111001010101"));
-        assertTrue('e' == ht.decodeChar("110100010101010"));
-        assertTrue('f' == ht.decodeChar("110000101010101010101001"));
+        assertEquals('a', ht.decodeChar("0"));
+        assertEquals('b', ht.decodeChar("101"));
+        assertEquals('c', ht.decodeChar("100"));
+        assertEquals('d', ht.decodeChar("111"));
+        assertEquals('e', ht.decodeChar("1101"));
+        assertEquals('f', ht.decodeChar("1100"));
+        assertEquals('a', ht.decodeChar("0101"));
+        assertEquals('b', ht.decodeChar("101101001010"));
+        assertEquals('c', ht.decodeChar("1001010101"));
+        assertEquals('d', ht.decodeChar("111001010101"));
+        assertEquals('e', ht.decodeChar("110100010101010"));
+        assertEquals('f', ht.decodeChar("110000101010101010101001"));
     }
 
     @Test

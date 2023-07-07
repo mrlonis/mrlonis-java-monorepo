@@ -36,8 +36,8 @@ public class ColorIterator implements Iterator {
     private int b;
 
     /**
-     * Represents whether this is this first time hasNext() has process. Is <code>true</code> if it is the first
-     * time hasNext() is called or if the r, g, and b values are all 0. Is <code>false</code> otherwise.
+     * Represents whether this is this first time hasNext() has process. Is <code>true</code> if it is the first time
+     * hasNext() is called or if the r, g, and b values are all 0. Is <code>false</code> otherwise.
      */
     private boolean initial;
 
@@ -45,7 +45,8 @@ public class ColorIterator implements Iterator {
      * Constructs a ColorIterator with a ColorTable parameter that will be stored in the Iterator instance variable
      * colorTable.
      *
-     * @param    colorTable    The ColorTable that has called for an Iterator.
+     * @param colorTable
+     *         The ColorTable that has called for an Iterator.
      */
     public ColorIterator(ColorTable colorTable) {
         this.initial = true;

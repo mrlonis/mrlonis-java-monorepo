@@ -15,6 +15,7 @@ public class BinarySearchTree<K> implements Tree<K> {
     protected Node root;
     protected int n;
     protected BiPredicate<K, K> lessThan;
+
     /**
      * Constructs an empty BST, where the data is to be organized according to the lessThan relation.
      */
@@ -291,22 +292,22 @@ public class BinarySearchTree<K> implements Tree<K> {
         printAllHelper(root);
         System.out.println("]");
     }
-	
+
 	/*
 	 * These methods are an adapted version from stackOverflow.com.
-	 * 
+	 *
 	 * I used this to visualize my tree during testing.
-	 * 
+	 *
 	 * I did not use this to plagiarize, simply used it as a visual aid. As
 	 * you can see above I have implemented my own toString() methods but
 	 * I did not copy a tree diagram and instead made it from scratch using
 	 * my own knowledge. Link to source will be below:
-	 * 
+	 *
 	 * Source: http://stackoverflow.com/questions/4965335/how-to-print-binary-tree-diagram
 	 * Answer from: Todd Davies
 	 * Answered on: Nov 26 2014
 	 * Last edited on: March 7th, 2015
-	
+
 	public String toString() {
 		return toStringHelper(new StringBuilder(), true, new StringBuilder(), this.root).toString();
 	}

@@ -161,8 +161,11 @@ public class ColorTable {
      * This method behaves differently depending on the ColorTable collision strategy and is thus named
      * collisionStrategySearch.
      *
-     * @param    hashVal            The Integer representation of a Color based on Util.pack().
-     * @param    hashLocation    Represents the ideal hashLocation for hashVal based on hashVal % this.capacity.
+     * @param hashVal
+     *         The Integer representation of a Color based on Util.pack().
+     * @param hashLocation
+     *         Represents the ideal hashLocation for hashVal based on hashVal % this.capacity.
+     *
      * @return The index hashVal is associated with.
      */
     private int collisionStrategySearch(int hashVal, int hashLocation) {
@@ -193,9 +196,10 @@ public class ColorTable {
      * Returns the frequency count associated with color. Colors that are not explicitly represented in the table are
      * assumed to be present with a count of zero. Uses Util.pack() as the hash function.
      *
-     * @return The frequency count of color.
+     * @param color
+     *         The Color that the method will return the frequency count of.
      *
-     * @param    color    The Color that the method will return the frequency count of.
+     * @return The frequency count of color.
      */
     public long get(Color color) {
         numCollisions = 0;
@@ -219,8 +223,8 @@ public class ColorTable {
      *
      * @param count
      *         The frequency count that will be associated with color in the ColorTable.
-     *
-     * @param    color    The Color that will be put into the ColorTable.
+     * @param color
+     *         The Color that will be put into the ColorTable.
      */
     public void put(Color color, long count) {
         if (count > 0) {
@@ -248,7 +252,8 @@ public class ColorTable {
      * Increments the frequency count associated with color. Colors that are not explicitly represented in the table are
      * assumed to be present with a count of zero.
      *
-     * @param    color    The Color that will be incremented in the ColorTable.
+     * @param color
+     *         The Color that will be incremented in the ColorTable.
      */
     public void increment(Color color) {
         numCollisions = 0;
@@ -302,7 +307,7 @@ public class ColorTable {
     /**
      * Returns true iff this table is empty.
      *
-     * @return    <code>true</code> if numOfAssoc equals 0 and <code>false</code> otherwise.
+     * @return <code>true</code> if numOfAssoc equals 0 and <code>false</code> otherwise.
      */
     public boolean isEmpty() {
         return this.numOfAssoc == 0;
@@ -366,7 +371,8 @@ public class ColorTable {
      * counts for each color in the color key space that exists in this ColorTable.
      *
      * @return An Iterator that marches through the color key space
-     * @see    ColorIterator
+     *
+     * @see ColorIterator
      */
     public Iterator iterator() {
         return new ColorIterator(this);
@@ -401,7 +407,9 @@ public class ColorTable {
     /**
      * Returns the frequency count of a color in the ColorTable at index i in the Association[] colorTable array.
      *
-     * @param    i    The desired index where the frequency count will be returned.
+     * @param i
+     *         The desired index where the frequency count will be returned.
+     *
      * @return The frequency count of the Association at index i in the Association[] colorTable array in this
      * ColorTable.
      */

@@ -34,8 +34,8 @@ class GUI extends JFrame {
         }
     }
 
-    private LineSegment sweepLine = null;
     private final List<LineSegment> world = new ArrayList<>();
+    private LineSegment sweepLine = null;
     private boolean showDetails;
 
     public GUI(int treeType) {

@@ -1,9 +1,9 @@
 package com.mrlonis;
 
+import twitter4j.TwitterException;
 import twitter4j.v1.Query;
 import twitter4j.v1.QueryResult;
 import twitter4j.v1.Status;
-import twitter4j.TwitterException;
 
 @SuppressWarnings("unused")
 
@@ -57,7 +57,7 @@ import twitter4j.TwitterException;
     public static void sendTweet(String message, boolean forReal) {
         message += " " + Constants.HASHTAG;
         if (!forReal) {
-            System.out.println(String.format("Tweet = %s", message));
+            System.out.printf("Tweet = %s%n", message);
         } else {
             try {
                 Constants.TWITTER.v1().tweets().updateStatus(message);
@@ -73,7 +73,7 @@ import twitter4j.TwitterException;
      */
     public static void tweetsAbout(String subject, boolean forReal) {
         if (!forReal) {
-            System.out.println(String.format("tweetsAbout(\"%s\", %b);", subject, forReal));
+            System.out.printf("tweetsAbout(\"%s\", %b);%n", subject, forReal);
         } else {
             Query query = Query.of(subject);
             /*
@@ -101,12 +101,12 @@ import twitter4j.TwitterException;
 
     public static void favoriteWord(String handle, boolean forReal) {
         if (!forReal) {
-            System.out.println(String.format("favoriteWord(\"%s\", %b);", handle, forReal));
+            System.out.printf("favoriteWord(\"%s\", %b);%n", handle, forReal);
         } else {
             PopularityBot bot = new PopularityBot(handle, 2000);
-            System.out.println(String.format(
-                    "The most common word in the last %d tweets from @%s is: %s\n" + "It appears %d times.\n",
-                    bot.getNumTweets(), handle, bot.getMostPopularWord(), bot.getFrequencyOfMostPopularWord()));
+            System.out.printf(
+                    "The most common word in the last %d tweets from @%s is: %s\n" + "It appears %d times.\n%n",
+                    bot.getNumTweets(), handle, bot.getMostPopularWord(), bot.getFrequencyOfMostPopularWord());
         }
     }
 }

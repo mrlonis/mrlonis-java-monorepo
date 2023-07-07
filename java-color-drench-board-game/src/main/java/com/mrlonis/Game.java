@@ -48,7 +48,7 @@ public class Game {
 
         if (args.length > 0) {
             System.out.println("Printing Args");
-            for (String arg: args) {
+            for (String arg : args) {
                 System.out.println(arg);
             }
 

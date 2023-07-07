@@ -26,7 +26,7 @@ public class Testing {
      * Start with this test. Make appropriate changes to BinarySearchTree.Node.
      */
     @Test
-     public void nodeProperties() {
+    public void nodeProperties() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         assertTrue(bst.isEmpty());
         BinarySearchTree<Integer>.Node p;
