@@ -1,4 +1,5 @@
 # Folders
+modules
 sonarlint
 # Files
 aws.xml
@@ -6,6 +7,7 @@ compiler.xml
 gradle.xml
 jarRepositories.xml
 misc.xml
+modules.xml
 uiDesigner.xml
 vcs.xml
 workspace.xml
