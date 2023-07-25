@@ -10,30 +10,27 @@ import java.util.PriorityQueue;
 
 @SuppressWarnings("unused")
 
-/**
+/*
  * Most of the work for this project involves implementing the connectAllWires()
  * method in this class. Feel free to create any helper methods that you deem
  * necessary.
- *
+ * </p>
  * Your goal is to come up with an efficient algorithm that will find a layout
  * that connects all the wires (if one exists) while attempting to minimize the
  * overall wire length.
  *
  * @author Matthew Lonis (mrlonis)
- */ public class PathFinder {
+ */
 
-    /**
-     * TODO
-     * <p>
-     * Returns the sum of the lengths of all non-null paths in the given layout.
-     */
+public class PathFinder {
+
+    // Returns the sum of the lengths of all non-null paths in the given layout.
     public static int totalWireUsage;
 
     /**
-     * TODO
-     * <p>
-     * Lays out a path connecting each wire on the chip, and then returns a map that associates a wire id numbers to the paths corresponding to the connected wires on the grid. If
-     * it is not possible to connect the end points of a wire, then there should be no association for the wire id# in the result.
+     * Lays out a path connecting each wire on the chip, and then returns a map that associates a wire id numbers to the
+     * paths corresponding to the connected wires on the grid. If it is not possible to connect the end points of a
+     * wire, then there should be no association for the wire id# in the result.
      */
     public static Map<Integer, Path> connectAllWires(Chip chip) {
         Map<Integer, Path> ans = new HashMap<>();
@@ -174,17 +171,11 @@ import java.util.PriorityQueue;
      * circumstances, such as the wire being unable to connect due to obstacles, null is returned.
      */
     public static Pair wireProcessing(Wire wire, boolean[][] visited, Chip chip, String wildCard) {
-        /**
-         * Start of local variable declarations.
-         */
-        /*
-         * The wire's from coordinate.
-         */
+        // Start of local variable declarations.
+        // The wire's from coordinate.
         Coord from = wire.from;
 
-        /*
-         * The wire's to coordinate.
-         */
+        // The wire's to coordinate.
         Coord to = wire.to;
 
         /*
@@ -193,9 +184,7 @@ import java.util.PriorityQueue;
          */
         String firstDir = "";
 
-        /*
-         * The path representing the coordinates that will connect this wire.
-         */
+        //  The path representing the coordinates that will connect this wire.
         Path path = new Path(wire);
 
         /*
@@ -204,14 +193,10 @@ import java.util.PriorityQueue;
          */
         int numberOfIterations = 0;
 
-        /*
-         * The grid that represents this chip.
-         */
+        //  The grid that represents this chip.
         Map<Coord, Integer> grid = chip.grid;
 
-        /*
-         * The dimension of the given chip.
-         */
+        //  The dimension of the given chip.
         Dimension dim = chip.dim;
 
         /*
@@ -221,9 +206,7 @@ import java.util.PriorityQueue;
          */
         int backtracks = 0;
 
-        /**
-         * Start of actual PathFinding.
-         */
+        // Start of actual PathFinding.
         while (!from.equals(to) && backtracks < 4) {
             Map<String, Coord> neigh = neighbors(from, to, visited, dim);
             int i = path.size();
@@ -392,9 +375,7 @@ import java.util.PriorityQueue;
                     }
                 }
             } else if (potentialAdvances.isEmpty()) {
-                /*
-                 * Process neighbors for advancement. 2nd Heuristic
-                 */
+                //  Process neighbors for advancement. 2nd Heuristic
                 int sep = Integer.MAX_VALUE;
                 for (Entry<String, Coord> e : neigh.entrySet()) {
                     Coord cor = e.getValue();
@@ -463,7 +444,6 @@ import java.util.PriorityQueue;
                         }
                     }
                 }
-
             }
 
             path.add(advance);
@@ -485,21 +465,11 @@ import java.util.PriorityQueue;
         }
     }
 
-    /**
-     * @param from
-     * @param to
-     * @param visited
-     * @param dim
-     *
-     * @return
-     */
     public static Map<String, Coord> neighbors(Coord from, Coord to, boolean[][] visited, Dimension dim) {
         Map<String, Coord> neigh = from.neighborsMap(dim);
         Map<String, Coord> temporaryNeighbors = new HashMap<>();
 
-        /*
-         * Figure out what neighbors to not consider.
-         */
+        //  Figure out what neighbors to not consider.
         for (Entry<String, Coord> fromsNeighbor : neigh.entrySet()) {
             boolean tf = true;
             String dir = fromsNeighbor.getKey();
