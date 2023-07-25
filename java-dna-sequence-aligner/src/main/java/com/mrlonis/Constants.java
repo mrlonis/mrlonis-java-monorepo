@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * There's nothing for you to do here. However, feel free to change colors and sizes, if you are so moved.
