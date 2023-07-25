@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
