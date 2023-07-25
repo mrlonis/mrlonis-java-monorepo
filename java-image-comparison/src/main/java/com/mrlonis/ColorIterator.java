@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * This class represents an iterator that returns all the colors in a color key space based on a certain bits per
