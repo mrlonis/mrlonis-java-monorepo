@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -288,6 +288,7 @@ import java.util.PriorityQueue;
                         for (Coord coord : path) {
                             if (!cor.equals(to) && !cor.equals(from)) {
                                 visited[cor.y][cor.x] = false;
+                                break;
                             }
                         }
 
@@ -511,6 +512,7 @@ import java.util.PriorityQueue;
             for (Coord secondNeighbor : cor.neighbors(dim)) {
                 if (!visited[secondNeighbor.y][secondNeighbor.x] || secondNeighbor.equals(to)) {
                     tf = false;
+                    break;
                 }
             }
 

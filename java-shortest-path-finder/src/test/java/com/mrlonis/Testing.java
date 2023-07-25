@@ -2,7 +2,7 @@ package com.mrlonis;
 
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.io.File;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -26,8 +26,7 @@ public class Testing {
      * Runs the benchmarks on all filenames starting with the give prefix.
      */
     public static void runBenchmarksFor(String prefix) {
-        System.out.println(
-                String.format("Routing chips %s/%s*%s\n", Constants.INPUTS_FOLDER, prefix, Constants.EXTENSION));
+        System.out.printf("Routing chips %s/%s*%s\n%n", Constants.INPUTS_FOLDER, prefix, Constants.EXTENSION);
         File folder = new File(Constants.INPUTS_FOLDER);
         for (File file : folder.listFiles()) {
             if (file.isFile() && file.getName().startsWith(prefix) && file.getName().endsWith(Constants.EXTENSION)) {
@@ -66,11 +65,11 @@ public class Testing {
             if (path != null) {
                 Coord start = path.get(0), end = path.get(path.size() - 1);
                 if (!start.equals(wires.get(i - 1).from)) {
-                    System.out.println(String.format(msg, "start", i, start, wires.get(i - 1).from));
+                    System.out.printf((msg) + "%n", "start", i, start, wires.get(i - 1).from);
                     return false;
                 }
                 if (!end.equals(wires.get(i - 1).to)) {
-                    System.out.println(String.format(msg, "end", i, start, wires.get(i - 1).to));
+                    System.out.printf((msg) + "%n", "end", i, start, wires.get(i - 1).to);
                     return false;
                 }
                 Set<Coord> used = new HashSet<>();

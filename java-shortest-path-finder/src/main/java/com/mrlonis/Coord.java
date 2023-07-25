@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -169,8 +169,7 @@ public class Coord implements Comparable<Coord> {
      * Returns true iff the (x,y)-coordinates of the given object match this Coord's (x,y)-coordinates.
      */
     public boolean equals(Object obj) {
-        if (obj instanceof Coord) {
-            Coord that = (Coord) obj;
+        if (obj instanceof Coord that) {
             return that.x == this.x && that.y == this.y;
         }
         return false;

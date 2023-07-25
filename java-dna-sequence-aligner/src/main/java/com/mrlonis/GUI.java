@@ -1,7 +1,23 @@
 package com.mrlonis;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.Serial;
 
@@ -76,7 +92,7 @@ public class GUI extends JFrame {
                         // chars from y
                         cell.setFont(charFont);
                         cell.setForeground(Constants.NUCLEOTIDE_COLOR);
-                        cell.setText((row == 0 ? y.charAt(col) : x.charAt(row)) + "");
+                        cell.setText(String.valueOf(row == 0 ? y.charAt(col) : x.charAt(row)));
                         cell.setComponentPopupMenu(new ACTG(cell, row, col));
                         if (row > 1) {
                             cell.setToolTipText("<html>x<sub>" + (row - 2) + "</sub></html>");
@@ -175,7 +191,7 @@ public class GUI extends JFrame {
                         cell.setBackground(Constants.PATH_COLOR);
                     }
                     if (numRows <= Constants.MAX_CELLS && numCols <= Constants.MAX_CELLS) {
-                        cell.setText(result.getScore() + "");
+                        cell.setText(String.valueOf(result.getScore()));
                     }
                 }
             }

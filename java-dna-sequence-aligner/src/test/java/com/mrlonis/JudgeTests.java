@@ -323,7 +323,7 @@ public class JudgeTests {
         assertTrue(sa.getResult(5, 5).onPath());
         int[][] expectedScores =
                 {{0, -1, -2, -3, -4, -5}, {-1, -2, -3, -4, -5, -6}, {-2, -3, -4, -1, -2, -3}, {-3, -4, -5, -2, -3, -4},
-                        {-4, -1, -2, -3, 0, -1}, {-5, -2, -3, 0, -1, -2},};
+                 {-4, -1, -2, -3, 0, -1}, {-5, -2, -3, 0, -1, -2},};
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 assertEquals(expectedScores[i][j], sa.getResult(i, j).getScore());

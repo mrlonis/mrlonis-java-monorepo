@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author Matthew Lonis
@@ -69,7 +69,8 @@ public class Driver {
                 for (int bitsPerChannel = 1; bitsPerChannel <= 8; bitsPerChannel++) {
                     numCollisions = 0;
                     System.out.printf("   %d: %.2f %d%n", bitsPerChannel,
-                            similarity(paintings[x].get(), paintings[y].get(), bitsPerChannel), numCollisions);
+                                      similarity(paintings[x].get(), paintings[y].get(), bitsPerChannel),
+                                      numCollisions);
                 }
                 System.out.println();
             }
@@ -92,7 +93,7 @@ public class Driver {
         long numBlackStarryCT = starryCT.get(Color.BLACK);
         System.out.println(
                 "Number of Black pixels in vangoah Starry Night image at 2 bits per channel: " + numBlackStarryCT +
-                        "\n");
+                "\n");
         Image christina = Painting.CHRISTINAS_WORLD.get();
         System.out.println("It looks like all three test images were successfully loaded!");
         System.out.println("mona's dimensions are " + mona.getWidth() + " x " + mona.getHeight());

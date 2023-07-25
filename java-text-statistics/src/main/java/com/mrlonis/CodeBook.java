@@ -15,9 +15,9 @@ import java.util.HashMap;
  */
 
 public class CodeBook {
-    private HashMap<Character, String> book = new HashMap<>();
-    private HuffmanTree ht;
-    private FrequencyTable freqs;
+    private final HashMap<Character, String> book = new HashMap<>();
+    private final HuffmanTree ht;
+    private final FrequencyTable freqs;
     private int n = 1;
 
     /**
@@ -28,7 +28,8 @@ public class CodeBook {
         String alpha = "abcdefghijklmnopqrstuvwxyz";
         double[] probs =
                 new double[]{11.602, 4.702, 3.511, 2.670, 2.007, 3.779, 1.950, 7.232, 6.286, 0.597, 0.590, 2.705, 4.383,
-                        2.365, 6.264, 2.545, 0.173, 1.653, 7.755, 16.671, 1.487, 0.649, 6.753, 0.017, 1.620, 0.034,};
+                             2.365, 6.264, 2.545, 0.173, 1.653, 7.755, 16.671, 1.487, 0.649, 6.753, 0.017, 1.620,
+                             0.034,};
         for (int i = 0; i < alpha.length(); i++) {
             freqs.put(alpha.charAt(i), (int) (probs[i] * 1000));
         }

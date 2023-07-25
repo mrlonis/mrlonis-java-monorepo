@@ -46,7 +46,7 @@ import twitter4j.v1.Status;
          * tweeted
          */
         for (String friend : new String[]{"taylorswift13", "billnye", "nasa", "realdonaldtrump", "mike_pence",
-                "kenzi_day", "PlayOverwatch", "THEUALIFESTYLE"}) {
+                                          "kenzi_day", "PlayOverwatch", "THEUALIFESTYLE"}) {
             favoriteWord(friend, true);
         }
     }

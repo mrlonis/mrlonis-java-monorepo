@@ -25,9 +25,11 @@ public class Testing {
         assertEquals(expected, ansKMP.pos);
         Result ansBoyerMoore = StringMatch.matchBoyerMoore(pattern, text);
         assertEquals(expected, ansBoyerMoore.pos);
-        System.out.println(String.format("%5d %5d %5d : %s", ansNaive.comps, ansKMP.comps, ansBoyerMoore.comps,
-                (ansNaive.comps < ansKMP.comps && ansNaive.comps < ansBoyerMoore.comps) ? "Naive" :
-                        (ansKMP.comps < ansNaive.comps && ansKMP.comps < ansBoyerMoore.comps) ? "KMP" : "Boyer-Moore"));
+        System.out.printf("%5d %5d %5d : %s%n", ansNaive.comps, ansKMP.comps, ansBoyerMoore.comps,
+                                         (ansNaive.comps < ansKMP.comps && ansNaive.comps < ansBoyerMoore.comps) ?
+                                         "Naive" :
+                                         (ansKMP.comps < ansNaive.comps && ansKMP.comps < ansBoyerMoore.comps) ? "KMP" :
+                                         "Boyer-Moore");
     }
 
     private static String makeRandomPattern() {
@@ -126,7 +128,7 @@ public class Testing {
         String text = "AAAAAAAAABAAAAAAAAAB";
         assertEquals(20, text.length());
         Result[] results = new Result[]{new Result(0, 4), new Result(9, 13), new Result(6, 28), new Result(-1, 62),
-                new Result(-1, 35),};
+                                        new Result(-1, 35),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchNaive(pat, text);
@@ -158,7 +160,7 @@ public class Testing {
         String text = "00000000000000000000";
         assertEquals(20, text.length());
         Result[] results = new Result[]{new Result(0, 5), new Result(-1, 16), new Result(-1, 64), new Result(-1, 16),
-                new Result(-1, 16),};
+                                        new Result(-1, 16),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchNaive(pat, text);
@@ -182,7 +184,7 @@ public class Testing {
         int i = 0;
         for (String pat : pats) {
             int ans = StringMatch.buildKMP(pat, flinks[i]);
-            assertTrue(Arrays.equals(results[i], flinks[i]));
+            assertArrayEquals(results[i], flinks[i]);
             assertEquals(comps[i], ans);
             i++;
         }
@@ -192,13 +194,13 @@ public class Testing {
     public void lec13bBuildKMP() {
         String[] pats = new String[]{"AABC", "ABCDE", "AABAACAABABA", "ABRACADABRA",};
         int[][] flinks = new int[][]{{-1, 0, 1, 0, 0}, {-1, 0, 0, 0, 0, 0}, {-1, 0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 0, 1},
-                {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
+                                     {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
         int[][] results = new int[][]{new int[5], new int[6], new int[13], new int[12]};
         int[] comps = new int[]{4, 4, 16, 12};
         int i = 0;
         for (String pat : pats) {
             int res = StringMatch.buildKMP(pat, results[i]);
-            assertTrue(Arrays.equals(flinks[i], results[i]));
+            assertArrayEquals(flinks[i], results[i]);
             assertEquals(comps[i], res);
             i++;
         }
@@ -214,12 +216,12 @@ public class Testing {
 
         int[][] flinkResults =
                 new int[][]{{-1, 0, 1, 2, 3, 4}, {-1, 0, 1, 2, 3, 4}, {-1, 0, 1, 2, 0, 0}, {-1, 0, 0, 1, 2, 0},
-                        {-1, 0, 0, 0, 0, 0}};
+                            {-1, 0, 0, 0, 0, 0}};
 
         int i = 0;
         for (String pat : pats) {
             int ans = StringMatch.buildKMP(pat, flinks[i]);
-            assertTrue(Arrays.equals(flinkResults[i], flinks[i]));
+            assertArrayEquals(flinkResults[i], flinks[i]);
             assertEquals(comps[i], ans);
             i++;
         }
@@ -231,7 +233,7 @@ public class Testing {
         String text = "AAAAAAAAABAAAAAAAAAB";
         assertEquals(20, text.length());
         Result[] results = new Result[]{new Result(0, 7), new Result(9, 16), new Result(6, 21), new Result(-1, 43),
-                new Result(-1, 40),};
+                                        new Result(-1, 40),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchKMP(pat, text);
@@ -245,7 +247,7 @@ public class Testing {
     public void lec13bKMP() {
         String[] pats = new String[]{"AABC", "ABCDE", "AABAACAABABA", "ABRACADABRA",};
         int[][] flinks = new int[][]{{-1, 0, 1, 0, 0}, {-1, 0, 0, 0, 0, 0}, {-1, 0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 0, 1},
-                {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
+                                     {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
         String text = "AAAAAABRACADABAAAAAAAAAAAAAAAAAAAAAAABCAAAAAAAAAAABAABAAAAAAAAAAAAAAA";
         assertEquals(69, text.length());
         Result[] results =
@@ -265,7 +267,7 @@ public class Testing {
         String text = "00000000000000000000";
         assertEquals(20, text.length());
         Result[] results = new Result[]{new Result(0, 9), new Result(-1, 24), new Result(-1, 43), new Result(-1, 25),
-                new Result(-1, 24),};
+                                        new Result(-1, 24),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchKMP(pat, text);
@@ -279,12 +281,12 @@ public class Testing {
     public void smallMachines() {
         String[] pats =
                 new String[]{"", "A", "AB", "AA", "AAAA", "BAAA", "AAAB", "AAAC", "ABAB", "ABCD", "ABBA", "AABC",
-                        "ABAAB", "AABAACAABABA", "ABRACADABRA",};
+                             "ABAAB", "AABAACAABABA", "ABRACADABRA",};
         int[][] flinks =
                 new int[][]{{-1}, {-1, 0}, {-1, 0, 0}, {-1, 0, 1}, {-1, 0, 1, 2, 3}, {-1, 0, 0, 0, 0}, {-1, 0, 1, 2, 0},
-                        {-1, 0, 1, 2, 0}, {-1, 0, 0, 1, 2}, {-1, 0, 0, 0, 0}, {-1, 0, 0, 0, 1}, {-1, 0, 1, 0, 0},
-                        {-1, 0, 0, 1, 1, 2}, {-1, 0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 0, 1},
-                        {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
+                            {-1, 0, 1, 2, 0}, {-1, 0, 0, 1, 2}, {-1, 0, 0, 0, 0}, {-1, 0, 0, 0, 1}, {-1, 0, 1, 0, 0},
+                            {-1, 0, 0, 1, 1, 2}, {-1, 0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 0, 1},
+                            {-1, 0, 0, 0, 1, 0, 1, 0, 1, 2, 3, 4},};
         int[] comps = new int[]{0, 0, 1, 1, 3, 3, 5, 5, 3, 3, 3, 4, 5, 16, 12};
         int i = 0;
         for (String pat : pats) {
@@ -301,34 +303,34 @@ public class Testing {
 
         int[][] delta1s =
                 new int[][]{new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE],
-                        new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE]};
+                            new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE]};
 
         int[][] results = new int[][]{
                 {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
                 {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0,
-                        3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 3, 4,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
                 {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
-                        0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 4,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
                 {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
-                        4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 0,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
                 {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
-                        0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}};
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 4,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}};
 
         int i = 0;
         for (String pat : pats) {
             StringMatch.buildDelta1(pat, delta1s[i]);
-            assertTrue(Arrays.equals(results[i], delta1s[i]));
+            assertArrayEquals(results[i], delta1s[i]);
             i++;
         }
     }
@@ -339,34 +341,32 @@ public class Testing {
 
         int[][] delta1s =
                 new int[][]{new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE],
-                        new int[Constants.SIGMA_SIZE]};
+                            new int[Constants.SIGMA_SIZE]};
 
         int[][] results = new int[][]{
                 {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2,
-                        1, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-                        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 1, 0,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
                 {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4,
-                        3, 2, 1, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 3, 2,
+                 1, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
                 {12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-                        12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-                        12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 0, 1, 6, 12, 12, 12, 12, 12, 12, 12,
-                        12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-                        12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-                        12, 12, 12, 12, 12},
+                 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+                 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 0, 1, 6, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+                 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
+                 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12},
                 {11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
-                        11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
-                        11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 0, 2, 6, 4, 11, 11, 11, 11, 11, 11,
-                        11, 11, 11, 11, 11, 11, 11, 1, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
-                        11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
-                        11, 11, 11, 11, 11}};
+                 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+                 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 0, 2, 6, 4, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+                 11, 11, 11, 1, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+                 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11}};
 
         int i = 0;
         for (String pat : pats) {
             StringMatch.buildDelta1(pat, delta1s[i]);
-            assertTrue(Arrays.equals(results[i], delta1s[i]));
+            assertArrayEquals(results[i], delta1s[i]);
             i++;
         }
     }
@@ -377,34 +377,34 @@ public class Testing {
 
         int[][] delta1s =
                 new int[][]{new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE],
-                        new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE]};
+                            new int[Constants.SIGMA_SIZE], new int[Constants.SIGMA_SIZE]};
 
         int[][] results = new int[][]{
                 {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
                 {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
                 {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
                 {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
                 {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-                        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}};
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+                 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5}};
 
         int i = 0;
         for (String pat : pats) {
             StringMatch.buildDelta1(pat, delta1s[i]);
-            assertTrue(Arrays.equals(results[i], delta1s[i]));
+            assertArrayEquals(results[i], delta1s[i]);
             i++;
         }
     }
@@ -415,7 +415,7 @@ public class Testing {
         String text = "AAAAAAAAABAAAAAAAAAB";
         assertEquals(20, text.length());
         Result[] results = new Result[]{new Result(0, 4), new Result(9, 29), new Result(6, 10), new Result(-1, 14),
-                new Result(-1, 21),};
+                                        new Result(-1, 21),};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchBoyerMoore(pat, text);
@@ -446,7 +446,7 @@ public class Testing {
         String text = "00000000000000000000";
         assertEquals(20, text.length());
         Result[] results = new Result[]{new Result(0, 5), new Result(-1, 4), new Result(-1, 8), new Result(-1, 48),
-                new Result(-1, 80)};
+                                        new Result(-1, 80)};
         int i = 0;
         for (String pat : pats) {
             Result res = StringMatch.matchBoyerMoore(pat, text);
@@ -479,7 +479,7 @@ public class Testing {
         assertEquals(result.length, 21);
         int count = StringMatch.buildKMP(pattern, flink);
         assertEquals(ansCount, count);
-        assertTrue(Arrays.equals(flink, result));
+        assertArrayEquals(flink, result);
     }
 
     @Test
@@ -500,16 +500,16 @@ public class Testing {
         int[] flink = new int[Constants.SIGMA_SIZE];
         int[] result =
                 new int[]{20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-                        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-                        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 1, 2, 0, 7, 12, 20, 20,
-                        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 3, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-                        20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-                        20, 20, 20, 20, 20, 20, 20, 20};
+                          20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+                          20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 1, 2, 0, 7, 12,
+                          20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 3, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+                          20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+                          20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20};
         assertEquals(pattern.length(), 20);
         assertEquals(flink.length, 128);
         assertEquals(result.length, 128);
         StringMatch.buildDelta1(pattern, flink);
-        assertTrue(Arrays.equals(flink, result));
+        assertArrayEquals(flink, result);
     }
 
     @Test
@@ -592,7 +592,7 @@ public class Testing {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore

@@ -951,7 +951,7 @@ public class Testing {
         }
         K key = p.data;
         return allLessThan(p.left, key, lessThan) && allGreaterThan(p.right, key, lessThan) &&
-                verifyOrderingProperty(p.left, lessThan) && verifyOrderingProperty(p.right, lessThan);
+               verifyOrderingProperty(p.left, lessThan) && verifyOrderingProperty(p.right, lessThan);
     }
 
     private <K> boolean allGreaterThan(BinarySearchTree<K>.Node p, K x, BiPredicate<K, K> lessThan) {

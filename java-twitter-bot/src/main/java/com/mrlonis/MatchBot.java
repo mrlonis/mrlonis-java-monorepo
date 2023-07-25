@@ -40,7 +40,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -99,7 +99,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -154,7 +154,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -202,7 +202,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -250,7 +250,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -298,7 +298,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -353,7 +353,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -408,7 +408,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -463,7 +463,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -518,7 +518,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -573,7 +573,7 @@ public class MatchBot extends TwitterBot {
          * Print out total comparisons for each algorithm.
          */
         System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Boyer-Moore comps = " +
-                compsBoyerMoore);
+                           compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore

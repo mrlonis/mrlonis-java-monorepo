@@ -542,7 +542,7 @@ public class Testing {
     public void simpleCodeBook() {
         String text =
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbb" + "ccccccccccc" + "dddddddddddddddd" +
-                        "eeeeeeeee" + "fffff";
+                "eeeeeeeee" + "fffff";
         CodeBook book = new CodeBook(text);
         assertEquals(6, book.size());
         assertEquals("0", book.encodeChar('a'));
@@ -616,7 +616,7 @@ public class Testing {
     public void smallZips() {
         String text =
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbb" + "ccccccccccc" + "dddddddddddddddd" +
-                        "eeeeeeeee" + "fffff";
+                "eeeeeeeee" + "fffff";
         Zipper zipper = new Zipper(new CodeBook(text));
         assertEquals("0", zipper.encode("a"));
         assertEquals("101", zipper.encode("b"));

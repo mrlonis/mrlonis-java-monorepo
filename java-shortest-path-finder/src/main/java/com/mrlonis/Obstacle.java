@@ -36,7 +36,7 @@ public class Obstacle {
      */
     public boolean contains(Coord coord) {
         return coord.x >= this.upperLeft.x && coord.y >= this.upperLeft.y && coord.x <= this.lowerRight.x &&
-                coord.y <= this.lowerRight.y;
+               coord.y <= this.lowerRight.y;
     }
 
     /**
