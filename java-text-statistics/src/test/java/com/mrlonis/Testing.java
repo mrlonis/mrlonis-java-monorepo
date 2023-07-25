@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-/**
+/*
  * To test with JUnit, add JUnit to your project. To do this, go to Project->Properties. Select "Java Build Path".
  * Select the "Libraries" tab and "Add Library". Select JUnit, then JUnit 4.
  *
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Testing {
+class Testing {
 
     /**********************************************************************************
      * When you've reached this point, run the Driver and start writing your
@@ -57,7 +57,7 @@ public class Testing {
      */
 
     @Test
-    public void emptyFreqTable() {
+    void emptyFreqTable() {
         FrequencyTable ft = new FrequencyTable();
         assertEquals(0, ft.size());
         assertTrue(ft.isEmpty());
@@ -67,7 +67,7 @@ public class Testing {
     }
 
     @Test
-    public void smallFreqTable() {
+    void smallFreqTable() {
         FrequencyTable ft = new FrequencyTable("abacca");
         assertEquals(3, ft.size());
         assertFalse(ft.isEmpty());
@@ -77,7 +77,7 @@ public class Testing {
     }
 
     @Test
-    public void mediumFreqTable() {
+    void mediumFreqTable() {
         FrequencyTable ft = new FrequencyTable("a");
         assertEquals(1, (int) ft.get('a'));
         ft = new FrequencyTable("aaaaaaaa");
@@ -95,7 +95,7 @@ public class Testing {
      **********************************************************************************/
 
     @Test
-    public void bigFreqTable() {
+    void bigFreqTable() {
         String alpha = "abcdefghijklmnopqrstuvwxyz";
         alpha += alpha.toUpperCase();
         Random gen = new Random();
@@ -125,8 +125,8 @@ public class Testing {
     }
 
     @Test
-    public void heapUtils() {
-        /**
+    void heapUtils() {
+        /*
          * 0 / \ 1 2 / \ / 3 4 5
          */
         assertEquals(1, Heap.getLeft(0));
@@ -141,11 +141,11 @@ public class Testing {
         assertEquals(2, Heap.getParent(5));
     }
 
-    /**
+    /*
      * Testing Heap.swap()
      */
     @Test
-    public void swapTest() {
+    void swapTest() {
         Heap<Integer> heap = new Heap<>((x, y) -> y.compareTo(x));
         for (int i = 0; i < 2; i++) {
             heap.keys.add(i);
@@ -181,11 +181,11 @@ public class Testing {
         assertEquals((Integer) 4, heap.keys.get(5));
     }
 
-    /**
+    /*
      * Heap.siftDown() Testing
      */
     @Test
-    public void siftDownTest() {
+    void siftDownTest() {
         Heap<Integer> heap = new Heap<>((x, y) -> y.compareTo(x));
         for (int i = 0; i < 10; i++) {
             heap.keys.add(i);
@@ -228,11 +228,11 @@ public class Testing {
         assertEquals((Integer) 1, heap.keys.get(9));
     }
 
-    /**
+    /*
      * Heap.siftUp() Testing
      */
     @Test
-    public void siftUpTest() {
+    void siftUpTest() {
         Heap<Integer> heap = new Heap<>((x, y) -> x.compareTo(y));
         for (int i = 1; i < 11; i++) {
             heap.keys.add(i);
@@ -314,7 +314,7 @@ public class Testing {
     }
 
     @Test
-    public void smallMinHeap() {
+    void smallMinHeap() {
         Heap<Integer> heap = new Heap<>((x, y) -> x.compareTo(y));
         Comparator<Integer> comp = heap.comparator();
         assertTrue(comp.compare(2, 3) < 0);
@@ -369,7 +369,7 @@ public class Testing {
     }
 
     @Test
-    public void smallMaxHeap() {
+    void smallMaxHeap() {
         Heap<Integer> heap = new Heap<>((x, y) -> y.compareTo(x));
         heap.insert(1);
         heap.insert(2);
@@ -410,7 +410,7 @@ public class Testing {
     }
 
     @Test
-    public void heapOfStrings() {
+    void heapOfStrings() {
         // Shorter strings come first.
         Heap<String> heap = new Heap<>((s, t) -> s.length() - t.length());
         Comparator<String> comp = heap.comparator();
@@ -426,7 +426,7 @@ public class Testing {
     }
 
     @Test
-    public void mediumMinHeap() {
+    void mediumMinHeap() {
         Heap<Integer> heap = new Heap<>((x, y) -> x.compareTo(y));
         for (int x : new int[]{9, 3, 4, 7, 6, 8, 2, 1, 5, 10}) {
             heap.insert(x);
@@ -438,7 +438,7 @@ public class Testing {
     }
 
     @Test
-    public void heapFormation() {
+    void heapFormation() {
         Heap<Integer> heap = new Heap<>((x, y) -> y.compareTo(x));
         for (int x : new int[]{14, 18, 9, 3, 12, 4, 19, 7, 11, 6, 16, 8, 13, 2, 20, 1, 5, 10, 15, 17}) {
             heap.insert(x);
@@ -452,7 +452,7 @@ public class Testing {
     }
 
     @Test
-    public void smallHuff() {
+    void smallHuff() {
         FrequencyTable ft = new FrequencyTable("aaaabbc");
         assertEquals(4, (int) ft.get('a'));
         assertEquals(2, (int) ft.get('b'));
@@ -469,7 +469,7 @@ public class Testing {
     }
 
     @Test
-    public void lookupHuff() {
+    void lookupHuff() {
         HuffmanTree ht = new HuffmanTree(new FrequencyTable("aaaabbc"));
         assertEquals("1", ht.lookup('a'));
         assertEquals("01", ht.lookup('b'));
@@ -482,7 +482,7 @@ public class Testing {
     }
 
     @Test
-    public void decodeHuff() {
+    void decodeHuff() {
         HuffmanTree ht = new HuffmanTree(new FrequencyTable("aaaabbc"));
         assertEquals('a', ht.decodeChar("1"));
         assertEquals('b', ht.decodeChar("01"));
@@ -495,7 +495,7 @@ public class Testing {
     }
 
     @Test
-    public void catInHat() {
+    void catInHat() {
         HuffmanTree ht = new HuffmanTree(new FrequencyTable("THE CAT IN THE HAT"));
         assertEquals(18, ht.root.priority);
         assertEquals(8, ht.root.left.priority);
@@ -539,7 +539,7 @@ public class Testing {
     }
 
     @Test
-    public void simpleCodeBook() {
+    void simpleCodeBook() {
         String text =
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbb" + "ccccccccccc" + "dddddddddddddddd" +
                 "eeeeeeeee" + "fffff";
@@ -567,7 +567,7 @@ public class Testing {
     }
 
     @Test
-    public void notInCodeBook() {
+    void notInCodeBook() {
         CodeBook book = new CodeBook("a");
         try {
             book.encodeChar('b');
@@ -582,7 +582,7 @@ public class Testing {
     }
 
     @Test
-    public void englishCodeBook() {
+    void englishCodeBook() {
         CodeBook english = new CodeBook();
         assertEquals("010", english.encodeChar('a'));
         assertEquals("0010", english.encodeChar('b'));
@@ -613,7 +613,7 @@ public class Testing {
     }
 
     @Test
-    public void smallZips() {
+    void smallZips() {
         String text =
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbb" + "ccccccccccc" + "dddddddddddddddd" +
                 "eeeeeeeee" + "fffff";
@@ -666,7 +666,7 @@ public class Testing {
     }
 
     @Test
-    public void bigRandomZips() {
+    void bigRandomZips() {
         String text = makeUniformRandomText(10000);
         CodeBook book = new CodeBook(text);
         Zipper zipper = new Zipper(book);
