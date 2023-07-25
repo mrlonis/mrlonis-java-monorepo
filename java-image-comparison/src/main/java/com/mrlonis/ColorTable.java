@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * A ColorTable is a class that represents a dictionary of frequency counts, keyed on Color. It is a simplification of
