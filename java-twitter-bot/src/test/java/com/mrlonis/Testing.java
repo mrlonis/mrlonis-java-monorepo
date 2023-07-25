@@ -3,7 +3,6 @@ package com.mrlonis;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -26,10 +25,9 @@ public class Testing {
         Result ansBoyerMoore = StringMatch.matchBoyerMoore(pattern, text);
         assertEquals(expected, ansBoyerMoore.pos);
         System.out.printf("%5d %5d %5d : %s%n", ansNaive.comps, ansKMP.comps, ansBoyerMoore.comps,
-                                         (ansNaive.comps < ansKMP.comps && ansNaive.comps < ansBoyerMoore.comps) ?
-                                         "Naive" :
-                                         (ansKMP.comps < ansNaive.comps && ansKMP.comps < ansBoyerMoore.comps) ? "KMP" :
-                                         "Boyer-Moore");
+                          (ansNaive.comps < ansKMP.comps && ansNaive.comps < ansBoyerMoore.comps) ? "Naive" :
+                          (ansKMP.comps < ansNaive.comps && ansKMP.comps < ansBoyerMoore.comps) ? "KMP" :
+                          "Boyer-Moore");
     }
 
     private static String makeRandomPattern() {
