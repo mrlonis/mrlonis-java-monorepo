@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 
 /**
  * This is the main entry point for the application. When run, a GUI will appear showing the cache table for a pair of
