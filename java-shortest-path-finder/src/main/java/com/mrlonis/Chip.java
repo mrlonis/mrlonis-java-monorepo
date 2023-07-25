@@ -1,6 +1,6 @@
 package com.mrlonis;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
