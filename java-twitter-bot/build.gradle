@@ -1,10 +1,34 @@
 plugins {
+    id "base"
+    id "java"
+    id "idea"
     id "jacoco"
     id "io.freefair.lombok" version "${lombokPluginVersion}"
 }
 
+group = "com.mrlonis"
+version = "0.0.1-SNAPSHOT"
+
 base {
     archivesName = "java-twitter-bot"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -66,6 +90,16 @@ jacocoTestCoverageVerification {
     }
 
     mustRunAfter jacocoTestReport
+}
+
+tasks.named("test") {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.warnings = true
+    options.deprecation = true
+    options.compilerArgs << "-Xlint:unchecked"
 }
 
 check {
