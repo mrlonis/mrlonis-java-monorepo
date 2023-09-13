@@ -13,14 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * JUnit tests for all TODO methods.
+ * JUnit tests for all methods.
  *
  * @author Matthew Lonis
  */
-public class BoardTests {
+class BoardTests {
 
     @Test
-    public void testOnBoard() {
+    void testOnBoard() {
         assertFalse(new Coord(3, 4).onBoard(4));
         assertTrue(new Coord(3, 4).onBoard(5));
         assertFalse(new Coord(1, 8).onBoard(4));
@@ -32,7 +32,7 @@ public class BoardTests {
     }
 
     @Test
-    public void testNeighbors() {
+    void testNeighbors() {
         List<Coord> arrayList = new ArrayList<>();
         assertEquals(arrayList, new Coord(0, 0).neighbors(1));
 
@@ -73,7 +73,7 @@ public class BoardTests {
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         Coord someCoord = new Coord(0, 0);
         assertEquals(0, someCoord.hashCode());
         someCoord = new Coord(1, 1);

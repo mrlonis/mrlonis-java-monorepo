@@ -44,8 +44,6 @@ import java.util.Map;
     }
 
     /**
-     * TODO
-     * <p>
      * This method constructs a chip from a description in an input file. Most of this method is already written for you. You need to fill in the code to read the number of wires
      * and the description of each wire from the file. You are also responsible for creating and populating the wires instance variable (which will be used by the layout() method
      * to initialize the grid).
