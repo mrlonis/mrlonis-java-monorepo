@@ -6,11 +6,11 @@ plugins {
     id "io.freefair.lombok" version "${lombokPluginVersion}"
 }
 
-group = "com.mrlonis"
+group = 'com.mrlonis'
 version = "0.0.1-SNAPSHOT"
 
 base {
-    archivesName = "text-statistics"
+    archivesName = "random-workspace"
 }
 
 java {
@@ -48,6 +48,9 @@ def filesToExcludeFromCoverage = ["**/com/mrlonis/configuration/**",
 test {
     finalizedBy jacocoTestReport
     useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+    }
 }
 
 jacocoTestReport {

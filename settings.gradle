@@ -6,3 +6,4 @@ include "line-sweeper"
 include "shortest-path-finder"
 include "text-statistics"
 include "twitter-bot"
+include 'random-workspace'

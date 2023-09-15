@@ -34,9 +34,8 @@ repositories {
 dependencies {
     implementation "org.twitter4j:twitter4j-core:4.1.2"
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+    testImplementation platform("org.junit:junit-bom:${junitVersion}")
+    testImplementation "org.junit.jupiter:junit-jupiter"
 }
 
 jacoco {
