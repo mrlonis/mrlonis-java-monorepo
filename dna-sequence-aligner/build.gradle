@@ -10,7 +10,7 @@ group = "com.mrlonis"
 version = "0.0.1-SNAPSHOT"
 
 base {
-    archivesName = "java-dna-sequence-aligner"
+    archivesName = "dna-sequence-aligner"
 }
 
 java {
