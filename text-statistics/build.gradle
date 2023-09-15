@@ -10,7 +10,7 @@ group = "com.mrlonis"
 version = "0.0.1-SNAPSHOT"
 
 base {
-    archivesName = "java-twitter-bot"
+    archivesName = "text-statistics"
 }
 
 java {
@@ -32,8 +32,6 @@ repositories {
 }
 
 dependencies {
-    implementation "org.twitter4j:twitter4j-core:4.1.2"
-
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
