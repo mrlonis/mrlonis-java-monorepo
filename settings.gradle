@@ -1,7 +1,7 @@
 rootProject.name = "mrlonis-java-monorepo"
 include "color-drench-board-game"
 include "dna-sequence-aligner"
-include "java-image-comparison"
+include "image-comparison"
 include "java-line-sweeper"
 include "java-shortest-path-finder"
 include "java-text-statistics"
