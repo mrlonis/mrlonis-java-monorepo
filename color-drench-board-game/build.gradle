@@ -10,7 +10,7 @@ group = "com.mrlonis"
 version = "0.0.1-SNAPSHOT"
 
 base {
-    archivesName = "java-color-drench-board-game"
+    archivesName = "color-drench-board-game"
 }
 
 java {
