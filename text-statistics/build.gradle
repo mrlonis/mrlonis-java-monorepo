@@ -3,7 +3,7 @@ plugins {
     id "java"
     id "idea"
     id "jacoco"
-    id "io.freefair.lombok" version "${lombokPluginVersion}"
+    id "io.freefair.lombok" version "8.6"
 }
 
 group = "com.mrlonis"
@@ -32,12 +32,12 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform("org.junit:junit-bom:${junitVersion}")
+    testImplementation platform("org.junit:junit-bom:5.10.2")
     testImplementation "org.junit.jupiter:junit-jupiter"
 }
 
 jacoco {
-    toolVersion = "${jacocoVersion}"
+    toolVersion = "0.8.12"
 }
 def filesToExcludeFromCoverage = ["**/com/mrlonis/configuration/**",
                                   "**/com/mrlonis/controller/filters/**",

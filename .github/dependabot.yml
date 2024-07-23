@@ -10,7 +10,15 @@ updates:
     schedule:
       interval: 'daily'
   - package-ecosystem: "gradle" # See documentation for possible values
-    directory: "/" # Location of package manifests
+    directories:
+      - "/color-drench-board-game"
+      - "/dna-sequence-aligner"
+      - "/image-comparison"
+      - "/line-sweeper"
+      - "/random-workspace"
+      - "/shortest-path-finder"
+      - "/text-statistics"
+      - "twitter-bot"
     schedule:
       interval: "daily"
     allow:
