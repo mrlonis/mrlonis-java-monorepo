@@ -8,7 +8,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
   - package-ecosystem: "gradle" # See documentation for possible values
     directories:
       - "/color-drench-board-game"
@@ -20,7 +20,7 @@ updates:
       - "/text-statistics"
       - "twitter-bot"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     allow:
       - dependency-type: "all"
     open-pull-requests-limit: 99
