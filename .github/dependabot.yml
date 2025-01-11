@@ -11,6 +11,7 @@ updates:
       interval: "weekly"
   - package-ecosystem: "gradle" # See documentation for possible values
     directories:
+      - "/buildSrc"
       - "/color-drench-board-game"
       - "/dna-sequence-aligner"
       - "/image-comparison"
@@ -29,23 +30,23 @@ updates:
         applies-to: version-updates
         dependency-type: production
         update-types:
-          - 'patch'
-          - 'minor'
+          - "patch"
+          - "minor"
       production-security-updates:
         applies-to: security-updates
         dependency-type: production
         update-types:
-          - 'patch'
-          - 'minor'
+          - "patch"
+          - "minor"
       development-version-updates:
         applies-to: version-updates
         dependency-type: development
         update-types:
-          - 'patch'
-          - 'minor'
+          - "patch"
+          - "minor"
       development-security-updates:
         applies-to: security-updates
         dependency-type: development
         update-types:
-          - 'patch'
-          - 'minor'
+          - "patch"
+          - "minor"

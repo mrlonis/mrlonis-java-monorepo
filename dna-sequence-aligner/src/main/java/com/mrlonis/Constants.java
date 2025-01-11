@@ -2,9 +2,7 @@ package com.mrlonis;
 
 import java.awt.Color;
 
-/**
- * There's nothing for you to do here. However, feel free to change colors and sizes, if you are so moved.
- */
+/** There's nothing for you to do here. However, feel free to change colors and sizes, if you are so moved. */
 public class Constants {
 
     public static final String TITLE = "Project 5: DNA Sequence Alignment";

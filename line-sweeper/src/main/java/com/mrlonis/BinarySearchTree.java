@@ -9,16 +9,13 @@ import java.util.function.BiPredicate;
  *
  * @author mrlonis (Matthew Lonis)
  */
-
 public class BinarySearchTree<K> implements Tree<K> {
 
     protected Node root;
     protected int n;
     protected BiPredicate<K, K> lessThan;
 
-    /**
-     * Constructs an empty BST, where the data is to be organized according to the lessThan relation.
-     */
+    /** Constructs an empty BST, where the data is to be organized according to the lessThan relation. */
     public BinarySearchTree(BiPredicate<K, K> lessThan) {
         this.lessThan = lessThan;
     }
@@ -26,9 +23,7 @@ public class BinarySearchTree<K> implements Tree<K> {
     /**
      * Looks up the key in this tree and, if found, returns the (possibly dirty) location containing the key.
      *
-     * @param key
-     *         The data for the node to be searched for in this tree.
-     *
+     * @param key The data for the node to be searched for in this tree.
      * @return The Node that is found by searching this tree.
      */
     public Node search(K key) {
@@ -59,9 +54,7 @@ public class BinarySearchTree<K> implements Tree<K> {
         return root.height;
     }
 
-    /**
-     * Clears all the keys from this tree. Runs in O(1) time!
-     */
+    /** Clears all the keys from this tree. Runs in O(1) time! */
     public void clear() {
         n = 0;
         root = null;
@@ -80,15 +73,13 @@ public class BinarySearchTree<K> implements Tree<K> {
      * Inserts the given key into this BST, as a leaf, where the path to the leaf is determined by the predicate
      * provided to the tree at construction time. The parent pointer of the new node and the heights in all node along
      * the path to the root are adjusted accordingly.
-     * <p>
-     * Note: we assume that all keys are unique. Thus, if the given key is already present in the tree, nothing
+     *
+     * <p>Note: we assume that all keys are unique. Thus, if the given key is already present in the tree, nothing
      * happens.
-     * <p>
-     * Returns the location where the insert occurred (i.e., the leaf node containing the key).
      *
-     * @param key
-     *         The data for the node to be inserted into this tree.
+     * <p>Returns the location where the insert occurred (i.e., the leaf node containing the key).
      *
+     * @param key The data for the node to be inserted into this tree.
      * @return The location of the newly inserted Node.
      */
     public Node insert(K key) {
@@ -170,11 +161,8 @@ public class BinarySearchTree<K> implements Tree<K> {
     /**
      * Returns true iff the given key is in this BST.
      *
-     * @param key
-     *         The key to search for in this BST.
-     *
-     * @return <code>true</code> if it exists in this tree and
-     * <code>false</code> otherwise.
+     * @param key The key to search for in this BST.
+     * @return <code>true</code> if it exists in this tree and <code>false</code> otherwise.
      */
     public boolean contains(K key) {
         Node p = search(key);
@@ -185,8 +173,7 @@ public class BinarySearchTree<K> implements Tree<K> {
      * Removes the key from this BST. If the key is not in the tree, nothing happens. Implement the removal using lazy
      * deletion.
      *
-     * @param key
-     *         The key to be removed from this tree if it exists in this tree.
+     * @param key The key to be removed from this tree if it exists in this tree.
      */
     public void remove(K key) {
         if (root != null) {
@@ -200,9 +187,7 @@ public class BinarySearchTree<K> implements Tree<K> {
         }
     }
 
-    /**
-     * Clears out all dirty nodes from this BST.
-     */
+    /** Clears out all dirty nodes from this BST. */
     public void rebuild() {
         List<K> keys = this.keys();
         this.clear();
@@ -260,13 +245,10 @@ public class BinarySearchTree<K> implements Tree<K> {
     /**
      * Helper function for my toStrig() method.
      *
-     * @param p
-     *         The current node in this tree to print out and reference from.
-     * @param str
-     *         The current state of the StringBuilder
-     * @param level
-     *         The level in the tree the method is currently at. Used to identify how deep the Node is in the tree.
-     *         Level = to 1 is the Nodes Right below the root, level 2 is the Nodes below level 1, etc.
+     * @param p The current node in this tree to print out and reference from.
+     * @param str The current state of the StringBuilder
+     * @param level The level in the tree the method is currently at. Used to identify how deep the Node is in the tree.
+     *     Level = to 1 is the Nodes Right below the root, level 2 is the Nodes below level 1, etc.
      */
     public void toStringHelper(Node p, StringBuilder str, int level) {
         if (p != null) {
@@ -284,54 +266,50 @@ public class BinarySearchTree<K> implements Tree<K> {
         }
     }
 
-    /**
-     * Testing Method
-     */
+    /** Testing Method */
     public void printAll() {
         System.out.print("[");
         printAllHelper(root);
         System.out.println("]");
     }
 
-	/*
-	 * These methods are an adapted version from stackOverflow.com.
-	 *
-	 * I used this to visualize my tree during testing.
-	 *
-	 * I did not use this to plagiarize, simply used it as a visual aid. As
-	 * you can see above I have implemented my own toString() methods but
-	 * I did not copy a tree diagram and instead made it from scratch using
-	 * my own knowledge. Link to source will be below:
-	 *
-	 * Source: http://stackoverflow.com/questions/4965335/how-to-print-binary-tree-diagram
-	 * Answer from: Todd Davies
-	 * Answered on: Nov 26 2014
-	 * Last edited on: March 7th, 2015
+    /*
+     * These methods are an adapted version from stackOverflow.com.
+     *
+     * I used this to visualize my tree during testing.
+     *
+     * I did not use this to plagiarize, simply used it as a visual aid. As
+     * you can see above I have implemented my own toString() methods but
+     * I did not copy a tree diagram and instead made it from scratch using
+     * my own knowledge. Link to source will be below:
+     *
+     * Source: http://stackoverflow.com/questions/4965335/how-to-print-binary-tree-diagram
+     * Answer from: Todd Davies
+     * Answered on: Nov 26 2014
+     * Last edited on: March 7th, 2015
 
-	public String toString() {
-		return toStringHelper(new StringBuilder(), true, new StringBuilder(), this.root).toString();
-	}
+    public String toString() {
+    	return toStringHelper(new StringBuilder(), true, new StringBuilder(), this.root).toString();
+    }
 
-	public StringBuilder toStringHelper(StringBuilder prefix, boolean isTail, StringBuilder sb, Node curr) {
-		if (curr == null) {
-			return sb;
-		}
-		if (curr.right != null && !curr.right.dirty) {
-			toStringHelper(new StringBuilder().append(prefix).append(isTail ? "│   " : "    "), false, sb, curr.right);
-		}
-		if (!curr.dirty) {
-			sb.append(prefix).append(isTail ? "└── " : "┌── ").append(curr.data.toString()).append("\n");
-		}
-		if (curr.left != null && !curr.left.dirty) {
-			toStringHelper(new StringBuilder().append(prefix).append(isTail ? "    " : "|   "), true, sb, curr.left);
-		}
-		return sb;
-	}
-	*/
+    public StringBuilder toStringHelper(StringBuilder prefix, boolean isTail, StringBuilder sb, Node curr) {
+    	if (curr == null) {
+    		return sb;
+    	}
+    	if (curr.right != null && !curr.right.dirty) {
+    		toStringHelper(new StringBuilder().append(prefix).append(isTail ? "│   " : "    "), false, sb, curr.right);
+    	}
+    	if (!curr.dirty) {
+    		sb.append(prefix).append(isTail ? "└── " : "┌── ").append(curr.data.toString()).append("\n");
+    	}
+    	if (curr.left != null && !curr.left.dirty) {
+    		toStringHelper(new StringBuilder().append(prefix).append(isTail ? "    " : "|   "), true, sb, curr.left);
+    	}
+    	return sb;
+    }
+    */
 
-    /**
-     * Testing method
-     */
+    /** Testing method */
     public void printAllHelper(Node p) {
         if (p == null) {
             return;
@@ -341,17 +319,12 @@ public class BinarySearchTree<K> implements Tree<K> {
         printAllHelper(p.right);
     }
 
-    /**
-     * A Node is a Location, which means that it can be the return value of a search on the tree.
-     */
-
+    /** A Node is a Location, which means that it can be the return value of a search on the tree. */
     class Node implements Location<K> {
         protected K data;
         protected Node left, right;
 
-        /**
-         * Before and After pointers for a Node. Created a Threaded tree.
-         */
+        /** Before and After pointers for a Node. Created a Threaded tree. */
         protected Node before, after;
 
         protected Node parent; // the parent of this node
@@ -362,8 +335,7 @@ public class BinarySearchTree<K> implements Tree<K> {
         /**
          * Constructs a leaf node with the given key.
          *
-         * @param key
-         *         The data for the node to be created.
+         * @param key The data for the node to be created.
          */
         public Node(K key) {
             this(key, null, null);
@@ -372,12 +344,9 @@ public class BinarySearchTree<K> implements Tree<K> {
         /**
          * Constructs a new node with the given values for fields.
          *
-         * @param data
-         *         The data for this Node
-         * @param left
-         *         The left node to this node.
-         * @param right
-         *         The Right node to this Node.
+         * @param data The data for this Node
+         * @param left The left node to this node.
+         * @param right The Right node to this Node.
          */
         public Node(K data, Node left, Node right) {
             this.data = data;

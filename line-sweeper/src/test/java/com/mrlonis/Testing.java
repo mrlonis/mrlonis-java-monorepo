@@ -5,14 +5,6 @@ package com.mrlonis;
  * Select the "Libraries" tab and "Add Library". Select JUnit, then JUnit 4.
  */
 
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiPredicate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,13 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.function.BiPredicate;
+import org.junit.jupiter.api.Test;
+
 public class Testing {
 
-    /**
-     * Start with this test. Make appropriate changes to BinarySearchTree.Node.
-     */
+    /** Start with this test. Make appropriate changes to BinarySearchTree.Node. */
     @Test
-    public void nodeProperties() {
+    void nodeProperties() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         assertTrue(bst.isEmpty());
         BinarySearchTree<Integer>.Node p;
@@ -63,14 +60,12 @@ public class Testing {
         assertEquals(4, p.height);
     }
 
-    /**
-     * When you're ready to run this test, remove the // from the above line.
-     */
+    /** When you're ready to run this test, remove the // from the above line. */
     @Test
-    public void insertSmallBST() {
+    void insertSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         assertTrue(bst.isEmpty());
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         int n = 0;
         for (Integer key : a) {
             bst.insert(key);
@@ -94,10 +89,10 @@ public class Testing {
     }
 
     @Test
-    public void clearSmallBST() {
+    void clearSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         assertTrue(bst.isEmpty());
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             bst.insert(key);
         }
@@ -112,19 +107,19 @@ public class Testing {
     }
 
     @Test
-    public void insertReturnBST() {
+    void insertReturnBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         assertTrue(bst.isEmpty());
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             assertEquals(key, bst.insert(key).get());
         }
     }
 
     @Test
-    public void skinnyBST() {
+    void skinnyBST() {
         BinarySearchTree<String> bst = new BinarySearchTree<>((String x, String y) -> x.compareTo(y) < 0);
-        String[] a = new String[]{"ape", "boa", "cat", "dog", "emu", "fox", "gnu", "hog"};
+        String[] a = new String[] {"ape", "boa", "cat", "dog", "emu", "fox", "gnu", "hog"};
         for (String key : a) {
             bst.insert(key);
         }
@@ -139,9 +134,9 @@ public class Testing {
     }
 
     @Test
-    public void parentsSmallBST() {
+    void parentsSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             bst.insert(key);
         }
@@ -154,9 +149,9 @@ public class Testing {
     }
 
     @Test
-    public void beforeAndAfterSmallBST() {
+    void beforeAndAfterSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             bst.insert(key);
         }
@@ -181,9 +176,9 @@ public class Testing {
     }
 
     @Test
-    public void searchSmallBST() {
+    void searchSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             bst.insert(key);
         }
@@ -200,9 +195,9 @@ public class Testing {
     }
 
     @Test
-    public void heightSmallBST() {
+    void heightSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             bst.insert(key);
         }
@@ -225,9 +220,9 @@ public class Testing {
     }
 
     @Test
-    public void removeSmallBST() {
+    void removeSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             bst.insert(key);
         }
@@ -258,9 +253,9 @@ public class Testing {
     }
 
     @Test
-    public void dupsSmallBST() {
+    void dupsSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             bst.insert(key);
         }
@@ -295,9 +290,9 @@ public class Testing {
     }
 
     @Test
-    public void keysSmallBST() {
+    void keysSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             bst.insert(key);
         }
@@ -311,9 +306,9 @@ public class Testing {
     }
 
     @Test
-    public void keysDirtyBST() {
+    void keysDirtyBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{26, 5, 28, 32, 4, 8, 0, 2, 3, 6, 10, 12, 22, 1, 14, 20, 16, 18, 7, 24, 30};
+        int[] a = new int[] {26, 5, 28, 32, 4, 8, 0, 2, 3, 6, 10, 12, 22, 1, 14, 20, 16, 18, 7, 24, 30};
         for (Integer key : a) {
             bst.insert(key);
         }
@@ -336,9 +331,9 @@ public class Testing {
     }
 
     @Test
-    public void rebuildSmallBST() {
+    void rebuildSmallBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             bst.insert(key);
         }
@@ -357,7 +352,7 @@ public class Testing {
     }
 
     @Test
-    public void bigBSTtest() {
+    void bigBSTtest() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         Random gen = new Random();
         List<Integer> a = new ArrayList<>();
@@ -370,7 +365,7 @@ public class Testing {
             assertTrue(verifyOrderingProperty(bst.root, bst.lessThan));
             assertTrue(verifyHeights(bst.root));
         }
-        //System.out.println(bst.toString());
+        // System.out.println(bst.toString());
         while (!a.isEmpty()) {
             int i = gen.nextInt(a.size());
             int x = a.get(i);
@@ -384,10 +379,10 @@ public class Testing {
     }
 
     @Test
-    public void beforeBST() {
+    void beforeBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         assertTrue(bst.isEmpty());
-        int[] a = new int[]{12, 4, 18, 5, 11, 8, 15, 9, 17, 20, 3, 13, 19, 2, 14, 7, 6, 10, 1, 16};
+        int[] a = new int[] {12, 4, 18, 5, 11, 8, 15, 9, 17, 20, 3, 13, 19, 2, 14, 7, 6, 10, 1, 16};
         int n = a.length;
         for (Integer key : a) {
             bst.insert(key);
@@ -399,10 +394,10 @@ public class Testing {
     }
 
     @Test
-    public void afterBST() {
+    void afterBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         assertTrue(bst.isEmpty());
-        int[] a = new int[]{12, 4, 18, 5, 11, 8, 15, 9, 17, 20, 3, 13, 19, 2, 14, 7, 6, 10, 1, 16};
+        int[] a = new int[] {12, 4, 18, 5, 11, 8, 15, 9, 17, 20, 3, 13, 19, 2, 14, 7, 6, 10, 1, 16};
         int n = a.length;
         for (Integer key : a) {
             bst.insert(key);
@@ -414,7 +409,7 @@ public class Testing {
     }
 
     @Test
-    public void beforeWithRemoveBST() {
+    void beforeWithRemoveBST() {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>((Integer x, Integer y) -> x < y);
         assertTrue(bst.isEmpty());
         for (int key = 1; key <= 100; key++) {
@@ -428,15 +423,15 @@ public class Testing {
         }
     }
 
-    /**********************************************************************************
-     * When you've reached this point, run the Driver to see the Line Sweep
-     * Algorithm in action.
-     **********************************************************************************/
-
+    /**
+     * ******************************************************************************** When you've reached this point,
+     * run the Driver to see the Line Sweep Algorithm in action.
+     * ********************************************************************************
+     */
     @Test
-    public void insertAVL() {
+    void insertAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{3, 8, 1, 2, 7, 9};
+        int[] a = new int[] {3, 8, 1, 2, 7, 9};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -460,10 +455,10 @@ public class Testing {
     }
 
     @Test
-    public void beforeAVL() {
+    void beforeAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
         assertTrue(avl.isEmpty());
-        int[] a = new int[]{12, 4, 18, 5, 11, 8, 15, 9, 17, 20, 3, 13, 19, 2, 14, 7, 6, 10, 1, 16};
+        int[] a = new int[] {12, 4, 18, 5, 11, 8, 15, 9, 17, 20, 3, 13, 19, 2, 14, 7, 6, 10, 1, 16};
         int n = a.length;
         for (Integer key : a) {
             avl.insert(key);
@@ -475,10 +470,10 @@ public class Testing {
     }
 
     @Test
-    public void afterAVL() {
+    void afterAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
         assertTrue(avl.isEmpty());
-        int[] a = new int[]{12, 4, 18, 5, 11, 8, 15, 9, 17, 20, 3, 13, 19, 2, 14, 7, 6, 10, 1, 16};
+        int[] a = new int[] {12, 4, 18, 5, 11, 8, 15, 9, 17, 20, 3, 13, 19, 2, 14, 7, 6, 10, 1, 16};
         int n = a.length;
         for (Integer key : a) {
             avl.insert(key);
@@ -490,9 +485,9 @@ public class Testing {
     }
 
     @Test
-    public void LLtinyAVL() {
+    void LLtinyAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{3, 2, 1};
+        int[] a = new int[] {3, 2, 1};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -514,9 +509,9 @@ public class Testing {
     }
 
     @Test
-    public void RRtinyAVL() {
+    void RRtinyAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{1, 2, 3};
+        int[] a = new int[] {1, 2, 3};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -538,9 +533,9 @@ public class Testing {
     }
 
     @Test
-    public void LRtinyAVL() {
+    void LRtinyAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{3, 1, 2};
+        int[] a = new int[] {3, 1, 2};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -562,9 +557,9 @@ public class Testing {
     }
 
     @Test
-    public void RLtinyAVL() {
+    void RLtinyAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{1, 3, 2};
+        int[] a = new int[] {1, 3, 2};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -586,9 +581,9 @@ public class Testing {
     }
 
     @Test
-    public void LLsmallAVL() {
+    void LLsmallAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{5, 6, 3, 2, 4, 1};
+        int[] a = new int[] {5, 6, 3, 2, 4, 1};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -619,9 +614,9 @@ public class Testing {
     }
 
     @Test
-    public void RRsmallAVL() {
+    void RRsmallAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{2, 1, 4, 3, 5, 6};
+        int[] a = new int[] {2, 1, 4, 3, 5, 6};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -652,9 +647,9 @@ public class Testing {
     }
 
     @Test
-    public void LRsmallAVL() {
+    void LRsmallAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{5, 2, 6, 1, 3};
+        int[] a = new int[] {5, 2, 6, 1, 3};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -692,9 +687,9 @@ public class Testing {
     }
 
     @Test
-    public void RLsmallAVL() {
+    void RLsmallAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{2, 1, 5, 3, 6};
+        int[] a = new int[] {2, 1, 5, 3, 6};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -732,9 +727,9 @@ public class Testing {
     }
 
     @Test
-    public void keysSmallAVL() {
+    void keysSmallAVL() {
         AVLTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -746,10 +741,10 @@ public class Testing {
     }
 
     @Test
-    public void mediumAVLtest() {
+    void mediumAVLtest() {
         int[] a;
         AVLTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        a = new int[]{5, 3, 1, 2, 7, 6, 9, 8, -1, -7, -5, -2, -3, 10, 15, 13, 12, 19, 20, 21};
+        a = new int[] {5, 3, 1, 2, 7, 6, 9, 8, -1, -7, -5, -2, -3, 10, 15, 13, 12, 19, 20, 21};
         for (Integer x : a) {
             avl.insert(x);
         }
@@ -776,7 +771,7 @@ public class Testing {
             assert verifyParentPointers(avl.root);
         }
 
-        a = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+        a = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
         avl = new AVLTree<>((Integer x, Integer y) -> x < y);
         for (Integer x : a) {
@@ -786,7 +781,7 @@ public class Testing {
         }
         assertEquals(4, avl.height());
         assert verifyParentPointers(avl.root);
-        a = new int[]{5, 3, 1, 2, 7, 6, 9, 8, -1, -7, -5, -2, -3, 10, 15, 13, 12, 19, 20, 21};
+        a = new int[] {5, 3, 1, 2, 7, 6, 9, 8, -1, -7, -5, -2, -3, 10, 15, 13, 12, 19, 20, 21};
         avl = new AVLTree<>((Integer x, Integer y) -> x < y);
         for (Integer x : a) {
             avl.insert(x);
@@ -822,7 +817,7 @@ public class Testing {
     }
 
     @Test
-    public void bigAVLtest() {
+    void bigAVLtest() {
         AVLTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
         Random gen = new Random();
         List<Integer> a = new ArrayList<>();
@@ -849,9 +844,9 @@ public class Testing {
     }
 
     @Test
-    public void keysDirtyAVL() {
+    void keysDirtyAVL() {
         AVLTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{26, 5, 28, 32, 4, 8, 0, 2, 3, 6, 10, 12, 22, 1, 14, 20, 16, 18, 7, 24, 30};
+        int[] a = new int[] {26, 5, 28, 32, 4, 8, 0, 2, 3, 6, 10, 12, 22, 1, 14, 20, 16, 18, 7, 24, 30};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -872,9 +867,9 @@ public class Testing {
     }
 
     @Test
-    public void rebuildSmallAVL() {
+    void rebuildSmallAVL() {
         AVLTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
-        int[] a = new int[]{4, 8, 0, 2, 6, 10};
+        int[] a = new int[] {4, 8, 0, 2, 6, 10};
         for (Integer key : a) {
             avl.insert(key);
         }
@@ -895,11 +890,11 @@ public class Testing {
         assertEquals(0, avl.height());
     }
 
-    /**********************************************************************************
-     * When you've reached this point, you're ready to replace the BST with AVL
-     * in the Driver.
-     **********************************************************************************/
-
+    /**
+     * ******************************************************************************** When you've reached this point,
+     * you're ready to replace the BST with AVL in the Driver.
+     * ********************************************************************************
+     */
     private <K> int countDirtyNodes(BinarySearchTree<K>.Node p) {
         if (p == null) {
             return 0;
@@ -911,8 +906,18 @@ public class Testing {
         if (p == null) {
             return true;
         }
-        int h1 = p.left == null ? 0 : p.left.height;
-        int h2 = p.right == null ? 0 : p.right.height;
+        int h1;
+        if (p.left == null) {
+            h1 = 0;
+        } else {
+            h1 = p.left.height;
+        }
+        int h2;
+        if (p.right == null) {
+            h2 = 0;
+        } else {
+            h2 = p.right.height;
+        }
         return p.height == 1 + Math.max(h1, h2) && verifyHeights(p.left) && verifyHeights(p.right);
     }
 
@@ -920,8 +925,18 @@ public class Testing {
         if (p == null) {
             return true;
         }
-        int h1 = p.left == null ? 0 : p.left.height;
-        int h2 = p.right == null ? 0 : p.right.height;
+        int h1;
+        if (p.left == null) {
+            h1 = 0;
+        } else {
+            h1 = p.left.height;
+        }
+        int h2;
+        if (p.right == null) {
+            h2 = 0;
+        } else {
+            h2 = p.right.height;
+        }
         return Math.abs(h1 - h2) <= 1 && verifyBFs(p.left) && verifyBFs(p.right);
     }
 
@@ -950,8 +965,10 @@ public class Testing {
             return true;
         }
         K key = p.data;
-        return allLessThan(p.left, key, lessThan) && allGreaterThan(p.right, key, lessThan) &&
-               verifyOrderingProperty(p.left, lessThan) && verifyOrderingProperty(p.right, lessThan);
+        return allLessThan(p.left, key, lessThan)
+                && allGreaterThan(p.right, key, lessThan)
+                && verifyOrderingProperty(p.left, lessThan)
+                && verifyOrderingProperty(p.right, lessThan);
     }
 
     private <K> boolean allGreaterThan(BinarySearchTree<K>.Node p, K x, BiPredicate<K, K> lessThan) {
@@ -967,5 +984,4 @@ public class Testing {
         }
         return lessThan.test(p.data, x) && allLessThan(p.left, x, lessThan) && allLessThan(p.right, x, lessThan);
     }
-
 }

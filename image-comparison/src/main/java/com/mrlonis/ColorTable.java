@@ -9,35 +9,20 @@ import java.awt.Color;
  *
  * @author Matthew Lonis
  */
-
 public class ColorTable {
-    /**
-     * Counts the number of collisions during an operation.
-     */
+    /** Counts the number of collisions during an operation. */
     private static int numCollisions = 0;
-    /**
-     * Represents the capacity of the colorTable array in this ColorTable.
-     */
+    /** Represents the capacity of the colorTable array in this ColorTable. */
     public int capacity;
-    /**
-     * Represents the number of current Associations in the colorTable array in this ColorTable.
-     */
+    /** Represents the number of current Associations in the colorTable array in this ColorTable. */
     public int numOfAssoc;
-    /**
-     * Represents the bits per channel used for the colors in this ColorTable.
-     */
+    /** Represents the bits per channel used for the colors in this ColorTable. */
     public int bitsPerChannel;
-    /**
-     * Represents the collision strategy used by this ColorTable.
-     */
+    /** Represents the collision strategy used by this ColorTable. */
     public int collisionStrategy;
-    /**
-     * Represents the rehash threshold of this ColorTable.
-     */
+    /** Represents the rehash threshold of this ColorTable. */
     public double rehashThreshold;
-    /**
-     * The internal array of a ColorTable that will hold the Associations for a color.
-     */
+    /** The internal array of a ColorTable that will hold the Associations for a color. */
     public Association[] colorTable;
 
     /**
@@ -46,24 +31,16 @@ public class ColorTable {
      * Constants.QUADRATIC for the collisionStrategy parameter. The rehashThrehold specifies the maximum tolerable load
      * factor before triggering a rehash.
      *
-     * @param initialCapacity
-     *         The starting size of the Association[] colorTable.
-     * @param bitsPerChannel
-     *         The bits per channel that colors are truncated to for a specified ColorTable.
-     * @param collisionStrategy
-     *         The collision strategy for a specified ColorTable.
-     * @param rehashThreshold
-     *         The point at which if the load factor exceeds this number, a rehash() is automatically called.
-     *
-     * @throws RuntimeException
-     *         if initialCapacity is not in the range [1..Constants.MAX_CAPACITY]
-     * @throws RuntimeException
-     *         if bitsPerChannel is not in the range [1..8]
-     * @throws RuntimeException
-     *         if collisionStrategy is not one of Constants.LINEAR or Constants.QUADRATIC
-     * @throws RuntimeException
-     *         if rehashThreshold is not in the range (0.0..1.0] for a linear strategy or (0.0..0.5) for a quadratic
-     *         strategy
+     * @param initialCapacity The starting size of the Association[] colorTable.
+     * @param bitsPerChannel The bits per channel that colors are truncated to for a specified ColorTable.
+     * @param collisionStrategy The collision strategy for a specified ColorTable.
+     * @param rehashThreshold The point at which if the load factor exceeds this number, a rehash() is automatically
+     *     called.
+     * @throws RuntimeException if initialCapacity is not in the range [1..Constants.MAX_CAPACITY]
+     * @throws RuntimeException if bitsPerChannel is not in the range [1..8]
+     * @throws RuntimeException if collisionStrategy is not one of Constants.LINEAR or Constants.QUADRATIC
+     * @throws RuntimeException if rehashThreshold is not in the range (0.0..1.0] for a linear strategy or (0.0..0.5)
+     *     for a quadratic strategy
      */
     public ColorTable(int initialCapacity, int bitsPerChannel, int collisionStrategy, double rehashThreshold) {
         if ((initialCapacity > Constants.MAX_CAPACITY) || (initialCapacity < 1)) {
@@ -114,9 +91,7 @@ public class ColorTable {
         return numCollisions;
     }
 
-    /**
-     * Simple testing.
-     */
+    /** Simple testing. */
     public static void main(String[] args) {
         /*
          * Testing Association Class
@@ -125,23 +100,23 @@ public class ColorTable {
         System.out.println("a1 key = " + a1.key + " value = " + a1.value);
 
         ColorTable table = new ColorTable(3, 6, Constants.QUADRATIC, .49);
-        int[] data = new int[]{32960, 4293315, 99011, 296390};
+        int[] data = new int[] {32_960, 4_293_315, 99_011, 296_390};
         for (int datum : data) {
             table.increment(new Color(datum));
         }
         System.out.println("capacity: " + table.getCapacity()); // Expected: 7
-        System.out.println("size: " + table.getSize());         // Expected: 3
+        System.out.println("size: " + table.getSize()); // Expected: 3
 
- 		/* The following automatically calls table.toString().
-       	Notice that we only include non-zero counts in the String representation.
+        /* The following automatically calls table.toString().
+           	Notice that we only include non-zero counts in the String representation.
 
-       	Expected: [3:2096,2, 5:67632,1, 6:6257,1]
+           	Expected: [3:2096,2, 5:67632,1, 6:6257,1]
 
-       	This shows that there are 3 keys in the table. They are at positions 3, 5, and 6.
-       	Their color codes are 2096, 67632, and 6257. The code 2096 was incremented twice.
-       	You do not have to mimic this format exactly, but strive for something compact
-       	and readable.
- 		 */
+           	This shows that there are 3 keys in the table. They are at positions 3, 5, and 6.
+           	Their color codes are 2096, 67632, and 6257. The code 2096 was incremented twice.
+           	You do not have to mimic this format exactly, but strive for something compact
+           	and readable.
+        */
         System.out.println(table);
     }
 
@@ -157,15 +132,12 @@ public class ColorTable {
     /**
      * This method finds an index that is either null or contains an Association who's key is equal to hashVal. The
      * method then returns the index that it found.
-     * <p>
-     * This method behaves differently depending on the ColorTable collision strategy and is thus named
+     *
+     * <p>This method behaves differently depending on the ColorTable collision strategy and is thus named
      * collisionStrategySearch.
      *
-     * @param hashVal
-     *         The Integer representation of a Color based on Util.pack().
-     * @param hashLocation
-     *         Represents the ideal hashLocation for hashVal based on hashVal % this.capacity.
-     *
+     * @param hashVal The Integer representation of a Color based on Util.pack().
+     * @param hashLocation Represents the ideal hashLocation for hashVal based on hashVal % this.capacity.
      * @return The index hashVal is associated with.
      */
     private int collisionStrategySearch(int hashVal, int hashLocation) {
@@ -177,7 +149,7 @@ public class ColorTable {
                 if ((this.colorTable[i] == null) || (this.colorTable[i].key == hashVal)) {
                     return i;
                 }
-                i = (i == this.capacity - 1) ? 0 : i + 1; //Linear strategy for incrementing i
+                i = (i == this.capacity - 1) ? 0 : i + 1; // Linear strategy for incrementing i
                 numCollisions++;
             } while (i != hashLocation);
         } else if (this.collisionStrategy == Constants.QUADRATIC) {
@@ -185,7 +157,7 @@ public class ColorTable {
                 if ((this.colorTable[i] == null) || (this.colorTable[i].key == hashVal)) {
                     return i;
                 }
-                i = (hashLocation + (h * h++)) % this.capacity; //Quadratic strategy for incrementing i
+                i = (hashLocation + (h * h++)) % this.capacity; // Quadratic strategy for incrementing i
                 numCollisions++;
             } while (i != hashLocation);
         }
@@ -196,9 +168,7 @@ public class ColorTable {
      * Returns the frequency count associated with color. Colors that are not explicitly represented in the table are
      * assumed to be present with a count of zero. Uses Util.pack() as the hash function.
      *
-     * @param color
-     *         The Color that the method will return the frequency count of.
-     *
+     * @param color The Color that the method will return the frequency count of.
      * @return The frequency count of color.
      */
     public long get(Color color) {
@@ -221,10 +191,8 @@ public class ColorTable {
      * Associates the count with the color in this table. Will do nothing if count is less than or equal to zero. Uses
      * Util.pack() as the hash function.
      *
-     * @param count
-     *         The frequency count that will be associated with color in the ColorTable.
-     * @param color
-     *         The Color that will be put into the ColorTable.
+     * @param count The frequency count that will be associated with color in the ColorTable.
+     * @param color The Color that will be put into the ColorTable.
      */
     public void put(Color color, long count) {
         if (count > 0) {
@@ -252,8 +220,7 @@ public class ColorTable {
      * Increments the frequency count associated with color. Colors that are not explicitly represented in the table are
      * assumed to be present with a count of zero.
      *
-     * @param color
-     *         The Color that will be incremented in the ColorTable.
+     * @param color The Color that will be incremented in the ColorTable.
      */
     public void increment(Color color) {
         numCollisions = 0;
@@ -318,8 +285,7 @@ public class ColorTable {
      * than double the current size of the Association[] colorTable array that is of the form 4j + 3. Then, this method
      * moves all the key/value associations into the new array.
      *
-     * @throws RuntimeException
-     *         if the ColorTable is already at maximum capacity.
+     * @throws RuntimeException if the ColorTable is already at maximum capacity.
      */
     private void rehash() {
         if (this.capacity == Constants.MAX_CAPACITY) {
@@ -371,7 +337,6 @@ public class ColorTable {
      * counts for each color in the color key space that exists in this ColorTable.
      *
      * @return An Iterator that marches through the color key space
-     *
      * @see ColorIterator
      */
     public Iterator iterator() {
@@ -407,11 +372,9 @@ public class ColorTable {
     /**
      * Returns the frequency count of a color in the ColorTable at index i in the Association[] colorTable array.
      *
-     * @param i
-     *         The desired index where the frequency count will be returned.
-     *
+     * @param i The desired index where the frequency count will be returned.
      * @return The frequency count of the Association at index i in the Association[] colorTable array in this
-     * ColorTable.
+     *     ColorTable.
      */
     public long getCountAt(int i) {
         if (this.colorTable[i] == null) {

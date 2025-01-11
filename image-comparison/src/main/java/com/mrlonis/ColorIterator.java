@@ -8,31 +8,20 @@ import java.awt.Color;
  *
  * @author mrlonis
  */
-
 public class ColorIterator implements Iterator {
-    /**
-     * Represents the increment amount for the RGB values in the color space.
-     */
+    /** Represents the increment amount for the RGB values in the color space. */
     private final int inc;
 
-    /**
-     * Represents the ColorTable that this ColorIterator will use ColorTable.get() on.
-     */
+    /** Represents the ColorTable that this ColorIterator will use ColorTable.get() on. */
     private final ColorTable colorTable;
 
-    /**
-     * Represents the Red value in the RGB spectrum.
-     */
+    /** Represents the Red value in the RGB spectrum. */
     private int r;
 
-    /**
-     * Represents the Green value in the RGB spectrum.
-     */
+    /** Represents the Green value in the RGB spectrum. */
     private int g;
 
-    /**
-     * Represents the Blue value in the RGB spectrum.
-     */
+    /** Represents the Blue value in the RGB spectrum. */
     private int b;
 
     /**
@@ -45,8 +34,7 @@ public class ColorIterator implements Iterator {
      * Constructs a ColorIterator with a ColorTable parameter that will be stored in the Iterator instance variable
      * colorTable.
      *
-     * @param colorTable
-     *         The ColorTable that has called for an Iterator.
+     * @param colorTable The ColorTable that has called for an Iterator.
      */
     public ColorIterator(ColorTable colorTable) {
         this.initial = true;
@@ -57,13 +45,11 @@ public class ColorIterator implements Iterator {
         this.inc = (int) Math.pow(2, (8 - colorTable.bitsPerChannel));
     }
 
-    /**
-     * Simple Testing
-     */
+    /** Simple Testing */
     public static void main(String[] args) {
         System.out.println("ColorIterator Testing...");
         ColorTable table = new ColorTable(3, 6, Constants.QUADRATIC, .49);
-        int[] data = new int[]{32960, 4293315, 99011, 296390};
+        int[] data = new int[] {32_960, 4_293_315, 99_011, 296_390};
         for (int datum : data) {
             table.increment(new Color(datum));
         }
@@ -105,11 +91,11 @@ public class ColorIterator implements Iterator {
     }
 
     /**
-     * Returns <code>true</code> if initial is true or if r, g, and b aren't all equal to 0.
-     * <code>false</code> otherwise.
+     * Returns <code>true</code> if initial is true or if r, g, and b aren't all equal to 0. <code>false</code>
+     * otherwise.
      *
      * @return Returns <code>true</code> if the ColorIterator has another color in the color space. Otherwise, returns
-     * <code>flase</code>.
+     *     <code>flase</code>.
      */
     public boolean hasNext() {
         if (initial) {

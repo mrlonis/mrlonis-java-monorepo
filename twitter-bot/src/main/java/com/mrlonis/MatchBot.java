@@ -11,9 +11,7 @@ import java.util.List;
  */
 public class MatchBot extends TwitterBot {
 
-    /**
-     * Constructs a MatchBot to operate on the last numTweets of the given user.
-     */
+    /** Constructs a MatchBot to operate on the last numTweets of the given user. */
     public MatchBot(String user, int numTweets) {
         super(user, numTweets);
     }
@@ -39,8 +37,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -53,7 +51,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -68,9 +67,7 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansKMP.get(i));
         }
 
-        /**
-         * Do something similar for the Boyer-Moore matching algorithm.
-         */
+        /** Do something similar for the Boyer-Moore matching algorithm. */
 
         /*
          * Divider for the console window.
@@ -98,8 +95,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -112,7 +109,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -153,8 +151,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -167,7 +165,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -201,8 +200,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -215,7 +214,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -249,8 +249,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -263,7 +263,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -297,8 +298,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -311,7 +312,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -352,8 +354,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -366,7 +368,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -407,8 +410,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -421,7 +424,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -462,8 +466,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -476,7 +480,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -517,8 +522,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Moyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -531,7 +536,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -572,8 +578,8 @@ public class MatchBot extends TwitterBot {
         /*
          * Print out total comparisons for each algorithm.
          */
-        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Boyer-Moore comps = " +
-                           compsBoyerMoore);
+        System.out.println("naive comps = " + compsNaive + ", KMP comps = " + compsKMP + ", Boyer-Moore comps = "
+                + compsBoyerMoore);
 
         /*
          * Test for consistency between Naive, KMP & Boyer-Moore
@@ -586,7 +592,8 @@ public class MatchBot extends TwitterBot {
             assert tweet.equals(ansNaive.get(i));
             assert tweet.equals(ansBoyerMoore.get(i));
             System.out.println(i++ + ". " + tweet);
-            System.out.println(pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
+            System.out.println(
+                    pattern + " appears at index " + tweet.toLowerCase().indexOf(pattern.toLowerCase()));
         }
 
         for (int i = 0; i < ansNaive.size(); i++) {
@@ -606,11 +613,8 @@ public class MatchBot extends TwitterBot {
      * Employs the naive string matching algorithm to find all Tweets containing the given pattern to the provided list.
      * Returns the total number of character comparisons performed.
      *
-     * @param pattern
-     *         The pattern to search for in the user's Tweets.
-     * @param ans
-     *         The list to add Tweets containing the given patter.
-     *
+     * @param pattern The pattern to search for in the user's Tweets.
+     * @param ans The list to add Tweets containing the given patter.
      * @return The total number of character comparisons performed.
      */
     public int searchTweetsNaive(String pattern, List<String> ans) {
@@ -634,11 +638,8 @@ public class MatchBot extends TwitterBot {
      * Employs the KMP string matching algorithm to add all Tweets containing the given pattern to the provided list.
      * Returns the total number of character comparisons performed.
      *
-     * @param pattern
-     *         The pattern to search for in the user's Tweets.
-     * @param ans
-     *         The list to add Tweets containing the given patter.
-     *
+     * @param pattern The pattern to search for in the user's Tweets.
+     * @param ans The list to add Tweets containing the given patter.
      * @return The total number of character comparisons performed.
      */
     public int searchTweetsKMP(String pattern, List<String> ans) {
@@ -662,11 +663,8 @@ public class MatchBot extends TwitterBot {
      * Employs the Boyer-Moore string matching algorithm to find all tweets containing the given pattern to the provided
      * list. Returns the total number of character comparisons performed.
      *
-     * @param pattern
-     *         The pattern to search for in the user's tweets.
-     * @param ans
-     *         The list to add tweets containing the given patter.
-     *
+     * @param pattern The pattern to search for in the user's tweets.
+     * @param ans The list to add tweets containing the given patter.
      * @return The total number of character comparisons performed.
      */
     public int searchTweetsBoyerMoore(String pattern, List<String> ans) {

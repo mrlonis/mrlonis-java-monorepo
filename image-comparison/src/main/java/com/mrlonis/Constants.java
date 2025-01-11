@@ -7,5 +7,5 @@ public class Constants {
     public static int LINEAR = 0;
     public static int QUADRATIC = 1;
 
-    public static int MAX_CAPACITY = 2147483587; // Largest prime for an array dimension.
+    public static int MAX_CAPACITY = 2_147_483_587; // Largest prime for an array dimension.
 }

@@ -1,8 +1,5 @@
 package com.mrlonis;
 
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -18,23 +15,21 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serial;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-/**
- * Support class to display a graph of the runtime data.
- */
+/** Support class to display a graph of the runtime data. */
 public class TimingGraph extends JPanel {
 
-    /**
-     * This is an auto-generated serial ID to remove the Eclipse warning.
-     */
+    /** This is an auto-generated serial ID to remove the Eclipse warning. */
     @Serial
     private static final long serialVersionUID = -1940206477212230676L;
+
     private final int numRuns;
     private final List<List<Integer>> timings;
 
-    /**
-     * Constructs a panel on which we can paint a graph of the given timing data.
-     */
+    /** Constructs a panel on which we can paint a graph of the given timing data. */
     public TimingGraph(List<List<Integer>> timings) {
         assert timings.size() > 0;
         this.timings = timings;
@@ -44,9 +39,7 @@ public class TimingGraph extends JPanel {
         showAndTell();
     }
 
-    /**
-     * Paints a graph of the timing data onto this panel.
-     */
+    /** Paints a graph of the timing data onto this panel. */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -104,9 +97,7 @@ public class TimingGraph extends JPanel {
         }
     }
 
-    /**
-     * Returns the largest value in the timing data.
-     */
+    /** Returns the largest value in the timing data. */
     private int getMax() {
         int max = Integer.MIN_VALUE;
         for (List<Integer> run : timings) {
@@ -117,9 +108,7 @@ public class TimingGraph extends JPanel {
         return max;
     }
 
-    /**
-     * Frames the graph of the timing data (and displays it) and also writes it to an image file.
-     */
+    /** Frames the graph of the timing data (and displays it) and also writes it to an image file. */
     private void showAndTell() {
         // Show
         JFrame frame = new JFrame();

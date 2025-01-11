@@ -7,23 +7,22 @@ package com.mrlonis;
  * @author Matthew Lonis (mrlonis)
  */
 
-import com.mrlonis.Judge.StringLengthException;
-import org.junit.jupiter.api.Test;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.mrlonis.Judge.StringLengthException;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import org.junit.jupiter.api.Test;
+
 public class JudgeTests {
 
     @Test
-    public void defaultJudgeTest() {
+    void defaultJudgeTest() {
         Judge judge = new Judge();
         assertEquals(2, judge.score('A', 'A'));
         assertEquals(-2, judge.score('A', 'C'));
@@ -43,11 +42,9 @@ public class JudgeTests {
         assertEquals(-2, judge.score("AC_G", "A_TA"));
     }
 
-    /**
-     * Create custom judge class and custom tests/strings
-     */
+    /** Create custom judge class and custom tests/strings */
     @Test
-    public void customJudgeTest() {
+    void customJudgeTest() {
         Judge judge = new Judge(10, -10, -5);
         assertEquals(10, judge.score('M', 'M'));
         assertEquals(-10, judge.score('M', 'T'));
@@ -72,11 +69,12 @@ public class JudgeTests {
         assertEquals(-10 - 10 - 5 - 5 - 5 - 10 - 10 - 10, judge.score("MATT_HEW", "LO___NIS"));
     }
 
-    /**********************************************
-     * Testing SequenceAligner.fillCache()
-     **********************************************/
+    /**
+     * ******************************************** Testing SequenceAligner.fillCache()
+     * ********************************************
+     */
     @Test
-    public void empties() {
+    void empties() {
         SequenceAligner sa;
         Result result;
         sa = new SequenceAligner("", "");
@@ -87,7 +85,7 @@ public class JudgeTests {
     }
 
     @Test
-    public void singletons() {
+    void singletons() {
         SequenceAligner sa;
         Result result;
         sa = new SequenceAligner("A", "A");
@@ -127,7 +125,7 @@ public class JudgeTests {
     }
 
     @Test
-    public void singletonsWithCustomJudge() {
+    void singletonsWithCustomJudge() {
         Judge judge;
         SequenceAligner sa;
         Result result;
@@ -170,7 +168,7 @@ public class JudgeTests {
     }
 
     @Test
-    public void doubletons() {
+    void doubletons() {
         SequenceAligner sa;
         Result result;
         sa = new SequenceAligner("AG", "AG");
@@ -210,7 +208,7 @@ public class JudgeTests {
     }
 
     @Test
-    public void oneTwos() {
+    void oneTwos() {
         SequenceAligner sa;
         Result result;
         sa = new SequenceAligner("A", "AG");
@@ -233,11 +231,12 @@ public class JudgeTests {
         assertEquals(Direction.DIAGONAL, result.getParent());
     }
 
-    /**********************************************
-     * Try running the Driver to see what happens.
-     **********************************************/
+    /**
+     * ******************************************** Try running the Driver to see what happens.
+     * ********************************************
+     */
     @Test
-    public void bigBases() {
+    void bigBases() {
         SequenceAligner sa;
         sa = new SequenceAligner(1000);
         for (int i = 0; i < sa.getX().length() + 1; i++) {
@@ -255,11 +254,12 @@ public class JudgeTests {
         }
     }
 
-    /**********************************************
-     * Testing SequenceAligner.traceback()
-     **********************************************/
+    /**
+     * ******************************************** Testing SequenceAligner.traceback()
+     * ********************************************
+     */
     @Test
-    public void simpleAlignment() {
+    void simpleAlignment() {
         SequenceAligner sa;
         sa = new SequenceAligner("ACGT", "ACGT");
         assertTrue(sa.isAligned());
@@ -313,7 +313,7 @@ public class JudgeTests {
     }
 
     @Test
-    public void pathMarks() {
+    void pathMarks() {
         SequenceAligner sa;
         sa = new SequenceAligner("AGACG", "CCGCT");
         assertEquals("_AGACG", sa.getAlignedX());
@@ -321,9 +321,14 @@ public class JudgeTests {
         // check that start and end are on the path
         assertTrue(sa.getResult(0, 0).onPath());
         assertTrue(sa.getResult(5, 5).onPath());
-        int[][] expectedScores =
-                {{0, -1, -2, -3, -4, -5}, {-1, -2, -3, -4, -5, -6}, {-2, -3, -4, -1, -2, -3}, {-3, -4, -5, -2, -3, -4},
-                 {-4, -1, -2, -3, 0, -1}, {-5, -2, -3, 0, -1, -2},};
+        int[][] expectedScores = {
+            {0, -1, -2, -3, -4, -5},
+            {-1, -2, -3, -4, -5, -6},
+            {-2, -3, -4, -1, -2, -3},
+            {-3, -4, -5, -2, -3, -4},
+            {-4, -1, -2, -3, 0, -1},
+            {-5, -2, -3, 0, -1, -2},
+        };
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 assertEquals(expectedScores[i][j], sa.getResult(i, j).getScore());
@@ -345,11 +350,9 @@ public class JudgeTests {
         }
     }
 
-    /**********************************************
-     * Benchmarks
-     **********************************************/
+    /** ******************************************** Benchmarks ******************************************** */
     @Test
-    public void runBenchmarks() {
+    void runBenchmarks() {
         System.out.println("Running Test Suite:\n");
         String filename = Constants.SUITE_FILENAME;
         SequenceAligner strands;

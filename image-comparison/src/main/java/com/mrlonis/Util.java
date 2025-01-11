@@ -7,11 +7,8 @@ public class Util {
     /**
      * Computes the cosine similarity between two ColorTables.
      *
-     * @param A
-     *         The first ColorTable.
-     * @param B
-     *         The second ColorTable.
-     *
+     * @param A The first ColorTable.
+     * @param B The second ColorTable.
      * @return The cosine similarity between A and B.
      */
     public static double cosineSimilarity(ColorTable A, ColorTable B) {
@@ -24,11 +21,8 @@ public class Util {
     /**
      * Computes the dot product of two ColorTables.
      *
-     * @param B
-     *         The second ColorTable in computation.
-     * @param A
-     *         The first ColorTable in computation.
-     *
+     * @param B The second ColorTable in computation.
+     * @param A The first ColorTable in computation.
      * @return The dot product of A and B.
      */
     public static double dotProduct(ColorTable A, ColorTable B) {
@@ -46,17 +40,15 @@ public class Util {
     /**
      * Computes the vector magnitude of a ColorTable.
      *
-     * @param A
-     *         The ColorTable that determines the vector magnitude.
-     *
+     * @param colorTable The ColorTable that determines the vector magnitude.
      * @return The vector magnitude of A.
      */
-    public static double vectorMagnitude(ColorTable A) {
+    public static double vectorMagnitude(ColorTable colorTable) {
         long result = 0;
-        Iterator aIT = A.iterator();
+        Iterator colorTableIterator = colorTable.iterator();
 
-        while (aIT.hasNext()) {
-            long value = aIT.next();
+        while (colorTableIterator.hasNext()) {
+            long value = colorTableIterator.next();
             result += (value * value);
         }
 
@@ -89,10 +81,10 @@ public class Util {
     /**
      * The 3 components of a Color are packed into one 32-bit int. The result is used as a hash code for Colors in the
      * ColorTable.
-     * <p>
-     * Each color component occupies exactly bitsPerChanel bits in the encoding.
-     * <p>
-     * The color components are shifted to the right to drop the lower order bits. Then the three reduced color
+     *
+     * <p>Each color component occupies exactly bitsPerChanel bits in the encoding.
+     *
+     * <p>The color components are shifted to the right to drop the lower order bits. Then the three reduced color
      * components are packed into the lower order 3 * bitsPerChannel bits of the returned code.
      */
     public static int pack(Color color, int bitsPerChannel) {
@@ -116,9 +108,7 @@ public class Util {
         }
     }
 
-    /**
-     * Undoes the last step in the pack operation to reconstitute the code into a Color object.
-     */
+    /** Undoes the last step in the pack operation to reconstitute the code into a Color object. */
     public static Color unpack(int code, int bitsPerChannel) {
         int r = code, g = code, b = code;
         if (bitsPerChannel >= 1 && bitsPerChannel <= 8) {
@@ -139,12 +129,10 @@ public class Util {
         }
     }
 
-    /**
-     * Simple testing.
-     */
+    /** Simple testing. */
     public static void main(String[] args) {
         System.out.println(isPrime(Constants.MAX_CAPACITY));
-        int j = 536870896;
+        int j = 536_870_896;
         System.out.println(Constants.MAX_CAPACITY == 4 * j + 3);
 
         int black = pack(Color.BLACK, 6);

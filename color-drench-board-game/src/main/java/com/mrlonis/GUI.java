@@ -1,5 +1,11 @@
 package com.mrlonis;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.io.Serial;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -9,21 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.event.MouseInputAdapter;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.io.Serial;
 
-/**
- * Builds the gui interface for an interactive run of the game.
- */
+/** Builds the gui interface for an interactive run of the game. */
 public class GUI extends JFrame {
 
-    /**
-     * This is an auto-generated serial ID to remove the Eclipse warning.
-     */
+    /** This is an auto-generated serial ID to remove the Eclipse warning. */
     @Serial
     private static final long serialVersionUID = -3353395325455077732L;
 
@@ -42,9 +38,7 @@ public class GUI extends JFrame {
     private final Board board;
     private final Game game;
 
-    /**
-     * Creates a gui to view the given game.
-     */
+    /** Creates a gui to view the given game. */
     public GUI(Game game) {
         setTitle(Constants.TITLE);
         this.game = game;
@@ -67,16 +61,12 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    /**
-     * Updates the display to show the number of steps used by the player so far.
-     */
+    /** Updates the display to show the number of steps used by the player so far. */
     public void setSteps() {
         steps.setText(game.getSteps() + "/" + game.getStepLimit());
     }
 
-    /**
-     * Sets up the menu.
-     */
+    /** Sets up the menu. */
     private void initMenu() {
         JMenu gameMenu = new JMenu("Game");
         gameMenu.setMnemonic(KeyEvent.VK_G);
@@ -119,11 +109,10 @@ public class GUI extends JFrame {
      */
     class TileButton extends JButton {
 
-        /**
-         * This is an auto-generated serial ID to remove the Eclipse warning.
-         */
+        /** This is an auto-generated serial ID to remove the Eclipse warning. */
         @Serial
         private static final long serialVersionUID = 1212931495709531989L;
+
         private final Tile tile;
 
         public TileButton(Tile tile) {
@@ -146,25 +135,19 @@ public class GUI extends JFrame {
             });
         }
 
-        /**
-         * Handles a game win condition.
-         */
+        /** Handles a game win condition. */
         private void youWin() {
             JOptionPane.showMessageDialog(GUI.this, "You Win!");
             game.resize(board.getSize());
         }
 
-        /**
-         * Handles a game loss condition.
-         */
+        /** Handles a game loss condition. */
         private void youLose() {
             JOptionPane.showMessageDialog(GUI.this, "You lose");
             game.resize(board.getSize());
         }
 
-        /**
-         * Draws the tile on this button.
-         */
+        /** Draws the tile on this button. */
         public void paintComponent(Graphics gr) {
             setBackground(tile.getColor().get());
             super.paintComponent(gr);

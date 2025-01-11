@@ -13,9 +13,7 @@ public class Obstacle {
 
     protected Coord upperLeft, lowerRight;
 
-    /**
-     * Creates a new obstacle whose upper left corner is (x1, y1) and whose lower right corner is (x2, y2).
-     */
+    /** Creates a new obstacle whose upper left corner is (x1, y1) and whose lower right corner is (x2, y2). */
     public Obstacle(int x1, int y1, int x2, int y2) {
         this(new Coord(x1, y1), new Coord(x2, y2));
     }
@@ -31,12 +29,13 @@ public class Obstacle {
     /**
      * Returns true iff the given coordinate is contained in the region of cells covered by this obstacle.
      *
-     * @param coord
-     *         The coordinate to check if it exists within the obstacle.
+     * @param coord The coordinate to check if it exists within the obstacle.
      */
     public boolean contains(Coord coord) {
-        return coord.x >= this.upperLeft.x && coord.y >= this.upperLeft.y && coord.x <= this.lowerRight.x &&
-               coord.y <= this.lowerRight.y;
+        return coord.x >= this.upperLeft.x
+                && coord.y >= this.upperLeft.y
+                && coord.x <= this.lowerRight.x
+                && coord.y <= this.lowerRight.y;
     }
 
     /**
@@ -56,9 +55,7 @@ public class Obstacle {
         return ans;
     }
 
-    /**
-     * Returns a textual representation of this obstacle.
-     */
+    /** Returns a textual representation of this obstacle. */
     public String toString() {
         return String.format("Obstacle[%s,%s]", upperLeft, lowerRight);
     }

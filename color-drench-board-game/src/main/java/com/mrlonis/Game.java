@@ -1,18 +1,18 @@
 package com.mrlonis;
 
-import javax.swing.SwingUtilities;
+import static java.lang.Math.toIntExact;
+
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
-
-import static java.lang.Math.toIntExact;
+import javax.swing.SwingUtilities;
 
 /**
  * Game is a controller that run a game in either interactive or batch mode. Unless resized, the game is played on a
  * board of size Constants.DEFAULT_SIZE.
- * <p>
- * Operations are provided to compare run times of different flood functions (using reflection to automatically detect
- * the defined methods in the Board class).
+ *
+ * <p>Operations are provided to compare run times of different flood functions (using reflection to automatically
+ * detect the defined methods in the Board class).
  */
 public class Game {
 
@@ -24,24 +24,18 @@ public class Game {
     private List<Integer> thisRun = new LinkedList<>(); // for timings when
     // running in batch mode
 
-    /**
-     * Creates an interactive game.
-     */
+    /** Creates an interactive game. */
     public Game() {
         this(true);
     }
 
-    /**
-     * Creates either an interactive or simulated (autoplayed) game depending on the sense of the argument.
-     */
+    /** Creates either an interactive or simulated (autoplayed) game depending on the sense of the argument. */
     public Game(boolean interactive) {
         this.interactive = interactive;
         this.init();
     }
 
-    /**
-     * Runs a game in interactive mode. See comment for how to run in batch (i.e., testing) mode.
-     */
+    /** Runs a game in interactive mode. See comment for how to run in batch (i.e., testing) mode. */
     public static void main(final String... args) {
         System.out.println(Constants.TITLE);
         String mode = "Interactive";
@@ -78,9 +72,7 @@ public class Game {
         System.out.println("Finished!");
     }
 
-    /**
-     * Initializes this game to a fresh state and starts up the gui.
-     */
+    /** Initializes this game to a fresh state and starts up the gui. */
     private void init() {
         this.board = new Board(this.size);
         this.currentStep = 0;
@@ -89,30 +81,22 @@ public class Game {
         }
     }
 
-    /**
-     * Returns the board associated with this game.
-     */
+    /** Returns the board associated with this game. */
     public Board getBoard() {
         return this.board;
     }
 
-    /**
-     * Returns true iff the player has run out of steps.
-     */
+    /** Returns true iff the player has run out of steps. */
     public boolean noMoreSteps() {
         return currentStep == getStepLimit();
     }
 
-    /**
-     * Returns the maximum number of steps for this game.
-     */
+    /** Returns the maximum number of steps for this game. */
     public int getStepLimit() {
         return size * 25 / 14 + 1;
     }
 
-    /**
-     * Returns the number of steps used by the player so far during this game.
-     */
+    /** Returns the number of steps used by the player so far during this game. */
     public int getSteps() {
         return currentStep;
     }
@@ -133,7 +117,7 @@ public class Game {
     public void select(int k, WaterColor color) {
         try {
             Class<?> c = Board.class;
-            Class<?>[] argTypes = new Class[]{WaterColor.class};
+            Class<?>[] argTypes = new Class[] {WaterColor.class};
             String name = "flood" + (k == 0 ? "" : k);
             Method floodFunction = c.getDeclaredMethod(name, argTypes);
             currentStep++;
@@ -151,7 +135,7 @@ public class Game {
     private void batchTest() {
         List<List<Integer>> allTimings = new LinkedList<>();
         Class<?> c = Board.class;
-        Class<?>[] argTypes = new Class[]{WaterColor.class};
+        Class<?>[] argTypes = new Class[] {WaterColor.class};
         int k = 0;
         try {
             while (true) {
@@ -176,9 +160,7 @@ public class Game {
         }
     }
 
-    /**
-     * Updates the board size and restarts.
-     */
+    /** Updates the board size and restarts. */
     void resize(int size) {
         this.size = size;
         if (this.interactive) {

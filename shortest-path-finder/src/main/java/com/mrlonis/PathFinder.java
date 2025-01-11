@@ -105,11 +105,9 @@ public class PathFinder {
      * Constructs the initial visited array placing true into every coordinate that is either inside an obstacle or an
      * end point of a wire.
      *
-     * @param chip
-     *         The chip this visited array will reference from.
-     *
+     * @param chip The chip this visited array will reference from.
      * @return A boolean matrix of true and false where true is wherever an obstacle is or wherever an end point of a
-     * wire is.
+     *     wire is.
      */
     public static boolean[][] visitedConstruction(Chip chip) {
         int height = chip.dim.height;
@@ -135,9 +133,7 @@ public class PathFinder {
      * the smallest separation distance will be placed at the top of the queue while the longer separations will be
      * placed at the bottom of the queue.
      *
-     * @param wires
-     *         The wires to be sorted into a PriorityQueue.
-     *
+     * @param wires The wires to be sorted into a PriorityQueue.
      * @return The PrioiortyQueue of sorted wires.
      */
     public static PriorityQueue<Wire> wiresSort(List<Wire> wires) {
@@ -155,20 +151,15 @@ public class PathFinder {
      * null value is returned if the path wasn't able to be completed, or a pair is returned that contains a null path
      * but a string containing the wireID of the wire preventing this wire from connecting.
      *
-     * @param wire
-     *         The wire to connect.
-     * @param visited
-     *         The visited matrix corresponding to coordinates that can be added to the path without interfering with
-     *         any obstacles or other wires.
-     * @param chip
-     *         The chip this wire exists inside of.
-     * @param wildCard
-     *         A wild card string. If this is anything other than "Ignore" then the algorithm will use this as a
-     *         reference of a direction to avoid using on its first move.
-     *
+     * @param wire The wire to connect.
+     * @param visited The visited matrix corresponding to coordinates that can be added to the path without interfering
+     *     with any obstacles or other wires.
+     * @param chip The chip this wire exists inside of.
+     * @param wildCard A wild card string. If this is anything other than "Ignore" then the algorithm will use this as a
+     *     reference of a direction to avoid using on its first move.
      * @return A pair containing the found path, if there is one, and a String referencing either the first direction
-     * the algorithm made or the wireID of the wire preventing this wire from being able to connect. In special
-     * circumstances, such as the wire being unable to connect due to obstacles, null is returned.
+     *     the algorithm made or the wireID of the wire preventing this wire from being able to connect. In special
+     *     circumstances, such as the wire being unable to connect due to obstacles, null is returned.
      */
     public static Pair wireProcessing(Wire wire, boolean[][] visited, Chip chip, String wildCard) {
         // Start of local variable declarations.
@@ -326,16 +317,16 @@ public class PathFinder {
 
             if (!potentialAdvances.isEmpty() && advance != to) {
                 if (numberOfIterations == 0) {
-                    if (potentialAdvances.containsKey("Right") && !wildCard.equals("Right")) {
+                    if (potentialAdvances.containsKey("Right") && !"Right".equals(wildCard)) {
                         advance = potentialAdvances.get("Right");
                         firstDir = "Right";
-                    } else if (potentialAdvances.containsKey("Up") && !wildCard.equals("Up")) {
+                    } else if (potentialAdvances.containsKey("Up") && !"Up".equals(wildCard)) {
                         advance = potentialAdvances.get("Up");
                         firstDir = "Up";
-                    } else if (potentialAdvances.containsKey("Left") && !wildCard.equals("Left")) {
+                    } else if (potentialAdvances.containsKey("Left") && !"Left".equals(wildCard)) {
                         advance = potentialAdvances.get("Left");
                         firstDir = "Left";
-                    } else if (potentialAdvances.containsKey("Down") && !wildCard.equals("Down")) {
+                    } else if (potentialAdvances.containsKey("Down") && !"Down".equals(wildCard)) {
                         advance = potentialAdvances.get("Down");
                         firstDir = "Down";
                     } else {
@@ -394,17 +385,17 @@ public class PathFinder {
                 }
 
                 if (!potentialAdvances.isEmpty() && advance != to) {
-                    if (numberOfIterations == 0 && !wildCard.equals("Ignore")) {
-                        if (potentialAdvances.containsKey("Right") && !wildCard.equals("Right")) {
+                    if (numberOfIterations == 0 && !"Ignore".equals(wildCard)) {
+                        if (potentialAdvances.containsKey("Right") && !"Right".equals(wildCard)) {
                             advance = potentialAdvances.get("Right");
                             firstDir = "Right";
-                        } else if (potentialAdvances.containsKey("Up") && !wildCard.equals("Up")) {
+                        } else if (potentialAdvances.containsKey("Up") && !"Up".equals(wildCard)) {
                             advance = potentialAdvances.get("Up");
                             firstDir = "Up";
-                        } else if (potentialAdvances.containsKey("Left") && !wildCard.equals("Left")) {
+                        } else if (potentialAdvances.containsKey("Left") && !"Left".equals(wildCard)) {
                             advance = potentialAdvances.get("Left");
                             firstDir = "Left";
-                        } else if (potentialAdvances.containsKey("Down") && !wildCard.equals("Down")) {
+                        } else if (potentialAdvances.containsKey("Down") && !"Down".equals(wildCard)) {
                             advance = potentialAdvances.get("Down");
                             firstDir = "Down";
                         } else {

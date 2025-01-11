@@ -15,5 +15,4 @@ public class Pair {
         this.path = path;
         this.wildCard = wild;
     }
-
 }

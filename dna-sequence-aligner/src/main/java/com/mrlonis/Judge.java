@@ -16,39 +16,29 @@ public class Judge {
     private final int mismatchCost;
     private final int gapCost;
 
-    /**
-     * Creates the default judge.
-     */
+    /** Creates the default judge. */
     public Judge() {
         this(DEFAULT_MATCH_COST, DEFAULT_MISMATCH_COST, DEFAULT_GAP_COST);
     }
 
-    /**
-     * Creates a judge using the specified costs.
-     */
+    /** Creates a judge using the specified costs. */
     public Judge(int matchCost, int mismatchCost, int gapCost) {
         this.matchCost = matchCost;
         this.mismatchCost = mismatchCost;
         this.gapCost = gapCost;
     }
 
-    /**
-     * Returns the gap cost used by this judge.
-     */
+    /** Returns the gap cost used by this judge. */
     public int getGapCost() {
         return gapCost;
     }
 
-    /**
-     * Returns the match cost used by this judge.
-     */
+    /** Returns the match cost used by this judge. */
     public int getMatchCost() {
         return matchCost;
     }
 
-    /**
-     * Returns the mismatch cost used by this judge.
-     */
+    /** Returns the mismatch cost used by this judge. */
     public int getMismatchCost() {
         return mismatchCost;
     }
@@ -56,15 +46,10 @@ public class Judge {
     /**
      * Returns the score associated with the two strings.
      *
-     * @param s1
-     *         The first string in the scoring.
-     * @param s2
-     *         The second string in the scoring.
-     *
+     * @param s1 The first string in the scoring.
+     * @param s2 The second string in the scoring.
      * @return The score associated with s1 and s2.
-     *
-     * @throws StringLengthException
-     *         if s1 and s2 are not the same length.
+     * @throws StringLengthException if s1 and s2 are not the same length.
      */
     public int score(String s1, String s2) {
         int ans = 0;
@@ -85,11 +70,8 @@ public class Judge {
     /**
      * Returns the score associated with the two characters.
      *
-     * @param a
-     *         The first character in the scoring.
-     * @param b
-     *         The second character in the scoring.
-     *
+     * @param a The first character in the scoring.
+     * @param b The second character in the scoring.
      * @return The score associated with the two characters.
      */
     public int score(char a, char b) {
@@ -109,15 +91,11 @@ public class Judge {
      */
     public static class StringLengthException extends RuntimeException {
 
-        /**
-         * Randomly Generated Serial ID
-         */
+        /** Randomly Generated Serial ID */
         @Serial
         private static final long serialVersionUID = 7428981602646859900L;
 
-        /**
-         * Default empty constructor.
-         */
+        /** Default empty constructor. */
         public StringLengthException() {
             super();
         }
@@ -125,8 +103,7 @@ public class Judge {
         /**
          * Throws a RuntimeException if two strings being scored are not of the same length.
          *
-         * @param str
-         *         The message returned to the user.
+         * @param str The message returned to the user.
          */
         public StringLengthException(String str) {
             super(str);

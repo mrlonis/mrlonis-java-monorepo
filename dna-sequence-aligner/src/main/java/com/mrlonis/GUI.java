@@ -1,15 +1,5 @@
 package com.mrlonis;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.ToolTipManager;
-import javax.swing.UIManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -20,15 +10,21 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.Serial;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
 
-/**
- * There's nothing for you to do here.
- */
+/** There's nothing for you to do here. */
 public class GUI extends JFrame {
 
-    /**
-     * Randomly generated Serial ID to avoid Eclipse warning.
-     */
+    /** Randomly generated Serial ID to avoid Eclipse warning. */
     @Serial
     private static final long serialVersionUID = 1945952304585171003L;
 
@@ -71,9 +67,7 @@ public class GUI extends JFrame {
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols; col++) {
                 JLabel cell = new JLabel() {
-                    /**
-                     *
-                     */
+                    /** */
                     @Serial
                     private static final long serialVersionUID = 1125324985782401249L;
 
@@ -151,9 +145,7 @@ public class GUI extends JFrame {
         setVisible(true);
     }
 
-    /**
-     * Replaces the character at position i in s with the string t.
-     */
+    /** Replaces the character at position i in s with the string t. */
     private static String replaceChar(String s, int i, String t) {
         return s.substring(0, i) + t + s.substring(i + 1);
     }
@@ -165,9 +157,7 @@ public class GUI extends JFrame {
         yLabel.setText("y: " + (y == null ? strands.getY() : y));
     }
 
-    /**
-     * Paint the GUI.
-     */
+    /** Paint the GUI. */
     public void paint(Graphics g) {
         super.paint(g);
         showCache();
@@ -198,14 +188,10 @@ public class GUI extends JFrame {
         }
     }
 
-    /**
-     * Context-sensitive menu that allows the user to change one nucleotide in a strand.
-     */
+    /** Context-sensitive menu that allows the user to change one nucleotide in a strand. */
     class ACTG extends JPopupMenu {
 
-        /**
-         * Randomly generated Serial ID to avoid Eclipse warning.
-         */
+        /** Randomly generated Serial ID to avoid Eclipse warning. */
         @Serial
         private static final long serialVersionUID = -6360532678602805033L;
 

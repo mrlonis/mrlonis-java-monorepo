@@ -7,24 +7,23 @@ import java.util.NoSuchElementException;
 
 /**
  * The keys in the heap must be stored in an array.
- * <p>
- * There may be duplicate keys in the heap.
- * <p>
- * The constructor takes an argument that specifies how objects in the heap are to be compared. This argument is a
+ *
+ * <p>There may be duplicate keys in the heap.
+ *
+ * <p>The constructor takes an argument that specifies how objects in the heap are to be compared. This argument is a
  * java.util.Comparator, which has a compare() method that has the same signature and behavior as the compareTo() method
  * found in the Comparable interface.
- * <p>
- * Here are some examples of a Comparator<String>:
- * <p>
- * (s, t) -> s.compareTo(t); (s, t) -> t.length() - s.length();
- * <p>
- * (s, t) -> t.toLowerCase().compareTo(s.toLowerCase());
- * <p>
- * (s, t) -> s.length() <= 3 ? -1 : 1;
+ *
+ * <p>Here are some examples of a Comparator<String>:
+ *
+ * <p>(s, t) -> s.compareTo(t); (s, t) -> t.length() - s.length();
+ *
+ * <p>(s, t) -> t.toLowerCase().compareTo(s.toLowerCase());
+ *
+ * <p>(s, t) -> s.length() <= 3 ? -1 : 1;
  *
  * @author Matthew Lonis (mrlonis)
  */
-
 public class Heap<E> implements PriorityQueue<E> {
     protected List<E> keys;
     private Comparator<E> comparator;
@@ -32,8 +31,7 @@ public class Heap<E> implements PriorityQueue<E> {
     /**
      * Creates a heap whose elements are prioritized by the comparator.
      *
-     * @param comparator
-     *         The comparator for this Heap.
+     * @param comparator The comparator for this Heap.
      */
     public Heap(Comparator<E> comparator) {
         this.keys = new ArrayList<>();
@@ -43,9 +41,7 @@ public class Heap<E> implements PriorityQueue<E> {
     /**
      * Returns the index of the left child of p.
      *
-     * @param p
-     *         The index to find the left child of.
-     *
+     * @param p The index to find the left child of.
      * @return The left child of p.
      */
     public static int getLeft(int p) {
@@ -55,9 +51,7 @@ public class Heap<E> implements PriorityQueue<E> {
     /**
      * Returns the index of the right child of p.
      *
-     * @param p
-     *         The index to find the right child of.
-     *
+     * @param p The index to find the right child of.
      * @return The right child of p.
      */
     public static int getRight(int p) {
@@ -67,9 +61,7 @@ public class Heap<E> implements PriorityQueue<E> {
     /**
      * Returns the index of the parent of p.
      *
-     * @param p
-     *         The index to find the parent of.
-     *
+     * @param p The index to find the parent of.
      * @return The parent of p.
      */
     public static int getParent(int p) {
@@ -89,9 +81,7 @@ public class Heap<E> implements PriorityQueue<E> {
      * Returns the top of this heap. This will be the highest priority key.
      *
      * @return The top element in the heap.
-     *
-     * @throws NoSuchElementException
-     *         if the heap is empty.
+     * @throws NoSuchElementException if the heap is empty.
      */
     public E peek() {
         return this.keys.get(0);
@@ -100,8 +90,7 @@ public class Heap<E> implements PriorityQueue<E> {
     /**
      * Inserts the given key into this heap. Uses siftUp().
      *
-     * @param key
-     *         The element to be inserted into this heap.
+     * @param key The element to be inserted into this heap.
      */
     public void insert(E key) {
         this.keys.add(key);
@@ -112,9 +101,7 @@ public class Heap<E> implements PriorityQueue<E> {
      * Removes and returns the highest priority key in this heap.
      *
      * @return The element that was removed from this heap.
-     *
-     * @throws NoSuchElementException
-     *         if the heap is empty.
+     * @throws NoSuchElementException if the heap is empty.
      */
     public E delete() {
         if (this.isEmpty()) {
@@ -129,8 +116,7 @@ public class Heap<E> implements PriorityQueue<E> {
     /**
      * Restores the heap property by sifting the key at position p down into the heap.
      *
-     * @param p
-     *         The starting position to start sifting down.
+     * @param p The starting position to start sifting down.
      */
     public void siftDown(int p) {
         int leftChild = getLeft(p);
@@ -154,8 +140,7 @@ public class Heap<E> implements PriorityQueue<E> {
     /**
      * Restores the heap property by sifting the key at position q up into the heap. (Used by insert()).
      *
-     * @param q
-     *         The starting position to start sifting up.
+     * @param q The starting position to start sifting up.
      */
     public void siftUp(int q) {
         int parent = getParent(q);
@@ -174,10 +159,8 @@ public class Heap<E> implements PriorityQueue<E> {
     /**
      * Exchanges the elements in the heap at the given indices in keys.
      *
-     * @param i
-     *         The first element index to be swapped.
-     * @param j
-     *         The second element index to be swapped.
+     * @param i The first element index to be swapped.
+     * @param j The second element index to be swapped.
      */
     public void swap(int i, int j) {
         E temp = this.keys.get(i);

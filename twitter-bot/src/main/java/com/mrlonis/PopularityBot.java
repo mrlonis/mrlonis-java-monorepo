@@ -32,9 +32,7 @@ public class PopularityBot extends TwitterBot {
     private int popFrequency;
     private String popWord;
 
-    /**
-     * Fetches the requested number of tweets from the given user.
-     */
+    /** Fetches the requested number of tweets from the given user. */
     public PopularityBot(String user, int numTweets) {
         super(user, numTweets);
         split();
@@ -56,9 +54,7 @@ public class PopularityBot extends TwitterBot {
         Collections.sort(words);
     }
 
-    /**
-     * Finds the most popular word in the user's tweets.
-     */
+    /** Finds the most popular word in the user's tweets. */
     private void findMostPopularWord() {
         popWord = "";
         int currRun = 0, maxRun = 0;
@@ -90,16 +86,12 @@ public class PopularityBot extends TwitterBot {
         return ans;
     }
 
-    /**
-     * Returns the most popular word in the user's recent tweet stream.
-     */
+    /** Returns the most popular word in the user's recent tweet stream. */
     public String getMostPopularWord() {
         return popWord;
     }
 
-    /**
-     * Returns the number of times the most popular word appears in the user's recent tweet stream.
-     */
+    /** Returns the number of times the most popular word appears in the user's recent tweet stream. */
     public int getFrequencyOfMostPopularWord() {
         return popFrequency;
     }

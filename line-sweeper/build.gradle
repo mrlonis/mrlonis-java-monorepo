@@ -1,54 +1,18 @@
 plugins {
-    id "base"
-    id "java"
-    id "idea"
-    id "jacoco"
-    id "io.freefair.lombok" version "8.11"
+    id "mrlonis-java"
 }
-
-group = "com.mrlonis"
-version = "0.0.1-SNAPSHOT"
 
 base {
     archivesName = "line-sweeper"
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation platform("org.junit:junit-bom:5.11.4")
-    testImplementation "org.junit.jupiter:junit-jupiter"
-}
-
-jacoco {
-    toolVersion = "0.8.12"
-}
-def filesToExcludeFromCoverage = ["**/com/mrlonis/configuration/**",
-                                  "**/com/mrlonis/controller/filters/**",
-                                  "**/com/mrlonis/dto/**",
-                                  "**/com/mrlonis/interfaces/**",
-                                  "**/com/mrlonis/SpringBootProjectTemplateApplication.*"]
-
-test {
-    finalizedBy jacocoTestReport
-    useJUnitPlatform()
-}
+def filesToExcludeFromCoverage = [
+    "**/com/mrlonis/configuration/**",
+    "**/com/mrlonis/controller/filters/**",
+    "**/com/mrlonis/dto/**",
+    "**/com/mrlonis/interfaces/**",
+    "**/com/mrlonis/SpringBootProjectTemplateApplication.*"
+]
 
 jacocoTestReport {
     dependsOn test
@@ -87,22 +51,4 @@ jacocoTestCoverageVerification {
     }
 
     mustRunAfter jacocoTestReport
-}
-
-tasks.named("test") {
-    useJUnitPlatform()
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.warnings = true
-    options.deprecation = true
-    options.compilerArgs << "-Xlint:unchecked"
-}
-
-check {
-    dependsOn jacocoTestCoverageVerification
-}
-
-build {
-    dependsOn jacocoTestReport
 }

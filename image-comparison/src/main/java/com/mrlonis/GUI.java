@@ -1,15 +1,5 @@
 package com.mrlonis;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -26,12 +16,20 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 public class GUI extends JFrame {
 
-    /**
-     *
-     */
+    /** */
     @Serial
     private static final long serialVersionUID = 6320759299671037262L;
 
@@ -52,9 +50,7 @@ public class GUI extends JFrame {
     private final ArrayList<ImagePanel> panels = new ArrayList<>();
     // bitSelector is the interface element for selecting desired number of bits per channel.
     JSlider bitSelector = new JSlider(SwingConstants.HORIZONTAL, 1, 8, 8) {
-        /**
-         *
-         */
+        /** */
         @Serial
         private static final long serialVersionUID = 2745885405011315969L;
 
@@ -73,9 +69,7 @@ public class GUI extends JFrame {
     // colorBox is the interface element for displaying the most recently selected color
     // from one of the images.
     JLabel colorBox = new JLabel("00 00 00") {
-        /**
-         *
-         */
+        /** */
         @Serial
         private static final long serialVersionUID = -3598882915133834212L;
 
@@ -97,9 +91,7 @@ public class GUI extends JFrame {
     // Indicative of whether or not the xray is turned on (initially false).
     private boolean xrayEffect;
 
-    /**
-     * Constructs a window to display two images and compare them for similarity after quantization.
-     */
+    /** Constructs a window to display two images and compare them for similarity after quantization. */
     public GUI(Image leftImage, Image rightImage) {
         this.leftImage = leftImage;
         this.rightImage = rightImage;
@@ -107,9 +99,7 @@ public class GUI extends JFrame {
         setBackground(Color.WHITE);
 
         JPanel main = new JPanel() {
-            /**
-             *
-             */
+            /** */
             @Serial
             private static final long serialVersionUID = -3538371272208108362L;
 
@@ -122,9 +112,7 @@ public class GUI extends JFrame {
         // sideBySide is the interface element for displaying the two images side by side.
         ImagePanel A = new ImagePanel(leftImage), B = new ImagePanel(rightImage);
         JPanel sideBySide = new JPanel() {
-            /**
-             *
-             */
+            /** */
             @Serial
             private static final long serialVersionUID = -8638776654159584375L;
 
@@ -140,9 +128,7 @@ public class GUI extends JFrame {
 
         // controls is the interface element holding the control panel.
         JPanel controls = new JPanel() {
-            /**
-             *
-             */
+            /** */
             @Serial
             private static final long serialVersionUID = 4287137813176043278L;
 
@@ -162,9 +148,7 @@ public class GUI extends JFrame {
 
         controls.add(Box.createRigidArea(new Dimension(30, 0)));
         controls.add(new JPanel() {
-            /**
-             *
-             */
+            /** */
             @Serial
             private static final long serialVersionUID = -1835311537011626348L;
 
@@ -179,9 +163,7 @@ public class GUI extends JFrame {
 
         controls.add(Box.createRigidArea(new Dimension(30, 0)));
         controls.add(new JPanel() {
-            /**
-             *
-             */
+            /** */
             @Serial
             private static final long serialVersionUID = -7189354716916668768L;
 
@@ -223,9 +205,7 @@ public class GUI extends JFrame {
         setVisible(true);
     }
 
-    /**
-     * Fires up the GUI with two randomly selected images.
-     */
+    /** Fires up the GUI with two randomly selected images. */
     public static void main(String[] args) {
         // Load all the paintings in the image directory.
         List<Image> paintings = new ArrayList<>();
@@ -243,17 +223,17 @@ public class GUI extends JFrame {
         SwingUtilities.invokeLater(() -> new GUI(pic1, pic2));
     }
 
-    /**
-     * Returns a color that contrasts visually with the given color.
-     */
+    /** Returns a color that contrasts visually with the given color. */
     public static Color getContrastColor(Color color) {
         double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
-        return y >= 128 ? Color.BLACK : Color.WHITE;
+        if (y >= 128) {
+            return Color.BLACK;
+        } else {
+            return Color.WHITE;
+        }
     }
 
-    /**
-     * Returns a black and white version of the given image, where pixels matching color are white.
-     */
+    /** Returns a black and white version of the given image, where pixels matching color are white. */
     private static Image xray(Color color, Image image) {
         Image copy = new Image(image);
         for (int x = 0; x < copy.getWidth(); x++) {
@@ -284,9 +264,7 @@ public class GUI extends JFrame {
      */
     class ImagePanel extends JPanel {
 
-        /**
-         *
-         */
+        /** */
         @Serial
         private static final long serialVersionUID = -121987832051247515L;
         // The actual image.
@@ -312,16 +290,17 @@ public class GUI extends JFrame {
                     colorBox.setBackground(color);
                     timer = new Timer();
                     // Schedule the xray effect to turn on 100ms after the intial press.
-                    timer.schedule(new TimerTask() {
-                        public void run() {
-                            xrayEffect = true;
-                            // Xray both panels, not just the this one.
-                            for (ImagePanel panel : panels) {
-                                panel.repaint();
-                            }
-                        }
-                    }, 100);
-
+                    timer.schedule(
+                            new TimerTask() {
+                                public void run() {
+                                    xrayEffect = true;
+                                    // Xray both panels, not just the this one.
+                                    for (ImagePanel panel : panels) {
+                                        panel.repaint();
+                                    }
+                                }
+                            },
+                            100);
                 }
 
                 public void mouseReleased(MouseEvent e) {

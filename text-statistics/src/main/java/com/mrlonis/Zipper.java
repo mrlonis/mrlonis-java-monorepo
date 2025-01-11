@@ -7,14 +7,11 @@ package com.mrlonis;
  *
  * @author Matthew Lonis (mrlonis)
  */
-
 public class Zipper {
     private CodeBook book; // used for encoding
     private HuffmanTree ht; // used for decoding
 
-    /**
-     * Create a Zipper from the provided code book.
-     */
+    /** Create a Zipper from the provided code book. */
     public Zipper(CodeBook book) {
         this.book = book;
         ht = book.getHuffmanTree();
@@ -23,9 +20,7 @@ public class Zipper {
     /**
      * Returns the bit string encoding of the given plain text.
      *
-     * @param plainText
-     *         The text to convert to a bit string encoding.
-     *
+     * @param plainText The text to convert to a bit string encoding.
      * @return The bit string encoding of the given text.
      */
     public String encode(String plainText) {
@@ -42,9 +37,7 @@ public class Zipper {
     /**
      * Returns the text string corresponding to the given bit string.
      *
-     * @param bits
-     *         The bit string to return the corresponding text string of.
-     *
+     * @param bits The bit string to return the corresponding text string of.
      * @return The text string corresponding to the given bit string.
      */
     public String decode(String bits) {
@@ -68,18 +61,15 @@ public class Zipper {
     /**
      * Returns the result of compressing a string of bits into a string of 8-bit characters.
      *
-     * @param bits
-     *         The string bits to compress into a string of 8-bits.
-     *
+     * @param bits The string bits to compress into a string of 8-bits.
      * @return The result of compressing the bit string into a string of 8-bits.
      */
     public String compress(String bits) {
         int n = bits.length();
         /**
-         * The last byte may not be full. We'll need to know how many bits are
-         * in the last byte, so that we can decompress properly later. We will
-         * prepend the compressed string with a head byte that holds the size of
-         * the last byte
+         * The last byte may not be full. We'll need to know how many bits are in the last byte, so that we can
+         * decompress properly later. We will prepend the compressed string with a head byte that holds the size of the
+         * last byte
          */
         int lastBiteSize = n % Constants.BITESIZE;
         if (lastBiteSize == 0) {
@@ -98,9 +88,7 @@ public class Zipper {
     /**
      * Returns the result of expanding the given compressed text into a bit string.
      *
-     * @param compressedText
-     *         The compressed text to be expanded.
-     *
+     * @param compressedText The compressed text to be expanded.
      * @return The result of expaning the given compressed text into a bit string.
      */
     public String decompress(String compressedText) {
@@ -112,6 +100,6 @@ public class Zipper {
             bits += Util.asciiToBits(compressedText.charAt(i), Constants.BITESIZE);
         }
         bits += Util.asciiToBits(compressedText.charAt(n - 1), lastBiteSize);
-        return bits.toString();
+        return bits;
     }
 }

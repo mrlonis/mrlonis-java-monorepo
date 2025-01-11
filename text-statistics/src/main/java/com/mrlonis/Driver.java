@@ -2,27 +2,26 @@ package com.mrlonis;
 
 /**
  * Running this driver will print some statistics about a small sample text.
- * <p>
- * Once your code passes all the unit tests, replace text with the contents of Alice In Wonderland. Figure out how to
+ *
+ * <p>Once your code passes all the unit tests, replace text with the contents of Alice In Wonderland. Figure out how to
  * calculate the percentage of bits saved. Do the same for Moby Dick. Then, download the plain text version of a
  * favorite book from http://www.gutenberg.org to your project directory, and collect those statistics.
- * <p>
- * Create a text file named report.txt in your project directory. This file should include your full name, username, and
- * lab section, and a table of your statistics regarding the three books.
+ *
+ * <p>Create a text file named report.txt in your project directory. This file should include your full name, username,
+ * and lab section, and a table of your statistics regarding the three books.
  *
  * @author Matthew Lonis (mrlonis)
  */
-
 public class Driver {
     public static void main(String[] args) {
         System.out.println(Constants.TITLE);
-		/*
-		String text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbbb" + "cccccccccccc"
-				+ "ddddddddddddddddddddd" + "eeeeeeeee" + "fffff";
-		*/
-        //String text = Util.loadFile(Constants.ALICE);
+        /*
+        String text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbbb" + "cccccccccccc"
+        		+ "ddddddddddddddddddddd" + "eeeeeeeee" + "fffff";
+        */
+        // String text = Util.loadFile(Constants.ALICE);
         String text = Util.loadFile(Constants.MOBY_DICK);
-        //String text = Util.loadFile(Constants.TOM_SAWYER);
+        // String text = Util.loadFile(Constants.TOM_SAWYER);
 
         System.out.println("\nThe original text has " + text.length() + " characters.");
         CodeBook book = new CodeBook(text);
