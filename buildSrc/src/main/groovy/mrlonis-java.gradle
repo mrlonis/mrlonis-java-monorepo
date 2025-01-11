@@ -41,6 +41,9 @@ jacoco {
 test {
     finalizedBy jacocoTestReport
     useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
