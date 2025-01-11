@@ -1,8 +1,6 @@
 package com.mrlonis;
 
-/**
- * @author mrlonis
- */
+/** @author mrlonis */
 public class Association {
 
     public int key;
@@ -18,5 +16,4 @@ public class Association {
 
         System.out.println("a1 key = " + a1.key + " value = " + a1.value);
     }
-
 }

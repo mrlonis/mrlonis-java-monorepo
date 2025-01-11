@@ -1,6 +1,9 @@
 package com.mrlonis;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Dimension;
 import java.io.File;
@@ -9,27 +12,23 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 /**
  * TODO: Write a comprehensive suite of unit tests!!!!
- * <p>
- * We include some very simple tests to get you started.
+ *
+ * <p>We include some very simple tests to get you started.
  */
 public class Testing {
 
-    /**
-     * Runs the benchmarks on all filenames starting with the give prefix.
-     */
+    /** Runs the benchmarks on all filenames starting with the give prefix. */
     public static void runBenchmarksFor(String prefix) {
         System.out.printf("Routing chips %s/%s*%s\n%n", Constants.INPUTS_FOLDER, prefix, Constants.EXTENSION);
         File folder = new File(Constants.INPUTS_FOLDER);
         for (File file : folder.listFiles()) {
-            if (file.isFile() && file.getName().startsWith(prefix) && file.getName().endsWith(Constants.EXTENSION)) {
+            if (file.isFile()
+                    && file.getName().startsWith(prefix)
+                    && file.getName().endsWith(Constants.EXTENSION)) {
                 System.out.println("========== " + file.getName() + " ==========");
                 Chip chip = new Chip(file);
                 System.out.println("before:\n" + chip);
@@ -51,9 +50,7 @@ public class Testing {
         System.out.println("Benchmarks completed...\n");
     }
 
-    /**
-     * Returns true iff the given wire layout is legal on the given grid.
-     */
+    /** Returns true iff the given wire layout is legal on the given grid. */
     public static boolean validateLayout(Map<Integer, Path> layout, Chip chip) {
         String msg = "Incorrect %s of path for wire %d, found %s, expected %s.";
         Dimension dim = chip.dim;
@@ -101,8 +98,8 @@ public class Testing {
         return true;
     }
 
-    //@Test
-    public void obstacleListOfCoords() {
+    // @Test
+    void obstacleListOfCoords() {
         Coord upperLeft = new Coord(1, 1);
         Coord lowerRight = new Coord(3, 3);
         Obstacle obs = new Obstacle(upperLeft, lowerRight);
@@ -135,8 +132,8 @@ public class Testing {
         assertFalse(listOfCoord.contains(new Coord(4, 4)));
     }
 
-    //@Test
-    public void chip3Manual() {
+    // @Test
+    void chip3Manual() {
         Dimension dim;
         List<Obstacle> obstacles = new LinkedList<>();
         List<Wire> wires = new LinkedList<>();
@@ -185,8 +182,8 @@ public class Testing {
         assertEquals(2, chip3.wires.get(0).separation());
     }
 
-    //@Test
-    public void chip9Manual() {
+    // @Test
+    void chip9Manual() {
         Dimension dim;
         List<Obstacle> obstacles = new LinkedList<>();
         List<Wire> wires = new LinkedList<>();
@@ -226,8 +223,8 @@ public class Testing {
         assertEquals(3, chip9.wires.get(3).to.y);
     }
 
-    //@Test
-    public void tinyWire() {
+    // @Test
+    void tinyWire() {
         Wire w1 = new Wire(1, 1, 2, 3, 4);
         assertEquals(1, w1.wireId);
         assertEquals(new Coord(1, 2), w1.from);
@@ -241,14 +238,14 @@ public class Testing {
         assertEquals(4, w2.separation());
     }
 
-    //@Test
-    public void tinyObstacle() {
+    // @Test
+    void tinyObstacle() {
         Obstacle obs = new Obstacle(5, 5, 5, 5);
         assertTrue(obs.contains(new Coord(5, 5)));
     }
 
-    //@Test
-    public void chip3File() {
+    // @Test
+    void chip3File() {
         Chip chip3 = new Chip(new File("inputs/small_03.in"));
         assertEquals(7, chip3.dim.width);
         assertEquals(6, chip3.dim.height);
@@ -261,8 +258,8 @@ public class Testing {
         assertEquals(3, chip3.wires.get(0).to.y);
     }
 
-    //@Test
-    public void smallChip0Layout() {
+    // @Test
+    void smallChip0Layout() {
         Chip chip0 = new Chip(new File("inputs/small_00.in"));
         System.out.println("before:\n" + chip0);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip0);
@@ -275,8 +272,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChip1Layout() {
+    // @Test
+    void smallChip1Layout() {
         Chip chip1 = new Chip(new File("inputs/small_01.in"));
         System.out.println("before:\n" + chip1);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip1);
@@ -289,8 +286,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChip2Layout() {
+    // @Test
+    void smallChip2Layout() {
         Chip chip2 = new Chip(new File("inputs/small_02.in"));
         System.out.println("before:\n" + chip2);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip2);
@@ -303,8 +300,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChip3Layout() {
+    // @Test
+    void smallChip3Layout() {
         Chip chip3 = new Chip(new File("inputs/small_03.in"));
         System.out.println("before:\n" + chip3);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip3);
@@ -317,8 +314,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChip4Layout() {
+    // @Test
+    void smallChip4Layout() {
         Chip chip4 = new Chip(new File("inputs/small_04.in"));
         System.out.println("before:\n" + chip4);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip4);
@@ -331,8 +328,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChip5Layout() {
+    // @Test
+    void smallChip5Layout() {
         Chip chip5 = new Chip(new File("inputs/small_05.in"));
         System.out.println("before:\n" + chip5);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip5);
@@ -345,8 +342,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChip6Layout() {
+    // @Test
+    void smallChip6Layout() {
         Chip chip6 = new Chip(new File("inputs/small_06.in"));
         System.out.println("before:\n" + chip6);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip6);
@@ -359,8 +356,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChip7Layout() {
+    // @Test
+    void smallChip7Layout() {
         Chip chip7 = new Chip(new File("inputs/small_07.in"));
         System.out.println("before:\n" + chip7);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip7);
@@ -373,8 +370,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChi80Layout() {
+    // @Test
+    void smallChi80Layout() {
         Chip chip8 = new Chip(new File("inputs/small_08.in"));
         System.out.println("before:\n" + chip8);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip8);
@@ -387,8 +384,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChip9Layout() {
+    // @Test
+    void smallChip9Layout() {
         Chip chip9 = new Chip(new File("inputs/small_09.in"));
         System.out.println("before:\n" + chip9);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip9);
@@ -401,8 +398,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChip10Layout() {
+    // @Test
+    void smallChip10Layout() {
         Chip chip10 = new Chip(new File("inputs/small_10.in"));
         System.out.println("before:\n" + chip10);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip10);
@@ -415,8 +412,8 @@ public class Testing {
 
     }
 
-    //@Test
-    public void smallChip11Layout() {
+    // @Test
+    void smallChip11Layout() {
         Chip chip11 = new Chip(new File("inputs/small_11.in"));
         System.out.println("before:\n" + chip11);
         Map<Integer, Path> layout = PathFinder.connectAllWires(chip11);
@@ -429,12 +426,12 @@ public class Testing {
 
     }
 
-    /*********************************************************************
-     * Benchmarks: Computes layouts for chips described in input/wire*.in
-     *********************************************************************/
-
+    /**
+     * ******************************************************************* Benchmarks: Computes layouts for chips
+     * described in input/wire*.in *******************************************************************
+     */
     @Test
-    public void runBenchmarks() {
+    void runBenchmarks() {
         runBenchmarksFor("small");
         runBenchmarksFor("medium");
         runBenchmarksFor("big");

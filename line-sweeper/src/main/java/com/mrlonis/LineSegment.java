@@ -11,17 +11,16 @@ import java.io.Serial;
 
 /**
  * [read-only]
- * <p>
- * This class represents a single LineSegment, composed from two endpoints. This class is used by the GUI as the user is
- * drawing the line. When that's happening, the LeftEndpoint is fixed, but the RightEndpoint is still changing. Methods
- * are provided to draw the line segment using a graphics context, with or without details and highlighting. Methods are
- * provided to test for intersection with another line segment or a point.
- * <p>
- * Importantly, the lessThan() predicate allows us to determine the relative order of this line segment and some other
- * line segment according to the y-intercepts with the sweep line. This is the main computation performed by the
+ *
+ * <p>This class represents a single LineSegment, composed from two endpoints. This class is used by the GUI as the user
+ * is drawing the line. When that's happening, the LeftEndpoint is fixed, but the RightEndpoint is still changing.
+ * Methods are provided to draw the line segment using a graphics context, with or without details and highlighting.
+ * Methods are provided to test for intersection with another line segment or a point.
+ *
+ * <p>Importantly, the lessThan() predicate allows us to determine the relative order of this line segment and some
+ * other line segment according to the y-intercepts with the sweep line. This is the main computation performed by the
  * relation on which Sweeper maintains its tree.
  */
-
 public class LineSegment {
     public static final Color DEFAULT_COLOR = Color.BLACK;
     public static final Color HIGHLIGHT_COLOR = new Color(0xee7600);
@@ -35,26 +34,20 @@ public class LineSegment {
     protected Color color;
     private boolean fixed;
 
-    /**
-     * Constructs a zero-length line segment from p1 to p1.
-     */
+    /** Constructs a zero-length line segment from p1 to p1. */
     public LineSegment(Point2D p1) {
         this.p1 = p1;
         this.color = DEFAULT_COLOR;
         fixed = false;
     }
 
-    /**
-     * Constructs a line segments with endpoints p1 and p2.
-     */
+    /** Constructs a line segments with endpoints p1 and p2. */
     public LineSegment(Point2D p1, Point2D p2) {
         this(p1);
         setP2(p2);
     }
 
-    /**
-     * Sets the second endpoint of this line segment to p2.
-     */
+    /** Sets the second endpoint of this line segment to p2. */
     public void setP2(Point2D p2) {
         if ((int) p1.getX() == (int) p2.getX())
         // nudge vertical lines
@@ -64,23 +57,17 @@ public class LineSegment {
         this.p2 = p2;
     }
 
-    /**
-     * Marks this line segment as fully constructed.
-     */
+    /** Marks this line segment as fully constructed. */
     public void fix() {
         fixed = true;
     }
 
-    /**
-     * Returns true iff this line segment is specified by a single endpoint.
-     */
+    /** Returns true iff this line segment is specified by a single endpoint. */
     public boolean isZeroLength() {
         return p2 == null;
     }
 
-    /**
-     * Returns the left endpoint associated with this line segment.
-     */
+    /** Returns the left endpoint associated with this line segment. */
     public Endpoint getLeftEndpoint() {
         if (isZeroLength() || p1.getX() < p2.getX()) {
             return new LeftEndpoint(p1);
@@ -88,9 +75,7 @@ public class LineSegment {
         return new LeftEndpoint(p2);
     }
 
-    /**
-     * Returns the right endpoint associated with this line segment.
-     */
+    /** Returns the right endpoint associated with this line segment. */
     public Endpoint getRightEndpoint() {
         if (isZeroLength() || p1.getX() > p2.getX()) {
             return new RightEndpoint(p1);
@@ -106,33 +91,26 @@ public class LineSegment {
         color = HIGHLIGHT_COLOR;
     }
 
-    /**
-     * Turns off the highlight for this line segment.
-     */
+    /** Turns off the highlight for this line segment. */
     public void unhighlight() {
         color = DEFAULT_COLOR;
     }
 
-    /**
-     * Returns the color this line should be drawn in.
-     */
+    /** Returns the color this line should be drawn in. */
     public Color getColor() {
         return color;
     }
 
-    /**
-     * Returns true iff this line segment intersects with that one.
-     */
+    /** Returns true iff this line segment intersects with that one. */
     public boolean intersects(LineSegment that) {
         return new Line2D.Double(p1, p2).intersectsLine(new Line2D.Double(that.p1, that.p2));
     }
 
-    /**
-     * Returns true iff this line segments intersects with that point.
-     */
+    /** Returns true iff this line segments intersects with that point. */
     public boolean intersects(Point2D that) {
-        return new Line2D.Double(p1, p2).intersects(
-                new Rectangle2D.Double(that.getX() - EPSILON, that.getY() - EPSILON, 2 * EPSILON, 2 * EPSILON));
+        return new Line2D.Double(p1, p2)
+                .intersects(
+                        new Rectangle2D.Double(that.getX() - EPSILON, that.getY() - EPSILON, 2 * EPSILON, 2 * EPSILON));
     }
 
     /**
@@ -151,16 +129,12 @@ public class LineSegment {
         return y1 < y2;
     }
 
-    /**
-     * Returns a textual representation of this line segment.
-     */
+    /** Returns a textual representation of this line segment. */
     public String toString() {
         return "[" + getLeftEndpoint() + ", " + getRightEndpoint() + "]";
     }
 
-    /**
-     * Return true iff this line segment is the same as the other one.
-     */
+    /** Return true iff this line segment is the same as the other one. */
     public boolean equals(Object other) {
         if (other instanceof LineSegment that) {
             return this.p1.equals(that.p1) && this.p2.equals(that.p2);
@@ -205,7 +179,6 @@ public class LineSegment {
  * extend from the top border of the window to the bottom border, and it's completely vertical. It is drawn as a dashed
  * gray line.
  */
-
 class SweepLine extends LineSegment {
     private boolean error = false;
 
@@ -220,7 +193,7 @@ class SweepLine extends LineSegment {
     }
 
     public void draw(Graphics2D g2d, boolean showDetails) {
-        Stroke dashed = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
+        Stroke dashed = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] {9}, 0);
         g2d.setStroke(dashed);
         g2d.setColor(getColor());
         g2d.draw(new Line2D.Double(p1, p2));
@@ -239,9 +212,7 @@ class SweepLine extends LineSegment {
  * compareTo().
  */
 abstract class Endpoint extends Point2D.Double implements Comparable<Endpoint> {
-    /**
-     * Added default serial ID to remove Eclipse warning.
-     */
+    /** Added default serial ID to remove Eclipse warning. */
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -285,13 +256,9 @@ abstract class Endpoint extends Point2D.Double implements Comparable<Endpoint> {
     }
 }
 
-/**
- * LeftEndpoint is an Endpoint that is known to be on the left side of a line segment.
- */
+/** LeftEndpoint is an Endpoint that is known to be on the left side of a line segment. */
 class LeftEndpoint extends Endpoint {
-    /**
-     * Added default serial ID to remove Eclipse warning.
-     */
+    /** Added default serial ID to remove Eclipse warning. */
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -304,13 +271,9 @@ class LeftEndpoint extends Endpoint {
     }
 }
 
-/**
- * RightEndpoint is an Endpoint that is known to be on the right side of a line segment.
- */
+/** RightEndpoint is an Endpoint that is known to be on the right side of a line segment. */
 class RightEndpoint extends Endpoint {
-    /**
-     * Added default serial ID to remove Eclipse warning.
-     */
+    /** Added default serial ID to remove Eclipse warning. */
     @Serial
     private static final long serialVersionUID = 1L;
 

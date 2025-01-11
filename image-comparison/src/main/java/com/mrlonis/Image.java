@@ -1,29 +1,25 @@
 package com.mrlonis;
 
-import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 
-/**
- * This class handles the loading of images from files, and it supports accessing the color of a specific pixel.
- */
+/** This class handles the loading of images from files, and it supports accessing the color of a specific pixel. */
 public class Image {
 
     private BufferedImage image;
     private int width, height;
     private String name;
 
-    /**
-     * Load an external image from the file system. Exits on error.
-     */
+    /** Load an external image from the file system. Exits on error. */
     public Image(String filename) {
         try {
             String[] words = filename.split("/");
             int last = words.length - 1;
-            name = words[last].substring(0, words[last].indexOf("."));
+            name = words[last].substring(0, words[last].indexOf('.'));
             image = ImageIO.read(new File(filename));
             width = image.getWidth();
             height = image.getHeight();
@@ -33,9 +29,7 @@ public class Image {
         }
     }
 
-    /**
-     * Construct a copy of source in this image.
-     */
+    /** Construct a copy of source in this image. */
     public Image(Image source) {
         this.width = source.width;
         this.height = source.height;
@@ -46,9 +40,7 @@ public class Image {
         g.dispose();
     }
 
-    /**
-     * Simple testing.
-     */
+    /** Simple testing. */
     public static void main(String[] args) {
         Image image = new Image(Constants.IMAGE_DIR + "/davinci.jpg");
         System.out.println("corner color: " + image.getColor(0, 0));
@@ -68,30 +60,22 @@ public class Image {
         return copy;
     }
 
-    /**
-     * Returns the name associated with this image.
-     */
+    /** Returns the name associated with this image. */
     public String getName() {
         return name;
     }
 
-    /**
-     * Returns the width (in pixels) of this image.
-     */
+    /** Returns the width (in pixels) of this image. */
     public int getWidth() {
         return width;
     }
 
-    /**
-     * Returns the height (in pixels) of this image.
-     */
+    /** Returns the height (in pixels) of this image. */
     public int getHeight() {
         return height;
     }
 
-    /**
-     * Returns the color in this image at coordinate (x, y).
-     */
+    /** Returns the color in this image at coordinate (x, y). */
     public Color getColor(int x, int y) {
         try {
             return new Color(image.getRGB(x, y));
@@ -100,18 +84,13 @@ public class Image {
         }
     }
 
-    /**
-     * Sets the pixel at location (x, y) to the specified color.
-     */
+    /** Sets the pixel at location (x, y) to the specified color. */
     public void setColor(int x, int y, Color color) {
         image.setRGB(x, y, color.getRGB());
     }
 
-    /**
-     * Uses the given graphics context to draw this image on the associated component.
-     */
+    /** Uses the given graphics context to draw this image on the associated component. */
     public void draw(Graphics gr) {
         gr.drawImage(image, 0, 0, null);
     }
-
 }

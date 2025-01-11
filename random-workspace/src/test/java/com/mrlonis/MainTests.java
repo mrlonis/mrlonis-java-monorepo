@@ -1,13 +1,13 @@
 package com.mrlonis;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 class MainTests {
     @Test
     void testMain() {
-        Main.main(new String[]{});
+        Main.main(new String[] {});
         assertTrue(true);
     }
 }

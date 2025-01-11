@@ -2,22 +2,21 @@ package com.mrlonis;
 
 /**
  * [read-only]
- * <p>
- * Given a set of n line segments, find a pair that intersects (if such a pair exists).
- * <p>
- * Simplifications: - there are no vertical line segments - there are no three-way (or more) intersections
- * <p>
- * The brute force solution compares all pairs of line segments for intersection and is in O(n^2).
- * <p>
- * O(n log n) Line Sweep Algorithm: - Sort all end-points of the line segments from left to right (along the x-axis). -
- * Sweep a vertical line from left to right, stopping at each end-point. - Maintain a BST of all the segments that
+ *
+ * <p>Given a set of n line segments, find a pair that intersects (if such a pair exists).
+ *
+ * <p>Simplifications: - there are no vertical line segments - there are no three-way (or more) intersections
+ *
+ * <p>The brute force solution compares all pairs of line segments for intersection and is in O(n^2).
+ *
+ * <p>O(n log n) Line Sweep Algorithm: - Sort all end-points of the line segments from left to right (along the x-axis).
+ * - Sweep a vertical line from left to right, stopping at each end-point. - Maintain a BST of all the segments that
  * intersect the sweep line, sorted by where they cross the sweep line at the current x-coordinate. - When a segment is
  * added to the tree (because the sweep line touches its left endpoint), check whether it intersects with the one
  * immediately above it or the one immediately below it on the sweep line. - When a segment is removed from the tree
  * (because the sweep line touches its right endpoint), check whether the lines immediately above and immediately below
  * intersect with each other.
  */
-
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,10 +34,9 @@ public class Sweeper {
     public Sweeper(List<LineSegment> world, int treeType) {
         this.world = world;
         /**
-         * Note that the relationship on which the tree is organized changes
-         * with the changing sweep line. This means we have to rebuild if we
-         * want another intersection (and to mitigate the effect of the dirty
-         * segments in the tree).
+         * Note that the relationship on which the tree is organized changes with the changing sweep line. This means we
+         * have to rebuild if we want another intersection (and to mitigate the effect of the dirty segments in the
+         * tree).
          */
         BiPredicate<LineSegment, LineSegment> sweepPred = (LineSegment s1, LineSegment s2) -> s1.lessThan(s2, sweepX);
         if (treeType == Constants.BST) {
@@ -48,9 +46,7 @@ public class Sweeper {
         }
     }
 
-    /**
-     * Returns the current x-coordinate of the sweep line.
-     */
+    /** Returns the current x-coordinate of the sweep line. */
     public int getSweepX() {
         return sweepX;
     }
@@ -132,11 +128,8 @@ public class Sweeper {
  * This exception is useful for debugging purposes. It is caught by the GUI, which highlights the segment and the sweep
  * line and also prints the state of the tree.
  */
-
 class SweeperException extends RuntimeException {
-    /**
-     * Added default serial ID to remove Eclipse warning.
-     */
+    /** Added default serial ID to remove Eclipse warning. */
     @Serial
     private static final long serialVersionUID = 1L;
 

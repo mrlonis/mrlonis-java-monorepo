@@ -4,14 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-/**
- * There's nothing for you to do here.
- */
-
+/** There's nothing for you to do here. */
 public class Util {
-    /**
-     * Reads a text file and returns the contents as a string.
-     */
+    /** Reads a text file and returns the contents as a string. */
     public static String loadFile(String filename) {
         StringBuilder sb = new StringBuilder();
         try {
@@ -26,16 +21,12 @@ public class Util {
         return sb.toString();
     }
 
-    /**
-     * Returns a bit string of length n, corresponding to the ASCII encoding of ch.
-     */
+    /** Returns a bit string of length n, corresponding to the ASCII encoding of ch. */
     public static String asciiToBits(char ch, int n) {
         return padLeft(Integer.toBinaryString((int) ch), n);
     }
 
-    /**
-     * Returns the char whose ASCII value corresponds to the given bit string.
-     */
+    /** Returns the char whose ASCII value corresponds to the given bit string. */
     public static char bitsToAscii(String bits) {
         return (char) Integer.parseInt(bits, 2);
     }

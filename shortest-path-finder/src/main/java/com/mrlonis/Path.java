@@ -9,10 +9,9 @@ import java.util.LinkedList;
  */
 public class Path extends LinkedList<Coord> {
 
-    /**
-     * Generated serial ID to suppress Eclipse warning.
-     */
+    /** Generated serial ID to suppress Eclipse warning. */
     private static final long serialVersionUID = 2827790888028951407L;
+
     protected Wire wire;
 
     public Path(Wire wire) {
@@ -20,11 +19,8 @@ public class Path extends LinkedList<Coord> {
         add(wire.from);
     }
 
-    /**
-     * Returns the length of this path.
-     */
+    /** Returns the length of this path. */
     public int length() {
         return size();
     }
-
 }

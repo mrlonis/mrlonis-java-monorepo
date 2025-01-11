@@ -1,16 +1,15 @@
 package com.mrlonis;
 
-import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 /**
  * JUnit tests for all methods.
@@ -83,7 +82,7 @@ class BoardTests {
     }
 
     @Test
-    public void testFullyFlooded() {
+    void testFullyFlooded() {
         int size = 1;
         Board testBoard = new Board(size);
         WaterColor color = WaterColor.BLUE;
@@ -102,7 +101,7 @@ class BoardTests {
     }
 
     @Test
-    public void testFlood() {
+    void testFlood() {
         int size = 5;
         Board testBoard = new Board(size);
         WaterColor color = WaterColor.BLUE;
@@ -138,7 +137,7 @@ class BoardTests {
     }
 
     @Test
-    public void testFlood1() {
+    void testFlood1() {
         int size = 5;
         Board testBoard = new Board(size);
         WaterColor color = WaterColor.BLUE;
@@ -174,7 +173,7 @@ class BoardTests {
     }
 
     @Test
-    public void testFlood2() {
+    void testFlood2() {
         int size = 5;
         Board testBoard = new Board(size);
         WaterColor color = WaterColor.BLUE;
@@ -210,7 +209,7 @@ class BoardTests {
     }
 
     @Test
-    public void testSuggest() {
+    void testSuggest() {
         int size = 5;
         Board testBoard = new Board(size);
         WaterColor color = WaterColor.BLUE;

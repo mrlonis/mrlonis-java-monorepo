@@ -1,18 +1,17 @@
 package com.mrlonis;
 
-import org.junit.jupiter.api.Test;
-
-import java.awt.Color;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.awt.Color;
+import org.junit.jupiter.api.Test;
+
 /**
  * Assorted JUnit tests for ColorTable.
- * <p>
- * To "turn off" any test, put double slashes ( "//" ) in front of the "@Test" that precedes that method. For example,
- * "//@Test".
+ *
+ * <p>To "turn off" any test, put double slashes ( "//" ) in front of the "@Test" that precedes that method. For
+ * example, "//@Test".
  */
 public class Testing {
 
@@ -25,7 +24,7 @@ public class Testing {
     private static ColorTable table;
 
     @Test
-    public void testPutAndGet() {
+    void testPutAndGet() {
         table = new ColorTable(3, 6, Constants.LINEAR, 0.9);
         assertEquals(0, table.getSize());
         assertEquals(3, table.getCapacity());
@@ -41,7 +40,7 @@ public class Testing {
     }
 
     @Test
-    public void testPutAndGetAt() {
+    void testPutAndGetAt() {
         table = new ColorTable(3, 2, Constants.LINEAR, 0.9);
         assertEquals(0, table.getSize());
         assertEquals(3, table.getCapacity());
@@ -62,7 +61,7 @@ public class Testing {
     }
 
     @Test
-    public void testImplicitCounts() {
+    void testImplicitCounts() {
         table = new ColorTable(3, 6, Constants.LINEAR, 0.9);
         assertEquals(0, table.get(Color.BLUE));
         assertEquals(0, table.get(Color.PINK));
@@ -71,7 +70,7 @@ public class Testing {
     }
 
     @Test
-    public void testIncrementAndGet() {
+    void testIncrementAndGet() {
         table = new ColorTable(3, 4, Constants.LINEAR, 0.9);
         table.increment(Color.RED);
         table.increment(Color.RED);
@@ -84,8 +83,8 @@ public class Testing {
     }
 
     @Test
-    public void testIncrementTruncated() {
-        table = new ColorTable(3, 1, Constants.LINEAR, 0.9);  // just using 3 bits for a color
+    void testIncrementTruncated() {
+        table = new ColorTable(3, 1, Constants.LINEAR, 0.9); // just using 3 bits for a color
         c1 = new Color(0xf0, 0xe0, 0xd0);
         c2 = new Color(0xff, 0xee, 0xdd);
         c3 = new Color(0xd1, 0xf2, 0xe3);
@@ -98,7 +97,7 @@ public class Testing {
     }
 
     @Test
-    public void testIncrementAndResizing() {
+    void testIncrementAndResizing() {
         table = new ColorTable(3, 6, Constants.LINEAR, 0.8);
         table.increment(Color.BLACK);
         assertEquals(1, table.get(Color.BLACK));
@@ -133,7 +132,7 @@ public class Testing {
     }
 
     @Test
-    public void testQuadraticProbingAndResizing() {
+    void testQuadraticProbingAndResizing() {
         testQuadraticProbing(); // This sets up the table to just before resizing.
         assertEquals(0, table.getCountAt(7)); // This fails if you rehash too soon.
         assertEquals(6, table.getSize());
@@ -146,7 +145,7 @@ public class Testing {
 
         // The next operation should force a resize from 13 to 31.
         table.put(c6, 7);
-        //System.out.println(table);
+        // System.out.println(table);
         assertEquals(7, table.getCountAt(16));
         table.put(c7, 8);
         assertEquals(8, table.getCountAt(29));
@@ -155,7 +154,7 @@ public class Testing {
     }
 
     @Test
-    public void testQuadraticProbing() {
+    void testQuadraticProbing() {
         table = new ColorTable(13, 8, Constants.QUADRATIC, 0.49);
         // For a tableSize of 13, these keys all collide.
         Color c0 = new Color(0);
@@ -183,7 +182,7 @@ public class Testing {
     }
 
     @Test
-    public void testLowLoadFactor() {
+    void testLowLoadFactor() {
         table = new ColorTable(3, 4, Constants.LINEAR, 0.1);
         assertEquals(0, table.getSize());
         assertEquals(3, table.getCapacity());
@@ -210,7 +209,7 @@ public class Testing {
     }
 
     @Test
-    public void testIterator() {
+    void testIterator() {
         table = new ColorTable(13, 2, Constants.LINEAR, 0.49);
         for (int i = 0; i < 20 * 17; i += 17) {
             table.put(new Color(i * i), i);
@@ -238,18 +237,21 @@ public class Testing {
     }
 
     @Test
-    public void testCosineSimilarity() {
+    void testCosineSimilarity() {
         ColorTable ct1 = Driver.vectorize(Painting.BLUE_DANCERS.get(), 1);
         ColorTable ct2 = Driver.vectorize(Painting.STARRY_NIGHT.get(), 1);
         System.out.println("ct1 = " + ct1);
         System.out.println("ct2 = " + ct2);
-	  /* Expected output:
-	     ct1 = [0:0,185844, 1:1,22927, 2:2,4639, 3:3,42667, 4:4,1202, 5:5,4, 6:6,1465, 7:7,25652]
-	     ct2 = [0:0,93892, 1:1,53325, 2:2,2416, 3:3,19151, 4:4,356, 5:5,64, 6:6,8108, 7:7,24688]
-	   */
-        assertEquals(193822.72576764572, Util.vectorMagnitude(ct1), .01);
-        assertEquals(112726.34557192032, Util.vectorMagnitude(ct2), .01);
-        assertEquals(2.0145773628E10, Util.dotProduct(ct1, ct2), .01);
-        assertEquals(0.9220486254283441, Util.cosineSimilarity(ct1, ct2), .01);
+        /*
+         * Expected output:
+         * ct1 = [0:0,185844, 1:1,22927, 2:2,4639, 3:3,42667, 4:4,1202, 5:5,4, 6:6,1465,
+         * 7:7,25652]
+         * ct2 = [0:0,93892, 1:1,53325, 2:2,2416, 3:3,19151, 4:4,356, 5:5,64, 6:6,8108,
+         * 7:7,24688]
+         */
+        assertEquals(193_954.368_628_293_6, Util.vectorMagnitude(ct1), .01);
+        assertEquals(112_726.345_571_920_32, Util.vectorMagnitude(ct2), .01);
+        assertEquals(2.0155270821E10, Util.dotProduct(ct1, ct2), .01);
+        assertEquals(0.922_048_625_428_344_1, Util.cosineSimilarity(ct1, ct2), .01);
     }
 }

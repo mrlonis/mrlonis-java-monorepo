@@ -1,27 +1,22 @@
 package com.mrlonis;
 
-import twitter4j.TwitterException;
-import twitter4j.v1.Paging;
-import twitter4j.v1.Status;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import twitter4j.TwitterException;
+import twitter4j.v1.Paging;
+import twitter4j.v1.Status;
 
-/**
- * This class is provided as a base model for interacting with the Twitter API.
- */
+/** This class is provided as a base model for interacting with the Twitter API. */
 public class TwitterBot {
 
     protected String user;
     protected List<String> tweets = new ArrayList<>();
     protected int numTweets;
 
-    /**
-     * Fetches the requested number of tweets from the given user.
-     */
+    /** Fetches the requested number of tweets from the given user. */
     public TwitterBot(String user, int numTweets) {
         this.user = user;
         this.numTweets = numTweets;
@@ -59,16 +54,12 @@ public class TwitterBot {
         }
     }
 
-    /**
-     * Returns the user associated with this bot.
-     */
+    /** Returns the user associated with this bot. */
     public String getUser() {
         return user;
     }
 
-    /**
-     * Returns the number of tweets retrieved from Twitter for the user by this bot.
-     */
+    /** Returns the number of tweets retrieved from Twitter for the user by this bot. */
     public int getNumTweets() {
         return tweets.size();
     }

@@ -15,27 +15,24 @@ import java.util.Map;
 @SuppressWarnings("unused")
 
 /**
- * A chip is printed on a rectangular circuit board. Components are "laid out"
- * on the chip in a grid of cells. A cell is addressed by its (x,y) coordinate
- * in the usual way. Some rectangular (possibly overlapping) regions on the grid
- * are covered by obstacles.
+ * A chip is printed on a rectangular circuit board. Components are "laid out" on the chip in a grid of cells. A cell is
+ * addressed by its (x,y) coordinate in the usual way. Some rectangular (possibly overlapping) regions on the grid are
+ * covered by obstacles.
  *
- * Pairs of cells to be connected by a wire are identified by a unique wire id.
- * The "Wire Routing Problem" is to find paths connecting all such pairs so that
- * the total length of all wires is minimized. Wires may not overlap and may not
+ * <p>Pairs of cells to be connected by a wire are identified by a unique wire id. The "Wire Routing Problem" is to find
+ * paths connecting all such pairs so that the total length of all wires is minimized. Wires may not overlap and may not
  * pass over or through an obstacle.
  *
  * @author Matthew Lonis (mrlonis)
- */ public class Chip {
+ */
+public class Chip {
 
     protected Dimension dim;
     protected List<Obstacle> obstacles;
     protected List<Wire> wires;
     protected Map<Coord, Integer> grid;
 
-    /**
-     * Creates a new chip of the given dimensions with the specified obstacles and wire endpoints.
-     */
+    /** Creates a new chip of the given dimensions with the specified obstacles and wire endpoints. */
     public Chip(Dimension dim, List<Obstacle> obstacles, List<Wire> wires) {
         this.dim = dim;
         this.obstacles = new ArrayList<>(obstacles);
@@ -44,9 +41,10 @@ import java.util.Map;
     }
 
     /**
-     * This method constructs a chip from a description in an input file. Most of this method is already written for you. You need to fill in the code to read the number of wires
-     * and the description of each wire from the file. You are also responsible for creating and populating the wires instance variable (which will be used by the layout() method
-     * to initialize the grid).
+     * This method constructs a chip from a description in an input file. Most of this method is already written for
+     * you. You need to fill in the code to read the number of wires and the description of each wire from the file. You
+     * are also responsible for creating and populating the wires instance variable (which will be used by the layout()
+     * method to initialize the grid).
      */
     public Chip(File file) {
         try {
@@ -87,9 +85,7 @@ import java.util.Map;
         }
     }
 
-    /**
-     * Lays out the initial grid.
-     */
+    /** Lays out the initial grid. */
     public void layout() {
         /*
          * Build an empty grid.
@@ -121,23 +117,17 @@ import java.util.Map;
         }
     }
 
-    /**
-     * Returns true iff the cell at the specified coord is available for the wire.
-     */
+    /** Returns true iff the cell at the specified coord is available for the wire. */
     public boolean isAvailable(Coord coord, int wireId) {
         return grid.get(coord) == Constants.FREE || grid.get(coord) == wireId;
     }
 
-    /**
-     * Returns true iff the cell at the specified coord is in a region occupied by an obstacle.
-     */
+    /** Returns true iff the cell at the specified coord is in a region occupied by an obstacle. */
     public boolean isObstacle(Coord coord) {
         return grid.get(coord) == Constants.OBSTACLE;
     }
 
-    /**
-     * Marks the cell on the grid at coordinate coord with the given value.
-     */
+    /** Marks the cell on the grid at coordinate coord with the given value. */
     public void markWirePaths(Map<Integer, Path> layout) {
         layout.forEach((Integer, Path) -> {
             for (Coord x : Path) {
@@ -146,30 +136,22 @@ import java.util.Map;
         });
     }
 
-    /**
-     * Marks the cell on the grid at coordinate coord with the given value.
-     */
+    /** Marks the cell on the grid at coordinate coord with the given value. */
     public void mark(Coord coord, int value) {
         grid.put(coord, value);
     }
 
-    /**
-     * Returns the dimension of this grid.
-     */
+    /** Returns the dimension of this grid. */
     public Dimension size() {
         return new Dimension(dim);
     }
 
-    /**
-     * Returns a list of coordinates on this grid that are neighbors of the given coord.
-     */
+    /** Returns a list of coordinates on this grid that are neighbors of the given coord. */
     public List<Coord> neighbors(Coord coord) {
         return coord.neighbors(dim);
     }
 
-    /**
-     * Returns a pretty version of this grid.
-     */
+    /** Returns a pretty version of this grid. */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         DecimalFormat formatter = new DecimalFormat("####");

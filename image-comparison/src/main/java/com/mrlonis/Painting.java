@@ -1,10 +1,11 @@
 package com.mrlonis;
 
-/**
- * Just a few specific paintings (good for testing purposes).
- */
+/** Just a few specific paintings (good for testing purposes). */
 public enum Painting {
-    MONA_LISA("davinci.jpg"), CHRISTINAS_WORLD("wyeth.jpg"), STARRY_NIGHT("vangogh.jpg"), BLUE_DANCERS("degas.jpg");
+    MONA_LISA("davinci.jpg"),
+    CHRISTINAS_WORLD("wyeth.jpg"),
+    STARRY_NIGHT("vangogh.jpg"),
+    BLUE_DANCERS("degas.jpg");
 
     private final Image image;
 
@@ -12,12 +13,8 @@ public enum Painting {
         this.image = new Image(Constants.IMAGE_DIR + "/" + filename);
     }
 
-    /**
-     * Returns the Image object associated with this painting.
-     */
+    /** Returns the Image object associated with this painting. */
     public Image get() {
         return image;
     }
 }
-
-

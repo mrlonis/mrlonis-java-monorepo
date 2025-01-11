@@ -7,9 +7,8 @@ import twitter4j.v1.Status;
 
 @SuppressWarnings("unused")
 
-/**
- * Be sure to add twitter4j-core-4.0.4.jar to your classpath.
- */ public class Driver {
+/** Be sure to add twitter4j-core-4.0.4.jar to your classpath. */
+public class Driver {
 
     public static void main(String... args) {
         /*
@@ -45,15 +44,21 @@ import twitter4j.v1.Status;
          * Find and print the most common word that each person has recently
          * tweeted
          */
-        for (String friend : new String[]{"taylorswift13", "billnye", "nasa", "realdonaldtrump", "mike_pence",
-                                          "kenzi_day", "PlayOverwatch", "THEUALIFESTYLE"}) {
+        for (String friend : new String[] {
+            "taylorswift13",
+            "billnye",
+            "nasa",
+            "realdonaldtrump",
+            "mike_pence",
+            "kenzi_day",
+            "PlayOverwatch",
+            "THEUALIFESTYLE"
+        }) {
             favoriteWord(friend, true);
         }
     }
 
-    /**
-     * Tweet out the given message (unless !forReal).
-     */
+    /** Tweet out the given message (unless !forReal). */
     public static void sendTweet(String message, boolean forReal) {
         message += " " + Constants.HASHTAG;
         if (!forReal) {
@@ -68,9 +73,7 @@ import twitter4j.v1.Status;
         }
     }
 
-    /**
-     * This method shows what people have tweeted about the subject this month.
-     */
+    /** This method shows what people have tweeted about the subject this month. */
     public static void tweetsAbout(String subject, boolean forReal) {
         if (!forReal) {
             System.out.printf("tweetsAbout(\"%s\", %b);%n", subject, forReal);
@@ -88,7 +91,8 @@ import twitter4j.v1.Status;
             query = query.since("2017-4-1");
             try {
                 QueryResult result = Constants.TWITTER.v1().search().search(query);
-                System.out.println("Number tweets about " + subject + ": " + result.getTweets().size());
+                System.out.println("Number tweets about " + subject + ": "
+                        + result.getTweets().size());
                 for (Status tweet : result.getTweets()) {
                     System.out.println("@" + tweet.getUser().getScreenName() + ": " + tweet.getText());
                 }

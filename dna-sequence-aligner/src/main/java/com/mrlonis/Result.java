@@ -11,79 +11,64 @@ enum Direction {
         public String toString() {
             return "diag";
         }
-    }, LEFT {
+    },
+    LEFT {
         public String toString() {
             return "left";
         }
-    }, UP {
+    },
+    UP {
         public String toString() {
             return "up";
         }
-    }, NONE {
+    },
+    NONE {
         public String toString() {
             return "";
         }
     }
 }
 
-/**
- * A Result represents the result of a subproblem that is stored in the cache.
- */
+/** A Result represents the result of a subproblem that is stored in the cache. */
 public class Result {
 
-    /**
-     * The subproblem score.
-     */
+    /** The subproblem score. */
     private final int score;
     /**
      * The direction of the neighboring entry in the cache from which this entry is extended. (See definition of
      * Direction below.)
      */
     private final Direction parent;
-    /**
-     * A flag indicating whether or not this subproblem is along the optimal path.
-     */
+    /** A flag indicating whether or not this subproblem is along the optimal path. */
     private boolean mark = false;
 
-    /**
-     * Creates an unmarked result with the given score and no parent.
-     */
+    /** Creates an unmarked result with the given score and no parent. */
     public Result(int score) {
         this(score, Direction.NONE);
     }
 
-    /**
-     * Creates an umarked result with the given score and parent.
-     */
+    /** Creates an umarked result with the given score and parent. */
     public Result(int score, Direction parent) {
         this.score = score;
         this.parent = parent;
     }
 
-    /**
-     * Returns the score associated with this result.
-     */
+    /** Returns the score associated with this result. */
     public int getScore() {
         return score;
     }
 
-    /**
-     * Returns the parent associated with this result.
-     */
+    /** Returns the parent associated with this result. */
     public Direction getParent() {
         return parent;
     }
 
-    /**
-     * Marks this result as being along the optimal path.
-     */
+    /** Marks this result as being along the optimal path. */
     public void markPath() {
         mark = true;
     }
 
-    /**
-     * Returns a textual representation of this result.
-     */
+    /** Returns a textual representation of this result. */
     public String toString() {
         String ans = "Result[score=" + score + ",parent=" + parent;
         if (onPath()) {
@@ -92,9 +77,7 @@ public class Result {
         return ans + "]";
     }
 
-    /**
-     * Returns true iff this result is known to be along the optimal path.
-     */
+    /** Returns true iff this result is known to be along the optimal path. */
     public boolean onPath() {
         return mark;
     }

@@ -12,34 +12,25 @@ import java.util.List;
  */
 public class Coord implements Comparable<Coord> {
 
-    /**
-     * The upper left corner of the board.
-     */
+    /** The upper left corner of the board. */
     public static Coord ORIGIN = new Coord(0, 0);
-    /**
-     * The (x, y) coordinates for the Coord.
-     */
+    /** The (x, y) coordinates for the Coord. */
     private final int x;
+
     private final int y;
 
-    /**
-     * Constructs a new Coord that is a copy of the given Coord.
-     */
+    /** Constructs a new Coord that is a copy of the given Coord. */
     public Coord(Coord coord) {
         this(coord.x, coord.y);
     }
 
-    /**
-     * Constructs a new Coord representing (x,y).
-     */
+    /** Constructs a new Coord representing (x,y). */
     public Coord(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    /**
-     * Simple testing.
-     */
+    /** Simple testing. */
     public static void main(String... args) {
         Coord someCoord = new Coord(2, 1);
         System.out.println("someCoord = " + someCoord);
@@ -78,9 +69,7 @@ public class Coord implements Comparable<Coord> {
     /**
      * Returns true iff this Coord is visible on a board of the given size.
      *
-     * @param size
-     *         The size of the Board.
-     *
+     * @param size The size of the Board.
      * @return true iff this Coord is visible on a board of the given size.
      */
     public boolean onBoard(int size) {
@@ -90,9 +79,7 @@ public class Coord implements Comparable<Coord> {
     /**
      * Returns a list of the immediate board coordinates of this Coord's north, south, east, and west neighbors.
      *
-     * @param size
-     *         The size of the Board.
-     *
+     * @param size The size of the Board.
      * @return An ArrayList of the immediate board coordinates of this Coord's north, south, east, and west neighbors.
      */
     public List<Coord> neighbors(int size) {
@@ -108,37 +95,27 @@ public class Coord implements Comparable<Coord> {
         return neighborsList;
     }
 
-    /**
-     * Returns the Coord that is directly above (i.e., north of) this one.
-     */
+    /** Returns the Coord that is directly above (i.e., north of) this one. */
     public Coord up() {
         return new Coord(x, y - 1);
     }
 
-    /**
-     * Returns the Coord that is directly below (i.e., south of) this one.
-     */
+    /** Returns the Coord that is directly below (i.e., south of) this one. */
     public Coord down() {
         return new Coord(x, y + 1);
     }
 
-    /**
-     * Returns the Coord that is immediately to the left (i.e., west) of this one.
-     */
+    /** Returns the Coord that is immediately to the left (i.e., west) of this one. */
     public Coord left() {
         return new Coord(x - 1, y);
     }
 
-    /**
-     * Returns the Coord that is immediately to the right (i.e., east) of this one.
-     */
+    /** Returns the Coord that is immediately to the right (i.e., east) of this one. */
     public Coord right() {
         return new Coord(x + 1, y);
     }
 
-    /**
-     * Returns true iff the (x,y)-coordinates of the given object match this Coord's (x,y)-coordinates.
-     */
+    /** Returns true iff the (x,y)-coordinates of the given object match this Coord's (x,y)-coordinates. */
     public boolean equals(Object obj) {
         if (obj instanceof Coord that) {
             return that.x == this.x && that.y == this.y;
@@ -146,16 +123,12 @@ public class Coord implements Comparable<Coord> {
         return false;
     }
 
-    /**
-     * Returns this Coord as a string of the form (x, y).
-     */
+    /** Returns this Coord as a string of the form (x, y). */
     public String toString() {
         return "(" + x + ", " + y + ")";
     }
 
-    /**
-     * Coords are ordered first on the x-coordinate and then on the y-coordinate.
-     */
+    /** Coords are ordered first on the x-coordinate and then on the y-coordinate. */
     public int compareTo(Coord that) {
         if (this.x == that.x) {
             return this.y - that.y;
@@ -163,16 +136,12 @@ public class Coord implements Comparable<Coord> {
         return this.x - that.x;
     }
 
-    /**
-     * Returns the x-coordinate.
-     */
+    /** Returns the x-coordinate. */
     public int getX() {
         return x;
     }
 
-    /**
-     * Returns the y-coordinate.
-     */
+    /** Returns the y-coordinate. */
     public int getY() {
         return y;
     }

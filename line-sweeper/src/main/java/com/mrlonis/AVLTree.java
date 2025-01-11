@@ -10,9 +10,7 @@ import java.util.function.BiPredicate;
  */
 public class AVLTree<K> extends BinarySearchTree<K> {
 
-    /**
-     * Creates an empty AVL tree as a BST organized according to the lessThan predicate.
-     */
+    /** Creates an empty AVL tree as a BST organized according to the lessThan predicate. */
     public AVLTree(BiPredicate<K, K> lessThan) {
         super(lessThan);
     }
@@ -21,9 +19,7 @@ public class AVLTree<K> extends BinarySearchTree<K> {
      * Inserts the given key into this AVL tree such that the ordering property for a BST and the balancing property for
      * an AVL tree are maintained.
      *
-     * @param key
-     *         The data for the Node to be inserted.
-     *
+     * @param key The data for the Node to be inserted.
      * @return The Node that was inserted into this tree.
      */
     public Node insert(K key) {
@@ -58,72 +54,70 @@ public class AVLTree<K> extends BinarySearchTree<K> {
             }
         }
         return returnValue;
-		/*
-		 * This is my first working version of insert using Strings. Not efficient.
-		
-		Node q = super.insert(key);
-		Node c = q;
-		Node p = q.parent;
-		String rotation = "";
-		if (p == null) {
-			return q;
-		} else {
-			while (p != null) {
-				int balance = p.getBalance();
-				
-				if (balance >= 2) {
-					if (p.left != null && p.right != null) {
-						if (p.left.height > p.right.height) {
-							rotation += "L";
-							c = p.left;
-						} else {
-							rotation += "R";
-							c = p.right;
-						}
-					} else if (p.left != null) {
-						rotation += "L";
-						c = p.left;
-					} else if (p.right != null) {
-						rotation += "R";
-						c = p.right;
-					}
+        /*
+         * This is my first working version of insert using Strings. Not efficient.
 
-					if (c.left != null && c.right != null) {
-						if (c.left.height > c.right.height) {
-							rotation += "L";
-						} else {
-							rotation += "R";
-						}
-					} else if (c.left != null) {
-						rotation += "L";
-					} else if (c.right != null) {
-						rotation += "R";
-					}
+        Node q = super.insert(key);
+        Node c = q;
+        Node p = q.parent;
+        String rotation = "";
+        if (p == null) {
+        	return q;
+        } else {
+        	while (p != null) {
+        		int balance = p.getBalance();
 
-					if (rotation.equals("LL")) {
-						p = LL_Rotation(p);
-					} else if (rotation.equals("RR")) {
-						p = RR_Rotation(p);
-					} else if (rotation.equals("LR")) {
-						p = LR_Rotation(p);
-					} else {
-						p = RL_Rotation(p);
-					}
-				}
+        		if (balance >= 2) {
+        			if (p.left != null && p.right != null) {
+        				if (p.left.height > p.right.height) {
+        					rotation += "L";
+        					c = p.left;
+        				} else {
+        					rotation += "R";
+        					c = p.right;
+        				}
+        			} else if (p.left != null) {
+        				rotation += "L";
+        				c = p.left;
+        			} else if (p.right != null) {
+        				rotation += "R";
+        				c = p.right;
+        			}
 
-				p = p.parent;
-			}
-		}
-		return q;
-		*/
+        			if (c.left != null && c.right != null) {
+        				if (c.left.height > c.right.height) {
+        					rotation += "L";
+        				} else {
+        					rotation += "R";
+        				}
+        			} else if (c.left != null) {
+        				rotation += "L";
+        			} else if (c.right != null) {
+        				rotation += "R";
+        			}
+
+        			if (rotation.equals("LL")) {
+        				p = LL_Rotation(p);
+        			} else if (rotation.equals("RR")) {
+        				p = RR_Rotation(p);
+        			} else if (rotation.equals("LR")) {
+        				p = LR_Rotation(p);
+        			} else {
+        				p = RL_Rotation(p);
+        			}
+        		}
+
+        		p = p.parent;
+        	}
+        }
+        return q;
+        */
     }
 
     /**
      * Performs an LL rotation on oldParent
      *
-     * @param oldParent
-     *         The pivot Node for rotation.
-     *
+     * @param oldParent The pivot Node for rotation.
      * @return The New parent Node that took oldParent's place
      */
     private Node LL_Rotation(Node oldParent) {
@@ -162,9 +156,7 @@ public class AVLTree<K> extends BinarySearchTree<K> {
     /**
      * Performs an RR rotation on oldParent
      *
-     * @param oldParent
-     *         The pivot Node for rotation.
-     *
+     * @param oldParent The pivot Node for rotation.
      * @return The New parent Node that took oldParent's place
      */
     private Node RR_Rotation(Node oldParent) {
@@ -203,9 +195,7 @@ public class AVLTree<K> extends BinarySearchTree<K> {
     /**
      * Performs an LR rotation on oldParent
      *
-     * @param oldParent
-     *         The pivot Node for rotation.
-     *
+     * @param oldParent The pivot Node for rotation.
      * @return The New parent Node that took oldParent's place
      */
     private Node LR_Rotation(Node oldParent) {
@@ -216,9 +206,7 @@ public class AVLTree<K> extends BinarySearchTree<K> {
     /**
      * Performs an RL rotation on oldParent
      *
-     * @param oldParent
-     *         The pivot Node for rotation.
-     *
+     * @param oldParent The pivot Node for rotation.
      * @return The New parent Node that took oldParent's place
      */
     private Node RL_Rotation(Node oldParent) {

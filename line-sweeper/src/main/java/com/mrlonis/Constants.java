@@ -2,10 +2,9 @@ package com.mrlonis;
 
 /**
  * [read-only]
- * <p>
- * Global project parameters.
+ *
+ * <p>Global project parameters.
  */
-
 public interface Constants {
     String TITLE = "Project 3: Line Segment Intersection";
 

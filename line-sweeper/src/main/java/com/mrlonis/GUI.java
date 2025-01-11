@@ -1,14 +1,5 @@
 package com.mrlonis;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,15 +18,19 @@ import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
 
-/**
- * [read-only]
- */
-
+/** [read-only] */
 class GUI extends JFrame {
-    /**
-     * Added default serial ID to remove Eclipse warning.
-     */
+    /** Added default serial ID to remove Eclipse warning. */
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -74,9 +69,7 @@ class GUI extends JFrame {
         setJMenuBar(menuBar);
 
         JPanel main = new JPanel() {
-            /**
-             * Added default serial ID to remove Eclipse warning.
-             */
+            /** Added default serial ID to remove Eclipse warning. */
             @Serial
             private static final long serialVersionUID = 1L;
 
@@ -87,9 +80,7 @@ class GUI extends JFrame {
         };
 
         JComponent drawingSurface = new JComponent() {
-            /**
-             * Added default serial ID to remove Eclipse warning.
-             */
+            /** Added default serial ID to remove Eclipse warning. */
             @Serial
             private static final long serialVersionUID = 1L;
 
@@ -227,7 +218,6 @@ class GUI extends JFrame {
         } catch (FileNotFoundException e) {
             System.out.println("The input file: [" + Constants.FILENAME + "] is not found.\n.");
         }
-
     }
 
     private void save(List<LineSegment> world) {

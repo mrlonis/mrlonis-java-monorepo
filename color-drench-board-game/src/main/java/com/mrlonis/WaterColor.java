@@ -21,18 +21,14 @@ public enum WaterColor {
         this.color = color;
     }
 
-    /**
-     * Simple testing.
-     */
+    /** Simple testing. */
     public static void main(String... args) {
         for (WaterColor color : values()) {
             System.out.println(color + "\t" + pickOneExcept(color));
         }
     }
 
-    /**
-     * Returns a water color that is different from thisOne, selected at random and with equal probability.
-     */
+    /** Returns a water color that is different from thisOne, selected at random and with equal probability. */
     public static WaterColor pickOneExcept(WaterColor thisOne) {
         WaterColor color;
         do {
@@ -41,23 +37,17 @@ public enum WaterColor {
         return color;
     }
 
-    /**
-     * Returns a water color, selected at random and with equal probability.
-     */
+    /** Returns a water color, selected at random and with equal probability. */
     public static WaterColor pickOne() {
         return values()[gen.nextInt(n)];
     }
 
-    /**
-     * Returns the java.awt.Color object associated with this water color.
-     */
+    /** Returns the java.awt.Color object associated with this water color. */
     public Color get() {
         return color;
     }
 
-    /**
-     * Returns a string representation of this water color.
-     */
+    /** Returns a string representation of this water color. */
     public String toString() {
         return super.toString().toLowerCase();
     }

@@ -1,8 +1,6 @@
 package com.mrlonis;
 
-/**
- * Global constants.
- */
+/** Global constants. */
 public class Constants {
     public static final String TITLE = "Project 2: Flood It";
     public static final String HINT =
@@ -13,6 +11,5 @@ public class Constants {
     public static final String TEST_GRAPH = "results.png";
     public static final int DEFAULT_SIZE = 14;
 
-    private Constants() {
-    }
+    private Constants() {}
 }

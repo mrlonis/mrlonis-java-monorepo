@@ -7,22 +7,21 @@ package com.mrlonis;
  * @author Matthew Lonis (mrlonis)
  */
 
-import org.junit.jupiter.api.Test;
-
-import java.util.Comparator;
-import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Comparator;
+import java.util.Random;
+import org.junit.jupiter.api.Test;
+
 class Testing {
 
-    /**********************************************************************************
-     * When you've reached this point, run the Driver and start writing your
-     * report.
-     **********************************************************************************/
-
+    /**
+     * ******************************************************************************** When you've reached this point,
+     * run the Driver and start writing your report.
+     * ********************************************************************************
+     */
     private static String makeUniformRandomText(int n) {
         Random rand = new Random();
         String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -52,10 +51,9 @@ class Testing {
     /**
      * Note: These tests are not necessarily exhaustive, although they do provide you with a good roadmap to follow in
      * developing your code for this project.
-     * <p>
-     * Add some of your own tests, but do not remove the provided tests or change any of the expected results.
+     *
+     * <p>Add some of your own tests, but do not remove the provided tests or change any of the expected results.
      */
-
     @Test
     void emptyFreqTable() {
         FrequencyTable ft = new FrequencyTable();
@@ -89,11 +87,11 @@ class Testing {
         assertEquals(0, (int) ft.get('d'));
     }
 
-    /**********************************************************************************
-     * We leave it to you to write tests for Heap.swap(), Heap.siftUp(), and
-     * Heap.siftDown(). Here would be a good place to put those tests.
-     **********************************************************************************/
-
+    /**
+     * ******************************************************************************** We leave it to you to write
+     * tests for Heap.swap(), Heap.siftUp(), and Heap.siftDown(). Here would be a good place to put those tests.
+     * ********************************************************************************
+     */
     @Test
     void bigFreqTable() {
         String alpha = "abcdefghijklmnopqrstuvwxyz";
@@ -428,7 +426,7 @@ class Testing {
     @Test
     void mediumMinHeap() {
         Heap<Integer> heap = new Heap<>((x, y) -> x.compareTo(y));
-        for (int x : new int[]{9, 3, 4, 7, 6, 8, 2, 1, 5, 10}) {
+        for (int x : new int[] {9, 3, 4, 7, 6, 8, 2, 1, 5, 10}) {
             heap.insert(x);
         }
         for (int i = 1; i <= 10; i++) {
@@ -440,7 +438,7 @@ class Testing {
     @Test
     void heapFormation() {
         Heap<Integer> heap = new Heap<>((x, y) -> y.compareTo(x));
-        for (int x : new int[]{14, 18, 9, 3, 12, 4, 19, 7, 11, 6, 16, 8, 13, 2, 20, 1, 5, 10, 15, 17}) {
+        for (int x : new int[] {14, 18, 9, 3, 12, 4, 19, 7, 11, 6, 16, 8, 13, 2, 20, 1, 5, 10, 15, 17}) {
             heap.insert(x);
         }
         assertEquals("[20, 17, 19, 15, 16, 13, 18, 5, 11, 14, 12, 4, 8, 2, 9, 1, 3, 7, 10, 6]", heap.toString());
@@ -540,9 +538,8 @@ class Testing {
 
     @Test
     void simpleCodeBook() {
-        String text =
-                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbb" + "ccccccccccc" + "dddddddddddddddd" +
-                "eeeeeeeee" + "fffff";
+        String text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbb" + "ccccccccccc"
+                + "dddddddddddddddd" + "eeeeeeeee" + "fffff";
         CodeBook book = new CodeBook(text);
         assertEquals(6, book.size());
         assertEquals("0", book.encodeChar('a'));
@@ -614,9 +611,8 @@ class Testing {
 
     @Test
     void smallZips() {
-        String text =
-                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbb" + "ccccccccccc" + "dddddddddddddddd" +
-                "eeeeeeeee" + "fffff";
+        String text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + "bbbbbbbbbbbbb" + "ccccccccccc"
+                + "dddddddddddddddd" + "eeeeeeeee" + "fffff";
         Zipper zipper = new Zipper(new CodeBook(text));
         assertEquals("0", zipper.encode("a"));
         assertEquals("101", zipper.encode("b"));
@@ -667,14 +663,13 @@ class Testing {
 
     @Test
     void bigRandomZips() {
-        String text = makeUniformRandomText(10000);
+        String text = makeUniformRandomText(10_000);
         CodeBook book = new CodeBook(text);
         Zipper zipper = new Zipper(book);
         assertEquals(text, zipper.decode(zipper.encode(text)));
-        text = makeBiasedRandomText(10000);
+        text = makeBiasedRandomText(10_000);
         book = new CodeBook(text);
         zipper = new Zipper(book);
         assertEquals(text, zipper.decode(zipper.encode(text)));
     }
-
 }
