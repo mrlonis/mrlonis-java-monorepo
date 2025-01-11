@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Assorted JUnit tests for ColorTable.
  *
- * <p>
- * To "turn off" any test, put double slashes ( "//" ) in front of the "@Test"
- * that precedes that method. For
+ * <p>To "turn off" any test, put double slashes ( "//" ) in front of the "@Test" that precedes that method. For
  * example, "//@Test".
  */
 class Testing {
@@ -217,7 +215,7 @@ class Testing {
             table.put(new Color(i * i), i);
         }
         assertEquals(9, table.getSize());
-        int[] expected = { 272, 119, 102, 0, 0, 289, 0, 306, 0, 0, 323, 221, 255, 238 };
+        int[] expected = {272, 119, 102, 0, 0, 289, 0, 306, 0, 0, 323, 221, 255, 238};
         Iterator it = table.iterator();
         int k = 0;
         while (it.hasNext() && k < expected.length) {
