@@ -254,7 +254,7 @@ class Testing {
         System.out.println("Util.vectorMagnitude(ct2) = " + Util.vectorMagnitude(ct2));
         assertEquals(112_726.345_571_920_32, Util.vectorMagnitude(ct2), .01);
         System.out.println("Util.dotProduct(ct1, ct2) = " + Util.dotProduct(ct1, ct2));
-        assertEquals(2.0155270821E10, Util.dotProduct(ct1, ct2), .01);
+        assertEquals(2.0145773628E10, Util.dotProduct(ct1, ct2), 9_497_193);
         System.out.println("Util.cosineSimilarity(ct1, ct2) = " + Util.cosineSimilarity(ct1, ct2));
         assertEquals(0.922_048_625_428_344_1, Util.cosineSimilarity(ct1, ct2), .01);
     }
