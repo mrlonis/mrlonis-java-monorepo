@@ -40,15 +40,15 @@ public class Util {
     /**
      * Computes the vector magnitude of a ColorTable.
      *
-     * @param A The ColorTable that determines the vector magnitude.
+     * @param colorTable The ColorTable that determines the vector magnitude.
      * @return The vector magnitude of A.
      */
-    public static double vectorMagnitude(ColorTable A) {
+    public static double vectorMagnitude(ColorTable colorTable) {
         long result = 0;
-        Iterator aIT = A.iterator();
+        Iterator colorTableIterator = colorTable.iterator();
 
-        while (aIT.hasNext()) {
-            long value = aIT.next();
+        while (colorTableIterator.hasNext()) {
+            long value = colorTableIterator.next();
             result += (value * value);
         }
 
@@ -56,7 +56,8 @@ public class Util {
     }
 
     /**
-     * Returns true iff n is a prime number. We handles several common cases quickly, and then use a variation of the
+     * Returns true iff n is a prime number. We handles several common cases
+     * quickly, and then use a variation of the
      * Sieve of Eratosthenes.
      */
     public static boolean isPrime(int n) {
@@ -79,13 +80,18 @@ public class Util {
     }
 
     /**
-     * The 3 components of a Color are packed into one 32-bit int. The result is used as a hash code for Colors in the
+     * The 3 components of a Color are packed into one 32-bit int. The result is
+     * used as a hash code for Colors in the
      * ColorTable.
      *
-     * <p>Each color component occupies exactly bitsPerChanel bits in the encoding.
+     * <p>
+     * Each color component occupies exactly bitsPerChanel bits in the encoding.
      *
-     * <p>The color components are shifted to the right to drop the lower order bits. Then the three reduced color
-     * components are packed into the lower order 3 * bitsPerChannel bits of the returned code.
+     * <p>
+     * The color components are shifted to the right to drop the lower order bits.
+     * Then the three reduced color
+     * components are packed into the lower order 3 * bitsPerChannel bits of the
+     * returned code.
      */
     public static int pack(Color color, int bitsPerChannel) {
         int r = color.getRed(), g = color.getGreen(), b = color.getBlue();
@@ -108,7 +114,10 @@ public class Util {
         }
     }
 
-    /** Undoes the last step in the pack operation to reconstitute the code into a Color object. */
+    /**
+     * Undoes the last step in the pack operation to reconstitute the code into a
+     * Color object.
+     */
     public static Color unpack(int code, int bitsPerChannel) {
         int r = code, g = code, b = code;
         if (bitsPerChannel >= 1 && bitsPerChannel <= 8) {

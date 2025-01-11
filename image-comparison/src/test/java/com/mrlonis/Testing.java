@@ -10,10 +10,12 @@ import org.junit.jupiter.api.Test;
 /**
  * Assorted JUnit tests for ColorTable.
  *
- * <p>To "turn off" any test, put double slashes ( "//" ) in front of the "@Test" that precedes that method. For
+ * <p>
+ * To "turn off" any test, put double slashes ( "//" ) in front of the "@Test"
+ * that precedes that method. For
  * example, "//@Test".
  */
-public class Testing {
+class Testing {
 
     private static Color c1;
     private static Color c2;
@@ -215,7 +217,7 @@ public class Testing {
             table.put(new Color(i * i), i);
         }
         assertEquals(9, table.getSize());
-        int[] expected = {272, 119, 102, 0, 0, 289, 0, 306, 0, 0, 323, 221, 255, 238};
+        int[] expected = { 272, 119, 102, 0, 0, 289, 0, 306, 0, 0, 323, 221, 255, 238 };
         Iterator it = table.iterator();
         int k = 0;
         while (it.hasNext() && k < expected.length) {
@@ -249,9 +251,13 @@ public class Testing {
          * ct2 = [0:0,93892, 1:1,53325, 2:2,2416, 3:3,19151, 4:4,356, 5:5,64, 6:6,8108,
          * 7:7,24688]
          */
+        System.out.println("Util.vectorMagnitude(ct1) = " + Util.vectorMagnitude(ct1));
         assertEquals(193_954.368_628_293_6, Util.vectorMagnitude(ct1), .01);
+        System.out.println("Util.vectorMagnitude(ct2) = " + Util.vectorMagnitude(ct2));
         assertEquals(112_726.345_571_920_32, Util.vectorMagnitude(ct2), .01);
+        System.out.println("Util.dotProduct(ct1, ct2) = " + Util.dotProduct(ct1, ct2));
         assertEquals(2.0155270821E10, Util.dotProduct(ct1, ct2), .01);
+        System.out.println("Util.cosineSimilarity(ct1, ct2) = " + Util.cosineSimilarity(ct1, ct2));
         assertEquals(0.922_048_625_428_344_1, Util.cosineSimilarity(ct1, ct2), .01);
     }
 }
