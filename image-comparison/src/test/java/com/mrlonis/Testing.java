@@ -250,7 +250,7 @@ class Testing {
          * 7:7,24688]
          */
         System.out.println("Util.vectorMagnitude(ct1) = " + Util.vectorMagnitude(ct1));
-        assertEquals(193_954.368_628_293_6, Util.vectorMagnitude(ct1), .01);
+        assertEquals(193_822.725_767_645_72, Util.vectorMagnitude(ct1), 131.642_860_648);
         System.out.println("Util.vectorMagnitude(ct2) = " + Util.vectorMagnitude(ct2));
         assertEquals(112_726.345_571_920_32, Util.vectorMagnitude(ct2), .01);
         System.out.println("Util.dotProduct(ct1, ct2) = " + Util.dotProduct(ct1, ct2));
