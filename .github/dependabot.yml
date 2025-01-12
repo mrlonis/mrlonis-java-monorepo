@@ -13,6 +13,7 @@ updates:
     directories:
       - "/buildSrc"
       - "/color-drench-board-game"
+      - "/csci-c-343"
       - "/dna-sequence-aligner"
       - "/image-comparison"
       - "/line-sweeper"
