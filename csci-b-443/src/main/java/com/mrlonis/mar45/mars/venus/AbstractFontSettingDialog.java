@@ -44,7 +44,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 public abstract class AbstractFontSettingDialog extends JDialog {
 
     JDialog editorDialog;
-    JComboBox fontFamilySelector, fontStyleSelector;
+    JComboBox<String> fontFamilySelector, fontStyleSelector;
     JSlider fontSizeSelector;
     JSpinner fontSizeSpinSelector;
     JLabel fontSample;
@@ -64,6 +64,7 @@ public abstract class AbstractFontSettingDialog extends JDialog {
         this.setContentPane(overallPanel);
         this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent we) {
                 closeDialog();
             }
@@ -87,7 +88,7 @@ public abstract class AbstractFontSettingDialog extends JDialog {
         // with a horizontal line separating the two groups.
         String[][] fullList = {commonFontFamilies, allFontFamilies};
 
-        fontFamilySelector = new JComboBox(makeVectorData(fullList));
+        fontFamilySelector = new JComboBox<>(makeVectorData(fullList));
         fontFamilySelector.setRenderer(new ComboBoxRenderer());
         fontFamilySelector.addActionListener(new BlockComboListener(fontFamilySelector));
         fontFamilySelector.setSelectedItem(currentFont.getFamily());
@@ -96,7 +97,7 @@ public abstract class AbstractFontSettingDialog extends JDialog {
         fontFamilySelector.setToolTipText("Short list of common font families followed by complete list.");
 
         String[] fontStyles = EditorFont.getFontStyleStrings();
-        fontStyleSelector = new JComboBox(fontStyles);
+        fontStyleSelector = new JComboBox<>(fontStyles);
         fontStyleSelector.setSelectedItem(EditorFont.styleIntToStyleString(currentFont.getStyle()));
         fontStyleSelector.setEditable(false);
         fontStyleSelector.setToolTipText("List of available font styles.");
@@ -150,6 +151,7 @@ public abstract class AbstractFontSettingDialog extends JDialog {
     // by application
     protected abstract Component buildControlPanel();
 
+    @Override
     public Font getFont() {
         return EditorFont.createFontFromStringValues(
                 (String) fontFamilySelector.getSelectedItem(),
@@ -200,9 +202,9 @@ public abstract class AbstractFontSettingDialog extends JDialog {
 
     // Given an array of string arrays, will produce a Vector contenating
     // the arrays with a separator between each.
-    private Vector makeVectorData(String[][] str) {
+    private Vector<String> makeVectorData(String[][] str) {
         boolean needSeparator = false;
-        Vector data = new Vector();
+        Vector<String> data = new Vector<>();
         for (String[] strings : str) {
             if (needSeparator) {
                 data.addElement(SEPARATOR);
@@ -216,13 +218,13 @@ public abstract class AbstractFontSettingDialog extends JDialog {
     }
 
     // Required renderer for handling the separator bar.
-    private class ComboBoxRenderer extends JLabel implements ListCellRenderer {
+    private static class ComboBoxRenderer extends JLabel implements ListCellRenderer<Object> {
         JSeparator separator;
 
         public ComboBoxRenderer() {
             setOpaque(true);
             setBorder(new EmptyBorder(1, 1, 1, 1));
-            separator = new JSeparator(JSeparator.HORIZONTAL);
+            separator = new JSeparator(SwingConstants.HORIZONTAL);
         }
 
         public Component getListCellRendererComponent(
@@ -250,11 +252,11 @@ public abstract class AbstractFontSettingDialog extends JDialog {
     }
 
     // Required listener to handle the separator bar.
-    private class BlockComboListener implements ActionListener {
-        JComboBox combo;
+    private static class BlockComboListener implements ActionListener {
+        JComboBox<String> combo;
         Object currentItem;
 
-        BlockComboListener(JComboBox combo) {
+        BlockComboListener(JComboBox<String> combo) {
             this.combo = combo;
             combo.setSelectedIndex(0);
             currentItem = combo.getSelectedItem();
