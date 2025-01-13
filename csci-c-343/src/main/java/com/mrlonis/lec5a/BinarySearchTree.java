@@ -178,7 +178,7 @@ public class BinarySearchTree<K extends Comparable<K>> implements Tree<K> {
         for (int key : a) {
             assert bst.contains(key);
         }
-        System.out.println(bst.toString());
+        System.out.println(bst);
 
         String[] b = new String[] {"Matthew", "Nova", "Chris", "Dylan", "Clements", "Audretsch", "Richardson", "Lonis"};
         Tree<String> bst2 = new BinarySearchTree<>();
@@ -191,7 +191,7 @@ public class BinarySearchTree<K extends Comparable<K>> implements Tree<K> {
         for (String key : b) {
             assert bst2.contains(key);
         }
-        System.out.println(bst2.toString());
+        System.out.println(bst2);
 
         double[] c = new double[] {3, 9, 7, 2, 1, 5, 6, 4, 8};
         Tree<Double> bst3 = new BinarySearchTree<>();
@@ -204,7 +204,7 @@ public class BinarySearchTree<K extends Comparable<K>> implements Tree<K> {
         for (double key : c) {
             assert bst3.contains(key);
         }
-        System.out.println(bst3.toString());
+        System.out.println(bst3);
     }
 }
 

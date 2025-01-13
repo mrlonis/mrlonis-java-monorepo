@@ -400,9 +400,9 @@ class BTree {
 
         bt = new BTree(4);
         int[] a = new int[] {1, 2, 3, 5, 6, 7, 9, 12, 16, 18, 21, 11, 4, 8, 10, 13, 14, 15, 17, 19, 20};
-        for (int i = 0; i < a.length; i++) bt.insert(a[i]);
+        for (int value : a) bt.insert(value);
         assert bt.size() == a.length;
-        for (int i = 0; i < a.length; i++) bt.insert(a[i]);
+        for (int k : a) bt.insert(k);
         assert bt.size() == a.length;
 
         assert 2 == bt.root.keys.size();
@@ -410,7 +410,7 @@ class BTree {
         assert 12 == bt.root.keys.get(1);
 
         bt = new BTree(7);
-        for (int i = 0; i < a.length; i++) bt.insert(a[i]);
+        for (int j : a) bt.insert(j);
         assert bt.size() == a.length;
 
         assert 3 == bt.root.keys.size();

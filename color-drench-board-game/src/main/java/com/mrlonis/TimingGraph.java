@@ -31,7 +31,7 @@ public class TimingGraph extends JPanel {
 
     /** Constructs a panel on which we can paint a graph of the given timing data. */
     public TimingGraph(List<List<Integer>> timings) {
-        assert timings.size() > 0;
+        assert !timings.isEmpty();
         this.timings = timings;
         setBackground(Color.WHITE);
         setOpaque(true);

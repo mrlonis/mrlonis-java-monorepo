@@ -207,7 +207,7 @@ public class SinglyLinkedList<T> implements List<T> {
         while (!animals.isEmpty()) {
             animals.remove(0);
         }
-        assert 0 == animals.size();
+        assert animals.isEmpty();
         assert animals.isEmpty();
 
         // Test with structured elements.

@@ -220,7 +220,7 @@ public class SinglyLinkedList<E> implements List<E> {
         /*
          * Integer Testing
          */
-        List<Integer> xsI = new SinglyLinkedList<Integer>();
+        List<Integer> xsI = new SinglyLinkedList<>();
         assert "()".equals(xsI.toString());
         int[] aI = new int[] {7, 4, 6, 9, 2};
         for (int xI : aI) {
@@ -244,7 +244,7 @@ public class SinglyLinkedList<E> implements List<E> {
         /*
          * Double Testing
          */
-        List<Double> xsD = new SinglyLinkedList<Double>();
+        List<Double> xsD = new SinglyLinkedList<>();
         assert "()".equals(xsD.toString());
         double[] aD = new double[] {7.0, 4.0, 6.0, 9.0, 2.0};
         for (double x : aD) {
@@ -268,7 +268,7 @@ public class SinglyLinkedList<E> implements List<E> {
         /*
          * Float Testing
          */
-        List<Float> xsF = new SinglyLinkedList<Float>();
+        List<Float> xsF = new SinglyLinkedList<>();
         assert "()".equals(xsF.toString());
         float[] aF = new float[] {7, 4, 6, 9, 2};
         for (float x : aF) {
@@ -292,7 +292,7 @@ public class SinglyLinkedList<E> implements List<E> {
         /*
          * String Testing
          */
-        List<String> xsS = new SinglyLinkedList<String>();
+        List<String> xsS = new SinglyLinkedList<>();
         assert "()".equals(xsS.toString());
         String[] aS = new String[] {"7", "4", "6", "9", "2"};
         for (String x : aS) {
@@ -316,7 +316,7 @@ public class SinglyLinkedList<E> implements List<E> {
         /*
          * Character Testing
          */
-        List<Character> xsC = new SinglyLinkedList<Character>();
+        List<Character> xsC = new SinglyLinkedList<>();
         assert "()".equals(xsC.toString());
         char[] aC = new char[] {'a', 'b', 'c', 'd', 'e'};
         for (char x : aC) {
@@ -340,7 +340,7 @@ public class SinglyLinkedList<E> implements List<E> {
         /*
          * Boolean Testing
          */
-        List<Boolean> xsB = new SinglyLinkedList<Boolean>();
+        List<Boolean> xsB = new SinglyLinkedList<>();
         assert "()".equals(xsB.toString());
         Boolean[] aB = new Boolean[] {true, false, true, false, true};
         for (Boolean x : aB) {

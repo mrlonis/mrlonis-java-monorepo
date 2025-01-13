@@ -94,7 +94,7 @@ public class SinglyLinkedList<T> implements List<T> {
     }
 
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             Node p = head;
 
             public boolean hasNext() {
@@ -213,7 +213,7 @@ public class SinglyLinkedList<T> implements List<T> {
 
         // Test remove all.
         while (!animals.isEmpty()) animals.remove(0);
-        assert 0 == animals.size();
+        assert animals.isEmpty();
         assert animals.isEmpty();
 
         // Test with structured elements.

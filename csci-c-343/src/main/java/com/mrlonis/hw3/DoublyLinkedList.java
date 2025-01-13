@@ -169,7 +169,7 @@ public class DoublyLinkedList<T> implements List<T> {
      * @return An Iterator for this list.
      */
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             Node p = head.next;
 
             /**

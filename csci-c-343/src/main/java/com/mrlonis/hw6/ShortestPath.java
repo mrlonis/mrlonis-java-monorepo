@@ -7,7 +7,7 @@ public class ShortestPath {
 
     /** Returns the length of the shortest path from s to t in the weighted acyclic digraph gr. */
     public static int shortestPath(int s, int t, Digraph gr) {
-        return shortestPathHelper(s, t, gr, new HashMap<Integer, Integer>());
+        return shortestPathHelper(s, t, gr, new HashMap<>());
     }
 
     private static int shortestPathHelper(int s, int t, Digraph gr, Map<Integer, Integer> cache) {
