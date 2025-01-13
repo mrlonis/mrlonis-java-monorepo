@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.StringTokenizer;
@@ -91,7 +92,7 @@ public class FilenameFinder {
         //
         URI uri;
         try {
-            Enumeration urls = classLoader.getResources(directoryPath);
+            Enumeration<URL> urls = classLoader.getResources(directoryPath);
 
             while (urls.hasMoreElements()) {
                 uri = new URI(urls.nextElement().toString());
@@ -379,7 +380,7 @@ public class FilenameFinder {
         }
         try {
             ZipFile zf = new ZipFile(new File(jarName));
-            Enumeration list = zf.entries();
+            Enumeration<? extends ZipEntry> list = zf.entries();
             while (list.hasMoreElements()) {
                 ZipEntry ze = (ZipEntry) list.nextElement();
                 if (ze.getName().startsWith(directoryPath + "/") && fileExtensionMatch(ze.getName(), fileExtension)) {

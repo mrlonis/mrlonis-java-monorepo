@@ -145,19 +145,13 @@ public class Const {
 
     /** Converts a MIPS constants to a string */
     public static String mipsToString(int mips) {
-        switch (mips) {
-            case MIPS_ARTH:
-                return "ARTH";
-            case MIPS_LW:
-                return " LW ";
-            case MIPS_SW:
-                return " SW ";
-            case MIPS_BEQ:
-                return "BEQ ";
-            case MIPS_J:
-                return " J  ";
-            default:
-                return Integer.toString(mips);
-        }
+        return switch (mips) {
+            case MIPS_ARTH -> "ARTH";
+            case MIPS_LW -> " LW ";
+            case MIPS_SW -> " SW ";
+            case MIPS_BEQ -> "BEQ ";
+            case MIPS_J -> " J  ";
+            default -> Integer.toString(mips);
+        };
     }
 }

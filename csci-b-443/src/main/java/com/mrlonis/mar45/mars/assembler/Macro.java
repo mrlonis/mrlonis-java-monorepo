@@ -122,8 +122,7 @@ public class Macro {
     /** @param obj {@link Macro} object to check if their name and count of arguments are same */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Macro) {
-            Macro macro = (Macro) obj;
+        if (obj instanceof Macro macro) {
             return macro.getName().equals(name) && (macro.args.size() == args.size());
         }
         return super.equals(obj);

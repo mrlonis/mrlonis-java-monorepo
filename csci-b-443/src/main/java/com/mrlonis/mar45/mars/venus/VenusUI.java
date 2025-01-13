@@ -4,10 +4,8 @@ import com.mrlonis.mar45.mars.*;
 import com.mrlonis.mar45.mars.mips.dump.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import java.net.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /*
 Copyright (c) 2003-2013,  Pete Sanderson and Kenneth Vollmar
@@ -304,7 +302,7 @@ public class VenusUI extends JFrame {
      */
     private void createActionObjects() {
         Toolkit tk = Toolkit.getDefaultToolkit();
-        Class cs = this.getClass();
+        Class<? extends VenusUI> cs = this.getClass();
         try {
             fileNewAction = new FileNewAction(
                     "New",
@@ -613,7 +611,7 @@ public class VenusUI extends JFrame {
     private JMenuBar setUpMenuBar() {
 
         Toolkit tk = Toolkit.getDefaultToolkit();
-        Class cs = this.getClass();
+        Class<? extends VenusUI> cs = this.getClass();
         JMenuBar menuBar = new JMenuBar();
         file = new JMenu("File");
         file.setMnemonic(KeyEvent.VK_F);

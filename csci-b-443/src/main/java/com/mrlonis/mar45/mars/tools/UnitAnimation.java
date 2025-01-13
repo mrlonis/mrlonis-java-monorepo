@@ -386,8 +386,8 @@ class UnitAnimation extends JPanel implements ActionListener {
             }
             for (Vector<Vertex> vert : outputGraph) {}
 
-            vertexList.get(0).setActive(true);
-            vertexTraversed.add(vertexList.get(0));
+            vertexList.getFirst().setActive(true);
+            vertexTraversed.add(vertexList.getFirst());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -493,8 +493,8 @@ class UnitAnimation extends JPanel implements ActionListener {
             }
             for (Vector<Vertex> vert : outputGraph) {}
 
-            vertexList.get(0).setActive(true);
-            vertexTraversed.add(vertexList.get(0));
+            vertexList.getFirst().setActive(true);
+            vertexTraversed.add(vertexList.getFirst());
         } catch (Exception e) {
             e.printStackTrace();
         }

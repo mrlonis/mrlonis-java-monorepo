@@ -156,13 +156,11 @@ public class CacheSimulator extends AbstractMarsToolAndApplication {
         ltb.setTitleJustification(TitledBorder.CENTER);
         logPanel.setBorder(ltb);
         logShow = new JCheckBox("Enabled", debug);
-        logShow.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                debug = e.getStateChange() == ItemEvent.SELECTED;
-                resetLogDisplay();
-                logText.setEnabled(debug);
-                logText.setBackground(debug ? Color.WHITE : logPanel.getBackground());
-            }
+        logShow.addItemListener(e -> {
+            debug = e.getStateChange() == ItemEvent.SELECTED;
+            resetLogDisplay();
+            logText.setEnabled(debug);
+            logText.setBackground(debug ? Color.WHITE : logPanel.getBackground());
         });
         logPanel.add(logShow);
         logText = new JTextArea(5, 70);
@@ -186,11 +184,9 @@ public class CacheSimulator extends AbstractMarsToolAndApplication {
         cachePlacementSelector.setEditable(false);
         cachePlacementSelector.setBackground(backgroundColor);
         cachePlacementSelector.setSelectedIndex(defaultPlacementPolicyIndex);
-        cachePlacementSelector.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                updateCacheSetSizeSelector();
-                reset();
-            }
+        cachePlacementSelector.addActionListener(e -> {
+            updateCacheSetSizeSelector();
+            reset();
         });
 
         cacheReplacementSelector = new JComboBox(replacementPolicyChoices);
@@ -202,36 +198,28 @@ public class CacheSimulator extends AbstractMarsToolAndApplication {
         cacheBlockSizeSelector.setEditable(false);
         cacheBlockSizeSelector.setBackground(backgroundColor);
         cacheBlockSizeSelector.setSelectedIndex(defaultCacheBlockSizeIndex);
-        cacheBlockSizeSelector.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                updateCacheSizeDisplay();
-                reset();
-            }
+        cacheBlockSizeSelector.addActionListener(e -> {
+            updateCacheSizeDisplay();
+            reset();
         });
         cacheBlockCountSelector = new JComboBox(cacheBlockCountChoices);
         cacheBlockCountSelector.setEditable(false);
         cacheBlockCountSelector.setBackground(backgroundColor);
         cacheBlockCountSelector.setSelectedIndex(defaultCacheBlockCountIndex);
-        cacheBlockCountSelector.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                updateCacheSetSizeSelector();
-                theCache = createNewCache();
-                resetCounts();
-                updateDisplay();
-                updateCacheSizeDisplay();
-                animations.fillAnimationBoxWithCacheBlocks();
-            }
+        cacheBlockCountSelector.addActionListener(e -> {
+            updateCacheSetSizeSelector();
+            theCache = createNewCache();
+            resetCounts();
+            updateDisplay();
+            updateCacheSizeDisplay();
+            animations.fillAnimationBoxWithCacheBlocks();
         });
 
         cacheSetSizeSelector = new JComboBox(cacheSetSizeChoices);
         cacheSetSizeSelector.setEditable(false);
         cacheSetSizeSelector.setBackground(backgroundColor);
         cacheSetSizeSelector.setSelectedIndex(defaultCacheSetSizeIndex);
-        cacheSetSizeSelector.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                reset();
-            }
-        });
+        cacheSetSizeSelector.addActionListener(e -> reset());
 
         // ALL COMPONENTS FOR "CACHE ORGANIZATION" SECTION
         JPanel placementPolicyRow = getPanelWithBorderLayout();

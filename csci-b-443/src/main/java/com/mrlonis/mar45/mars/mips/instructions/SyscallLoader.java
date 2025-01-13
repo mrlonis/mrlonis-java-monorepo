@@ -75,7 +75,7 @@ class SyscallLoader {
                 try {
                     // grab the class, make sure it implements Syscall, instantiate, add to list
                     String syscallClassName = CLASS_PREFIX + file.substring(0, file.indexOf(CLASS_EXTENSION) - 1);
-                    Class clas = Class.forName(syscallClassName);
+                    Class<?> clas = Class.forName(syscallClassName);
                     if (!Syscall.class.isAssignableFrom(clas)) {
                         continue;
                     }

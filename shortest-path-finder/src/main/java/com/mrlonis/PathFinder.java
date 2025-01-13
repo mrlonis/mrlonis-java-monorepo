@@ -221,7 +221,7 @@ public class PathFinder {
                         return null;
                     }
 
-                    notAcceptables.add(0, curr);
+                    notAcceptables.addFirst(curr);
                     path.remove(i - 1);
                     i = path.size();
                     curr = path.get(i - 1);
@@ -443,7 +443,7 @@ public class PathFinder {
             numberOfIterations++;
         }
 
-        if (path.get(path.size() - 1).equals(to)) {
+        if (path.getLast().equals(to)) {
             return new Pair(path, firstDir);
         } else {
             for (Coord cor : path) {

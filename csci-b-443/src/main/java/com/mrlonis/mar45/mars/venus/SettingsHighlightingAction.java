@@ -216,20 +216,16 @@ public class SettingsHighlightingAction extends GuiAction {
         dataHighlightButton = new JButton();
         dataHighlightButton.setText(getHighlightControlText(currentDataHighlightSetting));
         dataHighlightButton.setToolTipText(DATA_HIGHLIGHT_ENABLE_TOOL_TIP_TEXT);
-        dataHighlightButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                currentDataHighlightSetting = !currentDataHighlightSetting;
-                dataHighlightButton.setText(getHighlightControlText(currentDataHighlightSetting));
-            }
+        dataHighlightButton.addActionListener(e -> {
+            currentDataHighlightSetting = !currentDataHighlightSetting;
+            dataHighlightButton.setText(getHighlightControlText(currentDataHighlightSetting));
         });
         registerHighlightButton = new JButton();
         registerHighlightButton.setText(getHighlightControlText(currentRegisterHighlightSetting));
         registerHighlightButton.setToolTipText(REGISTER_HIGHLIGHT_ENABLE_TOOL_TIP_TEXT);
-        registerHighlightButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                currentRegisterHighlightSetting = !currentRegisterHighlightSetting;
-                registerHighlightButton.setText(getHighlightControlText(currentRegisterHighlightSetting));
-            }
+        registerHighlightButton.addActionListener(e -> {
+            currentRegisterHighlightSetting = !currentRegisterHighlightSetting;
+            registerHighlightButton.setText(getHighlightControlText(currentRegisterHighlightSetting));
         });
         JPanel dataHighlightPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel registerHighlightPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -245,33 +241,19 @@ public class SettingsHighlightingAction extends GuiAction {
         Box controlPanel = Box.createHorizontalBox();
         JButton okButton = new JButton("Apply and Close");
         okButton.setToolTipText(CLOSE_TOOL_TIP_TEXT);
-        okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setHighlightingSettings();
-                closeDialog();
-            }
+        okButton.addActionListener(e -> {
+            setHighlightingSettings();
+            closeDialog();
         });
         JButton applyButton = new JButton("Apply");
         applyButton.setToolTipText(APPLY_TOOL_TIP_TEXT);
-        applyButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setHighlightingSettings();
-            }
-        });
+        applyButton.addActionListener(e -> setHighlightingSettings());
         JButton resetButton = new JButton("Reset");
         resetButton.setToolTipText(RESET_TOOL_TIP_TEXT);
-        resetButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                resetButtonColors();
-            }
-        });
+        resetButton.addActionListener(e -> resetButtonColors());
         JButton cancelButton = new JButton("Cancel");
         cancelButton.setToolTipText(CANCEL_TOOL_TIP_TEXT);
-        cancelButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                closeDialog();
-            }
-        });
+        cancelButton.addActionListener(e -> closeDialog());
         controlPanel.add(Box.createHorizontalGlue());
         controlPanel.add(okButton);
         controlPanel.add(Box.createHorizontalGlue());
@@ -546,25 +528,17 @@ public class SettingsHighlightingAction extends GuiAction {
         protected Component buildControlPanel() {
             Box controlPanel = Box.createHorizontalBox();
             JButton okButton = new JButton("OK");
-            okButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    performOK();
-                    closeDialog();
-                }
+            okButton.addActionListener(e -> {
+                performOK();
+                closeDialog();
             });
             JButton cancelButton = new JButton("Cancel");
-            cancelButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    performCancel();
-                    closeDialog();
-                }
+            cancelButton.addActionListener(e -> {
+                performCancel();
+                closeDialog();
             });
             JButton resetButton = new JButton("Reset");
-            resetButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    reset();
-                }
-            });
+            resetButton.addActionListener(e -> reset());
             controlPanel.add(Box.createHorizontalGlue());
             controlPanel.add(okButton);
             controlPanel.add(Box.createHorizontalGlue());

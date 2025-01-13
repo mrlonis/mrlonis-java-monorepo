@@ -252,8 +252,7 @@ class Fruit {
     }
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof Fruit)) return false;
-        Fruit that = (Fruit) obj;
+        if (!(obj instanceof Fruit that)) return false;
         return name.equals(that.name) && count == that.count;
     }
 }

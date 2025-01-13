@@ -295,7 +295,7 @@ class BTree {
         bt.root.keys.add(8);
         bt.root.children.add(bt.new Node());
         bt.root.children.add(bt.new Node());
-        bt.root.children.get(0).keys.add(1);
+        bt.root.children.getFirst().keys.add(1);
         bt.root.children.get(0).keys.add(4);
         bt.root.children.get(0).keys.add(5);
         bt.root.children.get(1).keys.add(10);
@@ -319,11 +319,11 @@ class BTree {
         assert 2 == bt.root.keys.size();
         assert 4 == bt.root.keys.get(0);
         assert 8 == bt.root.keys.get(1);
-        assert 2 == bt.root.children.get(0).keys.size();
+        assert 2 == bt.root.children.getFirst().keys.size();
         assert 1 == bt.root.children.get(0).keys.get(0);
         assert 3 == bt.root.children.get(0).keys.get(1);
         assert 1 == bt.root.children.get(1).keys.size();
-        assert 5 == bt.root.children.get(1).keys.get(0);
+        assert 5 == bt.root.children.get(1).keys.getFirst();
         assert 3 == bt.root.children.get(2).keys.size();
         assert 10 == bt.root.children.get(2).keys.get(0);
         assert 12 == bt.root.children.get(2).keys.get(1);
@@ -343,7 +343,7 @@ class BTree {
         assert 9 == bt.root.children.get(2).keys.get(0);
         assert 10 == bt.root.children.get(2).keys.get(1);
         assert 1 == bt.root.children.get(3).keys.size();
-        assert 18 == bt.root.children.get(3).keys.get(0);
+        assert 18 == bt.root.children.get(3).keys.getFirst();
 
         // This will trigger a split in the root. (TODO #2)
         bt.insert(7);
@@ -352,14 +352,14 @@ class BTree {
         /** 8 / \ 4 12 / \ / \ 1, 3 5, 7 9, 10 18 */
         assert 10 == bt.size();
         assert 1 == bt.root.keys.size();
-        assert 8 == bt.root.keys.get(0);
+        assert 8 == bt.root.keys.getFirst();
         assert 1 == bt.root.children.get(0).keys.size();
-        assert 4 == bt.root.children.get(0).keys.get(0);
+        assert 4 == bt.root.children.get(0).keys.getFirst();
         assert 1 == bt.root.children.get(1).keys.size();
-        assert 12 == bt.root.children.get(1).keys.get(0);
+        assert 12 == bt.root.children.get(1).keys.getFirst();
         assert 2 == bt.root.children.get(0).children.get(1).keys.size();
         assert 5 == bt.root.children.get(0).children.get(1).keys.get(0);
-        assert 7 == bt.root.children.get(0).children.get(1).keys.get(1);
+        assert 7 == bt.root.children.getFirst().children.get(1).keys.get(1);
 
         // Ignore duplicate keys. (TODO #3)
 

@@ -268,10 +268,9 @@ class Fruit {
     }
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof Fruit)) {
+        if (!(obj instanceof Fruit that)) {
             return false;
         }
-        Fruit that = (Fruit) obj;
         return name.equals(that.name) && count == that.count;
     }
 }

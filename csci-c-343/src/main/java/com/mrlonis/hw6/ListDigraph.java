@@ -157,11 +157,7 @@ public class ListDigraph implements Digraph {
         Set<Integer> neighbors = new HashSet<>();
         Set<Integer> out = this.out(v);
 
-        out.forEach(x -> {
-            this.out(x).forEach(y -> {
-                neighbors.add(y);
-            });
-        });
+        out.forEach(x -> this.out(x).forEach(neighbors::add));
 
         return neighbors;
     }

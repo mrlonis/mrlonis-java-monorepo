@@ -231,7 +231,7 @@ class Testing {
      */
     @Test
     void siftUpTest() {
-        Heap<Integer> heap = new Heap<>((x, y) -> x.compareTo(y));
+        Heap<Integer> heap = new Heap<>(Integer::compareTo);
         for (int i = 1; i < 11; i++) {
             heap.keys.add(i);
         }
@@ -313,7 +313,7 @@ class Testing {
 
     @Test
     void smallMinHeap() {
-        Heap<Integer> heap = new Heap<>((x, y) -> x.compareTo(y));
+        Heap<Integer> heap = new Heap<>(Integer::compareTo);
         Comparator<Integer> comp = heap.comparator();
         assertTrue(comp.compare(2, 3) < 0);
         assertEquals(0, comp.compare(4, 4));
@@ -425,7 +425,7 @@ class Testing {
 
     @Test
     void mediumMinHeap() {
-        Heap<Integer> heap = new Heap<>((x, y) -> x.compareTo(y));
+        Heap<Integer> heap = new Heap<>(Integer::compareTo);
         for (int x : new int[] {9, 3, 4, 7, 6, 8, 2, 1, 5, 10}) {
             heap.insert(x);
         }

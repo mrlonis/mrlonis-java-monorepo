@@ -272,26 +272,17 @@ public class BHTSimulator extends AbstractMarsToolAndApplication implements Acti
             }
         }
 
-        switch (opCode) {
-            case 0x04:
-                return valRS == valRT;
-            case 0x05:
-                return valRS != valRT;
-            case 0x06:
-                return valRS <= 0;
-            case 0x07:
-                return valRS >= 0;
-            case 0x14:
-                return valRS == valRT;
-            case 0x15:
-                return valRS != valRT;
-            case 0x16:
-                return valRS <= 0;
-            case 0x17:
-                return valRS >= 0;
-        }
-
-        return true;
+        return switch (opCode) {
+            case 0x04 -> valRS == valRT;
+            case 0x05 -> valRS != valRT;
+            case 0x06 -> valRS <= 0;
+            case 0x07 -> valRS >= 0;
+            case 0x14 -> valRS == valRT;
+            case 0x15 -> valRS != valRT;
+            case 0x16 -> valRS <= 0;
+            case 0x17 -> valRS >= 0;
+            default -> true;
+        };
     }
 
     /**
@@ -322,10 +313,9 @@ public class BHTSimulator extends AbstractMarsToolAndApplication implements Acti
 
         if (!notice.accessIsFromMIPS()) return;
 
-        if (notice.getAccessType() == AccessNotice.READ && notice instanceof MemoryAccessNotice) {
+        if (notice.getAccessType() == AccessNotice.READ && notice instanceof MemoryAccessNotice memAccNotice) {
 
             // now it is safe to make a cast of the notice
-            MemoryAccessNotice memAccNotice = (MemoryAccessNotice) notice;
 
             try {
                 // access the statement in the text segment without notifying other tools etc.

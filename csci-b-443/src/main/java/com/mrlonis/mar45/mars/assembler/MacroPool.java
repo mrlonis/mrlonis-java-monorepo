@@ -156,8 +156,8 @@ public class MacroPool {
     }
 
     public void popFromCallStack() {
-        callStack.remove(callStack.size() - 1);
-        callStackOrigLines.remove(callStackOrigLines.size() - 1);
+        callStack.removeLast();
+        callStackOrigLines.removeLast();
     }
 
     public String getExpansionHistory() {

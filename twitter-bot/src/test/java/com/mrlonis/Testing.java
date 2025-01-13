@@ -738,8 +738,6 @@ public class Testing {
         /*
          * Show stats for the algorithms on real-time tweets.
          */
-        bot.tweets.forEach(tweet -> {
-            match(pattern, tweet);
-        });
+        bot.tweets.forEach(tweet -> match(pattern, tweet));
     }
 }

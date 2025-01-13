@@ -96,9 +96,7 @@ public class Trie implements Iterable<String> {
                 keys.add(this.word);
             }
 
-            this.children.forEach((c, node) -> {
-                node.getKeys();
-            });
+            this.children.forEach((c, node) -> node.getKeys());
         }
     }
 

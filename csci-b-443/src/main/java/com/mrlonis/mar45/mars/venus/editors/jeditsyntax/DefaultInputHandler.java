@@ -25,7 +25,7 @@ import javax.swing.KeyStroke;
 public class DefaultInputHandler extends InputHandler {
     /** Creates a new input handler with no key bindings defined. */
     public DefaultInputHandler() {
-        bindings = currentBindings = new Hashtable();
+        bindings = currentBindings = new Hashtable<KeyStroke, Object>();
     }
 
     /** Sets up the default key bindings. */
@@ -97,7 +97,7 @@ public class DefaultInputHandler extends InputHandler {
                 Object o = current.get(keyStroke);
                 if (o instanceof Hashtable) current = (Hashtable) o;
                 else {
-                    o = new Hashtable();
+                    o = new Hashtable<>();
                     current.put(keyStroke, o);
                     current = (Hashtable) o;
                 }
@@ -151,35 +151,40 @@ public class DefaultInputHandler extends InputHandler {
             KeyStroke keyStroke = KeyStroke.getKeyStroke(keyCode, modifiers);
             Object o = currentBindings.get(keyStroke);
 
-            if (o == null) {
-                // Don't beep if the user presses some
-                // key we don't know about unless a
-                // prefix is active. Otherwise it will
-                // beep when caps lock is pressed, etc.
-                if (currentBindings != bindings) {
-                    Toolkit.getDefaultToolkit().beep();
-                    // F10 should be passed on, but C+e F10
-                    // shouldn't
-                    repeatCount = 0;
-                    repeat = false;
+            switch (o) {
+                case null -> {
+                    // Don't beep if the user presses some
+                    // key we don't know about unless a
+                    // prefix is active. Otherwise it will
+                    // beep when caps lock is pressed, etc.
+                    if (currentBindings != bindings) {
+                        Toolkit.getDefaultToolkit().beep();
+                        // F10 should be passed on, but C+e F10
+                        // shouldn't
+                        repeatCount = 0;
+                        repeat = false;
+                        evt.consume();
+                    }
+                    currentBindings = bindings;
+                    // No binding for this keyStroke, pass it to menu
+                    // (mnemonic, accelerator).  DPS 4-may-2010
+                    com.mrlonis.mar45.mars.Globals.getGui().dispatchEventToMenu(evt);
                     evt.consume();
+                    return;
                 }
-                currentBindings = bindings;
-                // No binding for this keyStroke, pass it to menu
-                // (mnemonic, accelerator).  DPS 4-may-2010
-                com.mrlonis.mar45.mars.Globals.getGui().dispatchEventToMenu(evt);
-                evt.consume();
-                return;
-            } else if (o instanceof ActionListener) {
-                currentBindings = bindings;
-                executeAction(((ActionListener) o), evt.getSource(), null);
+                case ActionListener actionListener -> {
+                    currentBindings = bindings;
+                    executeAction(actionListener, evt.getSource(), null);
 
-                evt.consume();
-                return;
-            } else if (o instanceof Hashtable) {
-                currentBindings = (Hashtable) o;
-                evt.consume();
-                return;
+                    evt.consume();
+                    return;
+                }
+                case Hashtable hashtable -> {
+                    currentBindings = hashtable;
+                    evt.consume();
+                    return;
+                }
+                default -> {}
             }
         }
     }
@@ -320,8 +325,8 @@ public class DefaultInputHandler extends InputHandler {
     }
 
     // private members
-    private Hashtable bindings;
-    private Hashtable currentBindings;
+    private Hashtable<KeyStroke, Object> bindings;
+    private Hashtable<KeyStroke, Object> currentBindings;
 
     private DefaultInputHandler(DefaultInputHandler copy) {
         bindings = currentBindings = copy.bindings;

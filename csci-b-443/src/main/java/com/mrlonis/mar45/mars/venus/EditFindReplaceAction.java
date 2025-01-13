@@ -149,32 +149,16 @@ public class EditFindReplaceAction extends GuiAction {
             controlPanel.setBorder(BorderFactory.createEmptyBorder(6, 0, 0, 0));
             findButton = new JButton("Find");
             findButton.setToolTipText(FIND_TOOL_TIP_TEXT);
-            findButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    performFind();
-                }
-            });
+            findButton.addActionListener(e -> performFind());
             replaceButton = new JButton("Replace then Find");
             replaceButton.setToolTipText(REPLACE_TOOL_TIP_TEXT);
-            replaceButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    performReplace();
-                }
-            });
+            replaceButton.addActionListener(e -> performReplace());
             replaceAllButton = new JButton("Replace all");
             replaceAllButton.setToolTipText(REPLACE_ALL_TOOL_TIP_TEXT);
-            replaceAllButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    performReplaceAll();
-                }
-            });
+            replaceAllButton.addActionListener(e -> performReplaceAll());
             closeButton = new JButton("Close");
             closeButton.setToolTipText(CLOSE_TOOL_TIP_TEXT);
-            closeButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    performClose();
-                }
-            });
+            closeButton.addActionListener(e -> performClose());
             controlPanel.add(Box.createHorizontalGlue());
             controlPanel.add(findButton);
             controlPanel.add(Box.createHorizontalGlue());

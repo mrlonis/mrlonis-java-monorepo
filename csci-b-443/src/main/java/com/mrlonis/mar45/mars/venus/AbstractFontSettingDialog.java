@@ -104,30 +104,22 @@ public abstract class AbstractFontSettingDialog extends JDialog {
         fontSizeSelector = new JSlider(EditorFont.MIN_SIZE, EditorFont.MAX_SIZE, currentFont.getSize());
         fontSizeSelector.setToolTipText(
                 "Use slider to select font size from " + EditorFont.MIN_SIZE + " to " + EditorFont.MAX_SIZE + ".");
-        fontSizeSelector.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                Integer value = ((JSlider) e.getSource()).getValue();
-                fontSizeSpinSelector.setValue(value);
-                fontSample.setFont(getFont());
-            }
+        fontSizeSelector.addChangeListener(e -> {
+            Integer value = ((JSlider) e.getSource()).getValue();
+            fontSizeSpinSelector.setValue(value);
+            fontSample.setFont(getFont());
         });
         SpinnerNumberModel fontSizeSpinnerModel =
                 new SpinnerNumberModel(currentFont.getSize(), EditorFont.MIN_SIZE, EditorFont.MAX_SIZE, 1);
         fontSizeSpinSelector = new JSpinner(fontSizeSpinnerModel);
         fontSizeSpinSelector.setToolTipText("Current font size in points.");
-        fontSizeSpinSelector.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                Object value = ((JSpinner) e.getSource()).getValue();
-                fontSizeSelector.setValue((Integer) value);
-                fontSample.setFont(getFont());
-            }
+        fontSizeSpinSelector.addChangeListener(e -> {
+            Object value = ((JSpinner) e.getSource()).getValue();
+            fontSizeSelector.setValue((Integer) value);
+            fontSample.setFont(getFont());
         });
         // Action listener to update sample when family or style selected
-        ActionListener updateSample = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                fontSample.setFont(getFont());
-            }
-        };
+        ActionListener updateSample = e -> fontSample.setFont(getFont());
         fontFamilySelector.addActionListener(updateSample);
         fontStyleSelector.addActionListener(updateSample);
 
@@ -215,8 +207,8 @@ public abstract class AbstractFontSettingDialog extends JDialog {
             if (needSeparator) {
                 data.addElement(SEPARATOR);
             }
-            for (int j = 0; j < strings.length; j++) {
-                data.addElement(strings[j]);
+            for (String string : strings) {
+                data.addElement(string);
                 needSeparator = true;
             }
         }

@@ -290,14 +290,22 @@ public abstract class InputHandler extends KeyAdapter {
     public static JEditTextArea getTextArea(EventObject evt) {
         if (evt != null) {
             Object o = evt.getSource();
-            if (o instanceof Component) {
+            if (o instanceof Component c) {
                 // find the parent text area
-                Component c = (Component) o;
+                label:
                 for (; ; ) {
-                    if (c instanceof JEditTextArea) return (JEditTextArea) c;
-                    else if (c == null) break;
-                    if (c instanceof JPopupMenu) c = ((JPopupMenu) c).getInvoker();
-                    else c = c.getParent();
+                    switch (c) {
+                        case JEditTextArea jEditTextArea:
+                            return jEditTextArea;
+                        case null:
+                            break label;
+                        case JPopupMenu jPopupMenu:
+                            c = jPopupMenu.getInvoker();
+                            break;
+                        default:
+                            c = c.getParent();
+                            break;
+                    }
                 }
             }
         }
@@ -839,7 +847,7 @@ public abstract class InputHandler extends KeyAdapter {
 
             if (textArea.isEditable()) {
                 StringBuilder buf = new StringBuilder();
-                for (int i = 0; i < repeatCount; i++) buf.append(str);
+                buf.append(String.valueOf(str).repeat(Math.max(0, repeatCount)));
                 textArea.overwriteSetSelectedText(buf.toString());
             } else {
                 textArea.getToolkit().beep();

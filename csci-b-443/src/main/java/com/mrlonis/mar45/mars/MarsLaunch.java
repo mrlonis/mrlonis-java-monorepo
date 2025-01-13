@@ -229,12 +229,10 @@ public class MarsLaunch {
     private void launchIDE() {
         // System.setProperty("apple.laf.useScreenMenuBar", "true"); // Puts MARS menu on Mac OS menu bar
         new MarsSplashScreen(splashDuration).showSplash();
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                // Turn off metal's use of bold fonts
-                // UIManager.put("swing.boldMetal", Boolean.FALSE);
-                new VenusUI("MARS " + Globals.version);
-            }
+        SwingUtilities.invokeLater(() -> {
+            // Turn off metal's use of bold fonts
+            // UIManager.put("swing.boldMetal", Boolean.FALSE);
+            new VenusUI("MARS " + Globals.version);
         });
         return;
     }
@@ -328,62 +326,64 @@ public class MarsLaunch {
                     // Let it fall thru and get handled by catch-all
                 }
             }
-            if ("d".equals(args[i].toLowerCase())) {
-                Globals.debug = true;
-                continue;
-            }
-            if ("a".equals(args[i].toLowerCase())) {
-                simulate = false;
-                continue;
-            }
-            if ("ad".equals(args[i].toLowerCase()) || "da".equals(args[i].toLowerCase())) {
-                Globals.debug = true;
-                simulate = false;
-                continue;
-            }
-            if ("p".equals(args[i].toLowerCase())) {
-                assembleProject = true;
-                continue;
-            }
-            if ("dec".equals(args[i].toLowerCase())) {
-                displayFormat = DECIMAL;
-                continue;
-            }
-            if ("hex".equals(args[i].toLowerCase())) {
-                displayFormat = HEXADECIMAL;
-                continue;
-            }
-            if ("ascii".equals(args[i].toLowerCase())) {
-                displayFormat = ASCII;
-                continue;
-            }
-            if ("b".equals(args[i].toLowerCase())) {
-                verbose = false;
-                continue;
-            }
-            if ("db".equals(args[i].toLowerCase())) {
-                delayedBranching = true;
-                continue;
-            }
-            if ("np".equals(args[i].toLowerCase()) || "ne".equals(args[i].toLowerCase())) {
-                pseudo = false;
-                continue;
-            }
-            if ("we".equals(args[i].toLowerCase())) { // added 14-July-2008 DPS
-                warningsAreErrors = true;
-                continue;
-            }
-            if ("sm".equals(args[i].toLowerCase())) { // added 17-Dec-2009 DPS
-                startAtMain = true;
-                continue;
-            }
-            if ("smc".equals(args[i].toLowerCase())) { // added 5-Jul-2013 DPS
-                selfModifyingCode = true;
-                continue;
-            }
-            if ("ic".equals(args[i].toLowerCase())) { // added 19-Jul-2012 DPS
-                countInstructions = true;
-                continue;
+            switch (args[i].toLowerCase()) {
+                case "d" -> {
+                    Globals.debug = true;
+                    continue;
+                }
+                case "a" -> {
+                    simulate = false;
+                    continue;
+                }
+                case "ad", "da" -> {
+                    Globals.debug = true;
+                    simulate = false;
+                    continue;
+                }
+                case "p" -> {
+                    assembleProject = true;
+                    continue;
+                }
+                case "dec" -> {
+                    displayFormat = DECIMAL;
+                    continue;
+                }
+                case "hex" -> {
+                    displayFormat = HEXADECIMAL;
+                    continue;
+                }
+                case "ascii" -> {
+                    displayFormat = ASCII;
+                    continue;
+                }
+                case "b" -> {
+                    verbose = false;
+                    continue;
+                }
+                case "db" -> {
+                    delayedBranching = true;
+                    continue;
+                }
+                case "np", "ne" -> {
+                    pseudo = false;
+                    continue;
+                }
+                case "we" -> {
+                    warningsAreErrors = true;
+                    continue;
+                }
+                case "sm" -> {
+                    startAtMain = true;
+                    continue;
+                }
+                case "smc" -> {
+                    selfModifyingCode = true;
+                    continue;
+                }
+                case "ic" -> {
+                    countInstructions = true;
+                    continue;
+                }
             }
 
             if (args[i].indexOf('$') == 0) {
@@ -443,14 +443,14 @@ public class MarsLaunch {
             Globals.getSettings().setBooleanSettingNonPersistent(Settings.DELAYED_BRANCHING_ENABLED, delayedBranching);
             Globals.getSettings()
                     .setBooleanSettingNonPersistent(Settings.SELF_MODIFYING_CODE_ENABLED, selfModifyingCode);
-            File mainFile = new File((String) filenameList.get(0)).getAbsoluteFile(); // First file is "main" file
+            File mainFile = new File((String) filenameList.getFirst()).getAbsoluteFile(); // First file is "main" file
             ArrayList filesToAssemble;
             if (assembleProject) {
                 filesToAssemble = FilenameFinder.getFilenameList(mainFile.getParent(), Globals.fileExtensions);
                 if (filenameList.size() > 1) {
                     // Using "p" project option PLUS listing more than one filename on command line.
                     // Add the additional files, avoiding duplicates.
-                    filenameList.remove(0); // first one has already been processed
+                    filenameList.removeFirst(); // first one has already been processed
                     ArrayList moreFilesToAssemble =
                             FilenameFinder.getFilenameList(filenameList, FilenameFinder.MATCH_ALL_EXTENSIONS);
                     // Remove any duplicates then merge the two lists.
@@ -540,8 +540,7 @@ public class MarsLaunch {
                 private int lastAddress = 0;
 
                 public void update(Observable o, Object obj) {
-                    if (obj instanceof AccessNotice) {
-                        AccessNotice notice = (AccessNotice) obj;
+                    if (obj instanceof AccessNotice notice) {
                         if (!notice.accessIsFromMIPS()) return;
                         if (notice.getAccessType() != AccessNotice.READ) return;
                         MemoryAccessNotice m = (MemoryAccessNotice) notice;
@@ -632,20 +631,13 @@ public class MarsLaunch {
     //////////////////////////////////////////////////////////////////////
     // Formats int value for display: decimal, hex, ascii
     private String formatIntForDisplay(int value) {
-        String strValue;
-        switch (displayFormat) {
-            case DECIMAL:
-                strValue = "" + value;
-                break;
-            case HEXADECIMAL:
-                strValue = Binary.intToHexString(value);
-                break;
-            case ASCII:
-                strValue = Binary.intToAscii(value);
-                break;
-            default:
-                strValue = Binary.intToHexString(value);
-        }
+        String strValue =
+                switch (displayFormat) {
+                    case DECIMAL -> "" + value;
+                    case HEXADECIMAL -> Binary.intToHexString(value);
+                    case ASCII -> Binary.intToAscii(value);
+                    default -> Binary.intToHexString(value);
+                };
         return strValue;
     }
 

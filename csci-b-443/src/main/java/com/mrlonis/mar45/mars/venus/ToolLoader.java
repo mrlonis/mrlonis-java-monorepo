@@ -3,10 +3,8 @@ package com.mrlonis.mar45.mars.venus;
 import com.mrlonis.mar45.mars.tools.*;
 import com.mrlonis.mar45.mars.util.*;
 import java.awt.event.*;
-import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
-import java.util.zip.*;
 import javax.swing.*;
 
 /*
@@ -121,7 +119,7 @@ public class ToolLoader {
                 try {
                     // grab the class, make sure it implements MarsTool, instantiate, add to menu
                     String toolClassName = CLASS_PREFIX + file.substring(0, file.indexOf(CLASS_EXTENSION) - 1);
-                    Class clas = Class.forName(toolClassName);
+                    Class<?> clas = Class.forName(toolClassName);
                     if (!MarsTool.class.isAssignableFrom(clas)
                             || Modifier.isAbstract(clas.getModifiers())
                             || Modifier.isInterface(clas.getModifiers())) {

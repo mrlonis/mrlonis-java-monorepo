@@ -1,6 +1,5 @@
 package com.mrlonis.mar45.mars.mips.dump;
 
-import com.mrlonis.mar45.mars.*;
 import com.mrlonis.mar45.mars.util.*;
 import java.lang.reflect.*;
 import java.util.*;
@@ -65,7 +64,7 @@ public class DumpFormatLoader {
                 try {
                     // grab the class, make sure it implements DumpFormat, instantiate, add to list
                     String formatClassName = CLASS_PREFIX + file.substring(0, file.indexOf(CLASS_EXTENSION) - 1);
-                    Class clas = Class.forName(formatClassName);
+                    Class<?> clas = Class.forName(formatClassName);
                     if (DumpFormat.class.isAssignableFrom(clas)
                             && !Modifier.isAbstract(clas.getModifiers())
                             && !Modifier.isInterface(clas.getModifiers())) {

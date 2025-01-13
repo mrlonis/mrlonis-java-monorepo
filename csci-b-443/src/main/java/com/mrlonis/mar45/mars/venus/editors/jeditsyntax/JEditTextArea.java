@@ -137,14 +137,12 @@ public class JEditTextArea extends JComponent {
         // One can also accomplish this using: setFocusTraversalKeysEnabled(false);
         // but that seems heavy-handed.
         // DPS 12May2010
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-            public boolean dispatchKeyEvent(KeyEvent e) {
-                if (JEditTextArea.this.isFocusOwner() && e.getKeyCode() == KeyEvent.VK_TAB && e.getModifiers() == 0) {
-                    processKeyEvent(e);
-                    return true;
-                } else {
-                    return false;
-                }
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(e -> {
+            if (JEditTextArea.this.isFocusOwner() && e.getKeyCode() == KeyEvent.VK_TAB && e.getModifiers() == 0) {
+                processKeyEvent(e);
+                return true;
+            } else {
+                return false;
             }
         });
 
@@ -1199,7 +1197,7 @@ public class JEditTextArea extends JComponent {
 
             int repeatCount = inputHandler.getRepeatCount();
             StringBuilder buf = new StringBuilder();
-            for (int i = 0; i < repeatCount; i++) buf.append(selection);
+            buf.append(String.valueOf(selection).repeat(Math.max(0, repeatCount)));
 
             clipboard.setContents(new StringSelection(buf.toString()), null);
         }
@@ -1217,7 +1215,7 @@ public class JEditTextArea extends JComponent {
 
                 int repeatCount = inputHandler.getRepeatCount();
                 StringBuilder buf = new StringBuilder();
-                for (int i = 0; i < repeatCount; i++) buf.append(selection);
+                buf.append(selection.repeat(Math.max(0, repeatCount)));
                 selection = buf.toString();
                 setSelectedText(selection);
             } catch (Exception e) {
@@ -1475,11 +1473,9 @@ public class JEditTextArea extends JComponent {
             // If this is not done, mousePressed events accumulate
             // and the result is that scrolling doesn't stop after
             // the mouse is released
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    if (evt.getAdjustable() == vertical) setFirstLine(vertical.getValue());
-                    else setHorizontalOffset(-horizontal.getValue());
-                }
+            SwingUtilities.invokeLater(() -> {
+                if (evt.getAdjustable() == vertical) setFirstLine(vertical.getValue());
+                else setHorizontalOffset(-horizontal.getValue());
             });
         }
     }
@@ -1715,8 +1711,7 @@ public class JEditTextArea extends JComponent {
         }
 
         public boolean addEdit(UndoableEdit edit) {
-            if (edit instanceof CaretUndo) {
-                CaretUndo cedit = (CaretUndo) edit;
+            if (edit instanceof CaretUndo cedit) {
                 start = cedit.start;
                 end = cedit.end;
                 cedit.die();
@@ -1996,11 +1991,8 @@ public class JEditTextArea extends JComponent {
                 final MenuElement[] newPath = new MenuElement[2];
                 newPath[0] = path[0];
                 newPath[1] = (MenuElement) popupMenu.getComponentAtIndex(index);
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        MenuSelectionManager.defaultManager().setSelectedPath(newPath);
-                    }
-                });
+                SwingUtilities.invokeLater(
+                        () -> MenuSelectionManager.defaultManager().setSelectedPath(newPath));
                 return true;
             } else {
                 return false;

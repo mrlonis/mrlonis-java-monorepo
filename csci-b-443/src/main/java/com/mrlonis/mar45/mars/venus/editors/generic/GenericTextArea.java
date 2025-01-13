@@ -68,23 +68,17 @@ public class GenericTextArea extends JTextArea implements MARSTextEditingArea {
 
         this.undoManager = new UndoManager();
 
-        this.getCaret().addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                editPane.displayCaretPosition(getCaretPosition());
-            }
-        });
+        this.getCaret().addChangeListener(e -> editPane.displayCaretPosition(getCaretPosition()));
 
         // Needed to support unlimited undo/redo capability
-        undoableEditListener = new UndoableEditListener() {
-            public void undoableEditHappened(UndoableEditEvent e) {
-                // Remember the edit and update the menus.
-                if (isCompoundEdit) {
-                    compoundEdit.addEdit(e.getEdit());
-                } else {
-                    undoManager.addEdit(e.getEdit());
-                    editPane.updateUndoState();
-                    editPane.updateRedoState();
-                }
+        undoableEditListener = e -> {
+            // Remember the edit and update the menus.
+            if (isCompoundEdit) {
+                compoundEdit.addEdit(e.getEdit());
+            } else {
+                undoManager.addEdit(e.getEdit());
+                editPane.updateUndoState();
+                editPane.updateRedoState();
             }
         };
         this.getDocument().addUndoableEditListener(undoableEditListener);

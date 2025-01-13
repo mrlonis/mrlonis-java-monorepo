@@ -226,7 +226,7 @@ public class DoublyLinkedList<T> implements List<T> {
             xs.add(x);
         }
         // Sort xs in the natural order:
-        xs.sort((x, y) -> x.compareTo(y));
+        xs.sort(Integer::compareTo);
         for (int i = 0; i < xs.size(); i++) {
             assert i == xs.get(i);
         }
@@ -253,7 +253,7 @@ public class DoublyLinkedList<T> implements List<T> {
         for (int i = 0, j = ys.size() - 1; i < ys.size(); i++, j--) {
             assert j == ys.get(i);
         }
-        ys.sort((x, y) -> x.compareTo(y));
+        ys.sort(Integer::compareTo);
         for (int i = 0; i < ys.size(); i++) {
             assert i == ys.get(i);
         }
@@ -266,7 +266,7 @@ public class DoublyLinkedList<T> implements List<T> {
         assert zs.get(0) == 6;
         assert zs.get(1) == 3;
         assert zs.get(2) == 4;
-        zs.sort((x, y) -> x.compareTo(y));
+        zs.sort(Integer::compareTo);
         assert zs.get(0) == 3;
         assert zs.get(1) == 4;
         assert zs.get(2) == 6;
@@ -281,7 +281,7 @@ public class DoublyLinkedList<T> implements List<T> {
             ts.add(x);
         }
         assert ts.get(0) == 1;
-        ts.sort((x, y) -> x.compareTo(y));
+        ts.sort(Integer::compareTo);
         assert ts.get(0) == 1;
         ts.sort((x, y) -> y.compareTo(x));
         assert ts.get(0) == 1;
@@ -293,7 +293,7 @@ public class DoublyLinkedList<T> implements List<T> {
         }
         assert ss.get(0) == 1;
         assert ss.get(1) == 2;
-        ss.sort((x, y) -> x.compareTo(y));
+        ss.sort(Integer::compareTo);
         assert ss.get(0) == 1;
         assert ss.get(1) == 2;
         ss.sort((x, y) -> y.compareTo(x));

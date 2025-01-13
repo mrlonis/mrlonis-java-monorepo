@@ -109,7 +109,10 @@ public class Driver {
         } else {
             PopularityBot bot = new PopularityBot(handle, 2000);
             System.out.printf(
-                    "The most common word in the last %d tweets from @%s is: %s\n" + "It appears %d times.\n%n",
+                    """
+                              The most common word in the last %d tweets from @%s is: %s
+                              It appears %d times.
+                              %n""",
                     bot.getNumTweets(), handle, bot.getMostPopularWord(), bot.getFrequencyOfMostPopularWord());
         }
     }

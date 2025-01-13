@@ -167,33 +167,19 @@ public class SettingsMemoryConfigurationAction extends GuiAction {
             Box controlPanel = Box.createHorizontalBox();
             JButton okButton = new JButton("Apply and Close");
             okButton.setToolTipText(SettingsHighlightingAction.CLOSE_TOOL_TIP_TEXT);
-            okButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    performApply();
-                    performClose();
-                }
+            okButton.addActionListener(e -> {
+                performApply();
+                performClose();
             });
             JButton applyButton = new JButton("Apply");
             applyButton.setToolTipText(SettingsHighlightingAction.APPLY_TOOL_TIP_TEXT);
-            applyButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    performApply();
-                }
-            });
+            applyButton.addActionListener(e -> performApply());
             JButton cancelButton = new JButton("Cancel");
             cancelButton.setToolTipText(SettingsHighlightingAction.CANCEL_TOOL_TIP_TEXT);
-            cancelButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    performClose();
-                }
-            });
+            cancelButton.addActionListener(e -> performClose());
             JButton resetButton = new JButton("Reset");
             resetButton.setToolTipText(SettingsHighlightingAction.RESET_TOOL_TIP_TEXT);
-            resetButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    performReset();
-                }
-            });
+            resetButton.addActionListener(e -> performReset());
             controlPanel.add(Box.createHorizontalGlue());
             controlPanel.add(okButton);
             controlPanel.add(Box.createHorizontalGlue());

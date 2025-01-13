@@ -126,38 +126,41 @@ public class DigitalLabSim extends AbstractMarsToolAndApplication {
 
     protected JComponent getHelpComponent() {
         final String helpContent =
-                " This tool is composed of 3 parts : two seven-segment displays, an hexadecimal keyboard and counter \n"
-                        + "Seven segment display\n"
-                        + " Byte value at address 0xFFFF0010 : command right seven segment display \n "
-                        + " Byte value at address 0xFFFF0011 : command left seven segment display \n "
-                        + " Each bit of these two bytes are connected to segments (bit 0 for a segment, 1 for b segment and 7 for point \n \n"
-                        + "Hexadecimal keyboard\n"
-                        + " Byte value at address 0xFFFF0012 : command row number of hexadecimal keyboard (bit 0 to 3) and enable keyboard interrupt (bit 7) \n"
-                        + " Byte value at address 0xFFFF0014 : receive row and column of the key pressed, 0 if not key pressed \n"
-                        + " The mips program have to scan, one by one, each row (send 1,2,4,8...)"
-                        + " and then observe if a key is pressed (that mean byte value at adresse 0xFFFF0014 is different from zero). "
-                        + " This byte value is composed of row number (4 left bits) and column number (4 right bits)"
-                        + " Here you'll find the code for each key : 0x11,0x21,0x41,0x81,0x12,0x22,0x42,0x82,0x14,0x24,0x44,0x84,0x18,0x28,0x48,0x88. \n"
-                        + " For exemple key number 2 return 0x41, that mean the key is on column 3 and row 1. \n"
-                        + " If keyboard interruption is enable, an exception is started, with cause register bit number 11 set.\n \n"
-                        + "Counter\n"
-                        + " Byte value at address 0xFFFF0013 : If one bit of this byte is set, the counter interruption is enable.\n"
-                        + " If counter interruption is enable, every 30 instructions, an exception is started with cause register bit number 10.\n"
-                        + "   (contributed by Didier Teifreto, dteifreto@lifc.univ-fcomte.fr)";
+                """
+                                    This tool is composed of 3 parts : two seven-segment displays, an hexadecimal keyboard and counter\s
+                                   Seven segment display
+                                    Byte value at address 0xFFFF0010 : command right seven segment display\s
+                                    \
+                                    Byte value at address 0xFFFF0011 : command left seven segment display\s
+                                    \
+                                    Each bit of these two bytes are connected to segments (bit 0 for a segment, 1 for b segment and 7 for point\s
+                                   \s
+                                   Hexadecimal keyboard
+                                    Byte value at address 0xFFFF0012 : command row number of hexadecimal keyboard (bit 0 to 3) and enable keyboard interrupt (bit 7)\s
+                                    Byte value at address 0xFFFF0014 : receive row and column of the key pressed, 0 if not key pressed\s
+                                    The mips program have to scan, one by one, each row (send 1,2,4,8...)\
+                                    and then observe if a key is pressed (that mean byte value at adresse 0xFFFF0014 is different from zero). \
+                                    This byte value is composed of row number (4 left bits) and column number (4 right bits)\
+                                    Here you'll find the code for each key : 0x11,0x21,0x41,0x81,0x12,0x22,0x42,0x82,0x14,0x24,0x44,0x84,0x18,0x28,0x48,0x88.\s
+                                    For exemple key number 2 return 0x41, that mean the key is on column 3 and row 1.\s
+                                    If keyboard interruption is enable, an exception is started, with cause register bit number 11 set.
+                                   \s
+                                   Counter
+                                    Byte value at address 0xFFFF0013 : If one bit of this byte is set, the counter interruption is enable.
+                                    If counter interruption is enable, every 30 instructions, an exception is started with cause register bit number 10.
+                                      (contributed by Didier Teifreto, dteifreto@lifc.univ-fcomte.fr)""";
         JButton help = new JButton("Help");
-        help.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JTextArea ja = new JTextArea(helpContent);
-                ja.setRows(20);
-                ja.setColumns(60);
-                ja.setLineWrap(true);
-                ja.setWrapStyleWord(true);
-                JOptionPane.showMessageDialog(
-                        theWindow,
-                        new JScrollPane(ja),
-                        "Simulating the Hexa Keyboard and Seven segment display",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
+        help.addActionListener(e -> {
+            JTextArea ja = new JTextArea(helpContent);
+            ja.setRows(20);
+            ja.setColumns(60);
+            ja.setLineWrap(true);
+            ja.setWrapStyleWord(true);
+            JOptionPane.showMessageDialog(
+                    theWindow,
+                    new JScrollPane(ja),
+                    "Simulating the Hexa Keyboard and Seven segment display",
+                    JOptionPane.INFORMATION_MESSAGE);
         });
         return help;
     } /* ....................Seven Segment display start here................................... */

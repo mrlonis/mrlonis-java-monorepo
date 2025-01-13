@@ -193,9 +193,8 @@ public class RegistersWindow extends JPanel implements Observer {
                 // Simulated MIPS execution stops.  Stop responding.
                 RegisterFile.deleteRegistersObserver(this);
             }
-        } else if (obj instanceof RegisterAccessNotice) {
+        } else if (obj instanceof RegisterAccessNotice access) {
             // NOTE: each register is a separate Observable
-            RegisterAccessNotice access = (RegisterAccessNotice) obj;
             if (access.getAccessType() == AccessNotice.WRITE) {
                 // Uses the same highlighting technique as for Text Segment -- see
                 // AddressCellRenderer class in DataSegmentWindow.java.

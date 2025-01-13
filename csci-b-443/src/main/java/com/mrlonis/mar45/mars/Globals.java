@@ -6,7 +6,6 @@ import com.mrlonis.mar45.mars.mips.instructions.*;
 import com.mrlonis.mar45.mars.mips.instructions.syscalls.*;
 import com.mrlonis.mar45.mars.util.*;
 import com.mrlonis.mar45.mars.venus.*;
-import java.io.*;
 import java.util.*;
 
 /*
@@ -244,7 +243,7 @@ public class Globals {
     public ArrayList getSyscallOverrides() {
         ArrayList overrides = new ArrayList();
         Properties properties = PropertiesFile.loadPropertiesFromFile(syscallPropertiesFile);
-        Enumeration keys = properties.keys();
+        Enumeration<Object> keys = properties.keys();
         while (keys.hasMoreElements()) {
             String key = (String) keys.nextElement();
             overrides.add(new SyscallNumberOverride(key, properties.getProperty(key)));

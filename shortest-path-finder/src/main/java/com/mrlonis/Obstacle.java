@@ -48,7 +48,7 @@ public class Obstacle {
 
         for (int x = this.upperLeft.x; x <= this.lowerRight.x; x++) {
             for (int y = this.upperLeft.y; y <= this.lowerRight.y; y++) {
-                ans.add(0, new Coord(x, y));
+                ans.addFirst(new Coord(x, y));
             }
         }
 

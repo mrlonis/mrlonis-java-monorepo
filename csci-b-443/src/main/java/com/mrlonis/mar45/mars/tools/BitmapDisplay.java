@@ -214,34 +214,33 @@ public class BitmapDisplay extends AbstractMarsToolAndApplication {
 
     /** Overrides default method, to provide a Help button for this tool/app. */
     protected JComponent getHelpComponent() {
-        final String helpContent = "Use this program to simulate a basic bitmap display where\n"
-                + "each memory word in a specified address space corresponds to\n"
-                + "one display pixel in row-major order starting at the upper left\n"
-                + "corner of the display.  This tool may be run either from the\n"
-                + "MARS Tools menu or as a stand-alone application.\n"
-                + "\n"
-                + "You can easily learn to use this small program by playing with\n"
-                + "it!   Each rectangular unit on the display represents one memory\n"
-                + "word in a contiguous address space starting with the specified\n"
-                + "base address.  The value stored in that word will be interpreted\n"
-                + "as a 24-bit RGB color value with the red component in bits 16-23,\n"
-                + "the green component in bits 8-15, and the blue component in bits 0-7.\n"
-                + "Each time a memory word within the display address space is written\n"
-                + "by the MIPS program, its position in the display will be rendered\n"
-                + "in the color that its value represents.\n"
-                + "\n"
-                + "Version 1.0 is very basic and was constructed from the Memory\n"
-                + "Reference Visualization tool's code.  Feel free to improve it and\n"
-                + "send me your code for consideration in the next MARS release.\n"
-                + "\n"
-                + "Contact Pete Sanderson at psanderson@otterbein.edu with\n"
-                + "questions or comments.\n";
+        final String helpContent =
+                """
+                                   Use this program to simulate a basic bitmap display where
+                                   each memory word in a specified address space corresponds to
+                                   one display pixel in row-major order starting at the upper left
+                                   corner of the display.  This tool may be run either from the
+                                   MARS Tools menu or as a stand-alone application.
+
+                                   You can easily learn to use this small program by playing with
+                                   it!   Each rectangular unit on the display represents one memory
+                                   word in a contiguous address space starting with the specified
+                                   base address.  The value stored in that word will be interpreted
+                                   as a 24-bit RGB color value with the red component in bits 16-23,
+                                   the green component in bits 8-15, and the blue component in bits 0-7.
+                                   Each time a memory word within the display address space is written
+                                   by the MIPS program, its position in the display will be rendered
+                                   in the color that its value represents.
+
+                                   Version 1.0 is very basic and was constructed from the Memory
+                                   Reference Visualization tool's code.  Feel free to improve it and
+                                   send me your code for consideration in the next MARS release.
+
+                                   Contact Pete Sanderson at psanderson@otterbein.edu with
+                                   questions or comments.
+                                   """;
         JButton help = new JButton("Help");
-        help.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(theWindow, helpContent);
-            }
-        });
+        help.addActionListener(e -> JOptionPane.showMessageDialog(theWindow, helpContent));
         return help;
     }
 
@@ -258,76 +257,66 @@ public class BitmapDisplay extends AbstractMarsToolAndApplication {
         visualizationUnitPixelWidthSelector.setBackground(backgroundColor);
         visualizationUnitPixelWidthSelector.setSelectedIndex(defaultVisualizationUnitPixelWidthIndex);
         visualizationUnitPixelWidthSelector.setToolTipText("Width in pixels of rectangle representing memory word");
-        visualizationUnitPixelWidthSelector.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                unitPixelWidth = getIntComboBoxSelection(visualizationUnitPixelWidthSelector);
-                theGrid = createNewGrid();
-                updateDisplay();
-            }
+        visualizationUnitPixelWidthSelector.addActionListener(e -> {
+            unitPixelWidth = getIntComboBoxSelection(visualizationUnitPixelWidthSelector);
+            theGrid = createNewGrid();
+            updateDisplay();
         });
         visualizationUnitPixelHeightSelector = new JComboBox(visualizationUnitPixelHeightChoices);
         visualizationUnitPixelHeightSelector.setEditable(false);
         visualizationUnitPixelHeightSelector.setBackground(backgroundColor);
         visualizationUnitPixelHeightSelector.setSelectedIndex(defaultVisualizationUnitPixelHeightIndex);
         visualizationUnitPixelHeightSelector.setToolTipText("Height in pixels of rectangle representing memory word");
-        visualizationUnitPixelHeightSelector.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                unitPixelHeight = getIntComboBoxSelection(visualizationUnitPixelHeightSelector);
-                theGrid = createNewGrid();
-                updateDisplay();
-            }
+        visualizationUnitPixelHeightSelector.addActionListener(e -> {
+            unitPixelHeight = getIntComboBoxSelection(visualizationUnitPixelHeightSelector);
+            theGrid = createNewGrid();
+            updateDisplay();
         });
         visualizationPixelWidthSelector = new JComboBox(displayAreaPixelWidthChoices);
         visualizationPixelWidthSelector.setEditable(false);
         visualizationPixelWidthSelector.setBackground(backgroundColor);
         visualizationPixelWidthSelector.setSelectedIndex(defaultDisplayWidthIndex);
         visualizationPixelWidthSelector.setToolTipText("Total width in pixels of display area");
-        visualizationPixelWidthSelector.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                displayAreaWidthInPixels = getIntComboBoxSelection(visualizationPixelWidthSelector);
-                canvas.setPreferredSize(getDisplayAreaDimension());
-                canvas.setSize(getDisplayAreaDimension());
-                theGrid = createNewGrid();
-                updateDisplay();
-            }
+        visualizationPixelWidthSelector.addActionListener(e -> {
+            displayAreaWidthInPixels = getIntComboBoxSelection(visualizationPixelWidthSelector);
+            canvas.setPreferredSize(getDisplayAreaDimension());
+            canvas.setSize(getDisplayAreaDimension());
+            theGrid = createNewGrid();
+            updateDisplay();
         });
         visualizationPixelHeightSelector = new JComboBox(displayAreaPixelHeightChoices);
         visualizationPixelHeightSelector.setEditable(false);
         visualizationPixelHeightSelector.setBackground(backgroundColor);
         visualizationPixelHeightSelector.setSelectedIndex(defaultDisplayHeightIndex);
         visualizationPixelHeightSelector.setToolTipText("Total height in pixels of display area");
-        visualizationPixelHeightSelector.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                displayAreaHeightInPixels = getIntComboBoxSelection(visualizationPixelHeightSelector);
-                canvas.setPreferredSize(getDisplayAreaDimension());
-                canvas.setSize(getDisplayAreaDimension());
-                theGrid = createNewGrid();
-                updateDisplay();
-            }
+        visualizationPixelHeightSelector.addActionListener(e -> {
+            displayAreaHeightInPixels = getIntComboBoxSelection(visualizationPixelHeightSelector);
+            canvas.setPreferredSize(getDisplayAreaDimension());
+            canvas.setSize(getDisplayAreaDimension());
+            theGrid = createNewGrid();
+            updateDisplay();
         });
         displayBaseAddressSelector = new JComboBox(displayBaseAddressChoices);
         displayBaseAddressSelector.setEditable(false);
         displayBaseAddressSelector.setBackground(backgroundColor);
         displayBaseAddressSelector.setSelectedIndex(defaultBaseAddressIndex);
         displayBaseAddressSelector.setToolTipText("Base address for display area (upper left corner)");
-        displayBaseAddressSelector.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // This may also affect what address range we should be registered as an Observer
-                // for.  The default (inherited) address range is the MIPS static data segment
-                // starting at 0x10010000. To change this requires override of
-                // AbstractMarsToolAndApplication.addAsObserver().  The no-argument version of
-                // that method is called automatically  when "Connect" button is clicked for MarsTool
-                // and when "Assemble and Run" button is clicked for Mars application.
-                updateBaseAddress();
-                // If display base address is changed while connected to MIPS (this can only occur
-                // when being used as a MarsTool), we have to delete ourselves as an observer and re-register.
-                if (connectButton != null && connectButton.isConnected()) {
-                    deleteAsObserver();
-                    addAsObserver();
-                }
-                theGrid = createNewGrid();
-                updateDisplay();
+        displayBaseAddressSelector.addActionListener(e -> {
+            // This may also affect what address range we should be registered as an Observer
+            // for.  The default (inherited) address range is the MIPS static data segment
+            // starting at 0x10010000. To change this requires override of
+            // AbstractMarsToolAndApplication.addAsObserver().  The no-argument version of
+            // that method is called automatically  when "Connect" button is clicked for MarsTool
+            // and when "Assemble and Run" button is clicked for Mars application.
+            updateBaseAddress();
+            // If display base address is changed while connected to MIPS (this can only occur
+            // when being used as a MarsTool), we have to delete ourselves as an observer and re-register.
+            if (connectButton != null && connectButton.isConnected()) {
+                deleteAsObserver();
+                addAsObserver();
             }
+            theGrid = createNewGrid();
+            updateDisplay();
         });
 
         // ALL COMPONENTS FOR "ORGANIZATION" SECTION

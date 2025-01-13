@@ -35,7 +35,7 @@ public class TimingGraph extends JPanel {
         this.timings = timings;
         setBackground(Color.WHITE);
         setOpaque(true);
-        numRuns = timings.get(0).size();
+        numRuns = timings.getFirst().size();
         showAndTell();
     }
 
@@ -72,7 +72,7 @@ public class TimingGraph extends JPanel {
         float sx = (w - sw) / 2;
         g2.drawString(s, sx, sy);
         // Draw lines
-        double xInc = (double) (w - 2 * numRuns) / (timings.get(0).size() - 1);
+        double xInc = (double) (w - 2 * numRuns) / (timings.getFirst().size() - 1);
         double scale = (double) (h - 2 * numRuns) / getMax();
         Color[] colors = {Color.LIGHT_GRAY, Color.GREEN, Color.BLUE, Color.BLACK, Color.ORANGE};
         // g2.setPaint(Color.GREEN.darker());

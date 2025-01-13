@@ -94,18 +94,12 @@ public class SettingsExceptionHandlerAction extends GuiAction {
         // Bottom row - the control buttons for OK and Cancel
         Box controlPanel = Box.createHorizontalBox();
         JButton okButton = new JButton("OK");
-        okButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                performOK();
-                closeDialog();
-            }
+        okButton.addActionListener(e -> {
+            performOK();
+            closeDialog();
         });
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                closeDialog();
-            }
-        });
+        cancelButton.addActionListener(e -> closeDialog());
         controlPanel.add(Box.createHorizontalGlue());
         controlPanel.add(okButton);
         controlPanel.add(Box.createHorizontalGlue());

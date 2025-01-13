@@ -126,11 +126,7 @@ public class MatrixDigraph implements Digraph {
         Set<Integer> out = this.out(v);
         Set<Integer> secondOut = new HashSet<>();
 
-        out.forEach(x -> {
-            this.out(x).forEach(y -> {
-                secondOut.add(y);
-            });
-        });
+        out.forEach(x -> this.out(x).forEach(secondOut::add));
 
         return secondOut;
     }

@@ -248,7 +248,7 @@ public class MIPSprogram {
         ArrayList MIPSprogramsToAssemble = new ArrayList();
         int leadFilePosition = 0;
         if (exceptionHandler != null && !exceptionHandler.isEmpty()) {
-            filenames.add(0, exceptionHandler);
+            filenames.addFirst(exceptionHandler);
             leadFilePosition = 1;
         }
         for (Object o : filenames) {

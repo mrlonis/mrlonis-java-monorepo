@@ -60,7 +60,7 @@ public class Testing {
         for (int i = 1; i <= numWires; i++) {
             Path path = layout.get(i);
             if (path != null) {
-                Coord start = path.get(0), end = path.get(path.size() - 1);
+                Coord start = path.getFirst(), end = path.getLast();
                 if (!start.equals(wires.get(i - 1).from)) {
                     System.out.printf((msg) + "%n", "start", i, start, wires.get(i - 1).from);
                     return false;
@@ -151,17 +151,17 @@ public class Testing {
         assertEquals(7, chip3.dim.width);
         assertEquals(6, chip3.dim.height);
         assertEquals(4, chip3.obstacles.size());
-        assertTrue(chip3.obstacles.get(0).contains(new Coord(1, 1)));
-        assertTrue(chip3.obstacles.get(0).contains(new Coord(1, 2)));
-        assertTrue(chip3.obstacles.get(0).contains(new Coord(1, 3)));
-        assertTrue(chip3.obstacles.get(0).contains(new Coord(1, 4)));
-        assertFalse(chip3.obstacles.get(0).contains(new Coord(0, 0)));
-        assertFalse(chip3.obstacles.get(0).contains(new Coord(2, 1)));
-        assertFalse(chip3.obstacles.get(0).contains(new Coord(2, 2)));
-        assertFalse(chip3.obstacles.get(0).contains(new Coord(2, 3)));
-        assertFalse(chip3.obstacles.get(0).contains(new Coord(2, 4)));
-        assertFalse(chip3.obstacles.get(0).contains(new Coord(0, 1)));
-        assertFalse(chip3.obstacles.get(0).contains(new Coord(0, 2)));
+        assertTrue(chip3.obstacles.getFirst().contains(new Coord(1, 1)));
+        assertTrue(chip3.obstacles.getFirst().contains(new Coord(1, 2)));
+        assertTrue(chip3.obstacles.getFirst().contains(new Coord(1, 3)));
+        assertTrue(chip3.obstacles.getFirst().contains(new Coord(1, 4)));
+        assertFalse(chip3.obstacles.getFirst().contains(new Coord(0, 0)));
+        assertFalse(chip3.obstacles.getFirst().contains(new Coord(2, 1)));
+        assertFalse(chip3.obstacles.getFirst().contains(new Coord(2, 2)));
+        assertFalse(chip3.obstacles.getFirst().contains(new Coord(2, 3)));
+        assertFalse(chip3.obstacles.getFirst().contains(new Coord(2, 4)));
+        assertFalse(chip3.obstacles.getFirst().contains(new Coord(0, 1)));
+        assertFalse(chip3.obstacles.getFirst().contains(new Coord(0, 2)));
         assertFalse(chip3.obstacles.get(0).contains(new Coord(0, 3)));
         assertFalse(chip3.obstacles.get(0).contains(new Coord(0, 4)));
         assertTrue(chip3.obstacles.get(1).contains(new Coord(1, 4)));
@@ -174,12 +174,12 @@ public class Testing {
         assertTrue(chip3.obstacles.get(3).contains(new Coord(4, 2)));
         assertTrue(chip3.obstacles.get(3).contains(new Coord(5, 2)));
         assertEquals(1, chip3.wires.size());
-        assertEquals(1, chip3.wires.get(0).wireId);
-        assertEquals(4, chip3.wires.get(0).from.x);
-        assertEquals(3, chip3.wires.get(0).from.y);
-        assertEquals(2, chip3.wires.get(0).to.x);
-        assertEquals(3, chip3.wires.get(0).to.y);
-        assertEquals(2, chip3.wires.get(0).separation());
+        assertEquals(1, chip3.wires.getFirst().wireId);
+        assertEquals(4, chip3.wires.getFirst().from.x);
+        assertEquals(3, chip3.wires.getFirst().from.y);
+        assertEquals(2, chip3.wires.getFirst().to.x);
+        assertEquals(3, chip3.wires.getFirst().to.y);
+        assertEquals(2, chip3.wires.getFirst().separation());
     }
 
     // @Test
@@ -201,9 +201,9 @@ public class Testing {
         assertEquals(5, chip9.dim.height);
         assertEquals(0, chip9.obstacles.size());
         assertEquals(4, chip9.wires.size());
-        assertEquals(1, chip9.wires.get(0).wireId);
-        assertEquals(1, chip9.wires.get(0).from.x);
-        assertEquals(0, chip9.wires.get(0).from.y);
+        assertEquals(1, chip9.wires.getFirst().wireId);
+        assertEquals(1, chip9.wires.getFirst().from.x);
+        assertEquals(0, chip9.wires.getFirst().from.y);
         assertEquals(1, chip9.wires.get(0).to.x);
         assertEquals(4, chip9.wires.get(0).to.y);
         assertEquals(2, chip9.wires.get(1).wireId);
@@ -251,11 +251,11 @@ public class Testing {
         assertEquals(6, chip3.dim.height);
         assertEquals(4, chip3.obstacles.size());
         assertEquals(1, chip3.wires.size());
-        assertEquals(1, chip3.wires.get(0).wireId);
-        assertEquals(4, chip3.wires.get(0).from.x);
-        assertEquals(3, chip3.wires.get(0).from.y);
-        assertEquals(2, chip3.wires.get(0).to.x);
-        assertEquals(3, chip3.wires.get(0).to.y);
+        assertEquals(1, chip3.wires.getFirst().wireId);
+        assertEquals(4, chip3.wires.getFirst().from.x);
+        assertEquals(3, chip3.wires.getFirst().from.y);
+        assertEquals(2, chip3.wires.getFirst().to.x);
+        assertEquals(3, chip3.wires.getFirst().to.y);
     }
 
     // @Test

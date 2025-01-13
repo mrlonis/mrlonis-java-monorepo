@@ -190,16 +190,14 @@ public class ScavengerHunt implements Observer, MarsTool {
             graphicArea = new ScavengerHuntDisplay(GRAPHIC_WIDTH, GRAPHIC_HEIGHT);
             JPanel buttonPanel = new JPanel();
             JButton resetButton = new JButton("Reset");
-            resetButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    graphicArea.clear();
+            resetButton.addActionListener(e -> {
+                graphicArea.clear();
 
-                    // TBD ------- TBD
-                    // Reset actions here
-                    initializeScavengerData();
-                    // JOptionPane.showMessageDialog(null, "Reset needs to be implemented!" );
+                // TBD ------- TBD
+                // Reset actions here
+                initializeScavengerData();
+                // JOptionPane.showMessageDialog(null, "Reset needs to be implemented!" );
 
-                }
             });
             buttonPanel.add(resetButton);
 

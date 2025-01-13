@@ -150,21 +150,19 @@ public class EditPane extends JPanel implements Observer {
         lineNumbers.setVisible(true);
 
         // Listener fires when "Show Line Numbers" check box is clicked.
-        showLineNumbers.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (showLineNumbers.isSelected()) {
-                    lineNumbers.setText(getLineNumbersList(sourceCode.getDocument()));
-                    lineNumbers.setVisible(true);
-                } else {
-                    lineNumbers.setText("");
-                    lineNumbers.setVisible(false);
-                }
-                sourceCode.revalidate(); // added 16 Jan 2012 to assure label redrawn.
-                Globals.getSettings().setEditorLineNumbersDisplayed(showLineNumbers.isSelected());
-                // needed because caret disappears when checkbox clicked
-                sourceCode.setCaretVisible(true);
-                sourceCode.requestFocusInWindow();
+        showLineNumbers.addItemListener(e -> {
+            if (showLineNumbers.isSelected()) {
+                lineNumbers.setText(getLineNumbersList(sourceCode.getDocument()));
+                lineNumbers.setVisible(true);
+            } else {
+                lineNumbers.setText("");
+                lineNumbers.setVisible(false);
             }
+            sourceCode.revalidate(); // added 16 Jan 2012 to assure label redrawn.
+            Globals.getSettings().setEditorLineNumbersDisplayed(showLineNumbers.isSelected());
+            // needed because caret disappears when checkbox clicked
+            sourceCode.setCaretVisible(true);
+            sourceCode.requestFocusInWindow();
         });
 
         JPanel editInfo = new JPanel(new BorderLayout());
