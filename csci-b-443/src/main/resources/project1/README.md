@@ -15,4 +15,3 @@ In the project root directory, run
 ```
 java procsimu.Control
 ```
-

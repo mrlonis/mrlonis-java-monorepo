@@ -21,30 +21,10 @@ tasks.withType(JavaCompile).configureEach {
 
 spotless {
     encoding 'UTF-8'
-    format 'misc', {
-        target 'gradle/wrapper/gradle-wrapper.properties', '.gitattributes', '.gitignore', 'gradlew', 'gradlew.bat'
-        trimTrailingWhitespace()
-        endWithNewline()
-    }
     groovyGradle {
-        target '*.gradle' // default target of groovyGradle
+        target '**/*.gradle' // default target of groovyGradle
         greclipse().configFile('../greclipse.properties')
         importOrder()
-        trimTrailingWhitespace()
-        endWithNewline()
-    }
-    flexmark {
-        target '**/*.md'
-        flexmark()
-    }
-    format 'prettier', {
-        target '.github/**/*.yml', '.vscode/**/*.json', '**/*.json', '**/*.html', '**/*.xml', '**/*.yaml', '**/*.yml', '.prettierrc'
-        prettier(['prettier': '3.4.2', '@prettier/plugin-xml': '3.4.1']).npmInstallCache().config(['printWidth': 120,
-            "xmlSelfClosingSpace": false,
-            "xmlSortAttributesByKey": true,
-            "xmlWhitespaceSensitivity": "ignore",
-            "plugins": ["@prettier/plugin-xml"]
-        ])
         trimTrailingWhitespace()
         endWithNewline()
     }

@@ -6,7 +6,7 @@
 #       for k=2..1
 #         s = s+1
 # store s
-	
+
 i:		.word 54
 j:		.word 74
 k:		.word 31
@@ -33,7 +33,7 @@ fork:	add $8, $8, $6		# s = s+1
 sub $3, $3, $6			# k = k-1
 beq $3, $0, endif		# k == 0 => goto endif
 j fork				# next iteration
-	
+
 endif:	sub $2, $2, $6		# j = j-1
 beq $2, $0, endj		# j == 0 => goto endj
 j forj				# next iteration
@@ -41,5 +41,5 @@ j forj				# next iteration
 endj:	sub $1, $1, $6		# i = i-1
 beq $1, $0, endi		# j == 0 => goto endi
 j fori				# next iteration
-	
+
 endi:	sw $8, s($0)		# store s

@@ -67,13 +67,6 @@ spotless {
         trimTrailingWhitespace()
         endWithNewline()
     }
-    groovyGradle {
-        target '*.gradle' // default target of groovyGradle
-        greclipse().configFile('../greclipse.properties')
-        importOrder()
-        trimTrailingWhitespace()
-        endWithNewline()
-    }
 }
 
 check {

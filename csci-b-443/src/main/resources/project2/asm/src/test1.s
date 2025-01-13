@@ -1,6 +1,6 @@
 	# Forwarding test
 	# type 2 data hazards
-	
+
 	addi $1, $0, 1          # $1 = 1
 	addi $2, $0, 0          # $2 = 0
 	addi $3, $0, 3          # $3 = 3
