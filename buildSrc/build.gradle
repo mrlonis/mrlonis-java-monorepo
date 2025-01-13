@@ -20,8 +20,9 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 spotless {
+    encoding 'UTF-8'
     groovyGradle {
-        target '*.gradle' // default target of groovyGradle
+        target '**/*.gradle' // default target of groovyGradle
         greclipse().configFile('../greclipse.properties')
         importOrder()
         trimTrailingWhitespace()

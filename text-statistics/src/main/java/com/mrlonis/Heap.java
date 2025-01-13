@@ -84,7 +84,7 @@ public class Heap<E> implements PriorityQueue<E> {
      * @throws NoSuchElementException if the heap is empty.
      */
     public E peek() {
-        return this.keys.get(0);
+        return this.keys.getFirst();
     }
 
     /**

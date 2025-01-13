@@ -100,9 +100,9 @@ public class Bitonic {
     public static void main(String[] args) {
         /** n == 1 */
         int[] a = {1};
-        assert true == isBitonic(a, 0, 0);
-        assert false == isBitonic(a, 0, 1);
-        assert false == isBitonic(a, 1, 0);
+        assert isBitonic(a, 0, 0);
+        assert !isBitonic(a, 0, 1);
+        assert !isBitonic(a, 1, 0);
 
         /**
          * n == 2
@@ -110,24 +110,24 @@ public class Bitonic {
          * <p>Increasing Only
          */
         a = new int[] {1, 2};
-        assert true == isBitonic(a, 0, 1);
-        assert true == isBitonic(a, 0, 0);
-        assert true == isBitonic(a, 1, 1);
-        assert false == isBitonic(a, 1, 0);
+        assert isBitonic(a, 0, 1);
+        assert isBitonic(a, 0, 0);
+        assert isBitonic(a, 1, 1);
+        assert !isBitonic(a, 1, 0);
 
         /** Large Data Set */
         a = new int[] {1, 2, 3, 4, 5, 4, 3, 2, 1};
-        assert true == isBitonic(a, 0, 1);
-        assert true == isBitonic(a, 1, 2);
-        assert true == isBitonic(a, 2, 3);
-        assert true == isBitonic(a, 3, 4);
-        assert true == isBitonic(a, 4, 5);
-        assert true == isBitonic(a, 5, 6);
-        assert true == isBitonic(a, 6, 7);
-        assert true == isBitonic(a, 7, 8);
-        assert true == isBitonic(a, 0, 8);
-        assert false == isBitonic(a, 0, 9);
-        assert false == isBitonic(a, -1, 8);
+        assert isBitonic(a, 0, 1);
+        assert isBitonic(a, 1, 2);
+        assert isBitonic(a, 2, 3);
+        assert isBitonic(a, 3, 4);
+        assert isBitonic(a, 4, 5);
+        assert isBitonic(a, 5, 6);
+        assert isBitonic(a, 6, 7);
+        assert isBitonic(a, 7, 8);
+        assert isBitonic(a, 0, 8);
+        assert !isBitonic(a, 0, 9);
+        assert !isBitonic(a, -1, 8);
 
         /**
          * n == 2
@@ -135,15 +135,15 @@ public class Bitonic {
          * <p>Decreasing Only
          */
         a = new int[] {1, 0};
-        assert true == isBitonic(a, 0, 1);
-        assert true == isBitonic(a, 0, 0);
-        assert false == isBitonic(a, 1, 0);
+        assert isBitonic(a, 0, 1);
+        assert isBitonic(a, 0, 0);
+        assert !isBitonic(a, 1, 0);
 
         /** Large Data Set */
         a = new int[] {1, 2, 3, 4, 5, 4, 3, 2, 1, 5};
-        assert true == isBitonic(a, 0, 1);
-        assert true == isBitonic(a, 0, 8);
-        assert false == isBitonic(a, 0, 9);
+        assert isBitonic(a, 0, 1);
+        assert isBitonic(a, 0, 8);
+        assert !isBitonic(a, 0, 9);
 
         /** Largest Data Set */
         a = new int[] {

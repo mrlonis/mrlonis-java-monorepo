@@ -96,9 +96,7 @@ public class Trie implements Iterable<String> {
                 keys.add(this.word);
             }
 
-            this.children.forEach((c, node) -> {
-                node.getKeys();
-            });
+            this.children.forEach((c, node) -> node.getKeys());
         }
     }
 
@@ -178,7 +176,7 @@ public class Trie implements Iterable<String> {
         trie.remove("he");
         trie.remove("ours");
         assert 4 == trie.size();
-        assert trie.contains("he") == false;
+        assert !trie.contains("he");
         assert trie.contains("her");
         trie.insert("they");
         trie.insert("their");

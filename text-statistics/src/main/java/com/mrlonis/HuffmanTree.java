@@ -30,7 +30,7 @@ public class HuffmanTree {
             Integer yInt = y.priority;
             return xInt.compareTo(yInt);
         };
-        PriorityQueue<Node> forest = new Heap<Node>(comparator);
+        PriorityQueue<Node> forest = new Heap<>(comparator);
 
         /** Complete the implementation of Huffman's Algorithm. Start by populating forest with leaves. */
         charFreqs.forEach((letter, priority) -> {

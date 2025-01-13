@@ -39,7 +39,7 @@ public class Testing {
         StringBuilder sb = new StringBuilder();
         int steps = random.nextInt(10) + 1;
         for (int i = 0; i < steps; i++) {
-            if (sb.length() == 0 || random.nextBoolean()) { // Add literal
+            if (sb.isEmpty() || random.nextBoolean()) { // Add literal
                 int len = random.nextInt(5) + 1;
                 for (int j = 0; j < len; j++) {
                     sb.append(alphabet.charAt(random.nextInt(alphabet.length())));
@@ -738,8 +738,6 @@ public class Testing {
         /*
          * Show stats for the algorithms on real-time tweets.
          */
-        bot.tweets.forEach(tweet -> {
-            match(pattern, tweet);
-        });
+        bot.tweets.forEach(tweet -> match(pattern, tweet));
     }
 }

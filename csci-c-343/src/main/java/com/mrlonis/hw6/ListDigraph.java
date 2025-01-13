@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -59,7 +58,7 @@ public class ListDigraph implements Digraph {
 
     /** Create a directed graph with no edges and n vertices, labeled 0, 1, 2, ..., n - 1. Assume n is non-negative. */
     public ListDigraph(int n) {
-        this.adj = new HashMap<Integer, List<Edge>>();
+        this.adj = new HashMap<>();
         this.n = 0;
         this.m = 0;
 
@@ -75,9 +74,7 @@ public class ListDigraph implements Digraph {
             return Integer.MAX_VALUE;
         }
 
-        ListIterator<Edge> it = this.adj.get(u).listIterator();
-        while (it.hasNext()) {
-            Edge possibleAns = it.next();
+        for (Edge possibleAns : this.adj.get(u)) {
             if (possibleAns.to == v) {
                 return possibleAns.weight;
             }
@@ -92,9 +89,7 @@ public class ListDigraph implements Digraph {
             return false;
         }
 
-        ListIterator<Edge> it = this.adj.get(u).listIterator();
-        while (it.hasNext()) {
-            Edge possibleAns = it.next();
+        for (Edge possibleAns : this.adj.get(u)) {
             if (possibleAns.to == v) {
                 return true;
             }
@@ -119,9 +114,7 @@ public class ListDigraph implements Digraph {
      */
     public void addEdge(int u, int v, int weight) {
         if (this.hasEdge(u, v)) {
-            ListIterator<Edge> it = this.adj.get(u).listIterator();
-            while (it.hasNext()) {
-                Edge possibleAns = it.next();
+            for (Edge possibleAns : this.adj.get(u)) {
                 if (possibleAns.to == v) {
                     possibleAns.weight = weight;
                     return;
@@ -135,7 +128,7 @@ public class ListDigraph implements Digraph {
 
     /** Returns those vertices that are incident to an outgoing edge of v. */
     public Set<Integer> out(int v) {
-        Set<Integer> neighbors = new HashSet<Integer>();
+        Set<Integer> neighbors = new HashSet<>();
 
         for (int i = 0; i < this.numVertices(); i++) {
             if (this.hasEdge(v, i)) {
@@ -148,7 +141,7 @@ public class ListDigraph implements Digraph {
 
     /** Returns those vertices that are incident to an incoming edge of v. */
     public Set<Integer> in(int v) {
-        Set<Integer> neighbors = new HashSet<Integer>();
+        Set<Integer> neighbors = new HashSet<>();
 
         for (int i = 0; i < this.numVertices(); i++) {
             if (this.hasEdge(i, v)) {
@@ -164,11 +157,7 @@ public class ListDigraph implements Digraph {
         Set<Integer> neighbors = new HashSet<>();
         Set<Integer> out = this.out(v);
 
-        out.forEach(x -> {
-            this.out(x).forEach(y -> {
-                neighbors.add(y);
-            });
-        });
+        out.forEach(x -> this.out(x).forEach(neighbors::add));
 
         return neighbors;
     }

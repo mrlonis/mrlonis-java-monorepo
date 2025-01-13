@@ -3,7 +3,6 @@ package com.mrlonis.lab14;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +63,7 @@ public class ListGraph implements Graph {
         this.n = n;
         adj = new HashMap<>();
         for (int v = 0; v < n; v++) {
-            adj.put(v, new LinkedList<Edge>());
+            adj.put(v, new LinkedList<>());
         }
     }
 
@@ -132,7 +131,7 @@ public class ListGraph implements Graph {
 
     /** Returns those vertices that are incident to an outgoing edge of v. */
     public Set<Integer> adj(int v) {
-        Set<Integer> neighbors = new HashSet<Integer>();
+        Set<Integer> neighbors = new HashSet<>();
         for (Edge e : adj.get(v)) {
             neighbors.add(e.to);
         }
@@ -156,7 +155,7 @@ public class ListGraph implements Graph {
      * <p>Returns true if the graph is cyclic and false otherwise.
      */
     public boolean hasCycle() {
-        Boolean visited[] = new Boolean[this.numVertices()];
+        Boolean[] visited = new Boolean[this.numVertices()];
         for (int i = 0; i < this.numVertices(); i++) {
             visited[i] = false;
         }
@@ -171,14 +170,13 @@ public class ListGraph implements Graph {
         return false;
     }
 
-    Boolean isCyclicUtil(int v, Boolean visited[], int parent) {
+    Boolean isCyclicUtil(int v, Boolean[] visited, int parent) {
         System.out.println("New Helper");
         visited[v] = true;
         int i;
-        Iterator<Edge> it = adj.get(v).iterator();
 
-        while (it.hasNext()) {
-            i = it.next().to;
+        for (Edge edge : adj.get(v)) {
+            i = edge.to;
             System.out.println("i = " + i + " || v = " + v + " || parent = " + parent + " || visited = "
                     + Arrays.toString(visited));
 

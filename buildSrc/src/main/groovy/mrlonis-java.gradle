@@ -54,8 +54,9 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 spotless {
+    encoding 'UTF-8'
     java {
-        cleanthat().version('2.20')
+        cleanthat().version('2.22')
                 .sourceCompatibility('21')
                 .addMutator('SafeAndConsensual')
                 .addMutator('SafeButNotConsensual')
@@ -65,17 +66,6 @@ spotless {
         importOrder()
         trimTrailingWhitespace()
         endWithNewline()
-    }
-    groovyGradle {
-        target '*.gradle' // default target of groovyGradle
-        greclipse().configFile('../greclipse.properties')
-        importOrder()
-        trimTrailingWhitespace()
-        endWithNewline()
-    }
-    flexmark {
-        target '**/*.md'
-        flexmark()
     }
 }
 

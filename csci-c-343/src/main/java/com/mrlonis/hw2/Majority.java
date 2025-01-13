@@ -65,7 +65,7 @@ public class Majority {
     /** Returns true iff x appears in more than half of the elements of a. */
     public static boolean isMajority(int x, int[] a) {
         int count = 0, n = a.length;
-        for (int i = 0; i < n; i++) if (x == a[i]) count++;
+        for (int j : a) if (x == j) count++;
         return count > n / 2;
     }
 

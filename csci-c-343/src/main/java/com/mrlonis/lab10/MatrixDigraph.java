@@ -109,14 +109,14 @@ public class MatrixDigraph implements Digraph {
 
     /** Returns those vertices that are incident to an outgoing edge of v. */
     public Set<Integer> out(int v) {
-        Set<Integer> neighbors = new HashSet<Integer>();
+        Set<Integer> neighbors = new HashSet<>();
         for (int x = 0; x < n; x++) if (hasEdge(v, x)) neighbors.add(x);
         return neighbors;
     }
 
     /** TODO: Returns those vertices that are incident to an incoming edge of v. */
     public Set<Integer> in(int v) {
-        Set<Integer> neighbors = new HashSet<Integer>();
+        Set<Integer> neighbors = new HashSet<>();
         for (int x = 0; x < n; x++) if (hasEdge(x, v)) neighbors.add(x);
         return neighbors;
     }
@@ -126,11 +126,7 @@ public class MatrixDigraph implements Digraph {
         Set<Integer> out = this.out(v);
         Set<Integer> secondOut = new HashSet<>();
 
-        out.forEach(x -> {
-            this.out(x).forEach(y -> {
-                secondOut.add(y);
-            });
-        });
+        out.forEach(x -> this.out(x).forEach(secondOut::add));
 
         return secondOut;
     }

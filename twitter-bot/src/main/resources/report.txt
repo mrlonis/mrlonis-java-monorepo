@@ -1,8 +1,8 @@
 Report.txt
 
-Design and run a variety of experiments in MatchBot.main() and summarize your results in a text file 
-named report.txt that you include with your project. Which of the three algorithms works best on the 
-Twitter dataset? What about other kinds of data? Hypothesize about the reasons why one algorithm is 
+Design and run a variety of experiments in MatchBot.main() and summarize your results in a text file
+named report.txt that you include with your project. Which of the three algorithms works best on the
+Twitter dataset? What about other kinds of data? Hypothesize about the reasons why one algorithm is
 better suited to a particular type of data. Support your conclusions with evidence.
 
 @author Matthew Lonis (mrlonis)
@@ -25,10 +25,10 @@ The reason i believe the Boyer-Moore to be the best algorithm for any data set i
 with the least amount of character comparisons. KMP and naive never have less comparisons than the Boyer-Moore, so even when they tie, the Boyer-Moore is still preferred
 since it can be applied efficiently to other algorithms.
 
-I will make one note here: When a pattern has a character that mismatches at the front of the pattern no matter where it is when aligned relative to the text, the naive 
-algorithm will be faster since the Boyer-Moore will start analyzing the pattern with the text from the rightmost end of the pattern. This is the only advantage the naive 
-has over the Boyer-Moore. This is demonstrated when running all three algorithms on the lec14a, where the naive algorithm has 16 comparisons for the pattern "10000" and the 
-Boyer-Moore has 80 comparisons. I believe the Boyer-Moore could be improved dramatically if the algorithm can start its comparisons by first comparing the first and the last 
+I will make one note here: When a pattern has a character that mismatches at the front of the pattern no matter where it is when aligned relative to the text, the naive
+algorithm will be faster since the Boyer-Moore will start analyzing the pattern with the text from the rightmost end of the pattern. This is the only advantage the naive
+has over the Boyer-Moore. This is demonstrated when running all three algorithms on the lec14a, where the naive algorithm has 16 comparisons for the pattern "10000" and the
+Boyer-Moore has 80 comparisons. I believe the Boyer-Moore could be improved dramatically if the algorithm can start its comparisons by first comparing the first and the last
 index of the pattern against the text, and if they both match, proceed with the Boyer-Moore algorithm as normal.
 
 <--------- Evidence from MatchBot.java --------->
@@ -100,7 +100,7 @@ sexual assault appears at index 73
 
 <-------------------- New Pattern: Trump -------------------->
 naive comps = 22455, KMP comps = 24410, Moyer-Moore comps = 4942
-0. RT @VicBergerIV: ¯\_(ツ)_/¯ 
+0. RT @VicBergerIV: ¯\_(ツ)_/¯
 
 @realDonaldTrump https://t.co/QUEGY41AUA
 Trump appears at index 40
@@ -136,7 +136,7 @@ Overwatch appears at index 13
 
 Creeping on @taylorswift13 and looking for the pattern love!
 naive comps = 26063, KMP comps = 27415, Moyer-Moore comps = 7299
-0. So much love, pride, and respect for those who marched. I'm proud to be a woman today, and every day. 
+0. So much love, pride, and respect for those who marched. I'm proud to be a woman today, and every day.
 #WomensMarch
 love appears at index 8
 2. RT @twitter: Thank you, @taylorswift13 for celebrating love and sharing your stage with us every day. #LoveTwitter
@@ -147,10 +147,10 @@ Kangaroo: No. https://t.co/9CLnECzgF1
 love appears at index 11
 6. I loved playing Shanghai last night-- so stoked to play 2 more shows here!! https://t.co/nzFCEdOdQN
 love appears at index 2
-8. RT @TheRyanAdams: It's the SONGS that matter. The stories. The love. 
-Build things. Go deep. Dare. 
+8. RT @TheRyanAdams: It's the SONGS that matter. The stories. The love.
+Build things. Go deep. Dare.
 XO
-1989 
+1989
 https://t.co/Xwpwk1SAfv http:/…
 love appears at index 63
 10. RT @GrahamColton: I wish my music could be described as the love child btw @TheRyanAdams & @taylorswift13.  #1989 album is amazing. http://…

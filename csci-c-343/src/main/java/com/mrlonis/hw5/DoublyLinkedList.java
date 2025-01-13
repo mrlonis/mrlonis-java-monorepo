@@ -190,7 +190,7 @@ public class DoublyLinkedList<T> implements List<T> {
 
     /** Returns an iterator for this list. */
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             Node p = head.next;
 
             public boolean hasNext() {
@@ -226,12 +226,12 @@ public class DoublyLinkedList<T> implements List<T> {
             xs.add(x);
         }
         // Sort xs in the natural order:
-        xs.sort((x, y) -> x.compareTo(y));
+        xs.sort(Integer::compareTo);
         for (int i = 0; i < xs.size(); i++) {
             assert i == xs.get(i);
         }
         // Sort xs in the reverse of the natural order:
-        xs.sort((x, y) -> y.compareTo(x));
+        xs.sort(Comparator.reverseOrder());
         for (int i = 0; i < xs.size(); i++) {
             assert xs.size() - 1 - i == xs.get(i);
         }
@@ -249,11 +249,11 @@ public class DoublyLinkedList<T> implements List<T> {
         for (int x : b) {
             ys.add(x);
         }
-        ys.sort((x, y) -> y.compareTo(x));
+        ys.sort(Comparator.reverseOrder());
         for (int i = 0, j = ys.size() - 1; i < ys.size(); i++, j--) {
             assert j == ys.get(i);
         }
-        ys.sort((x, y) -> x.compareTo(y));
+        ys.sort(Integer::compareTo);
         for (int i = 0; i < ys.size(); i++) {
             assert i == ys.get(i);
         }
@@ -266,11 +266,11 @@ public class DoublyLinkedList<T> implements List<T> {
         assert zs.get(0) == 6;
         assert zs.get(1) == 3;
         assert zs.get(2) == 4;
-        zs.sort((x, y) -> x.compareTo(y));
+        zs.sort(Integer::compareTo);
         assert zs.get(0) == 3;
         assert zs.get(1) == 4;
         assert zs.get(2) == 6;
-        zs.sort((x, y) -> y.compareTo(x));
+        zs.sort(Comparator.reverseOrder());
         assert zs.get(0) == 6;
         assert zs.get(1) == 4;
         assert zs.get(2) == 3;
@@ -281,9 +281,9 @@ public class DoublyLinkedList<T> implements List<T> {
             ts.add(x);
         }
         assert ts.get(0) == 1;
-        ts.sort((x, y) -> x.compareTo(y));
+        ts.sort(Integer::compareTo);
         assert ts.get(0) == 1;
-        ts.sort((x, y) -> y.compareTo(x));
+        ts.sort(Comparator.reverseOrder());
         assert ts.get(0) == 1;
 
         DoublyLinkedList<Integer> ss = new DoublyLinkedList<>();
@@ -293,10 +293,10 @@ public class DoublyLinkedList<T> implements List<T> {
         }
         assert ss.get(0) == 1;
         assert ss.get(1) == 2;
-        ss.sort((x, y) -> x.compareTo(y));
+        ss.sort(Integer::compareTo);
         assert ss.get(0) == 1;
         assert ss.get(1) == 2;
-        ss.sort((x, y) -> y.compareTo(x));
+        ss.sort(Comparator.reverseOrder());
         assert ss.get(0) == 2;
         assert ss.get(1) == 1;
         System.out.println("All tests passed...");

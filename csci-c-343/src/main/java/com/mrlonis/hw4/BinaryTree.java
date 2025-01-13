@@ -45,10 +45,10 @@ public class BinaryTree implements Tree {
             lst.add(1, key);
         } else if (key % 2 == 0 /*Math.random() < 0.5*/) {
             root = new Node(key, root, null);
-            lst.add(0, key);
+            lst.addFirst(key);
         } else {
             root = new Node(key, null, root);
-            lst.add(0, key);
+            lst.addFirst(key);
         }
     }
 
