@@ -144,7 +144,7 @@ class Testing {
      */
     @Test
     void swapTest() {
-        Heap<Integer> heap = new Heap<>((x, y) -> y.compareTo(x));
+        Heap<Integer> heap = new Heap<Integer>(Comparator.reverseOrder());
         for (int i = 0; i < 2; i++) {
             heap.keys.add(i);
         }
@@ -153,7 +153,7 @@ class Testing {
         assertEquals((Integer) 1, heap.keys.get(0));
         assertEquals((Integer) 0, heap.keys.get(1));
 
-        heap = new Heap<>((x, y) -> y.compareTo(x));
+        heap = new Heap<Integer>(Comparator.reverseOrder());
         for (int i = 0; i < 10; i++) {
             heap.keys.add(i);
         }
@@ -184,7 +184,7 @@ class Testing {
      */
     @Test
     void siftDownTest() {
-        Heap<Integer> heap = new Heap<>((x, y) -> y.compareTo(x));
+        Heap<Integer> heap = new Heap<Integer>(Comparator.reverseOrder());
         for (int i = 0; i < 10; i++) {
             heap.keys.add(i);
         }
@@ -251,7 +251,7 @@ class Testing {
         assertEquals((Integer) 10, heap.keys.get(9));
         assertEquals((Integer) 5, heap.keys.get(10));
 
-        heap = new Heap<>((x, y) -> y.compareTo(x));
+        heap = new Heap<Integer>(Comparator.reverseOrder());
         for (int i = 1; i < 11; i++) {
             heap.keys.add(i);
         }
@@ -368,7 +368,7 @@ class Testing {
 
     @Test
     void smallMaxHeap() {
-        Heap<Integer> heap = new Heap<>((x, y) -> y.compareTo(x));
+        Heap<Integer> heap = new Heap<Integer>(Comparator.reverseOrder());
         heap.insert(1);
         heap.insert(2);
         heap.insert(3);
@@ -410,7 +410,7 @@ class Testing {
     @Test
     void heapOfStrings() {
         // Shorter strings come first.
-        Heap<String> heap = new Heap<>((s, t) -> s.length() - t.length());
+        Heap<String> heap = new Heap<>(Comparator.comparingInt(String::length));
         Comparator<String> comp = heap.comparator();
         assertTrue(comp.compare("zz", "aaaa") < 0);
         assertEquals(0, comp.compare("cat", "dog"));
@@ -437,7 +437,7 @@ class Testing {
 
     @Test
     void heapFormation() {
-        Heap<Integer> heap = new Heap<>((x, y) -> y.compareTo(x));
+        Heap<Integer> heap = new Heap<Integer>(Comparator.reverseOrder());
         for (int x : new int[] {14, 18, 9, 3, 12, 4, 19, 7, 11, 6, 16, 8, 13, 2, 20, 1, 5, 10, 15, 17}) {
             heap.insert(x);
         }

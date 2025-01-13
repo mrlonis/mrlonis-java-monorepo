@@ -14,7 +14,6 @@ import com.mrlonis.mar45.mars.mips.instructions.Instruction;
 import com.mrlonis.mar45.mars.util.Binary;
 import com.mrlonis.mar45.mars.util.SystemIO;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 /*
@@ -365,7 +364,7 @@ public class Assembler {
         // Such occurances will be flagged as errors.
         // Yes, I would not have to sort here if I used SortedSet rather than ArrayList
         // but in case of duplicate I like having both statements handy for error message.
-        Collections.sort(this.machineList, new ProgramStatementComparator());
+        this.machineList.sort(new ProgramStatementComparator());
         catchDuplicateAddresses(this.machineList, errors);
         if (errors.errorsOccurred() || errors.warningsOccurred() && warningsAreErrors) {
             throw new ProcessingException(errors);

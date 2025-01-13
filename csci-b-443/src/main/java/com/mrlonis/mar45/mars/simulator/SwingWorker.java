@@ -95,7 +95,7 @@ public abstract class SwingWorker {
      * @param useSwing Set true if MARS is running from GUI, false otherwise.
      */
     public SwingWorker(final boolean useSwing) {
-        final Runnable doFinished = () -> finished();
+        final Runnable doFinished = this::finished;
 
         Runnable doConstruct = () -> {
             try {

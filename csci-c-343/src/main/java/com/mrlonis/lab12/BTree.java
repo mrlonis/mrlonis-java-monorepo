@@ -358,7 +358,7 @@ class BTree {
         assert 1 == bt.root.children.get(1).keys.size();
         assert 12 == bt.root.children.get(1).keys.getFirst();
         assert 2 == bt.root.children.get(0).children.get(1).keys.size();
-        assert 5 == bt.root.children.get(0).children.get(1).keys.get(0);
+        assert 5 == bt.root.children.get(0).children.get(1).keys.getFirst();
         assert 7 == bt.root.children.getFirst().children.get(1).keys.get(1);
 
         // Ignore duplicate keys. (TODO #3)

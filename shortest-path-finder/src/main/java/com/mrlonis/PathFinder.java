@@ -1,6 +1,7 @@
 package com.mrlonis;
 
 import java.awt.Dimension;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -137,7 +138,7 @@ public class PathFinder {
      * @return The PrioiortyQueue of sorted wires.
      */
     public static PriorityQueue<Wire> wiresSort(List<Wire> wires) {
-        PriorityQueue<Wire> yo = new PriorityQueue<>((x, y) -> x.separation() - y.separation());
+        PriorityQueue<Wire> yo = new PriorityQueue<>(Comparator.comparingInt(Wire::separation));
 
         for (Wire x : wires) {
             yo.add(x);

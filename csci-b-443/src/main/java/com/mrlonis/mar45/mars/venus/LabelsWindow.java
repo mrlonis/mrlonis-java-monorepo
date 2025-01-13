@@ -321,7 +321,7 @@ public class LabelsWindow extends JInternalFrame {
             } else {
                 symbols = new ArrayList();
             }
-            Collections.sort(symbols, tableSortComparator); // DPS 25 Dec 2008
+            symbols.sort(tableSortComparator); // DPS 25 Dec 2008
             labelData = new Object[symbols.size()][2];
 
             for (int i = 0; i < symbols.size(); i++) { // sets up the label table

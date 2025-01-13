@@ -378,8 +378,7 @@ public class HelpHelpAction extends GuiAction {
                     webpagePane.addHyperlinkListener(e2 -> {
                         if (e2.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
                             JEditorPane pane1 = (JEditorPane) e2.getSource();
-                            if (e2 instanceof HTMLFrameHyperlinkEvent) {
-                                HTMLFrameHyperlinkEvent evt = (HTMLFrameHyperlinkEvent) e2;
+                            if (e2 instanceof HTMLFrameHyperlinkEvent evt) {
                                 HTMLDocument doc = (HTMLDocument) pane1.getDocument();
                                 doc.processHTMLFrameHyperlinkEvent(evt);
                             } else {
