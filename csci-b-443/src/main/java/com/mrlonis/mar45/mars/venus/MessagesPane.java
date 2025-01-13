@@ -89,7 +89,7 @@ public class MessagesPane extends JTabbedPane {
                 int lineStart = 0;
                 int lineEnd = 0;
                 try {
-                    int line = assemble.getLineOfOffset(assemble.viewToModel(e.getPoint()));
+                    int line = assemble.getLineOfOffset(assemble.viewToModel2D(e.getPoint()));
                     lineStart = assemble.getLineStartOffset(line);
                     lineEnd = assemble.getLineEndOffset(line);
                     text = assemble.getText(lineStart, lineEnd - lineStart);

@@ -54,8 +54,9 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 spotless {
+    encoding 'UTF-8'
     java {
-        cleanthat().version('2.20')
+        cleanthat().version('2.22')
                 .sourceCompatibility('21')
                 .addMutator('SafeAndConsensual')
                 .addMutator('SafeButNotConsensual')

@@ -310,7 +310,7 @@ public class VenusUI extends JFrame {
                     "Create a new file for editing",
                     KeyEvent.VK_N,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             fileOpenAction = new FileOpenAction(
                     "Open ...",
@@ -318,7 +318,7 @@ public class VenusUI extends JFrame {
                     "Open a file for editing",
                     KeyEvent.VK_O,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             fileCloseAction = new FileCloseAction(
                     "Close",
@@ -326,7 +326,7 @@ public class VenusUI extends JFrame {
                     "Close the current file",
                     KeyEvent.VK_C,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             fileCloseAllAction =
                     new FileCloseAllAction("Close All", null, "Close all open files", KeyEvent.VK_L, null, mainUI);
@@ -336,7 +336,7 @@ public class VenusUI extends JFrame {
                     "Save the current file",
                     KeyEvent.VK_S,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             fileSaveAsAction = new FileSaveAsAction(
                     "Save as ...",
@@ -353,7 +353,7 @@ public class VenusUI extends JFrame {
                     "Dump machine code or data in an available format",
                     KeyEvent.VK_D,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             filePrintAction = new FilePrintAction(
                     "Print ...",
@@ -369,7 +369,7 @@ public class VenusUI extends JFrame {
                     "Undo last edit",
                     KeyEvent.VK_U,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             editRedoAction = new EditRedoAction(
                     "Redo",
@@ -377,7 +377,7 @@ public class VenusUI extends JFrame {
                     "Redo last edit",
                     KeyEvent.VK_R,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             editCutAction = new EditCutAction(
                     "Cut",
@@ -385,7 +385,7 @@ public class VenusUI extends JFrame {
                     "Cut",
                     KeyEvent.VK_C,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             editCopyAction = new EditCopyAction(
                     "Copy",
@@ -393,7 +393,7 @@ public class VenusUI extends JFrame {
                     "Copy",
                     KeyEvent.VK_O,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             editPasteAction = new EditPasteAction(
                     "Paste",
@@ -401,7 +401,7 @@ public class VenusUI extends JFrame {
                     "Paste",
                     KeyEvent.VK_P,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             editFindReplaceAction = new EditFindReplaceAction(
                     "Find/Replace",
@@ -409,7 +409,7 @@ public class VenusUI extends JFrame {
                     "Find/Replace",
                     KeyEvent.VK_F,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             editSelectAllAction = new EditSelectAllAction(
                     "Select All",
@@ -417,7 +417,7 @@ public class VenusUI extends JFrame {
                     "Select All",
                     KeyEvent.VK_A,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             runAssembleAction = new RunAssembleAction(
                     "Assemble",
@@ -474,7 +474,7 @@ public class VenusUI extends JFrame {
                     "Clears all execution breakpoints set since the last assemble.",
                     KeyEvent.VK_K,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_K, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_K, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             runToggleBreakpointsAction = new RunToggleBreakpointsAction(
                     "Toggle all breakpoints",
@@ -482,7 +482,7 @@ public class VenusUI extends JFrame {
                     "Disable/enable all breakpoints without clearing (can also click Bkpt column header)",
                     KeyEvent.VK_T,
                     KeyStroke.getKeyStroke(
-                            KeyEvent.VK_T, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            KeyEvent.VK_T, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     mainUI);
             settingsLabelAction = new SettingsLabelAction(
                     "Show Labels Window (symbol table)",

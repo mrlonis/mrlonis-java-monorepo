@@ -130,7 +130,7 @@ public class DefaultInputHandler extends InputHandler {
     /** Handle a key pressed event. This will look up the binding for the key stroke and execute it. */
     public void keyPressed(KeyEvent evt) {
         int keyCode = evt.getKeyCode();
-        int modifiers = evt.getModifiers();
+        int modifiers = evt.getModifiersEx();
         if (keyCode == KeyEvent.VK_CONTROL
                 || keyCode == KeyEvent.VK_SHIFT
                 || keyCode == KeyEvent.VK_ALT
@@ -191,7 +191,7 @@ public class DefaultInputHandler extends InputHandler {
 
     /** Handle a key typed event. This inserts the key into the text area. */
     public void keyTyped(KeyEvent evt) {
-        int modifiers = evt.getModifiers();
+        int modifiers = evt.getModifiersEx();
         char c = evt.getKeyChar();
         // This IF statement needed to prevent Macintosh shortcut keyChar from
         // being echoed to the text area.  E.g. Command-s, for Save, will echo
