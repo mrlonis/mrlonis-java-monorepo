@@ -1353,7 +1353,7 @@ public class Assembler {
     // ProgramStatements.
     // Sorting is based on unsigned integer value of
     // ProgramStatement.getAddress()
-    private class ProgramStatementComparator implements Comparator {
+    private static class ProgramStatementComparator implements Comparator {
         // Will be used to sort the collection. Unsigned int compare, because
         // all kernel 32-bit
         // addresses have 1 in high order bit, which makes the int negative.
