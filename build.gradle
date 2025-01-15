@@ -14,9 +14,18 @@ task installGitHooks(type: Copy) {
     into { new File(rootProject.rootDir, '.git/hooks') }
 }
 
+task updateSubmodule {
+    doLast {
+        exec {
+            commandLine 'git', 'submodule', 'update', '--init', '--remote', '--force'
+        }
+    }
+}
+
 build {
     dependsOn spotlessApply
     dependsOn installGitHooks
+    dependsOn updateSubmodule
 }
 
 spotless {
