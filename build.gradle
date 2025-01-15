@@ -20,9 +20,6 @@ task updateSubmodule {
             commandLine 'git', 'submodule', 'update', '--init', '--remote', '--force'
         }
     }
-    onlyIf {
-        System.env['SOME_ENV_VAR'] != null
-    }
 }
 
 build {
