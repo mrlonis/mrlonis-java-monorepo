@@ -6,8 +6,26 @@ repositories {
     gradlePluginPortal()
 }
 
+task installGitHooks(type: Copy) {
+    from new File(rootProject.rootDir, '.hooks/pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks') }
+
+    from new File(rootProject.rootDir, '.hooks/pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks') }
+}
+
+task updateSubmodule {
+    doLast {
+        exec {
+            commandLine 'git', 'submodule', 'update', '--init', '--remote', '--force'
+        }
+    }
+}
+
 build {
     dependsOn spotlessApply
+    dependsOn installGitHooks
+    dependsOn updateSubmodule
 }
 
 spotless {
