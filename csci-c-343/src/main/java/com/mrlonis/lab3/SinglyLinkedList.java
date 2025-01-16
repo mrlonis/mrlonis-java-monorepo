@@ -31,13 +31,15 @@ public class SinglyLinkedList<T> implements List<T> {
             i++;
         }
 
-        while (i < xs.length) {
+        int xsLength = xs.length;
+        while (i < xsLength) {
             n++;
             Node p = head;
             while (p.next != null) {
                 p = p.next;
             }
             p.next = new Node(xs[i]);
+            xsLength--;
         }
     }
 
