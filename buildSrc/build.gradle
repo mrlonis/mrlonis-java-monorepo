@@ -9,7 +9,7 @@ repositories {
 
 dependencies {
     implementation("com.diffplug.spotless:spotless-plugin-gradle:7.0.2")
-    implementation("io.freefair.gradle:lombok-plugin:8.13")
+    implementation("io.freefair.gradle:lombok-plugin:8.13.1")
 }
 
 tasks.withType(JavaCompile).configureEach {
