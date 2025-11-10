@@ -15,7 +15,7 @@ dependencies {
 tasks.withType(JavaCompile).configureEach {
     options.warnings = true
     options.deprecation = true
-    options.compilerArgs << "-Xlint:unchecked"
+    options.compilerArgs << "-Xlint:all"
     dependsOn("spotlessApply")
 }
 

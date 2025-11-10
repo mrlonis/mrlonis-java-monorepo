@@ -6,7 +6,7 @@ repositories {
     gradlePluginPortal()
 }
 
-task installGitHooks(type: Copy) {
+tasks.register('installGitHooks', Copy) {
     from new File(rootProject.rootDir, '.hooks/pre-commit')
     into { new File(rootProject.rootDir, '.git/hooks') }
 
@@ -14,12 +14,10 @@ task installGitHooks(type: Copy) {
     into { new File(rootProject.rootDir, '.git/hooks') }
 }
 
-task updateSubmodule {
-    doLast {
-        exec {
-            commandLine 'git', 'submodule', 'update', '--init', '--remote', '--force'
-        }
-    }
+tasks.register('updateSubmodule', Exec) {
+    description = 'Updates git submodules'
+    group = 'update'
+    commandLine 'git', 'submodule', 'update', '--init', '--remote', '--force'
 }
 
 build {

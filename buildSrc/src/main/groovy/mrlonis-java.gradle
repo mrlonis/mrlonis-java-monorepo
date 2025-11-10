@@ -29,13 +29,14 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform("org.junit:junit-bom:5.11.4")
+    testImplementation platform("org.junit:junit-bom:6.0.1")
     testImplementation "org.junit.jupiter:junit-jupiter"
+    testImplementation 'org.junit.platform:junit-platform-launcher'
 }
 
 jacoco {
     // https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin
-    toolVersion = "0.8.12"
+    toolVersion = "0.8.14"
 }
 
 test {
@@ -49,7 +50,7 @@ test {
 tasks.withType(JavaCompile).configureEach {
     options.warnings = true
     options.deprecation = true
-    options.compilerArgs << "-Xlint:unchecked"
+    options.compilerArgs << "-Xlint:all"
     dependsOn("spotlessApply")
 }
 
