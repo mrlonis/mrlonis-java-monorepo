@@ -6,7 +6,7 @@ repositories {
     gradlePluginPortal()
 }
 
-task installGitHooks(type: Copy) {
+tasks.register('installGitHooks', Copy) {
     from new File(rootProject.rootDir, '.hooks/pre-commit')
     into { new File(rootProject.rootDir, '.git/hooks') }
 
@@ -14,12 +14,10 @@ task installGitHooks(type: Copy) {
     into { new File(rootProject.rootDir, '.git/hooks') }
 }
 
-task updateSubmodule {
-    doLast {
-        exec {
-            commandLine 'git', 'submodule', 'update', '--init', '--remote', '--force'
-        }
-    }
+tasks.register('updateSubmodule', Exec) {
+    description = 'Updates git submodules'
+    group = 'update'
+    commandLine 'git', 'submodule', 'update', '--init', '--remote', '--force'
 }
 
 build {
@@ -32,10 +30,15 @@ spotless {
     encoding 'UTF-8'
     format 'misc', {
         target('gradle/wrapper/gradle-wrapper.properties', '.gitattributes', '.gitignore', '.prettierignore', 'gradlew',
-                'gradlew.bat', 'csci-b-443/src/**/resources/**/*.s', 'dna-sequence-aligner/src/**/resources/*.txt',
+                'csci-b-443/src/**/resources/**/*.s', 'dna-sequence-aligner/src/**/resources/*.txt',
                 'line-sweeper/src/**/resources/*.txt', 'shortest-path-finder/src/**/resources/*.in',
                 'shortest-path-finder/src/**/resources/*.txt', 'text-statistics/src/**/resources/*.txt',
                 'twitter-bot/src/**/resources/*.txt')
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    format 'gradlew-bat', {
+        target('gradlew.bat')
         trimTrailingWhitespace()
         endWithNewline()
     }
@@ -63,4 +66,8 @@ spotless {
         trimTrailingWhitespace()
         endWithNewline()
     }
+}
+
+tasks.named('wrapper') {
+    distributionType = Wrapper.DistributionType.ALL
 }
