@@ -278,8 +278,7 @@ public class MemoryReferenceVisualization extends AbstractMarsToolAndApplication
 
     /** Overrides default method, to provide a Help button for this tool/app. */
     protected JComponent getHelpComponent() {
-        final String helpContent =
-                """
+        final String helpContent = """
                                    Use this program to visualize dynamic memory reference
                                    patterns in MIPS assembly programs.  It may be run either
                                    from MARS' Tools menu or as a stand-alone application.  For

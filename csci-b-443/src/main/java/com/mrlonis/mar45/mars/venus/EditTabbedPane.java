@@ -487,7 +487,7 @@ public class EditTabbedPane extends JTabbedPane {
                 case JOptionPane.NO_OPTION -> true;
                 case JOptionPane.CANCEL_OPTION -> false;
                 default -> // should never occur
-                false;
+                    false;
             };
         } else {
             return true;

@@ -214,8 +214,7 @@ public class BitmapDisplay extends AbstractMarsToolAndApplication {
 
     /** Overrides default method, to provide a Help button for this tool/app. */
     protected JComponent getHelpComponent() {
-        final String helpContent =
-                """
+        final String helpContent = """
                                    Use this program to simulate a basic bitmap display where
                                    each memory word in a specified address space corresponds to
                                    one display pixel in row-major order starting at the upper left

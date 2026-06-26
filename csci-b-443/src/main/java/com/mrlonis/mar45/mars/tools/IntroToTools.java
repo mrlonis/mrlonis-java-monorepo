@@ -82,8 +82,7 @@ public class IntroToTools extends AbstractMarsToolAndApplication {
         message.setLineWrap(true);
         message.setWrapStyleWord(true);
         message.setFont(new Font("Ariel", Font.PLAIN, 12));
-        message.setText(
-                """
+        message.setText("""
                         Hello!  This Tool does not do anything but you may use its \
                         source code as a starting point to build your own MARS Tool \
                         or Application.\

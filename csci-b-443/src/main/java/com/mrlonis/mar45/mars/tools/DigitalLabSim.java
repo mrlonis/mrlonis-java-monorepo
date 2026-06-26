@@ -125,8 +125,7 @@ public class DigitalLabSim extends AbstractMarsToolAndApplication {
     }
 
     protected JComponent getHelpComponent() {
-        final String helpContent =
-                """
+        final String helpContent = """
                                     This tool is composed of 3 parts : two seven-segment displays, an hexadecimal keyboard and counter\s
                                    Seven segment display
                                     Byte value at address 0xFFFF0010 : command right seven segment display\s

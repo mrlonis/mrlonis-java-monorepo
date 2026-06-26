@@ -38,7 +38,7 @@ public class StageWB extends Stage {
             case Const.ALU_AND: // register-register
                 control.register.write(lngRegResult, lngValue);
                 break;
-                // TODO writeback for ADD, SUB, OR, XOR, SLT, ADDI, ANDI, ORI, XORI, SLL, SRL
+            // TODO writeback for ADD, SUB, OR, XOR, SLT, ADDI, ANDI, ORI, XORI, SLL, SRL
             case Const.ALU_ADD: // register-register
                 control.register.write(lngRegResult, lngValue);
                 break;

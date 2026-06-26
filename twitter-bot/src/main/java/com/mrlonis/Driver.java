@@ -112,8 +112,7 @@ public class Driver {
                     """
                               The most common word in the last %d tweets from @%s is: %s
                               It appears %d times.
-                              %n""",
-                    bot.getNumTweets(), handle, bot.getMostPopularWord(), bot.getFrequencyOfMostPopularWord());
+                              %n""", bot.getNumTweets(), handle, bot.getMostPopularWord(), bot.getFrequencyOfMostPopularWord());
         }
     }
 }

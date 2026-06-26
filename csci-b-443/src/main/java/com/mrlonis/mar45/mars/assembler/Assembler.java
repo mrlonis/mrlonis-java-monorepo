@@ -1237,11 +1237,11 @@ public class Assembler {
                             case '0':
                                 theChar = '\0';
                                 break;
-                                // Not implemented: \ n = octal character (n is number)
-                                // \ x n = hex character (n is number)
-                                // \ u n = unicode character (n is number)
-                                // There are of course no spaces in these escape
-                                // codes...
+                            // Not implemented: \ n = octal character (n is number)
+                            // \ x n = hex character (n is number)
+                            // \ u n = unicode character (n is number)
+                            // There are of course no spaces in these escape
+                            // codes...
                         }
                     }
                     try {

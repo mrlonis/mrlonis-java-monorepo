@@ -98,7 +98,7 @@ public class StageID extends Stage {
                     case Const.EXT_AND:
                         lngALUInstr = Const.ALU_AND;
                         break;
-                        // TODO set ALU opcode for ADD, SUB, OR, XOR, SLT
+                    // TODO set ALU opcode for ADD, SUB, OR, XOR, SLT
                     case Const.EXT_ADD:
                         lngALUInstr = Const.ALU_ADD;
                         break;
@@ -188,7 +188,7 @@ public class StageID extends Stage {
                 lngNbRegResult = Conversion.extractR2(lngInstr);
                 lngALUInstr = Const.ALU_ANDI;
                 break;
-                // TODO ADDI, ORI, XORI
+            // TODO ADDI, ORI, XORI
             case Const.MIPS_ADDI:
                 print("MIPS_ADDI");
                 lngImm = Conversion.extractImm(lngInstr);

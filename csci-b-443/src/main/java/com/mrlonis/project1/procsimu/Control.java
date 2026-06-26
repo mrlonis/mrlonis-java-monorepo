@@ -202,7 +202,7 @@ public class Control extends JFrame implements Runnable, ActionListener {
     /** I think I finished this section but IDK */
     private void processWork() {
         switch (this.currentStage) {
-                // TODO: transition to appropriate next stage
+            // TODO: transition to appropriate next stage
             case Const.STAGE_IF:
                 this.stageIF.work();
                 this.currentStage = Const.STAGE_ID; // TODO
