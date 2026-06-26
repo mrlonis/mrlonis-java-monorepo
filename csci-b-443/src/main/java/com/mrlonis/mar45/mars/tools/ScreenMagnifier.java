@@ -204,8 +204,7 @@ class Magnifier extends JFrame implements ComponentListener {
 
     // A simple explanation of what the tool does.
     private JButton getHelpButton() {
-        final String helpContent =
-                """
+        final String helpContent = """
                                    Use this utility tool to display a magnified image of a
                                    screen section and highlight things on the image.  This
                                    will be of interest mainly to instructors.

@@ -152,7 +152,7 @@ public class StageEXE extends Stage {
                 lngALUout = lngReg2 >>> lngImm;
                 break;
 
-                // -- CONTROL TRANSFER --
+            // -- CONTROL TRANSFER --
             case Const.ALU_BEQ: // control transfer
                 print("ALU BEQ");
                 if (lngReg1 == lngReg2) {
@@ -189,11 +189,11 @@ public class StageEXE extends Stage {
         // -- Memory reference --
         // print("MEM Instr: " + lngMemInstr);
         switch ((int) lngMemInstr) {
-                // NB : The MIPS instr. LOAD or STORE have an absolute value (in reg 1)
-                //      + an immediate value (offset) to form the address to read
-                //      or to write. But this isn't implemented here and the absolute
-                //      part of the address is always 0.
-                //   => Not Data hazards on LOAD, only for reg2 on STORE
+            // NB : The MIPS instr. LOAD or STORE have an absolute value (in reg 1)
+            //      + an immediate value (offset) to form the address to read
+            //      or to write. But this isn't implemented here and the absolute
+            //      part of the address is always 0.
+            //   => Not Data hazards on LOAD, only for reg2 on STORE
             case Const.MEM_NOP:
                 print("MEM NOP");
                 // nothing to do

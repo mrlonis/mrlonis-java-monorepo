@@ -840,8 +840,7 @@ public class DataSegmentWindow extends JInternalFrame implements Observer {
             // *.setEnabled(settings.getBooleanSetting(Settings.SELF_MODIFYING_CODE_ENABLED));
         } else if (obj
                 instanceof
-                MemoryAccessNotice
-                access) { // NOTE: observable != Memory.getInstance() because Memory class delegates
+                MemoryAccessNotice access) { // NOTE: observable != Memory.getInstance() because Memory class delegates
             // notification duty.
             if (access.getAccessType() == AccessNotice.WRITE) {
                 int address = access.getAddress();

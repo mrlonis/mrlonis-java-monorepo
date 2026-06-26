@@ -102,8 +102,7 @@ public class MipsXray extends AbstractMarsToolAndApplication {
 
     /** Overrides default method, to provide a Help button for this tool/app. */
     protected JComponent getHelpComponent() {
-        final String helpContent =
-                """
+        final String helpContent = """
                                    This plugin is used to visualizate the behavior of mips processor using the default datapath.\s
                                    It reads the source code instruction and generates an animation representing the inputs and\s
                                    outputs of functional blocks and the interconnection between them.  The basic signals\s

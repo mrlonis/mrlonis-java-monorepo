@@ -91,7 +91,7 @@ public class StageEXE extends Stage {
                 print("ALU AND");
                 lngALUout = lngReg1 & lngReg2;
                 break;
-                // TODO implement ADD, SUB, OR, XOR, SLT
+            // TODO implement ADD, SUB, OR, XOR, SLT
             case Const.ALU_ADD: // register-register
                 print("ALU ADD");
                 lngALUout = lngReg1 + lngReg2;
@@ -128,7 +128,7 @@ public class StageEXE extends Stage {
                 print("ALU ANDI");
                 lngALUout = lngReg1 & lngImm;
                 break;
-                // TODO implement ADDI, ORI, XORI
+            // TODO implement ADDI, ORI, XORI
             case Const.ALU_ADDI:
                 print("ALU AdDI");
                 lngALUout = lngReg1 + lngImm;
@@ -141,7 +141,7 @@ public class StageEXE extends Stage {
                 print("ALU XORI");
                 lngALUout = lngReg1 ^ lngImm;
                 break;
-                // TODO implement SLL, SRL
+            // TODO implement SLL, SRL
             case Const.ALU_SLL:
                 print("ALU SLL");
                 lngALUout = lngReg1 << lngImm;
@@ -150,7 +150,7 @@ public class StageEXE extends Stage {
                 print("ALU SRL");
                 lngALUout = lngReg1 >>> lngImm;
                 break;
-                // -- CONTROL TRANSFER --
+            // -- CONTROL TRANSFER --
             case Const.ALU_BEQ: // control transfer
                 print("ALU BEQ");
 
@@ -192,11 +192,11 @@ public class StageEXE extends Stage {
         // -- Memory reference --
         // print("MEM Instr: " + lngMemInstr);
         switch ((int) lngMemInstr) {
-                // NB : The MIPS instr. LOAD or STORE have an absolute value (in reg 1)
-                //      + an immediate value (offset) to form the address to read
-                //      or to write. But this isn't implemented here and the absolute
-                //      part of the address is always 0.
-                //   => Not Data hazards on LOAD, only for re2 on STORE
+            // NB : The MIPS instr. LOAD or STORE have an absolute value (in reg 1)
+            //      + an immediate value (offset) to form the address to read
+            //      or to write. But this isn't implemented here and the absolute
+            //      part of the address is always 0.
+            //   => Not Data hazards on LOAD, only for re2 on STORE
             case Const.MEM_NOP:
                 print("MEM NOP");
                 // nothing to do

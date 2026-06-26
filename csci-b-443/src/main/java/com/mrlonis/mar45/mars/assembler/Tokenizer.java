@@ -306,10 +306,10 @@ public class Tokenizer {
                             tokenPos = 0;
                         }
                         break;
-                        // These two guys are special.  Will be recognized as unary if and only if two conditions hold:
-                        // 1. Immediately followed by a digit (will use look-ahead for this).
-                        // 2. Previous token, if any, is _not_ an IDENTIFIER
-                        // Otherwise considered binary and thus a separate token.  This is a slight hack but reasonable.
+                    // These two guys are special.  Will be recognized as unary if and only if two conditions hold:
+                    // 1. Immediately followed by a digit (will use look-ahead for this).
+                    // 2. Previous token, if any, is _not_ an IDENTIFIER
+                    // Otherwise considered binary and thus a separate token.  This is a slight hack but reasonable.
                     case '+':
                     case '-':
                         // Here's the REAL hack: recognizing signed exponent in E-notation floating point!
@@ -338,7 +338,7 @@ public class Tokenizer {
                             tokenPos = 0;
                         }
                         break;
-                        // these are other single-character tokens
+                    // these are other single-character tokens
                     case ':':
                     case '(':
                     case ')':
